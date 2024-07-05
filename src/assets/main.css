@@ -19,11 +19,11 @@
   html,
   body {
     font-family: Arial, Helvetica, sans-serif;
-    @apply bg-black fixed size-full select-none;
+    @apply fixed size-full select-none bg-black;
   }
 
   #app {
-    @apply flex justify-center items-center size-full;
+    @apply flex size-full items-center justify-center;
   }
 
   @media only screen and (max-width: 420px) {
@@ -40,19 +40,19 @@
       rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
       rgba(0, 0, 0, 0.3) 0px -5px 0px inset;
     -webkit-tap-highlight-color: transparent;
-    @apply rounded-sm border-2 border-[#010f20] cursor-pointer active:shadow-none translate-y-0.5 disabled:cursor-auto opacity-50 pointer-events-none;
+    @apply pointer-events-none translate-y-0.5 cursor-pointer rounded-sm border-2 border-[#010f20] opacity-50 active:shadow-none disabled:cursor-auto;
 
     &.yellow {
-      @apply text-[#8b5f00] bg-[#f5d41f];
+      @apply bg-[#f5d41f] text-[#8b5f00];
     }
 
     &.blue {
-      @apply text-white bg-[#216ed0];
+      @apply bg-[#216ed0] text-white;
     }
   }
 
   .screen {
-    @apply flex justify-center items-center h-[var(--base-height)] w-[var(--base-width)] relative bg-screen overflow-hidden bg-[#00a6df];
+    @apply relative flex h-[var(--base-height)] w-[var(--base-width)] items-center justify-center overflow-hidden bg-[#00a6df] bg-screen;
 
     @media only screen and (max-width: 420px) {
       background-color: unset;
@@ -64,6 +64,6 @@
 @layer utilities {
   .glass-effect {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    @apply backdrop-blur-sm bg-[rgba(255, 255, 255, 0.2)] border rgba(255, 255, 255, 0.3);
+    @apply bg-[rgba(255, 255, 255, 0.2)] border border-opacity-30 bg-black backdrop-blur-sm;
   }
 }
