@@ -92,6 +92,18 @@ div {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
+@media only screen and (max-width: 420px) {
+  .screen {
+    background-color: unset;
+    background-image: unset;
+  }
+
+  body {
+    background-color: #00a6df;
+    background-image: var(--bg-image);
+  }
+}
+
 @keyframes bounceIn {
   from,
   20%,
