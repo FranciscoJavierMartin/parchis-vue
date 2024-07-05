@@ -10,6 +10,12 @@
     --size-board: calc(var(--base-widht) - 22px);
     --size-tile: calc(var(--size-board) / 15);
     --die-size-tooltip: calc(var(--size-tile) * 0.3);
+
+    /* Board colors */
+    --game-red: #e02a29;
+    --game-blue: #0b92fe;
+    --game-yellow: #fbc620;
+    --game-green: #84c525;
   }
 
   html {

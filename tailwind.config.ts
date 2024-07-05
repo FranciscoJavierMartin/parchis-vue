@@ -9,10 +9,10 @@ const config: Config = {
       },
       colors: {
         game: {
-          red: '#e02a29',
-          blue: '#0b92fe',
-          yellow: '#fbc620',
-          green: '#84c525',
+          red: 'var(--game-red)',
+          blue: 'var(--game-blue)',
+          yellow: 'var(--game-yellow)',
+          green: 'var(--game-green)',
         },
       },
       keyframes: {
