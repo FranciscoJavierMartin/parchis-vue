@@ -7,7 +7,7 @@
 # More details at https://github.com/eslint/eslint
 # and https://eslint.org
 
-name: linter
+name: Linter and formatter
 
 on:
   push:
