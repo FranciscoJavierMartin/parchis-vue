@@ -25,7 +25,7 @@ export const DIE_SIZE_TOOLTIP = SIZE_TILE + SIZE_TILE * 0.15;
  * GYBR -> Green, yellow, blue and red.
  */
 export enum EBoardColors {
-  RGYB = 'RGYB',
+  RGYB = "RGYB",
   BRGY = 'BRGY',
   YBRG = 'YBRG',
   GYBR = 'GYBR',
