@@ -1,5 +1,5 @@
 <template>
-  <div class="game-board size-[var(--size-board)] bg-[var(--nest-grid-bg)] relative"></div>
+  <div class="game-board relative size-[var(--size-board)] bg-[var(--nest-grid-bg)]"></div>
 </template>
 
 <script setup lang="ts">
