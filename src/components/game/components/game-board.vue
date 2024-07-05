@@ -1,5 +1,5 @@
 <template>
-  <div class="game-board relative size-[var(--size-board)] bg-[var(--nest-grid-bg)]"></div>
+  <div class="game-board"></div>
 </template>
 
 <script setup lang="ts">
@@ -375,9 +375,13 @@ withDefaults(defineProps<BoardProps>(), {
     var(--safe-stars-base-size), var(--safe-stars-base-size), var(--safe-stars-base-size),
     var(--safe-stars-base-size), var(--safe-stars-base-size), var(--safe-stars-base-size);
 
+  background-color: var(--nest-grid-bg);
   box-shadow:
     var(--nest-grid-color) 0px 0px 0px 3px,
     #be835d 0px 0px 0px 6px,
     rgb(255, 217, 19) 0px 0px 0px 9px;
+  height: var(--size-board);
+  position: relative;
+  width: var(--size-board);
 }
 </style>
