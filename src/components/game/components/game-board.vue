@@ -408,5 +408,32 @@ withDefaults(defineProps<BoardProps>(), {
     top: 0;
     width: 100%;
   }
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    border-radius: 10px;
+
+    /*
+    * Muestra los 4 elementos de salida.
+    * Show four starter points
+    * The four goals and the stars
+    */
+    background-image: var(--safe-starts), var(--finish-elements), var(--nest-top-left),
+      var(--nest-top-right), var(--nest-bottom-left), var(--nest-bottom-right);
+
+    background-size: var(--safe-stars-size), var(--finish-elements-size), var(--nest-size-elements),
+      var(--nest-size-elements), var(--nest-size-elements), var(--nest-size-elements);
+
+    background-position: var(--safe-starts-position), var(--finish-elements-position),
+      var(--nest-top-left-position), var(--nest-top-right-position),
+      var(--nest-bottom-left-position), var(--nest-bottom-right-position);
+
+    background-repeat: no-repeat;
+  }
 }
 </style>
