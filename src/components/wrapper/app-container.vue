@@ -31,5 +31,10 @@ useWindowResize();
   overflow: hidden;
   position: relative;
   width: var(--base-width);
+
+  @media only screen and (max-width: 420px) {
+    background-color: unset;
+    background-image: unset;
+  }
 }
 </style>

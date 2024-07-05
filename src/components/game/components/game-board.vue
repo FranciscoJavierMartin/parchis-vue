@@ -376,6 +376,7 @@ withDefaults(defineProps<BoardProps>(), {
     var(--safe-stars-base-size), var(--safe-stars-base-size), var(--safe-stars-base-size);
 
   background-color: var(--nest-grid-bg);
+  border-radius: 10px;
   box-shadow:
     var(--nest-grid-color) 0px 0px 0px 3px,
     #be835d 0px 0px 0px 6px,
@@ -383,5 +384,29 @@ withDefaults(defineProps<BoardProps>(), {
   height: var(--size-board);
   position: relative;
   width: var(--size-board);
+
+  &::before {
+    background: repeating-linear-gradient(
+        to right,
+        transparent,
+        transparent calc(var(--size-tile) - 1px),
+        var(--nest-grid-color) calc(var(--size-tile) - 1px),
+        var(--nest-grid-color) var(--size-tile)
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent calc(var(--size-tile) - 1px),
+        var(--nest-grid-color) calc(var(--size-tile) - 1px),
+        var(--nest-grid-color) var(--size-tile)
+      );
+    border-radius: 10px;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
 }
 </style>

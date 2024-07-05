@@ -93,11 +93,6 @@ div {
 }
 
 @media only screen and (max-width: 420px) {
-  .screen {
-    background-color: unset;
-    background-image: unset;
-  }
-
   body {
     background-color: #00a6df;
     background-image: var(--bg-image);
