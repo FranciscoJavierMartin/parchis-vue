@@ -1,5 +1,7 @@
 <template>
-  <div class="game-board" :class="boardColor"></div>
+  <div class="game-board" :class="boardColor">
+    <slot />
+  </div>
 </template>
 
 <script setup lang="ts">
