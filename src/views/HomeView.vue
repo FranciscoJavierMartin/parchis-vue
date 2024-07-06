@@ -6,7 +6,10 @@
         :coordinate="{ x: SIZE_TILE * 6, y: SIZE_TILE * 11 }"
         type-tile="EXIT"
         :index="0"
-        :dice-available="[]"
+        :dice-available="[
+          { key: 1, value: 1 },
+          { key: 5, value: 2 },
+        ]"
         :total-tokens="1"
         :position="1"
         :enable-tooltip="false"

@@ -15,7 +15,7 @@ export const BASE_HEIGHT = 732;
 export const BASE_WIDTH = 412;
 export const SIZE_BOARD = BASE_WIDTH - 22;
 export const SIZE_TILE = SIZE_BOARD / 15;
-export const DIE_SIZE_TOOLTIP = SIZE_TILE + SIZE_TILE * 0.15;
+export const DICE_SIZE_TOOLTIP = SIZE_TILE + SIZE_TILE * 0.15;
 
 // Board orientations.
 /**

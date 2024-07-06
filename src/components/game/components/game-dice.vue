@@ -8,6 +8,7 @@
 
 <script setup lang="ts">
 import type { TDiceValues } from '@/interfaces';
+import { DICE_SIZE_TOOLTIP } from '@/utils/constants';
 
 interface DiceProps {
   value: TDiceValues;
@@ -15,7 +16,7 @@ interface DiceProps {
   animate?: boolean;
 }
 
-withDefaults(defineProps<DiceProps>(), { size: 50, animate: true });
+withDefaults(defineProps<DiceProps>(), { size: DICE_SIZE_TOOLTIP, animate: true });
 </script>
 
 <style scoped>

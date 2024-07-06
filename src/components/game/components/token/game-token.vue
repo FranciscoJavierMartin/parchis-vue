@@ -10,9 +10,16 @@
       zIndex,
     }"
   >
-    <GamePiece :color="color" :debug="debug" :index="index" :style="pieceStyle" />
+    <TokenPiece :color="color" :debug="debug" :index="index" :style="pieceStyle" />
     <button v-if="showButton" class="game-token-button" @click="handleClickDice" />
   </div>
+  <TokenTooltip
+    v-if="canSelectToken && showTooltip"
+    :color="color"
+    :coordinate="coordinate"
+    :diceAvailable="diceAvailable"
+    :handleTooltipDice="handleTooltipDice"
+  />
 </template>
 
 <script setup lang="ts">
@@ -25,7 +32,8 @@ import {
   MAXIMUM_VISIBLE_TOKENS_PER_CELL,
   ZINDEX_TOKEN_SELECT,
 } from '@/utils/constants';
-import GamePiece from '@/components/game/components/token/components/piece/game-piece.vue';
+import TokenPiece from '@/components/game/components/token/components/piece/token-piece.vue';
+import TokenTooltip from '@/components/game/components/token/components/tooltip/token-tooltip.vue';
 
 // TODO: Add handleSelectToken
 interface TokenProps extends IToken {
@@ -52,11 +60,11 @@ const props = withDefaults(defineProps<TokenProps>(), {
   debug: false,
 });
 
-const showTooltip = ref<boolean>(false);
+const showTooltip = ref<boolean>(true);
 
-function handleClickDice():void{
+function handleClickDice(): void {}
 
-}
+function handleTooltipDice(dice: IDiceList): void {}
 
 const zIndex = computed<number>(() => {
   /*
@@ -137,7 +145,7 @@ const pieceStyle = computed<StyleValue>(() => {
 const showButton = computed<boolean>(
   () =>
     props.canSelectToken &&
-    // props.diceAvailable.length !== 0 &&
+    props.diceAvailable.length !== 0 &&
     !showTooltip.value &&
     !props.isMoving &&
     !props.isDisabledUI,
