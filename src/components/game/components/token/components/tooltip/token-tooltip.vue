@@ -116,8 +116,12 @@ const tooltipPosition = computed(() => {
     width: 0;
   }
 
-  &.left::after {
-    left: 2%;
+  &.left {
+    border-radius: 5px 5px 5px 3px;
+
+    &::after {
+      left: 2%;
+    }
   }
 
   &.top::after {
