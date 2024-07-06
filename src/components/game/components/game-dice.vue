@@ -54,5 +54,13 @@ withDefaults(defineProps<DiceProps>(), { size: 30, animate: false });
       90% 10%,
       10% 90%;
   }
+
+  &.dice-3::after {
+    background-image: var(--point), var(--point), var(--point);
+    background-position:
+      90% 10%,
+      50% 50%,
+      10% 90%;
+  }
 }
 </style>
