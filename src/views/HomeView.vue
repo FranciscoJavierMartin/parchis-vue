@@ -3,12 +3,26 @@
     <GameBoard>
       <GameToken
         color="BLUE"
-        :coordinate="{ x: SIZE_TILE * 13, y: SIZE_TILE * 8 }"
+        :coordinate="{ x: SIZE_TILE * 6, y: SIZE_TILE * 12 }"
         type-tile="EXIT"
         :index="0"
         :dice-available="[]"
-        :total-tokens="1"
+        :total-tokens="5"
         :position="1"
+        :enable-tooltip="false"
+        :is-moving="false"
+        can-select-token
+        :animated="false"
+        :position-tile="1"
+      />
+      <GameToken
+        color="BLUE"
+        :coordinate="{ x: SIZE_TILE * 6, y: SIZE_TILE * 12 }"
+        type-tile="EXIT"
+        :index="0"
+        :dice-available="[]"
+        :total-tokens="5"
+        :position="5"
         :enable-tooltip="false"
         :is-moving="false"
         can-select-token
@@ -17,12 +31,12 @@
       />
       <GameToken
         color="GREEN"
-        :coordinate="{ x: SIZE_TILE * 1, y: SIZE_TILE * 6 }"
+        :coordinate="{ x: SIZE_TILE * 6, y: SIZE_TILE * 12 }"
         type-tile="EXIT"
         :index="1"
         :dice-available="[]"
-        :total-tokens="1"
-        :position="1"
+        :total-tokens="5"
+        :position="2"
         :enable-tooltip="false"
         :is-moving="false"
         can-select-token
@@ -31,12 +45,12 @@
       />
       <GameToken
         color="RED"
-        :coordinate="{ x: SIZE_TILE * 6, y: SIZE_TILE * 13 }"
+        :coordinate="{ x: SIZE_TILE * 6, y: SIZE_TILE * 12 }"
         type-tile="EXIT"
         :index="2"
         :dice-available="[]"
-        :total-tokens="1"
-        :position="1"
+        :total-tokens="5"
+        :position="3"
         :enable-tooltip="false"
         :is-moving="false"
         can-select-token
@@ -45,18 +59,18 @@
       />
       <GameToken
         color="YELLOW"
-        :coordinate="{ x: SIZE_TILE * 8, y: SIZE_TILE * 1 }"
+        :coordinate="{ x: SIZE_TILE * 6, y: SIZE_TILE * 12 }"
         type-tile="EXIT"
         :index="3"
         :dice-available="[]"
-        :total-tokens="1"
-        :position="1"
+        :total-tokens="5"
+        :position="4"
         :enable-tooltip="false"
         :is-moving="false"
         can-select-token
         :animated="false"
         :position-tile="1"
-      />
+      />-->
     </GameBoard>
     <!-- <GameDice :value="1" />
     <GameDice :value="2" />

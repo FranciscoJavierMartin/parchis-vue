@@ -3,7 +3,7 @@
   <div
     class="game-token-piece"
     :class="color.toLowerCase()"
-    :style="{ width: 'var(--size-tile)', height: 'var(--size-tile)', ...(style as any) }"
+    :style="{ width: 'var(--size-tile)', height: 'var(--size-tile)', ...(style as CSSProperties) }"
   >
     <span v-if="debug" :style="{ width: 'var(--size-tile)', height: 'var(--size-tile)' }"
       >{{ index }}
@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import type { TColors } from '@/interfaces';
-import type { StyleValue } from 'vue';
+import type { CSSProperties, StyleValue } from 'vue';
 
 interface PieceProps {
   color: TColors;
