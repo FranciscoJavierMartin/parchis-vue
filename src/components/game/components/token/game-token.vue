@@ -11,11 +11,12 @@
     }"
   >
     <GamePiece :color="color" :debug="debug" :index="index" :style="pieceStyle" />
+    <button v-if="showButton" class="game-token-button" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, type StyleValue } from 'vue';
+import { computed, ref, type StyleValue } from 'vue';
 import type { IDiceList, IToken } from '@/interfaces';
 import {
   BASE_ZINDEX_TOKEN,
@@ -48,6 +49,8 @@ const props = withDefaults(defineProps<TokenProps>(), {
   isDisabledUI: false,
   debug: false,
 });
+
+const showTooltip = ref<boolean>(false);
 
 const zIndex = computed<number>(() => {
   /*
@@ -124,6 +127,15 @@ const pieceStyle = computed<StyleValue>(() => {
     transform: `scale(${scale}) translate(${translateX}px, -1px)`,
   };
 });
+
+const showButton = computed<boolean>(
+  () =>
+    props.canSelectToken &&
+    // props.diceAvailable.length !== 0 &&
+    !showTooltip.value &&
+    !props.isMoving &&
+    !props.isDisabledUI,
+);
 </script>
 
 <style scoped>
@@ -136,6 +148,32 @@ const pieceStyle = computed<StyleValue>(() => {
 
   &.moving {
     animation: heartBeat 1s infinite;
+  }
+
+  .game-token-button {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    left: -10%;
+    top: -10%;
+    z-index: 1;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(1.4px);
+    border: 2px dashed rgba(255, 255, 255, 1);
+    animation: rotation 5s normal linear infinite;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
   }
 }
 
