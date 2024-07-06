@@ -36,20 +36,60 @@ withDefaults(defineProps<TokenTooltipProps>(), {
   position: absolute;
   z-index: 10;
 
+  &::after {
+    border-style: solid;
+    border-width: 10px;
+    content: '';
+    height: 0;
+    left: 40%;
+    position: absolute;
+    top: 100%;
+    width: 0;
+  }
+
+  &.left::after {
+    left: 2%;
+  }
+
+  &.top::after {
+    top: -40%;
+    transform: scale(-1);
+  }
+
+  &.right::after {
+    left: 73%;
+  }
+
   &.blue {
     background-color: var(--game-blue);
+
+    &::after {
+      border-color: var(--game-blue) transparent transparent transparent;
+    }
   }
 
   &.red {
     background-color: var(--game-red);
+
+    &::after {
+      border-color: var(--game-red) transparent transparent transparent;
+    }
   }
 
   &.yellow {
     background-color: var(--game-yellow);
+
+    &::after {
+      border-color: var(--game-yellow) transparent transparent transparent;
+    }
   }
 
   &.green {
     background-color: var(--game-green);
+
+    &::after {
+      border-color: var(--game-green) transparent transparent transparent;
+    }
   }
 
   button {
