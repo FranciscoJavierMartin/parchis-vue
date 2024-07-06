@@ -1,5 +1,5 @@
 <template>
-  <div class="game-board"></div>
+  <div class="game-board" :class="boardColor"></div>
 </template>
 
 <script setup lang="ts">
@@ -385,6 +385,18 @@ withDefaults(defineProps<BoardProps>(), {
   position: relative;
   width: var(--size-board);
 
+  /* Show start tiles and safe tiles */
+  background-image: var(--finish-row-top), var(--finish-row-left), var(--finish-row-right),
+    var(--finish-bottom-right), var(--safe-points);
+
+  background-size: var(--size-tile) var(--size-tile);
+
+  background-position: var(--finish-row-top-position), var(--finish-row-left-position),
+    var(--finish-row-right-position), var(--finish-bottom-right-position),
+    var(--safe-points-position);
+
+  background-repeat: no-repeat;
+
   &::before {
     background: repeating-linear-gradient(
         to right,
@@ -433,6 +445,39 @@ withDefaults(defineProps<BoardProps>(), {
       var(--nest-bottom-left-position), var(--nest-bottom-right-position);
 
     background-repeat: no-repeat;
+  }
+
+  /*
+    Classes that change the colors of the board, rotating them.
+    They start from the point of departure in the bottom, then follow the order of the right-bottom, right-top, and left-top.
+    The default value of the board is:
+    RBYG -> Red, Blue, Yellow, and Green, which is not necessary since the CSS variables already have those values initially
+    The others are:
+
+    * RGYB -> Rojo, verde, amarillo y azul, color por defecto...
+    * BRGY -> Azul, Rojom verde y amarillo. *
+    * YBRG -> Amarillo, azul, rojo y verde *
+    * GYBR -> Verde, amarillo, azul y rojo...
+  */
+  &.BRGY {
+    --nest-bottom-left-bg: var(--game-blue);
+    --nest-top-left-bg: var(--game-red);
+    --nest-top-right-bg: var(--game-green);
+    --nest-bottom-right-bg: var(--game-yellow);
+  }
+
+  &.YBRG {
+    --nest-bottom-left-bg: var(--game-yellow);
+    --nest-top-left-bg: var(--game-blue);
+    --nest-top-right-bg: var(--game-red);
+    --nest-bottom-right-bg: var(--game-green);
+  }
+
+  &.GYBR {
+    --nest-bottom-left-bg: var(--game-green);
+    --nest-top-left-bg: var(--game-yellow);
+    --nest-top-right-bg: var(--game-blue);
+    --nest-bottom-right-bg: var(--game-red);
   }
 }
 </style>
