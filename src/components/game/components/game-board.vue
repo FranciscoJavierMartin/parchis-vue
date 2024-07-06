@@ -410,16 +410,15 @@ withDefaults(defineProps<BoardProps>(), {
   }
 
   &::after {
+    border-radius: 10px;
     content: '';
-    width: 100%;
     height: 100%;
     left: 0;
-    top: 0;
     position: absolute;
-    border-radius: 10px;
+    top: 0;
+    width: 100%;
 
     /*
-    * Muestra los 4 elementos de salida.
     * Show four starter points
     * The four goals and the stars
     */

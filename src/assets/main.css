@@ -38,6 +38,13 @@ body {
   user-select: none;
 }
 
+@media only screen and (max-width: 420px) {
+  body {
+    background-color: #00a6df;
+    background-image: var(--bg-image);
+  }
+}
+
 div {
   box-sizing: border-box;
 }
@@ -90,13 +97,6 @@ div {
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-
-@media only screen and (max-width: 420px) {
-  body {
-    background-color: #00a6df;
-    background-image: var(--bg-image);
-  }
 }
 
 @keyframes bounceIn {
