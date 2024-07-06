@@ -19,7 +19,7 @@ import type {
 export type TBoardColors = keyof typeof EBoardColors;
 export type TColors = keyof typeof EColors;
 export type TSufixColors = keyof typeof ESufixColors;
-export type TDicevalues = 1 | 2 | 3 | 4 | 5 | 6;
+export type TDiceValues = 1 | 2 | 3 | 4 | 5 | 6;
 export type TPositionGame = keyof typeof EPositionGame;
 export type TtypeTile = keyof typeof EtypeTile;
 export type TPositionProfiles = keyof typeof EPositionProfiles;
@@ -73,7 +73,7 @@ export type TLocationBoardElements = Record<TPositionGame, IPositionGame>;
  * Profile component handlers types
  */
 export type THandleTimer = (ends: boolean, playerIndex?: number) => void;
-export type THandleSelectDice = (diceValue?: TDicevalues, isActionSocket?: boolean) => void;
+export type THandleSelectDice = (diceValue?: TDiceValues, isActionSocket?: boolean) => void;
 export type THandleMuteChat = (playerIndex: number) => void;
 export type THandleDoneDice = (isActionSocket?: boolean) => void;
 
@@ -107,7 +107,7 @@ export interface IPlayer extends IUser {
 
 export interface IDiceList {
   key: number;
-  value: TDicevalues;
+  value: TDiceValues;
 }
 
 /**
@@ -141,7 +141,7 @@ export interface IActionsTurn {
   timerActivated: boolean;
   disabledDice: boolean;
   showDice: boolean;
-  diceValue: 0 | TDicevalues;
+  diceValue: 0 | TDiceValues;
   diceList: IDiceList[];
   diceRollNumber: number;
   isDisabledUI: boolean;
@@ -265,7 +265,7 @@ export interface ISocketListenChatMessage {
 }
 
 export interface ISocketListenData {
-  [EActionsBoardGame.ROLL_DICE]: TDicevalues;
+  [EActionsBoardGame.ROLL_DICE]: TDiceValues;
   [EActionsBoardGame.SELECT_TOKEN]: ISelectTokenValues;
   [EActionsBoardGame.OPPONENT_LEAVE]: string;
   [EActionsBoardGame.CHAT_MESSAGE]: ISocketListenChatMessage;
@@ -288,7 +288,7 @@ export interface ISocketListenActions {
 export interface ISocketActions {
   type: TActionsBoardGame;
   roomName: string;
-  [EActionsBoardGame.ROLL_DICE]: TDicevalues;
+  [EActionsBoardGame.ROLL_DICE]: TDiceValues;
   [EActionsBoardGame.SELECT_TOKEN]: ISelectTokenValues;
   [EActionsBoardGame.OPPONENT_LEAVE]: string;
   [EActionsBoardGame.CHAT_MESSAGE]: ISocketListenChatMessage;
