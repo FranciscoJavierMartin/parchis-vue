@@ -4,19 +4,20 @@
     :class="{ moving: isMoving, animated }"
     :style="{
       height: 'var(--size-tile)',
-      left: coordinate.x,
-      top: coordinate.y,
+      left: `${coordinate.x}px`,
+      top: `${coordinate.y}px`,
       width: 'var(--size-tile)',
       zIndex: 2,
     }"
   >
-    Token
+    <GamePiece :color="color" />
   </div>
 </template>
 
 <script setup lang="ts">
 import type { IDiceList, IToken } from '@/interfaces';
 import { EColors, EtypeTile } from '@/utils/constants';
+import GamePiece from '@/components/game/components/token/components/piece/game-piece.vue';
 
 // TODO: Add handleSelectToken
 interface TokenProps extends IToken {
@@ -27,7 +28,6 @@ interface TokenProps extends IToken {
 
 withDefaults(defineProps<TokenProps>(), {
   color: EColors.RED,
-  coordinate: { x: 0, y: 0 },
   typeTile: EtypeTile.NORMAL,
   index: 0,
   diceAvailable: [],
