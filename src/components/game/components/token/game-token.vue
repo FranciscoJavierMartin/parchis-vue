@@ -1,5 +1,17 @@
 <template>
-  <div>Token</div>
+  <div
+    class="game-token"
+    :class="{ moving: isMoving, animated }"
+    :style="{
+      height: 'var(--size-tile)',
+      left: coordinate.x,
+      top: coordinate.y,
+      width: 'var(--size-tile)',
+      zIndex: 2,
+    }"
+  >
+    Token
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -30,3 +42,39 @@ withDefaults(defineProps<TokenProps>(), {
   debug: true,
 });
 </script>
+
+<style scoped>
+.game-token {
+  position: absolute;
+
+  &.animated {
+    transition: all 100ms ease;
+  }
+
+  &.moving {
+    animation: heartBeat 1s infinite;
+  }
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+
+  14% {
+    transform: scale(1.3);
+  }
+
+  28% {
+    transform: scale(1);
+  }
+
+  42% {
+    transform: scale(1.3);
+  }
+
+  70% {
+    transform: scale(1);
+  }
+}
+</style>
