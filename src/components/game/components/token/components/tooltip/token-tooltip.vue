@@ -1,5 +1,9 @@
 <template>
-  <div class="token-tooltip" :class="[color.toLowerCase()]">
+  <div
+    class="token-tooltip"
+    :class="[color.toLowerCase(), tooltipPosition.position]"
+    :style="{ left: `${tooltipPosition.coordinate.x}px`, top: `${tooltipPosition.coordinate.y}px` }"
+  >
     <button v-for="dice in diceAvailable" :key="dice.key" :title="`Dice ${dice.value}`">
       <GameDice :value="dice.value" :size="DICE_SIZE_TOOLTIP" />
     </button>
@@ -7,8 +11,9 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import type { ICoordinate, IDiceList, TColors } from '@/interfaces';
-import { EColors, DICE_SIZE_TOOLTIP } from '@/utils/constants';
+import { EColors, DICE_SIZE_TOOLTIP, SIZE_TILE, SIZE_BOARD } from '@/utils/constants';
 import GameDice from '@/components/game/components/game-dice.vue';
 
 interface TokenTooltipProps {
@@ -18,10 +23,74 @@ interface TokenTooltipProps {
   handleTooltipDice: (dice: IDiceList) => void;
 }
 
-withDefaults(defineProps<TokenTooltipProps>(), {
+const props = withDefaults(defineProps<TokenTooltipProps>(), {
   color: EColors.RED,
   coordinate: { x: 0, y: 0 },
   diceAvailable: [],
+});
+
+function isCoordinateInRange(coordinate: ICoordinate): boolean {
+  return (
+    coordinate.x >= 0 &&
+    coordinate.x <= SIZE_BOARD &&
+    coordinate.y >= 0 &&
+    coordinate.y <= SIZE_BOARD
+  );
+}
+
+const tooltipPosition = computed(() => {
+  const tooltipSize = {
+    width: Math.round(props.diceAvailable.length * DICE_SIZE_TOOLTIP),
+    height: DICE_SIZE_TOOLTIP,
+  };
+
+  const posiblePositions = {
+    center: {
+      x: -(tooltipSize.width / 2),
+      y: -(tooltipSize.height + SIZE_TILE),
+    },
+    left: {
+      x: 0,
+      y: -(tooltipSize.height + SIZE_TILE),
+    },
+    top: {
+      x: -(tooltipSize.width / 2),
+      y: tooltipSize.height * 5,
+    },
+    right: {
+      x: -(tooltipSize.width - 8),
+      y: -(tooltipSize.height + SIZE_TILE),
+    },
+  };
+
+  const position = Object.entries(posiblePositions).find((position) => {
+    const tooltipTopLeft = {
+      x: props.coordinate.x + position[1].x,
+      y: props.coordinate.y + position[1].y,
+    };
+
+    const tooltipBottomRight = {
+      x: tooltipTopLeft.x + tooltipSize.width + 16,
+      y: tooltipTopLeft.y + tooltipSize.height + 8,
+    };
+
+    return isCoordinateInRange(tooltipTopLeft) && isCoordinateInRange(tooltipBottomRight);
+  });
+
+  const finalPosition: { position: string; coordinate: ICoordinate } = position
+    ? {
+        position: position[0],
+        coordinate: {
+          x: props.coordinate.x + position[1].x,
+          y: props.coordinate.y + position[1].y,
+        },
+      }
+    : {
+        position: '',
+        coordinate: { x: 0, y: 0 },
+      };
+
+  return finalPosition;
 });
 </script>
 
