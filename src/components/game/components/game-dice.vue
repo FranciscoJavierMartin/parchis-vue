@@ -67,8 +67,8 @@ withDefaults(defineProps<DiceProps>(), { size: 30, animate: false });
     background-image: var(--point), var(--point), var(--point), var(--point);
     background-position:
       10% 10%,
-      90% 10%,
       10% 90%,
+      90% 10%,
       90% 90%;
   }
 
@@ -76,9 +76,21 @@ withDefaults(defineProps<DiceProps>(), { size: 30, animate: false });
     background-image: var(--point), var(--point), var(--point), var(--point), var(--point);
     background-position:
       10% 10%,
-      90% 10%,
-      50% 50%,
       10% 90%,
+      50% 50%,
+      90% 10%,
+      90% 90%;
+  }
+
+  &.dice-6::after {
+    background-image: var(--point), var(--point), var(--point), var(--point), var(--point),
+      var(--point);
+    background-position:
+      10% 10%,
+      10% 50%,
+      10% 90%,
+      90% 10%,
+      90% 50%,
       90% 90%;
   }
 }
