@@ -2,6 +2,11 @@
   <AppWrapper>
     <!-- <GameBoard /> -->
     <GameDice :value="1" />
+    <GameDice :value="2" />
+    <GameDice :value="3" />
+    <GameDice :value="4" />
+    <GameDice :value="5" />
+    <GameDice :value="6" />
   </AppWrapper>
 </template>
 

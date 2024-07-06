@@ -15,7 +15,7 @@ interface DiceProps {
   animate?: boolean;
 }
 
-withDefaults(defineProps<DiceProps>(), { size: 130, animate: false });
+withDefaults(defineProps<DiceProps>(), { size: 30, animate: false });
 </script>
 
 <style scoped>
@@ -46,6 +46,13 @@ withDefaults(defineProps<DiceProps>(), { size: 130, animate: false });
   &.dice-1::after {
     background-image: var(--point);
     background-position: 50% 50%;
+  }
+
+  &.dice-2::after {
+    background-image: var(--point), var(--point);
+    background-position:
+      90% 10%,
+      10% 90%;
   }
 }
 </style>
