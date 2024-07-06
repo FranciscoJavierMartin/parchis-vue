@@ -12,7 +12,7 @@ export function debounce(fn: Function, delay: number) {
     if (timer) {
       clearTimeout(timer);
     }
-    const context = this as any;
+    const context = this;
     timer = setTimeout(() => {
       fn.apply(context, args);
     }, delay);
