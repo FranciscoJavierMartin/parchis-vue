@@ -15,7 +15,7 @@ interface DiceProps {
   animate?: boolean;
 }
 
-withDefaults(defineProps<DiceProps>(), { size: 30, animate: false });
+withDefaults(defineProps<DiceProps>(), { size: 50, animate: true });
 </script>
 
 <style scoped>
@@ -29,6 +29,10 @@ withDefaults(defineProps<DiceProps>(), { size: 30, animate: false });
     rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
     rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
+
+  &.animate {
+    animation: bounceIn 1s both;
+  }
 
   &::after {
     background-repeat: no-repeat;
