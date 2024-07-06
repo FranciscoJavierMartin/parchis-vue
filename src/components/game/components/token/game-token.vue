@@ -11,13 +11,13 @@
     }"
   >
     <GamePiece :color="color" :debug="debug" :index="index" :style="pieceStyle" />
-    <button v-if="showButton" class="game-token-button" />
+    <button v-if="showButton" class="game-token-button" @click="handleClickDice" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, type StyleValue } from 'vue';
-import type { IDiceList, IToken } from '@/interfaces';
+import type { IDiceList, ISelectTokenValues, IToken } from '@/interfaces';
 import {
   BASE_ZINDEX_TOKEN,
   EColors,
@@ -32,6 +32,8 @@ interface TokenProps extends IToken {
   diceList?: IDiceList[]; // TODO: Remove optional value
   isDisabledUI?: boolean;
   debug?: boolean;
+  // TODO: Remove optional value
+  handleSelectedToken?: (selectedTokenValues: ISelectTokenValues) => void;
 }
 
 const props = withDefaults(defineProps<TokenProps>(), {
@@ -51,6 +53,10 @@ const props = withDefaults(defineProps<TokenProps>(), {
 });
 
 const showTooltip = ref<boolean>(false);
+
+function handleClickDice():void{
+
+}
 
 const zIndex = computed<number>(() => {
   /*
