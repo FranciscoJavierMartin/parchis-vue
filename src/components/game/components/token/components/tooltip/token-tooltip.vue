@@ -55,7 +55,7 @@ const tooltipPosition = computed(() => {
     },
     top: {
       x: -(tooltipSize.width / 2),
-      y: tooltipSize.height * 5,
+      y: tooltipSize.height + 5,
     },
     right: {
       x: -(tooltipSize.width - 8),

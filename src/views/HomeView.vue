@@ -3,7 +3,7 @@
     <GameBoard>
       <GameToken
         color="BLUE"
-        :coordinate="{ x: SIZE_TILE * 1, y: SIZE_TILE * 10 }"
+        :coordinate="{ x: SIZE_TILE * 8, y: SIZE_TILE * 1 }"
         type-tile="EXIT"
         :index="0"
         :dice-available="[
