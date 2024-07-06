@@ -4,7 +4,11 @@
     class="game-token-piece"
     :class="color.toLowerCase()"
     :style="{ width: 'var(--size-tile)', height: 'var(--size-tile)', ...(style as any) }"
-  ></div>
+  >
+    <span v-if="debug" :style="{ width: 'var(--size-tile)', height: 'var(--size-tile)' }"
+      >{{ index }}
+    </span>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -101,6 +105,20 @@ withDefaults(defineProps<PieceProps>(), {
     &::after {
       color: var(--game-yellow);
     }
+  }
+
+  /* Styles to show token index. Only for debug */
+  span {
+    align-items: center;
+    background: black;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+    opacity: 0.7;
+    position: absolute;
+    top: -20px;
   }
 }
 </style>

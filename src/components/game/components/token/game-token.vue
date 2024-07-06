@@ -10,7 +10,7 @@
       zIndex: 2,
     }"
   >
-    <GamePiece :color="color" />
+    <GamePiece :color="color" :debug="debug" :index="index" />
   </div>
 </template>
 
