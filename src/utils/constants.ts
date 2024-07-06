@@ -5,7 +5,7 @@ import type {
   IPredefinedChatMessages,
   ISocketError,
   ISocketListenActions,
-  TDicevalues,
+  TDiceValues,
 } from '@/interfaces';
 
 /**
@@ -125,7 +125,7 @@ export const DEFAULT_VALUE_ACTION_TURN: IActionsTurn = {
 /**
  * Dice value to escape
  */
-export const DICE_VALUE_GET_OUT_JAIL: TDicevalues = 6;
+export const DICE_VALUE_GET_OUT_JAIL: TDiceValues = 6;
 
 /**
  * Maximum of dice launches.
