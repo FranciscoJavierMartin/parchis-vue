@@ -35,5 +35,29 @@ withDefaults(defineProps<TokenTooltipProps>(), {
   padding: 8px;
   position: absolute;
   z-index: 10;
+
+  &.blue {
+    background-color: var(--game-blue);
+  }
+
+  &.red {
+    background-color: var(--game-red);
+  }
+
+  &.yellow {
+    background-color: var(--game-yellow);
+  }
+
+  &.green {
+    background-color: var(--game-green);
+  }
+
+  button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+  }
 }
 </style>
