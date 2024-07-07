@@ -30,8 +30,8 @@ interface TokenTooltipProps {
 
 const props = withDefaults(defineProps<TokenTooltipProps>(), {
   color: EColors.RED,
-  coordinate: { x: 0, y: 0 },
-  diceAvailable: [],
+  coordinate: { x: 0, y: 0 } as unknown as () => ICoordinate,
+  diceAvailable: [] as unknown as () => IDiceList[],
 });
 
 function isCoordinateInRange(coordinate: ICoordinate): boolean {

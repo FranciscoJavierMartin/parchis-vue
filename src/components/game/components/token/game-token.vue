@@ -48,7 +48,7 @@ const props = withDefaults(defineProps<TokenProps>(), {
   color: EColors.RED,
   typeTile: EtypeTile.NORMAL,
   index: 0,
-  diceAvailable: [],
+  diceAvailable: [] as unknown as () => IDiceList[],
   totalTokens: 4,
   position: 1,
   enableTooltip: false,
