@@ -3,7 +3,7 @@
     class="token-tooltip"
     :class="[color.toLowerCase(), tooltipPosition.position]"
     :style="{ left: `${tooltipPosition.coordinate.x}px`, top: `${tooltipPosition.coordinate.y}px` }"
-    v-click-outside
+    v-click-outside="handleClickOutside"
   >
     <button v-for="dice in diceAvailable" :key="dice.key" :title="`Dice ${dice.value}`">
       <GameDice :value="dice.value" :size="DICE_SIZE_TOOLTIP" />
@@ -30,6 +30,10 @@ const props = withDefaults(defineProps<TokenTooltipProps>(), {
   coordinate: { x: 0, y: 0 },
   diceAvailable: [],
 });
+
+function handleClickOutside() {
+  console.log('Click outsiee');
+}
 
 function isCoordinateInRange(coordinate: ICoordinate): boolean {
   return (
