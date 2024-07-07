@@ -21,6 +21,7 @@
           :dice-list="[]"
           :handle-selected-token="handleSelectedToken"
         />
+        <GameDebug />
       </GameBoard>
     </template>
   </PageWrapper>
@@ -30,6 +31,7 @@
 import PageWrapper from '@/layout/page-wrapper.vue';
 import GameBoard from '@/components/game/components/game-board.vue';
 import GameToken from '@/components/game/components/token/game-token.vue';
+import GameDebug from '@/components/game/components/debug/game-debug.vue';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/utils/positions-board';
 import type { ISelectTokenValues } from '@/interfaces';
 
