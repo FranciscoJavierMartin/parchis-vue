@@ -3,7 +3,14 @@
   <PageWrapper>
     <template #default>
       <BoardWrapper>
-        <GameBoard :boardColor="boardColor">
+        <ProfileSection
+          :base-position="EPositionProfiles.TOP"
+          :profile-handlers="{ handleDoneDice, handleMuteChat, handleSelectDice, handleTimer }"
+          :players="players"
+          :total-players="(players.length as TTotalPlayers)"
+          :current-turn="0"
+        />
+        <GameBoard :boardColor="(boardColor as EBoardColors)">
           <GameToken
             v-for="i in totalTokens"
             :key="i"
@@ -28,6 +35,13 @@
           <GameDebug v-if="debug" />
           <ShowTotalTokens :total-tokens="{ 0: 5, 4: 8 }" />
         </GameBoard>
+        <ProfileSection
+          :base-position="EPositionProfiles.BOTTOM"
+          :profile-handlers="{ handleDoneDice, handleMuteChat, handleSelectDice, handleTimer }"
+          :players="players"
+          :total-players="(players.length as TTotalPlayers)"
+          :current-turn="0"
+        />
       </BoardWrapper>
     </template>
   </PageWrapper>
@@ -41,6 +55,7 @@ import GameToken from '@/components/game/components/token/game-token.vue';
 import GameDebug from '@/components/game/components/debug/game-debug.vue';
 import ShowTotalTokens from '@/components/game/components/token/components/total-tokens/show-total-tokens.vue';
 import BoardWrapper from '@/components/game/components/board-wrapper.vue';
+import ProfileSection from '@/components/game/profiles/profile-section.vue';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/utils/positions-board';
 import type {
   IPlayer,
@@ -50,7 +65,7 @@ import type {
   TTotalPlayers,
   TTypeGame,
 } from '@/interfaces';
-import { EBoardColors, ETypeGame } from '@/utils/constants';
+import { EBoardColors, EPositionProfiles, ETypeGame } from '@/utils/constants';
 import { getInitialDataPlayers } from '@/utils/data-players';
 
 // TODO: Add types for socket
@@ -77,7 +92,13 @@ const players = ref<IPlayer[]>(
 );
 
 const totalTokens: number = 5;
+
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
   console.log('selectedTokenValues', selectedTokenValues);
 }
+
+function handleTimer() {}
+function handleSelectDice() {}
+function handleDoneDice() {}
+function handleMuteChat() {}
 </script>
