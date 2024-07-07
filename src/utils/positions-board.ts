@@ -60,22 +60,6 @@ const POINTS: IPoint[] = [
     indexBase: 24,
   },
   {
-    x: 7,
-    y: 0,
-    increaseX: 1,
-    increaseY: 0,
-    total: 2,
-    indexBase: 24,
-  },
-  {
-    x: 8,
-    y: 1,
-    increaseX: 0,
-    increaseY: 1,
-    total: 5,
-    indexBase: 26,
-  },
-  {
     x: 8,
     y: 1,
     increaseX: 0,
@@ -96,8 +80,8 @@ const POINTS: IPoint[] = [
     y: 7,
     increaseX: 0,
     increaseY: 1,
-    total: 6,
-    indexBase: 31,
+    total: 2,
+    indexBase: 37,
   },
   {
     x: 13,
@@ -128,7 +112,7 @@ const POINTS: IPoint[] = [
 /*
  * Store the values of position where they are in the final tile.
  */
-const FINAL_POSITIONS_VALUES: TFinalPositionsValues = {
+export const FINAL_POSITIONS_VALUES: TFinalPositionsValues = {
   BOTTOM_LEFT: [
     {
       index: 0,
@@ -254,7 +238,7 @@ const FINAL_POSITIONS_VALUES: TFinalPositionsValues = {
 /**
  * Store the values to calculate the position of starting tiles
  */
-const EXIT_TILES_VALUES: TExitTilesValues = {
+export const EXIT_TILES_VALUES: TExitTilesValues = {
   BOTTOM_LEFT: {
     x: 7,
     y: 13,
@@ -289,7 +273,7 @@ const EXIT_TILES_VALUES: TExitTilesValues = {
   },
 };
 
-function calculatePosition(point: IPoint): IPositionsItems[] {
+export function calculatePosition(point: IPoint): IPositionsItems[] {
   const position: IPositionsItems[] = [];
 
   const { x, y, increaseX, increaseY, total, indexBase } = point;
