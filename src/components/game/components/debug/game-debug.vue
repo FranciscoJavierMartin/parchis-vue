@@ -14,6 +14,13 @@
     >
       {{ position.index }}
     </GameDebugTile>
+    <GameDebugTile
+      v-for="position in data.finalPositions"
+      :key="position.index"
+      :coordinate="position.coordinate"
+    >
+      {{ position.index }}
+    </GameDebugTile>
   </template>
 </template>
 
