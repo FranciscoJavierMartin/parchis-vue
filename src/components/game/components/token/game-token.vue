@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, type StyleValue } from 'vue';
+import { computed, ref, watchEffect, type StyleValue } from 'vue';
 import type { IDiceList, ISelectTokenValues, IToken } from '@/interfaces';
 import {
   BASE_ZINDEX_TOKEN,
@@ -62,7 +62,7 @@ const props = withDefaults(defineProps<TokenProps>(), {
   debug: false,
 });
 
-const showTooltip = ref<boolean>(false);
+const showTooltip = ref<boolean>(props.enableTooltip);
 
 function handleClickOutside() {
   showTooltip.value = false;
@@ -162,6 +162,13 @@ const showButton = computed<boolean>(
     !props.isMoving &&
     !props.isDisabledUI,
 );
+
+// If there are not available dices, then dismiss tooltip
+watchEffect(() => {
+  if (showTooltip.value && props.diceAvailable.length === 0) {
+    showTooltip.value = false;
+  }
+});
 </script>
 
 <style scoped>

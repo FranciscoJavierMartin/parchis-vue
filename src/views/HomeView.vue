@@ -12,7 +12,7 @@
         ]"
         :total-tokens="1"
         :position="1"
-        :enable-tooltip="false"
+        :enable-tooltip="true"
         :is-moving="false"
         can-select-token
         :animated="false"
