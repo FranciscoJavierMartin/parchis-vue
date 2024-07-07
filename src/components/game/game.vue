@@ -20,8 +20,9 @@
           :can-select-token="true"
           :dice-list="[]"
           :handle-selected-token="handleSelectedToken"
+          :debug="debug"
         />
-        <GameDebug />
+        <GameDebug v-if="debug" />
       </GameBoard>
     </template>
   </PageWrapper>
@@ -34,6 +35,12 @@ import GameToken from '@/components/game/components/token/game-token.vue';
 import GameDebug from '@/components/game/components/debug/game-debug.vue';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/utils/positions-board';
 import type { ISelectTokenValues } from '@/interfaces';
+
+interface GameProps {
+  debug?: boolean;
+}
+
+withDefaults(defineProps<GameProps>(), { debug: false });
 
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
   console.log('selectedTokenValues', selectedTokenValues);

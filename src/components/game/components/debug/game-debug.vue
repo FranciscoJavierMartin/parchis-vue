@@ -22,9 +22,16 @@
       {{ position.index }}
     </GameDebugTile>
   </template>
+  <GameDebugTile
+    v-for="position in POSITION_TILES"
+    :key="position.index"
+    :coordinate="position.coordinate"
+  >
+    {{ position.index }}
+  </GameDebugTile>
 </template>
 
 <script setup lang="ts">
 import GameDebugTile from '@/components/game/components/debug/game-debug-tile.vue';
-import { POSITION_ELEMENTS_BOARD } from '@/utils/positions-board';
+import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/utils/positions-board';
 </script>
