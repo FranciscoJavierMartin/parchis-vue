@@ -325,6 +325,9 @@ export const POSITION_TILES: IPositionsItems[] = POINTS.flatMap((point) => {
   return calculatePosition(point);
 });
 
+/**
+ * Store the board positions, depending on player location
+ */
 export const POSITION_ELEMENTS_BOARD: TLocationBoardElements = {
   BOTTOM_LEFT: {
     exitTileIndex: 50,

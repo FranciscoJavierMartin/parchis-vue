@@ -21,7 +21,7 @@
       <GameTile v-for="position of tileExitLeft" :key="position.index" v-bind="position" />
       <GameTile v-for="position of tileExitRight" :key="position.index" v-bind="position" />
 
-      <GameTile
+      <!-- <GameTile
         v-for="position of FINAL_POSITIONS_VALUES.BOTTOM_LEFT"
         :key="position.index"
         v-bind="position"
@@ -40,23 +40,27 @@
         v-for="position of FINAL_POSITIONS_VALUES.TOP_RIGHT"
         :key="position.index"
         v-bind="position"
-      />
+      />-->
+
       <GameToken
+        v-for="i in 4"
+        :key="i"
         color="RED"
-        :coordinate="FINAL_POSITIONS_VALUES.BOTTOM_LEFT[0].coordinate"
+        :coordinate="FINAL_POSITIONS_VALUES.TOP_RIGHT[i - 1].coordinate"
         type-tile="END"
         :index="0"
-        :dice-available="[{ key: 1, value: 1 }]"
+        :dice-available="[]"
         :total-tokens="1"
         :position="1"
         :enable-tooltip="false"
         :is-moving="false"
         :animated="false"
         :position-tile="1"
-        can-select-token
-        :dice-list="[{ key: 1, value: 1 }]"
+        :can-select-token="false"
+        :dice-list="[]"
         :handle-selected-token="handleSelectedToken"
       />
+
       <!--<GameToken
         color="BLUE"
         :coordinate="{ x: SIZE_TILE * 1, y: SIZE_TILE * 8 }"
