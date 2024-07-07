@@ -1,20 +1,15 @@
-function handleClick(element: HTMLElement, event: Event, handler: Function) {
-  if (!element.contains(event.target as Node)) {
-    handler();
-  }
-}
-
+// TODO: Add types
 export const vClickOutside = {
-  mounted(element: HTMLElement, binding, vnode) {
-    console.log('Mounted', binding.value);
+  mounted(element: HTMLElement, binding: { value: Function }) {
     const handler = binding.value;
-
-    document.addEventListener('mousedown', (event) => {
-      handleClick(element, event, handler);
-    });
+    (element as any).clickOutsideEventHandler = (event: MouseEvent) => {
+      if (!element.contains(event.target as Node)) {
+        handler();
+      }
+    };
+    document.addEventListener('mousedown', (element as any).clickOutsideEventHandler);
   },
-  beforeUnmount(element, binding, vnode) {
-    console.log('Unmounted', binding);
-    document.onmousedown = null;
+  beforeUnmount(element: HTMLElement) {
+    document.removeEventListener('mousedown', (element as any).clickOutsideEventHandler);
   },
 };

@@ -65,7 +65,6 @@ const props = withDefaults(defineProps<TokenProps>(), {
 const showTooltip = ref<boolean>(false);
 
 function handleClickOutside() {
-  console.log('Click outsiee');
   showTooltip.value = false;
 }
 
