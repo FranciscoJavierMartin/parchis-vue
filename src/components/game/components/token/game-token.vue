@@ -60,9 +60,14 @@ const props = withDefaults(defineProps<TokenProps>(), {
   debug: false,
 });
 
-const showTooltip = ref<boolean>(true);
+const showTooltip = ref<boolean>(false);
 
-function handleClickDice(): void {}
+function handleClickDice(): void {
+  if (props.diceAvailable.length === 1) {
+  } else {
+    showTooltip.value = true;
+  }
+}
 
 function handleTooltipDice(dice: IDiceList): void {}
 

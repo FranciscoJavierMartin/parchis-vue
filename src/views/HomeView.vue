@@ -3,13 +3,29 @@
     <GameBoard>
       <GameToken
         color="BLUE"
-        :coordinate="{ x: SIZE_TILE * 8, y: SIZE_TILE * 1 }"
+        :coordinate="{ x: SIZE_TILE * 6, y: SIZE_TILE * 12 }"
         type-tile="EXIT"
         :index="0"
         :dice-available="[
           { key: 1, value: 1 },
           { key: 5, value: 2 },
-          { key: 10, value: 6 },
+        ]"
+        :total-tokens="1"
+        :position="1"
+        :enable-tooltip="false"
+        :is-moving="false"
+        can-select-token
+        :animated="false"
+        :position-tile="1"
+      />
+      <GameToken
+        color="RED"
+        :coordinate="{ x: SIZE_TILE * 1, y: SIZE_TILE * 8 }"
+        type-tile="EXIT"
+        :index="0"
+        :dice-available="[
+          { key: 1, value: 1 },
+          { key: 5, value: 2 },
         ]"
         :total-tokens="1"
         :position="1"
@@ -20,20 +36,6 @@
         :position-tile="1"
       />
       <!--<GameToken
-        color="BLUE"
-        :coordinate="{ x: SIZE_TILE * 6, y: SIZE_TILE * 12 }"
-        type-tile="EXIT"
-        :index="0"
-        :dice-available="[]"
-        :total-tokens="5"
-        :position="5"
-        :enable-tooltip="false"
-        :is-moving="false"
-        can-select-token
-        :animated="false"
-        :position-tile="1"
-      />
-      <GameToken
         color="GREEN"
         :coordinate="{ x: SIZE_TILE * 6, y: SIZE_TILE * 12 }"
         type-tile="EXIT"
