@@ -3,6 +3,7 @@
     class="token-tooltip"
     :class="[color.toLowerCase(), tooltipPosition.position]"
     :style="{ left: `${tooltipPosition.coordinate.x}px`, top: `${tooltipPosition.coordinate.y}px` }"
+    v-click-outside
   >
     <button v-for="dice in diceAvailable" :key="dice.key" :title="`Dice ${dice.value}`">
       <GameDice :value="dice.value" :size="DICE_SIZE_TOOLTIP" />
@@ -15,6 +16,7 @@ import { computed } from 'vue';
 import type { ICoordinate, IDiceList, TColors } from '@/interfaces';
 import { EColors, DICE_SIZE_TOOLTIP, SIZE_TILE, SIZE_BOARD } from '@/utils/constants';
 import GameDice from '@/components/game/components/game-dice.vue';
+import { vClickOutside } from '@/composables/use-click-outside';
 
 interface TokenTooltipProps {
   color: TColors;
