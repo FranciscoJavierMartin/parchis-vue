@@ -14,7 +14,7 @@
     <button v-if="showButton" class="game-token-button" @click="handleClickDice" />
   </div>
   <TokenTooltip
-    v-if="canSelectToken && showTooltip"
+    v-if="diceAvailable.length > 1 && canSelectToken && showTooltip"
     :color="color"
     :coordinate="coordinate"
     :diceAvailable="diceAvailable"
@@ -37,13 +37,11 @@ import TokenPiece from '@/components/game/components/token/components/piece/toke
 import TokenTooltip from '@/components/game/components/token/components/tooltip/token-tooltip.vue';
 import { vClickOutside } from '@/composables/use-click-outside';
 
-// TODO: Add handleSelectToken
 interface TokenProps extends IToken {
-  diceList?: IDiceList[]; // TODO: Remove optional value
+  diceList: IDiceList[];
   isDisabledUI?: boolean;
   debug?: boolean;
-  // TODO: Remove optional value
-  handleSelectedToken?: (selectedTokenValues: ISelectTokenValues) => void;
+  handleSelectedToken: (selectedTokenValues: ISelectTokenValues) => void;
 }
 
 const props = withDefaults(defineProps<TokenProps>(), {
@@ -57,7 +55,6 @@ const props = withDefaults(defineProps<TokenProps>(), {
   isMoving: false,
   animated: false,
   canSelectToken: true,
-  diceList: [],
   isDisabledUI: false,
   debug: false,
 });
@@ -70,13 +67,18 @@ function handleClickOutside() {
 
 function handleClickDice(): void {
   if (props.diceAvailable.length === 1) {
-    console.log();
+    const diceIndex = props.diceList.findIndex((dice) => dice.key === props.diceAvailable[0].key);
+    props.handleSelectedToken({ diceIndex, tokenIndex: props.index });
   } else {
     showTooltip.value = true;
   }
 }
 
-function handleTooltipDice(dice: IDiceList): void {}
+function handleTooltipDice(dice: IDiceList): void {
+  showTooltip.value = false;
+  const diceIndex = props.diceList.findIndex((d) => d.key === dice.key);
+  props.handleSelectedToken({ diceIndex, tokenIndex: props.index });
+}
 
 const zIndex = computed<number>(() => {
   /*

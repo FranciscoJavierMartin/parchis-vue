@@ -4,7 +4,12 @@
     :class="[color.toLowerCase(), tooltipPosition.position]"
     :style="{ left: `${tooltipPosition.coordinate.x}px`, top: `${tooltipPosition.coordinate.y}px` }"
   >
-    <button v-for="dice in diceAvailable" :key="dice.key" :title="`Dice ${dice.value}`">
+    <button
+      v-for="dice in diceAvailable"
+      :key="dice.key"
+      :title="`Dice ${dice.value}`"
+      @click="() => handleTooltipDice(dice)"
+    >
       <GameDice :value="dice.value" :size="DICE_SIZE_TOOLTIP" />
     </button>
   </div>
