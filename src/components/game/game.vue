@@ -33,19 +33,35 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import PageWrapper from '@/layout/page-wrapper.vue';
 import GameBoard from '@/components/game/components/game-board.vue';
 import GameToken from '@/components/game/components/token/game-token.vue';
 import GameDebug from '@/components/game/components/debug/game-debug.vue';
 import ShowTotalTokens from '@/components/game/components/token/components/total-tokens/show-total-tokens.vue';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/utils/positions-board';
-import type { ISelectTokenValues } from '@/interfaces';
+import type {
+  IPlayer,
+  ISelectTokenValues,
+  IUser,
+  TBoardColors,
+  TTotalPlayers,
+  TTypeGame,
+} from '@/interfaces';
 
+// TODO: Add types for socket
 interface GameProps {
+  totalPlayers: TTotalPlayers;
+  initialTurn: number;
+  users: IUser[];
+  typeGame?: TTypeGame;
+  boardColor?: TBoardColors;
   debug?: boolean;
 }
 
 withDefaults(defineProps<GameProps>(), { debug: false });
+
+const players = ref<IPlayer[]>([]);
 
 const totalTokens: number = 5;
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
