@@ -2,31 +2,33 @@
 <template>
   <PageWrapper>
     <template #default>
-      <GameBoard :boardColor="boardColor">
-        <GameToken
-          v-for="i in totalTokens"
-          :key="i"
-          color="RED"
-          :coordinate="
-            POSITION_TILES[POSITION_ELEMENTS_BOARD.BOTTOM_LEFT.startTileIndex].coordinate
-          "
-          type-tile="JAIL"
-          :index="i - 1"
-          :dice-available="[]"
-          :total-tokens="totalTokens"
-          :position="i"
-          :enable-tooltip="false"
-          :is-moving="false"
-          :animated="false"
-          :position-tile="1"
-          :can-select-token="true"
-          :dice-list="[]"
-          :handle-selected-token="handleSelectedToken"
-          :debug="debug"
-        />
-        <GameDebug v-if="debug" />
-        <ShowTotalTokens :total-tokens="{ 0: 5, 4: 8 }" />
-      </GameBoard>
+      <BoardWrapper>
+        <GameBoard :boardColor="boardColor">
+          <GameToken
+            v-for="i in totalTokens"
+            :key="i"
+            color="RED"
+            :coordinate="
+              POSITION_TILES[POSITION_ELEMENTS_BOARD.BOTTOM_LEFT.startTileIndex].coordinate
+            "
+            type-tile="JAIL"
+            :index="i - 1"
+            :dice-available="[]"
+            :total-tokens="totalTokens"
+            :position="i"
+            :enable-tooltip="false"
+            :is-moving="false"
+            :animated="false"
+            :position-tile="1"
+            :can-select-token="true"
+            :dice-list="[]"
+            :handle-selected-token="handleSelectedToken"
+            :debug="debug"
+          />
+          <GameDebug v-if="debug" />
+          <ShowTotalTokens :total-tokens="{ 0: 5, 4: 8 }" />
+        </GameBoard>
+      </BoardWrapper>
     </template>
   </PageWrapper>
 </template>
@@ -38,6 +40,7 @@ import GameBoard from '@/components/game/components/game-board.vue';
 import GameToken from '@/components/game/components/token/game-token.vue';
 import GameDebug from '@/components/game/components/debug/game-debug.vue';
 import ShowTotalTokens from '@/components/game/components/token/components/total-tokens/show-total-tokens.vue';
+import BoardWrapper from '@/components/game/components/board-wrapper.vue';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/utils/positions-board';
 import type {
   IPlayer,
