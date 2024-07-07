@@ -112,7 +112,7 @@ const POINTS: IPoint[] = [
 /*
  * Store the values of position where they are in the final tile.
  */
-export const FINAL_POSITIONS_VALUES: TFinalPositionsValues = {
+const FINAL_POSITIONS_VALUES: TFinalPositionsValues = {
   BOTTOM_LEFT: [
     {
       index: 0,
@@ -238,7 +238,7 @@ export const FINAL_POSITIONS_VALUES: TFinalPositionsValues = {
 /**
  * Store the values to calculate the position of starting tiles
  */
-export const EXIT_TILES_VALUES: TExitTilesValues = {
+const EXIT_TILES_VALUES: TExitTilesValues = {
   BOTTOM_LEFT: {
     x: 7,
     y: 13,
@@ -273,7 +273,7 @@ export const EXIT_TILES_VALUES: TExitTilesValues = {
   },
 };
 
-export function calculatePosition(point: IPoint): IPositionsItems[] {
+function calculatePosition(point: IPoint): IPositionsItems[] {
   const position: IPositionsItems[] = [];
 
   const { x, y, increaseX, increaseY, total, indexBase } = point;
@@ -300,7 +300,7 @@ export function calculatePosition(point: IPoint): IPositionsItems[] {
  * @param baseY
  * @returns
  */
-export function getStartPositions(baseX: number, baseY: number): IPositionsItems[] {
+function getStartPositions(baseX: number, baseY: number): IPositionsItems[] {
   const position: IPositionsItems[] = [];
   const center = SIZE_TILE / 2;
 
@@ -321,9 +321,18 @@ export function getStartPositions(baseX: number, baseY: number): IPositionsItems
   return position;
 }
 
+/**
+ * Safe tiles index
+ */
+export const SAFE_AREAS: number[] = [0, 8, 13, 21, 26, 34, 39, 47];
+
 export const POSITION_TILES: IPositionsItems[] = POINTS.flatMap((point) => {
   return calculatePosition(point);
 });
+
+export const TOTAL_TILES: number = POSITION_TILES.length;
+
+export const TOTAL_EXIT_TILES: number = 6;
 
 /**
  * Store the board positions, depending on player location

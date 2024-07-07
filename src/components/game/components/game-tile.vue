@@ -7,7 +7,7 @@
       border: '1px solid black',
       height: 'var(--size-tile)',
       width: 'var(--size-tile)',
-      backgroundColor: 'rgb(0 0 0 / 60%)',
+      backgroundColor: 'rgb(0 0 0 / 30%)',
       color: 'white',
       zIndex: 10,
       display: 'flex',
