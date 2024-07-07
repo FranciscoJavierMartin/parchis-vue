@@ -19,6 +19,7 @@
     :coordinate="coordinate"
     :diceAvailable="diceAvailable"
     :handleTooltipDice="handleTooltipDice"
+    v-click-outside="handleClickOutside"
   />
 </template>
 
@@ -34,6 +35,7 @@ import {
 } from '@/utils/constants';
 import TokenPiece from '@/components/game/components/token/components/piece/token-piece.vue';
 import TokenTooltip from '@/components/game/components/token/components/tooltip/token-tooltip.vue';
+import { vClickOutside } from '@/composables/use-click-outside';
 
 // TODO: Add handleSelectToken
 interface TokenProps extends IToken {
@@ -62,8 +64,14 @@ const props = withDefaults(defineProps<TokenProps>(), {
 
 const showTooltip = ref<boolean>(false);
 
+function handleClickOutside() {
+  console.log('Click outsiee');
+  showTooltip.value = false;
+}
+
 function handleClickDice(): void {
   if (props.diceAvailable.length === 1) {
+    console.log();
   } else {
     showTooltip.value = true;
   }
