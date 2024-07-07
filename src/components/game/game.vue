@@ -7,10 +7,10 @@
           :base-position="EPositionProfiles.TOP"
           :profile-handlers="{ handleDoneDice, handleMuteChat, handleSelectDice, handleTimer }"
           :players="players"
-          :total-players="(players.length as TTotalPlayers)"
+          :total-players="players.length as TTotalPlayers"
           :current-turn="0"
         />
-        <GameBoard :boardColor="(boardColor as EBoardColors)">
+        <GameBoard :boardColor="boardColor as EBoardColors">
           <GameToken
             v-for="i in totalTokens"
             :key="i"
@@ -39,7 +39,7 @@
           :base-position="EPositionProfiles.BOTTOM"
           :profile-handlers="{ handleDoneDice, handleMuteChat, handleSelectDice, handleTimer }"
           :players="players"
-          :total-players="(players.length as TTotalPlayers)"
+          :total-players="players.length as TTotalPlayers"
           :current-turn="0"
         />
       </BoardWrapper>
