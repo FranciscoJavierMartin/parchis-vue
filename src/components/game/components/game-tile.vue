@@ -9,6 +9,10 @@
       width: 'var(--size-tile)',
       backgroundColor: 'rgb(0 0 0 / 60%)',
       color: 'white',
+      zIndex: 10,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     }"
   >
     {{ index }}

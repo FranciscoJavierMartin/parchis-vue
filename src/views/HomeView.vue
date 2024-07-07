@@ -2,6 +2,18 @@
   <AppWrapper>
     <GameBoard>
       <GameTile v-for="position of POSITION_TILES" :key="position.index" v-bind="position" />
+      <GameTile
+        v-for="position of positionsJailBottomLeft"
+        :key="position.index"
+        v-bind="position"
+      />
+      <GameTile v-for="position of positionsJailTopLeft" :key="position.index" v-bind="position" />
+      <GameTile
+        v-for="position of positionsJailBottomRight"
+        :key="position.index"
+        v-bind="position"
+      />
+      <GameTile v-for="position of positionsJailTopRight" :key="position.index" v-bind="position" />
       <GameToken
         color="RED"
         :coordinate="POSITION_TILES[40].coordinate"
@@ -95,7 +107,10 @@ import type { ISelectTokenValues } from '@/interfaces';
 
 import { POSITION_TILES, getStartPositions } from '@/utils/positions-board';
 
-const positionsJailBottom = getStartPositions(2, 11);
+const positionsJailBottomLeft = getStartPositions(2, 11);
+const positionsJailTopLeft = getStartPositions(2, 2);
+const positionsJailBottomRight = getStartPositions(11, 2);
+const positionsJailTopRight = getStartPositions(11, 11);
 
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
   console.log('selectedTokenValues', selectedTokenValues);

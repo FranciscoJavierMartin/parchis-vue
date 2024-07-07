@@ -337,7 +337,7 @@ export function getStartPositions(baseX: number, baseY: number): IPositionsItems
   return position;
 }
 
-export const POSITION_TILES:IPositionsItems[] = POINTS.flatMap((point) => {
+export const POSITION_TILES: IPositionsItems[] = POINTS.flatMap((point) => {
   return calculatePosition(point);
 });
 
