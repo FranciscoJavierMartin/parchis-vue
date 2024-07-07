@@ -7,30 +7,9 @@
 <script setup lang="ts">
 import Game from '@/components/game/game.vue';
 import AppWrapper from '@/components/wrapper/app/app-wrapper.vue';
-import type { IUser, TTotalPlayers } from '@/interfaces';
+import type { TTotalPlayers } from '@/interfaces';
+import { TEMP_USERS } from '@/utils/data-players';
 
-const TEMP_USERS: IUser[] = [
-  {
-    id: '1',
-    name: 'Player 01',
-    isBot: false,
-  },
-  {
-    id: '2',
-    name: 'Player 02',
-    isBot: true,
-  },
-  {
-    id: '3',
-    name: 'Player 03',
-    isBot: false,
-  },
-  {
-    id: '4',
-    name: 'Player 04',
-    isBot: false,
-  },
-];
-
+// TODO: Use users.length instead of pass totalPlayers
 const totalPlayers = TEMP_USERS.length as TTotalPlayers;
 </script>

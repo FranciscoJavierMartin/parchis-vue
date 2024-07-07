@@ -2,7 +2,7 @@
 <template>
   <PageWrapper>
     <template #default>
-      <GameBoard>
+      <GameBoard :boardColor="boardColor">
         <GameToken
           v-for="i in totalTokens"
           :key="i"
@@ -25,7 +25,6 @@
           :debug="debug"
         />
         <GameDebug v-if="debug" />
-
         <ShowTotalTokens :total-tokens="{ 0: 5, 4: 8 }" />
       </GameBoard>
     </template>
@@ -48,6 +47,8 @@ import type {
   TTotalPlayers,
   TTypeGame,
 } from '@/interfaces';
+import { EBoardColors, ETypeGame } from '@/utils/constants';
+import { getInitialDataPlayers } from '@/utils/data-players';
 
 // TODO: Add types for socket
 interface GameProps {
@@ -59,9 +60,18 @@ interface GameProps {
   debug?: boolean;
 }
 
-withDefaults(defineProps<GameProps>(), { debug: false });
+const props = withDefaults(defineProps<GameProps>(), {
+  totalPlayers: 2,
+  initialTurn: 0,
+  users: [] as unknown as () => IUser[],
+  typeGame: ETypeGame.OFFLINE,
+  boardColor: EBoardColors.RGYB,
+  debug: false,
+});
 
-const players = ref<IPlayer[]>([]);
+const players = ref<IPlayer[]>(
+  getInitialDataPlayers(props.users, props.boardColor, props.totalPlayers),
+);
 
 const totalTokens: number = 5;
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
