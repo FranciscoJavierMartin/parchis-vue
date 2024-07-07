@@ -1,22 +1,7 @@
 <template>
   <AppWrapper>
     <GameBoard>
-      <div
-        v-for="position of POSITION_TILES"
-        :key="position.index"
-        :style="{
-          position: 'absolute',
-          left: `${position.coordinate.x}px`,
-          top: `${position.coordinate.y}px`,
-          border: '1px solid black',
-          height: 'var(--size-tile)',
-          width: 'var(--size-tile)',
-          backgroundColor: 'rgb(0 0 0 / 60%)',
-          color: 'white',
-        }"
-      >
-        {{ position.index }}
-      </div>
+      <GameTile v-for="position of POSITION_TILES" :key="position.index" v-bind="position" />
       <GameToken
         color="RED"
         :coordinate="POSITION_TILES[40].coordinate"
@@ -103,11 +88,14 @@
 
 <script setup lang="ts">
 import GameBoard from '@/components/game/components/game-board.vue';
+import GameTile from '@/components/game/components/game-tile.vue';
 import GameToken from '@/components/game/components/token/game-token.vue';
 import AppWrapper from '@/components/wrapper/app/app-wrapper.vue';
 import type { ISelectTokenValues } from '@/interfaces';
-import { SIZE_TILE } from '@/utils/constants';
-import { POSITION_TILES } from '@/utils/positions-board';
+
+import { POSITION_TILES, getStartPositions } from '@/utils/positions-board';
+
+const positionsJailBottom = getStartPositions(2, 11);
 
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
   console.log('selectedTokenValues', selectedTokenValues);
