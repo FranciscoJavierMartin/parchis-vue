@@ -4,15 +4,17 @@
     <template #default>
       <GameBoard>
         <GameToken
+          v-for="i in totalTokens"
+          :key="i"
           color="RED"
           :coordinate="
             POSITION_TILES[POSITION_ELEMENTS_BOARD.BOTTOM_LEFT.startTileIndex].coordinate
           "
           type-tile="JAIL"
-          :index="0"
+          :index="i - 1"
           :dice-available="[]"
-          :total-tokens="1"
-          :position="1"
+          :total-tokens="totalTokens"
+          :position="i"
           :enable-tooltip="false"
           :is-moving="false"
           :animated="false"
@@ -42,6 +44,7 @@ interface GameProps {
 
 withDefaults(defineProps<GameProps>(), { debug: false });
 
+const totalTokens: number = 5;
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
   console.log('selectedTokenValues', selectedTokenValues);
 }
