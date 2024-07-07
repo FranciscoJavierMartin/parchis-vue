@@ -1,6 +1,6 @@
 <template>
   <AppWrapper>
-    <Game :debug="true" />
+    <Game :debug="false" />
   </AppWrapper>
 </template>
 

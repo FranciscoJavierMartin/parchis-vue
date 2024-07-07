@@ -4,15 +4,17 @@
     <template #default>
       <GameBoard>
         <GameToken
+          v-for="i in totalTokens"
+          :key="i"
           color="RED"
           :coordinate="
             POSITION_TILES[POSITION_ELEMENTS_BOARD.BOTTOM_LEFT.startTileIndex].coordinate
           "
           type-tile="JAIL"
-          :index="0"
+          :index="i - 1"
           :dice-available="[]"
-          :total-tokens="1"
-          :position="1"
+          :total-tokens="totalTokens"
+          :position="i"
           :enable-tooltip="false"
           :is-moving="false"
           :animated="false"
@@ -23,6 +25,8 @@
           :debug="debug"
         />
         <GameDebug v-if="debug" />
+
+        <ShowTotalTokens :total-tokens="{ 0: 5, 4: 8 }" />
       </GameBoard>
     </template>
   </PageWrapper>
@@ -33,6 +37,7 @@ import PageWrapper from '@/layout/page-wrapper.vue';
 import GameBoard from '@/components/game/components/game-board.vue';
 import GameToken from '@/components/game/components/token/game-token.vue';
 import GameDebug from '@/components/game/components/debug/game-debug.vue';
+import ShowTotalTokens from '@/components/game/components/token/components/total-tokens/show-total-tokens.vue';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/utils/positions-board';
 import type { ISelectTokenValues } from '@/interfaces';
 
@@ -42,6 +47,7 @@ interface GameProps {
 
 withDefaults(defineProps<GameProps>(), { debug: false });
 
+const totalTokens: number = 5;
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
   console.log('selectedTokenValues', selectedTokenValues);
 }
