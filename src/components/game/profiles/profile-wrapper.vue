@@ -1,15 +1,28 @@
 <template>
-  <div v-if="indexProfile">{{ position }} - {{ indexProfile }}</div>
+  <div v-if="indexProfile">
+    <ProfilePlayer
+      v-bind="profileHandlers"
+      :base-position="basePosition"
+      :position="position"
+      :has-turn="hasTurn"
+      :actions-turn="hasTurn ? actionsTurn : DEFAULT_VALUE_ACTION_TURN"
+      :player="players[indexProfile - 1]"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import type {
+  IActionsTurn,
   IPlayer,
   IProfileHandlers,
   TPositionProfile,
   TPositionProfiles,
   TTotalPlayers,
 } from '@/interfaces';
+import ProfilePlayer from '@/components/game/profiles/profile/profile-player.vue';
+import { DEFAULT_VALUE_ACTION_TURN } from '@/utils/constants';
 
 // TODO: Extract in common (without position)
 interface ProfileSectionProps {
@@ -18,7 +31,7 @@ interface ProfileSectionProps {
   players: IPlayer[];
   totalPlayers: TTotalPlayers;
   profileHandlers: IProfileHandlers;
-  // actionsTurn: IActionsTurn;
+  actionsTurn: IActionsTurn;
   position: TPositionProfile;
 }
 
@@ -60,4 +73,8 @@ const DISTRIBUTION_PROFILES: TPositionTotalPlayers = {
 
 const indexProfile =
   DISTRIBUTION_PROFILES[props.totalPlayers]?.[props.basePosition]?.[props.position] || 0;
+
+const hasTurn = computed<boolean>(
+  () => indexProfile !== 0 && props.currentTurn === indexProfile - 1,
+);
 </script>

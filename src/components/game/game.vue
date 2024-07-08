@@ -10,6 +10,7 @@
           :players="players"
           :total-players="(players.length as TTotalPlayers)"
           :current-turn="currentTurn"
+          :actions-turn="actionsTurn"
         />
         <!-- prettier-ignore-attribute -->
         <GameBoard :boardColor="(boardColor as EBoardColors)">
@@ -42,6 +43,7 @@
           :players="players"
           :total-players="(players.length as TTotalPlayers)"
           :current-turn="currentTurn"
+          :actions-turn="actionsTurn"
         />
       </BoardWrapper>
     </template>
@@ -64,6 +66,7 @@ import {
   type ISelectTokenValues,
   type IUser,
   type TBoardColors,
+  type TDiceValues,
   type TTotalPlayers,
   type TTypeGame,
 } from '@/interfaces';
@@ -99,8 +102,11 @@ function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
   console.log('selectedTokenValues', selectedTokenValues);
 }
 
-function handleTimer() {}
-function handleSelectDice() {}
-function handleDoneDice() {}
-function handleMuteChat() {}
+function handleTimer(ends: boolean = false): void {}
+
+function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = false): void {}
+
+function handleDoneDice(isActionSocket: boolean = false): void {}
+
+function handleMuteChat(playerIndex: number): void {}
 </script>

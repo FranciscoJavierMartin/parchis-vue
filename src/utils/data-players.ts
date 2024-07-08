@@ -20,7 +20,7 @@ export const TEMP_USERS: IUser[] = [
     name: 'Player 02',
     isBot: true,
   },
-  /* {
+  {
     id: '3',
     name: 'Player 03',
     isBot: false,
@@ -29,7 +29,7 @@ export const TEMP_USERS: IUser[] = [
     id: '4',
     name: 'Player 04',
     isBot: false,
-  },*/
+  },
 ];
 
 function getPlayersColors(boardColor: TBoardColors, totalPlayers: TTotalPlayers): ESufixColors[] {

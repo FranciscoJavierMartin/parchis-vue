@@ -5,7 +5,7 @@
       :key="position"
       class="game-profile-section-container"
     >
-      <ProfileCard v-bind="$props" :position="position" />
+      <ProfileWrapper v-bind="$props" :position="position" />
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@ import type {
   TTotalPlayers,
 } from '@/interfaces';
 import { EPositionProfile } from '@/utils/constants';
-import ProfileCard from '@/components/game/profiles/profile-card.vue';
+import ProfileWrapper from '@/components/game/profiles/profile-wrapper.vue';
 
 // TODO: Extract in common
 interface ProfileSectionProps {
@@ -28,7 +28,7 @@ interface ProfileSectionProps {
   players: IPlayer[];
   totalPlayers: TTotalPlayers;
   profileHandlers: IProfileHandlers;
-  // actionsTurn: IActionsTurn;
+  actionsTurn: IActionsTurn;
 }
 
 defineProps<ProfileSectionProps>();
