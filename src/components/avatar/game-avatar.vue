@@ -26,7 +26,7 @@ withDefaults(defineProps<GameAvatarProps>(), {
 
 <style scoped>
 img {
-  background: url('/default.png') no-repeat;
+  background: no-repeat url('/default.png');
   background-size: contain;
   display: block;
   -moz-box-sizing: border-box;
