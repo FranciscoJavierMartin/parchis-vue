@@ -5,7 +5,7 @@
     :class="[className]"
    
   /> -->
-  <img src="https://bitsofco.de/broken.jpg" alt="Kanye Laughing">
+  <img src="https://bitsofco.de/broken.jpg" alt="Kanye Laughing" />
 </template>
 
 <script lang="ts" setup>
@@ -26,14 +26,13 @@ withDefaults(defineProps<GameAvatarProps>(), {
 
 <style scoped>
 img {
-  font-family: 'Helvetica';
-  font-weight: 300;
-  line-height: 2;
-  text-align: center;
-
-  width: 100%;
-  height: auto;
+  background: url('/default.png') no-repeat;
+  background-size: contain;
   display: block;
-  position: relative;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 50px;
+  height: 50px;
+  padding-left: 50px;
 }
 </style>

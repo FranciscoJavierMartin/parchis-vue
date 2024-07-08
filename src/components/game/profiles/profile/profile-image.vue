@@ -17,7 +17,6 @@ interface ProfileImageProps {
 }
 
 const props = defineProps<ProfileImageProps>();
-
 </script>
 
 <style scoped>
