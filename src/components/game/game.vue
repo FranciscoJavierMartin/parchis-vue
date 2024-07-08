@@ -60,16 +60,17 @@ import ShowTotalTokens from '@/components/game/components/token/components/total
 import BoardWrapper from '@/components/game/components/board-wrapper.vue';
 import ProfileSection from '@/components/game/profiles/profile-section.vue';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/utils/positions-board';
-import type {
-  IPlayer,
-  ISelectTokenValues,
-  IUser,
-  TBoardColors,
-  TTotalPlayers,
-  TTypeGame,
+import {
+  type IActionsTurn,
+  type IPlayer,
+  type ISelectTokenValues,
+  type IUser,
+  type TBoardColors,
+  type TTotalPlayers,
+  type TTypeGame,
 } from '@/interfaces';
 import { EBoardColors, EPositionProfiles, ETypeGame } from '@/utils/constants';
-import { getInitialDataPlayers } from '@/utils/data-players';
+import { getInitialDataPlayers, getInitialActionsTurnValue } from '@/utils/data-players';
 
 // TODO: Add types for socket
 interface GameProps {
@@ -93,6 +94,7 @@ const props = withDefaults(defineProps<GameProps>(), {
 const players = ref<IPlayer[]>(
   getInitialDataPlayers(props.users, props.boardColor, props.totalPlayers),
 );
+const actionsTurn = ref<IActionsTurn>(getInitialActionsTurnValue(props.initialTurn, players.value));
 
 const totalTokens: number = 5;
 

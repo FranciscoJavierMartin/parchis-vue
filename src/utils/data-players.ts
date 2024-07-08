@@ -1,5 +1,12 @@
-import type { IPlayer, IUser, TBoardColors, TSufixColors, TTotalPlayers } from '@/interfaces';
-import { ESufixColors } from '@/utils/constants';
+import type {
+  IActionsTurn,
+  IPlayer,
+  IUser,
+  TBoardColors,
+  TSufixColors,
+  TTotalPlayers,
+} from '@/interfaces';
+import { EActionsBoardGame, ESufixColors } from '@/utils/constants';
 
 // TODO: Remove
 export const TEMP_USERS: IUser[] = [
@@ -65,4 +72,22 @@ export function getInitialDataPlayers(
   }));
 
   return players;
+}
+
+function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
+  const { isOnline, isBot } = players[indexTurn];
+  return !!((isBot || isOnline) && !(isOnline && indexTurn === 0));
+}
+
+export function getInitialActionsTurnValue(indexTurn: number, players: IPlayer[]): IActionsTurn {
+  return {
+    timerActivated: true,
+    disabledDice: validateDisabledDice(indexTurn, players),
+    showDice: true,
+    diceValue: 0,
+    diceList: [],
+    diceRollNumber: 0,
+    isDisabledUI: false,
+    actionsBoardGame: EActionsBoardGame.ROLL_DICE,
+  };
 }
