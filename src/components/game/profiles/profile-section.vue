@@ -39,12 +39,10 @@ defineProps<ProfileSectionProps>();
   display: flex;
   margin: 10px;
   width: 100%;
-  border: 1px solid red;
 
   .game-profile-section-container {
     padding: 5px 10px;
     width: 50%;
-    border: 1px solid blue;
   }
 }
 </style>

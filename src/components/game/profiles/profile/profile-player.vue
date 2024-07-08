@@ -1,5 +1,15 @@
 <template>
-  <div>{{ basePosition }} - {{ position }} - {{ player.name }}</div>
+  <div class="game-profile" :class="[basePosition.toLowerCase(), position.toLowerCase()]">
+    <div class="game-profile-dice-name">
+      <ProfileImage
+        :handle-interval="(ends) => handleTimer(ends)"
+        :player="player"
+        :position="position"
+        :start-timer="false"
+        :handle-mute-chat="handleMuteChat"
+      />
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -13,6 +23,7 @@ import type {
   TPositionProfile,
   TPositionProfiles,
 } from '@/interfaces';
+import ProfileImage from './profile-image.vue';
 
 interface ProfilePlayerProps {
   basePosition: TPositionProfiles;
@@ -26,5 +37,18 @@ interface ProfilePlayerProps {
   handleMuteChat: THandleMuteChat;
 }
 
-defineProps<ProfilePlayerProps>();
+const props = defineProps<ProfilePlayerProps>();
 </script>
+
+<style scoped>
+.game-profile {
+  position: relative;
+  width: 100%;
+
+  .game-profile-dice-name {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+</style>
