@@ -9,22 +9,20 @@
           :profile-handlers="{ handleDoneDice, handleMuteChat, handleSelectDice, handleTimer }"
           :players="players"
           :total-players="(players.length as TTotalPlayers)"
-          :current-turn="0"
+          :current-turn="currentTurn"
         />
         <!-- prettier-ignore-attribute -->
         <GameBoard :boardColor="(boardColor as EBoardColors)">
           <GameToken
-            v-for="i in totalTokens"
-            :key="i"
             color="RED"
             :coordinate="
               POSITION_TILES[POSITION_ELEMENTS_BOARD.BOTTOM_LEFT.startTileIndex].coordinate
             "
             type-tile="JAIL"
-            :index="i - 1"
+            :index="0"
             :dice-available="[]"
-            :total-tokens="totalTokens"
-            :position="i"
+            :total-tokens="1"
+            :position="1"
             :enable-tooltip="false"
             :is-moving="false"
             :animated="false"
@@ -35,7 +33,7 @@
             :debug="debug"
           />
           <GameDebug v-if="debug" />
-          <ShowTotalTokens :total-tokens="{ 0: 5, 4: 8 }" />
+          <ShowTotalTokens :total-tokens="{}" />
         </GameBoard>
         <!-- prettier-ignore-attribute -->
         <ProfileSection
@@ -43,7 +41,7 @@
           :profile-handlers="{ handleDoneDice, handleMuteChat, handleSelectDice, handleTimer }"
           :players="players"
           :total-players="(players.length as TTotalPlayers)"
-          :current-turn="0"
+          :current-turn="currentTurn"
         />
       </BoardWrapper>
     </template>
@@ -95,8 +93,7 @@ const players = ref<IPlayer[]>(
   getInitialDataPlayers(props.users, props.boardColor, props.totalPlayers),
 );
 const actionsTurn = ref<IActionsTurn>(getInitialActionsTurnValue(props.initialTurn, players.value));
-
-const totalTokens: number = 5;
+const currentTurn = ref<number>(props.initialTurn);
 
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
   console.log('selectedTokenValues', selectedTokenValues);
