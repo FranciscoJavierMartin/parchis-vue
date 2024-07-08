@@ -3,14 +3,16 @@
   <PageWrapper>
     <template #default>
       <BoardWrapper>
+        <!-- prettier-ignore-attribute -->
         <ProfileSection
           :base-position="EPositionProfiles.TOP"
           :profile-handlers="{ handleDoneDice, handleMuteChat, handleSelectDice, handleTimer }"
           :players="players"
-          :total-players="players.length as TTotalPlayers"
+          :total-players="(players.length as TTotalPlayers)"
           :current-turn="0"
         />
-        <GameBoard :boardColor="boardColor as EBoardColors">
+        <!-- prettier-ignore-attribute -->
+        <GameBoard :boardColor="(boardColor as EBoardColors)">
           <GameToken
             v-for="i in totalTokens"
             :key="i"
@@ -35,11 +37,12 @@
           <GameDebug v-if="debug" />
           <ShowTotalTokens :total-tokens="{ 0: 5, 4: 8 }" />
         </GameBoard>
+        <!-- prettier-ignore-attribute -->
         <ProfileSection
           :base-position="EPositionProfiles.BOTTOM"
           :profile-handlers="{ handleDoneDice, handleMuteChat, handleSelectDice, handleTimer }"
           :players="players"
-          :total-players="players.length as TTotalPlayers"
+          :total-players="(players.length as TTotalPlayers)"
           :current-turn="0"
         />
       </BoardWrapper>
