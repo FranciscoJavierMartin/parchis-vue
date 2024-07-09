@@ -1,38 +1,26 @@
 <template>
-  <!-- <img
+  <img
     :src="photo"
     :alt="name"
-    :class="[className]"
-   
-  /> -->
-  <img src="https://bitsofco.de/broken.jpg" alt="Kanye Laughing" />
+    :onerror="
+      (event: ErrorEvent) => {
+        (event.currentTarget as HTMLImageElement).src = defaultAvatar;
+        (event.currentTarget as HTMLImageElement).onerror = null;
+      }
+    "
+  />
 </template>
 
 <script lang="ts" setup>
 // TODO: Rename component to PlayerAvatar
-import defaultImage from '@/assets/default.png';
+import defaultAvatar from '@/assets/default.png';
 interface GameAvatarProps {
   photo?: string;
   name?: string;
-  className?: string;
 }
 
 withDefaults(defineProps<GameAvatarProps>(), {
   photo: '',
   name: '',
-  className: '',
 });
 </script>
-
-<style scoped>
-img {
-  background: no-repeat url('/default.png');
-  background-size: contain;
-  display: block;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 50px;
-  height: 50px;
-  padding-left: 50px;
-}
-</style>
