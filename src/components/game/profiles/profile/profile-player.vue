@@ -5,7 +5,7 @@
         :handle-interval="(ends) => handleTimer(ends)"
         :player="player"
         :position="position"
-        :start-timer="false"
+        :start-timer="actionsTurn.timerActivated"
         :handle-mute-chat="handleMuteChat"
       />
     </div>

@@ -1,12 +1,15 @@
 <template>
   <div class="game-profile-image">
     <GameAvatar :photo="player.photo" :name="player.name" class="game-profile-image-avatar" />
+    <div v-if="!(startTimer && isRunning)" class="game-profile-image-progress" />
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref, watch } from 'vue';
 import GameAvatar from '@/components/avatar/game-avatar.vue';
 import type { IPlayer, THandleMuteChat, TPositionProfile } from '@/interfaces';
+import { TIME_INTERVAL_CHRONOMETER } from '@/utils/constants';
 
 interface ProfileImageProps {
   player: IPlayer;
@@ -17,6 +20,46 @@ interface ProfileImageProps {
 }
 
 const props = defineProps<ProfileImageProps>();
+const progress = ref<number>(1);
+const isRunning = ref<boolean>(false);
+
+watch(
+  () => props.startTimer,
+  (startTimer) => {
+    isRunning.value = startTimer;
+    progress.value = 1;
+  },
+  { immediate: true },
+);
+
+watch(
+  [progress, isRunning],
+  ([newProgress, newIsRunning]) => {
+    // if (!newIsRunning) {
+    //   cleanUpWatcher();
+    // }
+
+    if (newIsRunning) {
+      const newProgressIncreased = newProgress + 1;
+
+      // When it is a bot
+      if (newProgress === 15) {
+        props.handleInterval(false);
+      }
+
+      if (newProgressIncreased === 100) {
+        isRunning.value = false;
+        props.handleInterval(true);
+        // cleanUpWatcher();
+      }
+
+      setTimeout(() => {
+        progress.value = newProgressIncreased;
+      }, TIME_INTERVAL_CHRONOMETER);
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <style scoped>
@@ -34,6 +77,16 @@ const props = defineProps<ProfileImageProps>();
       rgb(51, 51, 51) 0px 0px 0px 3px;
     height: 100%;
     width: 100%;
+  }
+
+  .game-profile-image-progress {
+    background: conic-gradient(transparent 10deg, #5ab340cc 0deg);
+    border-radius: 5px;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 50px;
   }
 }
 </style>
