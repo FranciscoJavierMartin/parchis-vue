@@ -85,7 +85,10 @@ export function getInitialActionsTurnValue(indexTurn: number, players: IPlayer[]
     disabledDice: validateDisabledDice(indexTurn, players),
     showDice: true,
     diceValue: 0,
-    diceList: [],
+    diceList: [
+      { key: 1, value: 6 },
+      { key: 2, value: 5 },
+    ],
     diceRollNumber: 0,
     isDisabledUI: false,
     actionsBoardGame: EActionsBoardGame.ROLL_DICE,

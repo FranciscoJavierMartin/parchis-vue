@@ -8,6 +8,7 @@
         :start-timer="actionsTurn.timerActivated"
         :handle-mute-chat="handleMuteChat"
       />
+      <NameAndDice :name="player.name" :has-turn="hasTurn" :dice-available="actionsTurn.diceList" />
     </div>
   </div>
 </template>
@@ -23,7 +24,8 @@ import type {
   TPositionProfile,
   TPositionProfiles,
 } from '@/interfaces';
-import ProfileImage from './profile-image.vue';
+import ProfileImage from '@/components/game/profiles/profile/profile-image.vue';
+import NameAndDice from '@/components/game/profiles/profile/name-and-dice.vue';
 
 interface ProfilePlayerProps {
   basePosition: TPositionProfiles;
