@@ -1,12 +1,12 @@
 <template>
   <div class="game-profile-image">
     <GameAvatar :photo="player.photo" :name="player.name" class="game-profile-image-avatar" />
-    <div v-if="!(startTimer && isRunning)" class="game-profile-image-progress" />
+    <div v-if="startTimer && isRunning" class="game-profile-image-progress" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import GameAvatar from '@/components/avatar/game-avatar.vue';
 import type { IPlayer, THandleMuteChat, TPositionProfile } from '@/interfaces';
 import { TIME_INTERVAL_CHRONOMETER } from '@/utils/constants';
@@ -23,6 +23,8 @@ const props = defineProps<ProfileImageProps>();
 const progress = ref<number>(1);
 const isRunning = ref<boolean>(false);
 
+const progressDegrees = computed<string>(() => `${Math.round(360 * (progress.value / 100))}deg`);
+
 watch(
   () => props.startTimer,
   (startTimer) => {
@@ -35,10 +37,6 @@ watch(
 watch(
   [progress, isRunning],
   ([newProgress, newIsRunning]) => {
-    // if (!newIsRunning) {
-    //   cleanUpWatcher();
-    // }
-
     if (newIsRunning) {
       const newProgressIncreased = newProgress + 1;
 
@@ -50,7 +48,6 @@ watch(
       if (newProgressIncreased === 100) {
         isRunning.value = false;
         props.handleInterval(true);
-        // cleanUpWatcher();
       }
 
       setTimeout(() => {
@@ -80,7 +77,7 @@ watch(
   }
 
   .game-profile-image-progress {
-    background: conic-gradient(transparent 10deg, #5ab340cc 0deg);
+    background: conic-gradient(transparent v-bind(progressDegrees), #5ab340cc 0deg);
     border-radius: 5px;
     height: 50px;
     left: 0;
