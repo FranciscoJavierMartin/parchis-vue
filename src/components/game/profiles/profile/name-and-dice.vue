@@ -1,12 +1,23 @@
 <template>
   <div class="game-profile-name-dice">
-    <div v-if="diceAvailable.length" class="game-profile-dices"></div>
-    <div v-else class="game-profile-name" :class="{ 'has-turn': hasTurn }">{{ name }}</div>
+    <div v-if="diceAvailable.length" class="game-profile-dices">
+      <GameDice
+        v-for="{ key, value } in diceAvailable"
+        :key="key"
+        :value="value"
+        :size="16"
+        animate
+      />
+    </div>
+    <div v-else class="game-profile-name" :class="{ 'has-turn': hasTurn }">
+      {{ name }}
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { IDiceList } from '@/interfaces';
+import GameDice from '@/components/game/components/game-dice.vue';
 
 interface NameAndDiceProps {
   name: string;
@@ -25,6 +36,9 @@ defineProps<NameAndDiceProps>();
   width: 100%;
 
   .game-profile-dices {
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 
   .game-profile-name {
