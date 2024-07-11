@@ -1,7 +1,7 @@
 <template>
   <div class="game-profile-dice" :class="{ hide: !showDice }">
     <button class="game-profile-dice-button" :disabled="disabledDice">
-      <Dice3d :dice-value="0" :size="45" />
+      <Dice3d :dice-value="valueD" :size="45" />
     </button>
   </div>
 </template>
@@ -9,6 +9,7 @@
 <script setup lang="ts">
 import type { TDiceValues } from '@/interfaces';
 import Dice3d from '@/components/game/components/dice/dice-3d.vue';
+import { ref } from 'vue';
 
 interface ProfileDiceProps {
   disabledDice: boolean;
@@ -25,6 +26,12 @@ withDefaults(defineProps<ProfileDiceProps>(), {
   value: 0,
   diceRollNumber: 0,
 });
+
+const valueD = ref<number>(1);
+
+setInterval(() => {
+  valueD.value = 1 + ((valueD.value + 1) % 6);
+}, 4000);
 </script>
 
 <style scoped>
@@ -69,6 +76,7 @@ withDefaults(defineProps<ProfileDiceProps>(), {
     cursor: pointer;
     width: 45px;
     width: 45px;
+    position: absolute;
   }
 }
 

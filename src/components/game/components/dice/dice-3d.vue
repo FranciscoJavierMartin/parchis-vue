@@ -8,7 +8,9 @@
     }"
   >
     <!-- prettier-ignore-attribute -->
-    <DiceFace v-for="i in 6" :key="i" :value="(i as TDiceValues)" :size="size" class="face" />
+    <!-- <DiceFace v-for="i in 6" :key="i" :value="(i as TDiceValues)" :size="size" class="face" /> -->
+    <!-- prettier-ignore-attribute -->
+    <DiceFace :value="(1 as TDiceValues)" :size="size" class="face" />
   </div>
 </template>
 
@@ -40,8 +42,9 @@ watch(
   transform-style: preserve-3d;
   width: var(--size-side);
   height: var(--size-side);
-  position: relative;
+  /* position: relative; */
   transition: 1s ease;
+  transform: rotateY(45deg);
 
   &.animation-rolling {
     animation: rolling 1s;
