@@ -10,6 +10,12 @@
       />
       <NameAndDice :name="player.name" :has-turn="hasTurn" :dice-available="actionsTurn.diceList" />
     </div>
+    <ProfileDice
+      :disabled-dice="actionsTurn.disabledDice"
+      :show-dice="actionsTurn.showDice"
+      :dice-roll-number="actionsTurn.diceRollNumber"
+      :value="actionsTurn.diceValue"
+    />
   </div>
 </template>
 
@@ -25,6 +31,7 @@ import type {
   TPositionProfiles,
 } from '@/interfaces';
 import ProfileImage from '@/components/game/profiles/profile/profile-image.vue';
+import ProfileDice from '@/components/game/profiles/profile/profile-dice.vue';
 import NameAndDice from '@/components/game/profiles/profile/name-and-dice.vue';
 
 interface ProfilePlayerProps {
