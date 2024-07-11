@@ -1,5 +1,5 @@
 <template>
-  <div>Hello</div>
+  <div class="game-profile-dice" :class="{ hide: !showDice }">Hello</div>
 </template>
 
 <script setup lang="ts">
@@ -22,4 +22,20 @@ withDefaults(defineProps<ProfileDiceProps>(), {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.game-profile-dice {
+  animation: bounceIn 1s both;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  left: 62px;
+  top: -5px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.hide {
+  }
+}
+</style>
