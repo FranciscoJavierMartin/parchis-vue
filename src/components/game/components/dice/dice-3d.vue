@@ -7,13 +7,15 @@
       '--random-rotation-degress': `${randomRotationDegrees}deg`,
     }"
   >
-    <GameDice v-for="i in 6" :key="i" :value="i" :size="size" class="face" />
+    <!-- prettier-ignore-attribute -->
+    <DiceFace v-for="i in 6" :key="i" :value="(i as TDiceValues)" :size="size" class="face" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import GameDice from './dice-face.vue';
+import DiceFace from '@/components/game/components/dice/dice-face.vue';
+import type { TDiceValues } from '@/interfaces';
 
 defineProps<{ size: number }>();
 
@@ -21,6 +23,7 @@ const isRolling = ref<boolean>(false);
 const diceValue = ref<number>(1);
 const randomRotationDegrees = ref<number>(0);
 
+// FIXME: Use isRolling. May with setTimeout
 function rollDice(): void {
   const random = Math.floor(Math.random() * 10);
   if (random >= 1 && random <= 6) {

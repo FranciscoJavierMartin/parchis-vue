@@ -27,13 +27,6 @@ withDefaults(defineProps<ProfileDiceProps>(), {
   diceRollNumber: 0,
 });
 
-const valueD = ref<number>(1);
-
-// setInterval(() => {
-//   valueD.value = 1 + ((valueD.value + 1) % 6);
-// }, 4000);
-
-const diceValue = ref<number>(3);
 const diceRef = ref(null);
 
 function rollDice(): void {
