@@ -1,5 +1,7 @@
 <template>
-  <div class="game-profile-dice" :class="{ hide: !showDice }">Hello</div>
+  <div class="game-profile-dice" :class="{ hide: !showDice }">
+    <button class="game-profile-dice-button" :disabled="disabledDice"></button>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -55,6 +57,15 @@ withDefaults(defineProps<ProfileDiceProps>(), {
 
   &.hide {
     animation: bounceOut 0.6s both;
+  }
+
+  .game-profile-dice-button {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 45px;
+    width: 45px;
   }
 }
 
