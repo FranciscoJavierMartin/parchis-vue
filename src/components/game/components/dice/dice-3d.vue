@@ -4,36 +4,36 @@
     :class="[`roll-${diceValue}`, isRolling ? 'animation-rolling' : 'animation-none']"
     :style="{
       '--size-side': `${size}px`,
-      '--random-rotation-degress': `${randomRotationDegrees}deg`,
+      '--random-rotation-degress': `${randomRotationDegrees}deg`
     }"
   >
-    <!-- prettier-ignore-attribute -->
-    <!-- <DiceFace v-for="i in 6" :key="i" :value="(i as TDiceValues)" :size="size" class="face" /> -->
-    <!-- prettier-ignore-attribute -->
-    <DiceFace :value="(1 as TDiceValues)" :size="size" class="face" />
+    <GameDice v-for="i in 6" :key="i" :value="i" :size="size" class="face" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import DiceFace from '@/components/game/components/dice/dice-face.vue';
-import type { TDiceValues } from '@/interfaces';
+import { ref } from 'vue'
+import GameDice from './dice-face.vue'
 
-const props = defineProps<{ diceValue: number; size: number }>();
+defineProps<{ size: number }>()
 
-const isRolling = ref<boolean>(false);
+const isRolling = ref<boolean>(false)
+const diceValue = ref<number>(1)
+const randomRotationDegrees = ref<number>(0)
 
-const randomRotationDegrees = ref<number>(0);
+function rollDice(): void {
+  const random = Math.floor(Math.random() * 10)
+  if (random >= 1 && random <= 6) {
+    randomRotationDegrees.value = Math.floor(100 + Math.random() * 400)
+    diceValue.value = random
+  } else {
+    rollDice()
+  }
+}
 
-watch(
-  () => props.diceValue,
-  () => {
-    if (!isRolling.value) {
-      randomRotationDegrees.value = Math.floor(100 + Math.random() * 400);
-      isRolling.value = false;
-    }
-  },
-);
+defineExpose({
+  rollDice
+})
 </script>
 
 <style scoped>
@@ -42,9 +42,8 @@ watch(
   transform-style: preserve-3d;
   width: var(--size-side);
   height: var(--size-side);
-  /* position: relative; */
+  position: relative;
   transition: 1s ease;
-  transform: rotateY(45deg);
 
   &.animation-rolling {
     animation: rolling 1s;

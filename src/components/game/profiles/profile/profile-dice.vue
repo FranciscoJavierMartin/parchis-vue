@@ -1,7 +1,7 @@
 <template>
   <div class="game-profile-dice" :class="{ hide: !showDice }">
-    <button class="game-profile-dice-button" :disabled="disabledDice">
-      <Dice3d :dice-value="valueD" :size="45" />
+    <button class="game-profile-dice-button" :disabled="false" @click="rollDice">
+      <Dice3d ref="diceRef" :size="45" />
     </button>
   </div>
 </template>
@@ -29,9 +29,16 @@ withDefaults(defineProps<ProfileDiceProps>(), {
 
 const valueD = ref<number>(1);
 
-setInterval(() => {
-  valueD.value = 1 + ((valueD.value + 1) % 6);
-}, 4000);
+// setInterval(() => {
+//   valueD.value = 1 + ((valueD.value + 1) % 6);
+// }, 4000);
+
+const diceValue = ref<number>(3);
+const diceRef = ref(null);
+
+function rollDice(): void {
+  diceRef.value?.rollDice();
+}
 </script>
 
 <style scoped>
@@ -77,6 +84,7 @@ setInterval(() => {
     width: 45px;
     width: 45px;
     position: absolute;
+    z-index: 10;
   }
 }
 
