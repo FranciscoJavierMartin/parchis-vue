@@ -10,7 +10,7 @@
       :title="`Dice ${dice.value}`"
       @click="() => handleTooltipDice(dice)"
     >
-      <GameDice :value="dice.value" :size="DICE_SIZE_TOOLTIP" />
+      <DiceFace :value="dice.value" :size="DICE_SIZE_TOOLTIP" />
     </button>
   </div>
 </template>
@@ -19,7 +19,7 @@
 import { computed } from 'vue';
 import type { ICoordinate, IDiceList, TColors } from '@/interfaces';
 import { EColors, DICE_SIZE_TOOLTIP, SIZE_TILE, SIZE_BOARD } from '@/utils/constants';
-import GameDice from '@/components/game/components/dice/game-dice.vue';
+import DiceFace from '@/components/game/components/dice/dice-face.vue';
 
 interface TokenTooltipProps {
   color: TColors;
