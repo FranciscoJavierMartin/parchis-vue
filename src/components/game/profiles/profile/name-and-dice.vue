@@ -1,7 +1,7 @@
 <template>
   <div class="game-profile-name-dice">
     <div v-if="diceAvailable.length" class="game-profile-dices">
-      <GameDice
+      <DiceFace
         v-for="{ key, value } in diceAvailable"
         :key="key"
         :value="value"
@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import type { IDiceList } from '@/interfaces';
-import GameDice from '@/components/game/components/game-dice.vue';
+import DiceFace from '@/components/game/components/dice/dice-face.vue';
 
 interface NameAndDiceProps {
   name: string;
