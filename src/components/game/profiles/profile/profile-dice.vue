@@ -34,8 +34,27 @@ withDefaults(defineProps<ProfileDiceProps>(), {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #00487f;
+  box-shadow:
+    rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+  &::after {
+    border-style: solid;
+    border-width: 10px;
+    content: '';
+    height: 0;
+    position: absolute;
+    width: 0;
+    border-color: #00487f transparent transparent transparent;
+    transform: rotate(90deg);
+    left: -30%;
+    top: 35%;
+  }
 
   &.hide {
+    animation: bounceOut 0.6s both;
   }
 }
 </style>
