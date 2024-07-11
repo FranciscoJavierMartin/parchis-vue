@@ -1,11 +1,14 @@
 <template>
   <div class="game-profile-dice" :class="{ hide: !showDice }">
-    <button class="game-profile-dice-button" :disabled="disabledDice"></button>
+    <button class="game-profile-dice-button" :disabled="disabledDice">
+      <Dice3d :dice-value="0" :size="45" />
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { TDiceValues } from '@/interfaces';
+import Dice3d from '@/components/game/components/dice/dice-3d.vue';
 
 interface ProfileDiceProps {
   disabledDice: boolean;
