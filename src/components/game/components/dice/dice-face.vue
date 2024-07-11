@@ -16,7 +16,7 @@ interface DiceProps {
   animate?: boolean;
 }
 
-withDefaults(defineProps<DiceProps>(), { size: DICE_SIZE_TOOLTIP, animate: true });
+withDefaults(defineProps<DiceProps>(), { size: DICE_SIZE_TOOLTIP, animate: false });
 </script>
 
 <style scoped>
@@ -32,7 +32,7 @@ withDefaults(defineProps<DiceProps>(), { size: DICE_SIZE_TOOLTIP, animate: true 
     rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
 
   &.animate {
-    /* animation: bounceIn 1s both; */
+    animation: bounceIn 1s both;
   }
 
   &::after {

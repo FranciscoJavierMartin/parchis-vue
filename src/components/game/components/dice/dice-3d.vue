@@ -4,7 +4,7 @@
     :class="[`roll-${diceValue}`, isRolling ? 'animation-rolling' : 'animation-none']"
     :style="{
       '--size-side': `${size}px`,
-      '--random-rotation-degress': `${randomRotationDegrees}deg`
+      '--random-rotation-degress': `${randomRotationDegrees}deg`,
     }"
   >
     <GameDice v-for="i in 6" :key="i" :value="i" :size="size" class="face" />
@@ -12,28 +12,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import GameDice from './dice-face.vue'
+import { ref } from 'vue';
+import GameDice from './dice-face.vue';
 
-defineProps<{ size: number }>()
+defineProps<{ size: number }>();
 
-const isRolling = ref<boolean>(false)
-const diceValue = ref<number>(1)
-const randomRotationDegrees = ref<number>(0)
+const isRolling = ref<boolean>(false);
+const diceValue = ref<number>(1);
+const randomRotationDegrees = ref<number>(0);
 
 function rollDice(): void {
-  const random = Math.floor(Math.random() * 10)
+  const random = Math.floor(Math.random() * 10);
   if (random >= 1 && random <= 6) {
-    randomRotationDegrees.value = Math.floor(100 + Math.random() * 400)
-    diceValue.value = random
+    randomRotationDegrees.value = Math.floor(100 + Math.random() * 400);
+    diceValue.value = random;
   } else {
-    rollDice()
+    rollDice();
   }
 }
 
 defineExpose({
-  rollDice
-})
+  rollDice,
+});
 </script>
 
 <style scoped>
