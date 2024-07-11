@@ -27,7 +27,7 @@ withDefaults(defineProps<ProfileDiceProps>(), {
   diceRollNumber: 0,
 });
 
-const diceRef = ref(null);
+const diceRef = ref<typeof Dice3d | null>(null);
 
 function rollDice(): void {
   diceRef.value?.rollDice();

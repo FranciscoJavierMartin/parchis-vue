@@ -24,6 +24,7 @@ const diceValue = ref<number>(1);
 const randomRotationDegrees = ref<number>(0);
 
 // FIXME: Use isRolling. May with setTimeout
+// TODO: Emit value
 function rollDice(): void {
   const random = Math.floor(Math.random() * 10);
   if (random >= 1 && random <= 6) {
