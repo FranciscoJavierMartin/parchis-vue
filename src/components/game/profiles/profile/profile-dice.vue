@@ -57,4 +57,29 @@ withDefaults(defineProps<ProfileDiceProps>(), {
     animation: bounceOut 0.6s both;
   }
 }
+
+/* CSS Fix for firefox because it has an issue with animations. */
+@-moz-document url-prefix() {
+  @supports (animation: calc(0s)) {
+    .game-profile-dice,
+    .game-profile-dice.hide {
+      animation: none;
+    }
+
+    .game-profile-dice {
+      opacity: 1;
+      transition: all 500ms ease;
+    }
+
+    .game-profile-dice.hide {
+      opacity: 0;
+    }
+  }
+}
+
+.game-profile.right .game-profile-dice::after {
+  transform: rotate(-90deg);
+  left: auto;
+  right: -30%;
+}
 </style>
