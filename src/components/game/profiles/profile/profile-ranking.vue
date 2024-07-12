@@ -1,0 +1,44 @@
+<template>
+  <div class="game-profile-ranking">
+    <span class="game-profile-ranking-value">{{ rankingPosition }}</span>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { PREFIX_RANKING } from '@/utils/constants';
+import { computed } from 'vue';
+
+interface ProfileRankingProps {
+  value: number;
+}
+
+const props = defineProps<ProfileRankingProps>();
+
+const rankingPosition = computed<string>(() => `${props.value}${PREFIX_RANKING[props.value - 1]}`);
+</script>
+
+<style scoped>
+.game-profile-ranking {
+  align-items: center;
+  animation: bounceIn 1s both;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  position: absolute;
+  width: 50px;
+
+  .game-profile-ranking-value {
+    color: #f8ea55;
+    font-family: 'Arial Black', Gadget, sans-serif;
+    font-size: 25px;
+    text-shadow:
+      0px 0px 0 rgb(235, 221, 72),
+      0px 1px 0 rgb(222, 208, 59),
+      0px 2px 0 rgb(209, 195, 46),
+      0px 3px 0 rgb(196, 182, 33),
+      0px 4px 3px rgba(171, 99, 37, 0.27),
+      0px 4px 1px rgba(171, 99, 37, 0.5),
+      0px 0px 3px rgba(171, 99, 37, 0.2);
+  }
+}
+</style>
