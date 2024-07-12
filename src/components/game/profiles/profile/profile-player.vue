@@ -19,6 +19,7 @@
       :handle-done-dice="handleDoneDice"
       :handle-select-dice="handleSelectDice"
     />
+    <ProfileRanking v-if="player.finished" :value="player.ranking" />
   </div>
 </template>
 
@@ -36,6 +37,7 @@ import type {
 import ProfileImage from '@/components/game/profiles/profile/profile-image.vue';
 import ProfileDice from '@/components/game/profiles/profile/profile-dice.vue';
 import NameAndDice from '@/components/game/profiles/profile/name-and-dice.vue';
+import ProfileRanking from '@/components/game/profiles/profile/profile-ranking.vue';
 
 interface ProfilePlayerProps {
   basePosition: TPositionProfiles;
@@ -63,6 +65,12 @@ const props = defineProps<ProfilePlayerProps>();
     width: 100%;
   }
 
+  &.top {
+    .game-profile-ranking {
+      top: 0;
+    }
+  }
+
   &.bottom {
     .game-profile-dice-name {
       flex-direction: column-reverse;
@@ -71,11 +79,19 @@ const props = defineProps<ProfilePlayerProps>();
     .game-profile-dice {
       top: 30px;
     }
+
+    .game-profile-ranking {
+      top: 36px;
+    }
   }
 
   &.right {
     .game-profile-dice-name {
       align-items: flex-end;
+    }
+
+    .game-profile-ranking {
+      right: 55px;
     }
 
     :deep(.game-profile-dices) {
@@ -88,6 +104,12 @@ const props = defineProps<ProfilePlayerProps>();
 
     :deep(.game-profile-name) {
       text-align: right;
+    }
+  }
+
+  &.left {
+    .game-profile-ranking {
+      left: 55px;
     }
   }
 }
