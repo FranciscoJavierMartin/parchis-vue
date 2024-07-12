@@ -3,10 +3,12 @@ import type {
   IPlayer,
   IUser,
   TBoardColors,
+  TDiceValues,
   TSufixColors,
   TTotalPlayers,
 } from '@/interfaces';
 import { EActionsBoardGame, ESufixColors } from '@/utils/constants';
+import { getRandomNumber } from './helpers';
 
 // TODO: Remove
 export const TEMP_USERS: IUser[] = [
@@ -93,4 +95,24 @@ export function getInitialActionsTurnValue(indexTurn: number, players: IPlayer[]
     isDisabledUI: false,
     actionsBoardGame: EActionsBoardGame.ROLL_DICE,
   };
+}
+
+export function randomValueDice(): TDiceValues {
+  return getRandomNumber(1, 6) as TDiceValues;
+}
+
+export function getRandomValueDice(
+  actionsTurn: IActionsTurn,
+  diceValue?: TDiceValues,
+): IActionsTurn {
+  const newActionsTurn = structuredClone(actionsTurn);
+
+  newActionsTurn.diceValue = diceValue || randomValueDice();
+  newActionsTurn.timerActivated = false;
+  newActionsTurn.disabledDice = true;
+  const diceRollNumber = newActionsTurn.diceRollNumber;
+  const newDiceRollNumber = diceRollNumber + 1 >= 10 ? 1 : diceRollNumber + 1;
+  newActionsTurn.diceRollNumber = newDiceRollNumber;
+
+  return newActionsTurn;
 }

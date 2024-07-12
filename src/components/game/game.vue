@@ -71,7 +71,11 @@ import {
   type TTypeGame,
 } from '@/interfaces';
 import { EBoardColors, EPositionProfiles, ETypeGame } from '@/utils/constants';
-import { getInitialDataPlayers, getInitialActionsTurnValue } from '@/utils/data-players';
+import {
+  getInitialDataPlayers,
+  getInitialActionsTurnValue,
+  getRandomValueDice,
+} from '@/utils/data-players';
 
 // TODO: Add types for socket
 interface GameProps {
@@ -104,7 +108,9 @@ function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
 
 function handleTimer(ends: boolean = false): void {}
 
-function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = false): void {}
+function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = false): void {
+  actionsTurn.value = getRandomValueDice(actionsTurn.value, diceValue);
+}
 
 function handleDoneDice(isActionSocket: boolean = false): void {}
 
