@@ -23,6 +23,7 @@ interface PieceProps {
 }
 
 withDefaults(defineProps<PieceProps>(), {
+  // TODO: Use a better type
   style: {} as any,
   index: 0,
   debug: false,
