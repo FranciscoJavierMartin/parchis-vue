@@ -1,7 +1,9 @@
 <template>
   <div class="game-profile-image">
+    <div v-if="player.isOffline" class="game-profile-image-offline">Left</div>
     <GameAvatar :photo="player.photo" :name="player.name" class="game-profile-image-avatar" />
     <button
+      v-if="showMuteChat"
       :aria-describedby="titleMuteChat"
       class="game-profile-mute-chat"
       :class="[position.toLowerCase(), { mute: player.isMuted }]"
@@ -36,6 +38,10 @@ const progressDegrees = computed<string>(() => `${Math.round(360 * (progress.val
 const titleMuteChat = computed<string>(() =>
   props.player.isMuted ? 'Enable chat messages' : 'Mute chat messages',
 );
+const showMuteChat = computed<boolean>(
+  () => !!(props.player.isOnline && props.player.index !== 0 && !props.player.isOffline),
+);
+
 watch(
   () => props.startTimer,
   (startTimer) => {
@@ -87,6 +93,28 @@ watch(
     width: 100%;
   }
 
+  .game-profile-image-offline {
+    align-items: center;
+    animation: bounceIn 1s both;
+    background-color: #ff0000b3;
+    border-radius: 5px;
+    box-shadow:
+      rgba(0, 0, 0, 0.4) 0px 2px 4px,
+      rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    color: white;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    text-shadow: 1px 1px 1px black;
+    text-transform: uppercase;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+  }
+
   .game-profile-mute-chat {
     background-color: transparent;
     border: none;
@@ -113,6 +141,22 @@ watch(
       right: -5px;
       top: -5px;
       width: 20px;
+
+      svg {
+        width: 65%;
+      }
+    }
+
+    &.right .icon-wrapper {
+      left: -5px;
+    }
+
+    &.left .icon-wrapper {
+      transform: scaleX(-1);
+    }
+
+    &.mute .icon-wrapper {
+      background-color: #e91e63;
     }
   }
 
