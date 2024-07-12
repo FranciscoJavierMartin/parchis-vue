@@ -48,6 +48,7 @@ defineExpose({
   height: var(--size-side);
   position: relative;
   transition: 1s ease;
+  z-index: 0;
 
   &.animation-rolling {
     animation: rolling 1s;

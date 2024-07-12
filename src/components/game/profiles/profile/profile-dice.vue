@@ -1,15 +1,17 @@
 <template>
   <div class="game-profile-dice" :class="{ hide: !showDice }">
-    <button class="game-profile-dice-button" :disabled="false" @click="rollDice">
+    <GameIcon type="arrow" />
+    <button class="game-profile-dice-button" :disabled="disabledDice" @click="rollDice">
       <Dice3d ref="diceRef" :size="45" />
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import type { TDiceValues } from '@/interfaces';
 import Dice3d from '@/components/game/components/dice/dice-3d.vue';
-import { ref } from 'vue';
+import GameIcon from '@/components/icons/game-icon.vue';
 
 interface ProfileDiceProps {
   disabledDice: boolean;
@@ -69,6 +71,18 @@ function rollDice(): void {
     animation: bounceOut 0.6s both;
   }
 
+  .icon-wrapper {
+    animation: move-arrow 0.5s infinite alternate;
+    filter: drop-shadow(0px -2px 1px black);
+    height: 50px;
+    left: 25px;
+    position: absolute;
+    scale: 1.5;
+    top: -25px;
+    width: 50px;
+    z-index: 1;
+  }
+
   .game-profile-dice-button {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     background: transparent;
@@ -104,5 +118,14 @@ function rollDice(): void {
   transform: rotate(-90deg);
   left: auto;
   right: -30%;
+}
+
+@keyframes move-arrow {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
 }
 </style>
