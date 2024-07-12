@@ -1,6 +1,14 @@
 <template>
   <div class="game-profile-image">
     <GameAvatar :photo="player.photo" :name="player.name" class="game-profile-image-avatar" />
+    <button
+      :aria-describedby="titleMuteChat"
+      class="game-profile-mute-chat"
+      :class="[position.toLowerCase(), { mute: player.isMuted }]"
+      @click="() => handleMuteChat(player.index)"
+    >
+      <GameIcon type="chat" :svg-styles="{ height: '20px', width: '20px', scale: 0.7 }" />
+    </button>
     <div v-if="startTimer && isRunning" class="game-profile-image-progress" />
   </div>
 </template>
@@ -10,6 +18,7 @@ import { computed, ref, watch } from 'vue';
 import GameAvatar from '@/components/avatar/game-avatar.vue';
 import type { IPlayer, THandleMuteChat, TPositionProfile } from '@/interfaces';
 import { TIME_INTERVAL_CHRONOMETER } from '@/utils/constants';
+import GameIcon from '@/components/icons/game-icon.vue';
 
 interface ProfileImageProps {
   player: IPlayer;
@@ -24,7 +33,9 @@ const progress = ref<number>(1);
 const isRunning = ref<boolean>(false);
 
 const progressDegrees = computed<string>(() => `${Math.round(360 * (progress.value / 100))}deg`);
-
+const titleMuteChat = computed<string>(() =>
+  props.player.isMuted ? 'Enable chat messages' : 'Mute chat messages',
+);
 watch(
   () => props.startTimer,
   (startTimer) => {
@@ -74,6 +85,35 @@ watch(
       rgb(51, 51, 51) 0px 0px 0px 3px;
     height: 100%;
     width: 100%;
+  }
+
+  .game-profile-mute-chat {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 50px;
+    z-index: 2;
+
+    .icon-wrapper {
+      align-items: center;
+      background-color: #009688;
+      border-radius: 50%;
+      border: 1px solid white;
+      box-shadow:
+        rgba(0, 0, 0, 0.12) 0px 1px 3px,
+        rgba(0, 0, 0, 0.24) 0px 1px 2px;
+      display: flex;
+      height: 20px;
+      justify-content: center;
+      position: absolute;
+      right: -5px;
+      top: -5px;
+      width: 20px;
+    }
   }
 
   .game-profile-image-progress {
