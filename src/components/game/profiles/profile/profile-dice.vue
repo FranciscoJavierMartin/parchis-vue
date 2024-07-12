@@ -12,17 +12,18 @@ import { ref } from 'vue';
 import type { TDiceValues } from '@/interfaces';
 import Dice3d from '@/components/game/components/dice/dice-3d.vue';
 import GameIcon from '@/components/icons/game-icon.vue';
+import { ROLL_TIME_VALUE } from '@/utils/constants';
 
 interface ProfileDiceProps {
   disabledDice: boolean;
   showDice: boolean;
   value: 0 | TDiceValues;
   diceRollNumber: number;
-  // handleDoneDice: () => void;
-  // handleSelectDice: () => void;
+  handleDoneDice: () => void;
+  handleSelectDice: () => void;
 }
 
-withDefaults(defineProps<ProfileDiceProps>(), {
+const props = withDefaults(defineProps<ProfileDiceProps>(), {
   disabledDice: false,
   showDice: false,
   value: 0,
@@ -30,6 +31,8 @@ withDefaults(defineProps<ProfileDiceProps>(), {
 });
 
 const diceRef = ref<typeof Dice3d | null>(null);
+// TODO: Adjust roll time in dice to this values (accept as a prop)
+const rollTime = props.value !== 0 ? ROLL_TIME_VALUE : 0;
 
 function rollDice(): void {
   diceRef.value?.rollDice();

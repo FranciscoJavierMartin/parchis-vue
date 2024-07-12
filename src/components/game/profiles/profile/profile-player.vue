@@ -11,10 +11,13 @@
       <NameAndDice :name="player.name" :has-turn="hasTurn" :dice-available="actionsTurn.diceList" />
     </div>
     <ProfileDice
+      v-if="hasTurn"
       :disabled-dice="actionsTurn.disabledDice"
       :show-dice="actionsTurn.showDice"
       :dice-roll-number="actionsTurn.diceRollNumber"
       :value="actionsTurn.diceValue"
+      :handle-done-dice="handleDoneDice"
+      :handle-select-dice="handleSelectDice"
     />
   </div>
 </template>
@@ -58,6 +61,34 @@ const props = defineProps<ProfilePlayerProps>();
     display: flex;
     flex-direction: column;
     width: 100%;
+  }
+
+  &.bottom {
+    .game-profile-dice-name {
+      flex-direction: column-reverse;
+    }
+
+    .game-profile-dice {
+      top: 30px;
+    }
+  }
+
+  &.right {
+    .game-profile-dice-name {
+      align-items: flex-end;
+    }
+
+    :deep(.game-profile-dices) {
+      flex-direction: row-reverse;
+    }
+
+    :deep(.game-profile-name-dice) {
+      justify-content: flex-end;
+    }
+
+    :deep(.game-profile-name) {
+      text-align: right;
+    }
   }
 }
 </style>
