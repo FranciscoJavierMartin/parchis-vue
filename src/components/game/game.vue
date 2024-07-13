@@ -16,9 +16,7 @@
         <GameBoard :boardColor="(boardColor as EBoardColors)">
           <GameToken
             color="RED"
-            :coordinate="
-              POSITION_TILES[POSITION_ELEMENTS_BOARD.BOTTOM_LEFT.startTileIndex].coordinate
-            "
+            :coordinate="POSITION_ELEMENTS_BOARD.BOTTOM_LEFT.startPositions[0].coordinate"
             type-tile="JAIL"
             :index="0"
             :dice-available="[]"
@@ -66,9 +64,9 @@ import type { IActionsTurn, TTotalPlayers, TTypeGame } from '@/interfaces/game';
 import type { IPlayer, IUser } from '@/interfaces/user';
 import type { TBoardColors } from '@/interfaces/board';
 import type { TDiceValues } from '@/interfaces/dice';
-import type { ISelectTokenValues } from '@/interfaces/token';
+import type { IListTokens, ISelectTokenValues } from '@/interfaces/token';
 import { getInitialDataPlayers } from '@/helpers/player';
-import { getInitialActionsTurnValue } from '@/helpers/game';
+import { getInitialActionsTurnValue, getInitialPositionTokens } from '@/helpers/game';
 import { getRandomValueDice } from '@/helpers/random';
 
 // TODO: Add types for socket
@@ -95,6 +93,9 @@ const players = ref<IPlayer[]>(
 );
 const actionsTurn = ref<IActionsTurn>(getInitialActionsTurnValue(props.initialTurn, players.value));
 const currentTurn = ref<number>(props.initialTurn);
+const listTokens = ref<IListTokens[]>(
+  getInitialPositionTokens(props.boardColor, props.totalPlayers, players.value),
+);
 
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
   console.log('selectedTokenValues', selectedTokenValues);
