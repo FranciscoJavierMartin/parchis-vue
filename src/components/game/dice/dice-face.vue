@@ -1,7 +1,7 @@
 <template>
   <div
     class="dice-face"
-    :class="[`dice-${value}`, { animate }]"
+    :class="[`dice-${value}`, { animate, shadow }]"
     :style="{ width: `${size}px`, height: `${size}px` }"
   />
 </template>
@@ -14,22 +14,25 @@ interface DiceProps {
   value: TDiceValues;
   size?: number;
   animate?: boolean;
+  shadow?: boolean;
 }
 
-withDefaults(defineProps<DiceProps>(), { size: DICE_SIZE_TOOLTIP, animate: false });
+withDefaults(defineProps<DiceProps>(), { size: DICE_SIZE_TOOLTIP, animate: false, shadow: false });
 </script>
 
 <style scoped>
 .dice-face {
   --point: radial-gradient(circle, black 35%, rgba(255, 255, 255, 0) 50%);
   position: relative;
-
   background-color: white;
   border-radius: 2px;
-  box-shadow:
-    rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-    rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
+
+  &.shadow {
+    box-shadow:
+      rgba(0, 0, 0, 0.4) 0px 2px 4px,
+      rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
+  }
 
   &.animate {
     animation: bounceIn 1s both;

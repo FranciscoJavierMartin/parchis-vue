@@ -10,7 +10,7 @@
       :title="`Dice ${dice.value}`"
       @click="() => handleTooltipDice(dice)"
     >
-      <DiceFace :value="dice.value" :size="DICE_SIZE_TOOLTIP" />
+      <DiceFace :value="dice.value" :size="DICE_SIZE_TOOLTIP" shadow />
     </button>
   </div>
 </template>
