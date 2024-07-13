@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 // TODO: Rename component to PlayerAvatar
-import defaultAvatar from '@/assets/default.png';
+import defaultAvatar from '@/assets/images/default.png';
 interface GameAvatarProps {
   photo?: string;
   name?: string;
