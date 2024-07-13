@@ -22,10 +22,10 @@ withDefaults(defineProps<DiceProps>(), { size: DICE_SIZE_TOOLTIP, animate: false
 <style scoped>
 .game-dice {
   --point: radial-gradient(circle, black 35%, rgba(255, 255, 255, 0) 50%);
+  position: relative;
 
   background-color: white;
   border-radius: 2px;
-  position: relative;
   box-shadow:
     rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
@@ -36,16 +36,16 @@ withDefaults(defineProps<DiceProps>(), { size: DICE_SIZE_TOOLTIP, animate: false
   }
 
   &::after {
-    background-repeat: no-repeat;
-    background-size: 30% 30%;
-    content: '';
-    filter: drop-shadow(0 0 1px black);
-    height: 100%;
-    left: 0;
-    overflow: hidden;
     position: absolute;
     top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    overflow: hidden;
+    content: '';
+    filter: drop-shadow(0 0 1px black);
+    background-repeat: no-repeat;
+    background-size: 30% 30%;
   }
 
   &.dice-1::after {

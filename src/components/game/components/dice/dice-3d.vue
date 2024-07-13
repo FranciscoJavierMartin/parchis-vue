@@ -43,12 +43,12 @@ defineExpose({
 <style scoped>
 .dice {
   --half-size: calc(var(--size-side) / 2);
-  transform-style: preserve-3d;
+  position: relative;
+  z-index: 0;
   width: var(--size-side);
   height: var(--size-side);
-  position: relative;
   transition: 1s ease;
-  z-index: 0;
+  transform-style: preserve-3d;
 
   &.animation-rolling {
     animation: rolling 1s;

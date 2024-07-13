@@ -79,68 +79,68 @@ watch(
 <style scoped>
 .game-profile-image {
   position: relative;
-  height: 50px;
   width: 50px;
+  height: 50px;
   background-color: black;
 
   .game-profile-image-avatar {
+    width: 100%;
+    height: 100%;
     background-color: #e4e4e4;
     border-radius: 5px;
     box-shadow:
       rgba(0, 0, 0, 0.16) 0px 1px 4px,
       rgb(51, 51, 51) 0px 0px 0px 3px;
-    height: 100%;
-    width: 100%;
   }
 
   .game-profile-image-offline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
     align-items: center;
-    animation: bounceIn 1s both;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    text-transform: uppercase;
     background-color: #ff0000b3;
     border-radius: 5px;
     box-shadow:
       rgba(0, 0, 0, 0.4) 0px 2px 4px,
       rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
       rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    color: white;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    left: 0;
-    position: absolute;
-    text-shadow: 1px 1px 1px black;
-    text-transform: uppercase;
-    top: 0;
-    width: 100%;
-    z-index: 2;
+    animation: bounceIn 1s both;
   }
 
   .game-profile-mute-chat {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    height: 50px;
-    left: 0;
     position: absolute;
     top: 0;
-    width: 50px;
+    left: 0;
     z-index: 2;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
 
     .icon-wrapper {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      display: flex;
       align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
       background-color: #009688;
-      border-radius: 50%;
       border: 1px solid white;
+      border-radius: 50%;
       box-shadow:
         rgba(0, 0, 0, 0.12) 0px 1px 3px,
         rgba(0, 0, 0, 0.24) 0px 1px 2px;
-      display: flex;
-      height: 20px;
-      justify-content: center;
-      position: absolute;
-      right: -5px;
-      top: -5px;
-      width: 20px;
 
       svg {
         width: 65%;
@@ -161,13 +161,13 @@ watch(
   }
 
   .game-profile-image-progress {
-    background: conic-gradient(transparent v-bind(progressDegrees), #5ab340cc 0deg);
-    border-radius: 5px;
-    height: 50px;
-    left: 0;
     position: absolute;
     top: 0;
+    left: 0;
     width: 50px;
+    height: 50px;
+    background: conic-gradient(transparent v-bind(progressDegrees), #5ab340cc 0deg);
+    border-radius: 5px;
   }
 }
 </style>

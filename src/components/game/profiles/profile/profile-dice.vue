@@ -41,33 +41,33 @@ function rollDice(): void {
 
 <style scoped>
 .game-profile-dice {
-  animation: bounceIn 1s both;
   position: absolute;
+  top: -5px;
+  left: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 60px;
   height: 60px;
-  left: 62px;
-  top: -5px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: #00487f;
+  border-radius: 8px;
   box-shadow:
     rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
     rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  animation: bounceIn 1s both;
 
   &::after {
+    position: absolute;
+    top: 35%;
+    left: -30%;
+    width: 0;
+    height: 0;
+    content: '';
+    border-color: #00487f transparent transparent transparent;
     border-style: solid;
     border-width: 10px;
-    content: '';
-    height: 0;
-    position: absolute;
-    width: 0;
-    border-color: #00487f transparent transparent transparent;
     transform: rotate(90deg);
-    left: -30%;
-    top: 35%;
   }
 
   &.hide {
@@ -75,26 +75,25 @@ function rollDice(): void {
   }
 
   .icon-wrapper {
-    animation: move-arrow 0.5s infinite alternate;
-    filter: drop-shadow(0px -2px 1px black);
-    height: 50px;
-    left: 25px;
     position: absolute;
-    scale: 1.5;
     top: -25px;
-    width: 50px;
+    left: 25px;
     z-index: 1;
+    width: 50px;
+    height: 50px;
+    filter: drop-shadow(0px -2px 1px black);
+    scale: 1.5;
+    animation: move-arrow 0.5s infinite alternate;
   }
 
   .game-profile-dice-button {
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    width: 45px;
-    width: 45px;
     position: absolute;
     z-index: 10;
+    width: 45px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   }
 }
 
@@ -118,9 +117,9 @@ function rollDice(): void {
 }
 
 .game-profile.right .game-profile-dice::after {
-  transform: rotate(-90deg);
-  left: auto;
   right: -30%;
+  left: auto;
+  transform: rotate(-90deg);
 }
 
 @keyframes move-arrow {

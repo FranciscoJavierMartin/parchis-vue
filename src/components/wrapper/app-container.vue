@@ -14,23 +14,23 @@ useWindowResize();
 
 <style scoped>
 .container {
-  align-items: center;
   display: flex;
-  height: 100%;
+  align-items: center;
   justify-content: center;
   width: 100%;
+  height: 100%;
 }
 
 .screen {
+  position: relative;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  width: var(--base-width);
+  height: var(--base-height);
+  overflow: hidden;
   background-color: #00a6df;
   background-image: var(--bg-image);
-  display: flex;
-  height: var(--base-height);
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-  width: var(--base-width);
 
   @media only screen and (max-width: 420px) {
     background-color: unset;

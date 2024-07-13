@@ -4,12 +4,13 @@ module.exports = {
   // Inherit a set of rule collections.
   extends: [
     // standard rule set
-    'stylelint-config-standard',
+    // 'stylelint-config-standard',
     // Style property order rules
     'stylelint-config-recess-order',
     // Incorporate Prettier rules
-    'stylelint-config-prettier',
+    // 'stylelint-config-prettier',
     'stylelint-prettier/recommended',
+    'stylelint-config-recommended-vue',
   ],
   // Configure rules
   rules: {

@@ -32,15 +32,12 @@ withDefaults(defineProps<PieceProps>(), {
 
 <style scoped>
 .game-token-piece {
-  border-radius: 50%;
-  left: 0;
-  pointer-events: none;
   position: absolute;
   top: 0;
-  transition: all 150ms ease;
+  left: 0;
   z-index: 2;
-  /* To ensure re render in Safari */
-  transform: translateZ(0);
+  pointer-events: none;
+  border-radius: 50%;
   box-shadow:
     rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
@@ -48,32 +45,35 @@ withDefaults(defineProps<PieceProps>(), {
     rgba(6, 24, 44, 0.4) 0px 0px 0px 1px,
     rgba(6, 24, 44, 0.65) 0px 4px 4px -1px,
     rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  transition: all 150ms ease;
+  /* To ensure re render in Safari */
+  transform: translateZ(0);
 
   &::before {
-    content: '';
-    border-radius: 50%;
-    background-color: white;
-    height: 60%;
-    left: 18%;
     position: absolute;
     top: 13%;
+    left: 18%;
     width: 65%;
+    height: 60%;
+    content: '';
+    background-color: white;
+    border-radius: 50%;
     box-shadow:
       rgba(0, 0, 0, 0.16) 0px 3px 6px,
       rgba(0, 0, 0, 0.23) 0px 3px 6px;
   }
 
   &::after {
-    align-items: center;
-    content: '\2605';
-    display: flex;
-    font-size: 12px;
-    height: 50%;
-    justify-content: center;
-    left: 25%;
     position: absolute;
     top: 15%;
+    left: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 50%;
+    height: 50%;
+    font-size: 12px;
+    content: '\2605';
   }
 
   &.red {
@@ -110,16 +110,16 @@ withDefaults(defineProps<PieceProps>(), {
 
   /* Styles to show token index. Only for debug */
   span {
-    align-items: center;
-    background: black;
-    border-radius: 10px;
-    color: white;
-    display: flex;
-    font-weight: bold;
-    justify-content: center;
-    opacity: 0.7;
     position: absolute;
     top: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    background: black;
+    border-radius: 10px;
+    opacity: 0.7;
   }
 }
 </style>

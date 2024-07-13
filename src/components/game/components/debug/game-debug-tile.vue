@@ -21,13 +21,13 @@ defineProps<{ coordinate: ICoordinate }>();
 
 <style scoped>
 .game-debug-tile {
-  align-items: center;
+  position: absolute;
+  z-index: 1;
   display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 11px;
   font-weight: bold;
-  justify-content: center;
-  position: absolute;
   text-shadow: white 0px 0px 2px;
-  z-index: 1;
 }
 </style>

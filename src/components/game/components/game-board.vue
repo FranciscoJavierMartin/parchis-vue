@@ -17,6 +17,8 @@ withDefaults(defineProps<BoardProps>(), {
 </script>
 
 <style scoped>
+/* stylelint-disable function-linear-gradient-no-nonstandard-direction */
+
 .game-board {
   /* Background color for starter */
   --nest-grid-bg: white;
@@ -376,30 +378,36 @@ withDefaults(defineProps<BoardProps>(), {
   --safe-stars-size: var(--safe-stars-base-size), var(--safe-stars-base-size),
     var(--safe-stars-base-size), var(--safe-stars-base-size), var(--safe-stars-base-size),
     var(--safe-stars-base-size), var(--safe-stars-base-size), var(--safe-stars-base-size);
-
-  background-color: var(--nest-grid-bg);
-  border-radius: 10px;
-  box-shadow:
-    var(--nest-grid-color) 0px 0px 0px 3px,
-    #be835d 0px 0px 0px 6px,
-    rgb(255, 217, 19) 0px 0px 0px 9px;
-  height: var(--size-board);
   position: relative;
   width: var(--size-board);
+  height: var(--size-board);
+
+  background-color: var(--nest-grid-bg);
 
   /* Show start tiles and safe tiles */
   background-image: var(--finish-row-top), var(--finish-row-left), var(--finish-row-right),
     var(--finish-bottom-right), var(--safe-points);
 
-  background-size: var(--size-tile) var(--size-tile);
+  background-repeat: no-repeat;
 
   background-position: var(--finish-row-top-position), var(--finish-row-left-position),
     var(--finish-row-right-position), var(--finish-bottom-right-position),
     var(--safe-points-position);
 
-  background-repeat: no-repeat;
+  background-size: var(--size-tile) var(--size-tile);
+  border-radius: 10px;
+  box-shadow:
+    var(--nest-grid-color) 0px 0px 0px 3px,
+    #be835d 0px 0px 0px 6px,
+    rgb(255, 217, 19) 0px 0px 0px 9px;
 
   &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
     background: repeating-linear-gradient(
         to right,
         transparent,
@@ -415,22 +423,15 @@ withDefaults(defineProps<BoardProps>(), {
         var(--nest-grid-color) var(--size-tile)
       );
     border-radius: 10px;
-    content: '';
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
   }
 
   &::after {
-    border-radius: 10px;
-    content: '';
-    height: 100%;
-    left: 0;
     position: absolute;
     top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    content: '';
 
     /*
     * Show four starter points
@@ -439,14 +440,15 @@ withDefaults(defineProps<BoardProps>(), {
     background-image: var(--safe-starts), var(--finish-elements), var(--nest-top-left),
       var(--nest-top-right), var(--nest-bottom-left), var(--nest-bottom-right);
 
-    background-size: var(--safe-stars-size), var(--finish-elements-size), var(--nest-size-elements),
-      var(--nest-size-elements), var(--nest-size-elements), var(--nest-size-elements);
+    background-repeat: no-repeat;
 
     background-position: var(--safe-starts-position), var(--finish-elements-position),
       var(--nest-top-left-position), var(--nest-top-right-position),
       var(--nest-bottom-left-position), var(--nest-bottom-right-position);
 
-    background-repeat: no-repeat;
+    background-size: var(--safe-stars-size), var(--finish-elements-size), var(--nest-size-elements),
+      var(--nest-size-elements), var(--nest-size-elements), var(--nest-size-elements);
+    border-radius: 10px;
   }
 
   /*

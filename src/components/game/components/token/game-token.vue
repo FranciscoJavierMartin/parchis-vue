@@ -187,17 +187,17 @@ watchEffect(() => {
 
   .game-token-button {
     position: absolute;
+    top: -10%;
+    left: -10%;
+    z-index: 1;
     width: 120%;
     height: 120%;
-    left: -10%;
-    top: -10%;
-    z-index: 1;
     cursor: pointer;
-    border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(1.4px);
+    backdrop-filter: blur(5px);
     border: 2px dashed rgba(255, 255, 255, 1);
+    border-radius: 50%;
     animation: rotation 5s normal linear infinite;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   }

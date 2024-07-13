@@ -25,17 +25,17 @@ html {
 
 html,
 body {
-  background-color: black;
-  font-family: Arial, Helvetica, sans-serif;
-  height: 100%;
   position: fixed;
   width: 100%;
-  -webkit-touch-callout: none;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  background-color: black;
+  -webkit-touch-callout: none;
 }
 
 @media only screen and (max-width: 420px) {
@@ -50,22 +50,22 @@ div {
 }
 
 #app {
-  align-items: center;
   display: flex;
-  height: 100%;
+  align-items: center;
   justify-content: center;
   width: 100%;
+  height: 100%;
 }
 
 .button {
-  border-radius: 20px;
+  cursor: pointer;
   border: 2px solid #010f20;
   border: none;
+  border-radius: 20px;
   box-shadow:
     rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
     rgba(0, 0, 0, 0.3) 0px -5px 0px inset;
-  cursor: pointer;
 
   &:active {
     box-shadow: none;
@@ -74,27 +74,27 @@ div {
   }
 
   &.yellow {
-    background-color: #f5d41f;
     color: #8b5f00;
+    background-color: #f5d41f;
   }
 
   &.blue {
-    background-color: #216ed0;
     color: white;
+    background-color: #216ed0;
   }
 
   &:disabled {
+    pointer-events: none;
     cursor: auto;
     opacity: 0.5;
-    pointer-events: none;
   }
 }
 
 /* From https://css.glass */
 .glass-effect {
+  background: rgba(255, 255, 255, 0.2);
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
-  background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }

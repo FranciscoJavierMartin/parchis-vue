@@ -101,24 +101,24 @@ const tooltipPosition = computed(() => {
 
 <style scoped>
 .token-tooltip {
-  animation: bounceIn 0.5s both;
-  border-radius: 5px;
-  box-shadow: -2px 4px 14px 0px #090909;
+  position: absolute;
+  z-index: 10;
   display: flex;
   gap: 5px;
   padding: 8px;
-  position: absolute;
-  z-index: 10;
+  border-radius: 5px;
+  box-shadow: -2px 4px 14px 0px #090909;
+  animation: bounceIn 0.5s both;
 
   &::after {
-    border-style: solid;
-    border-width: 10px;
-    content: '';
-    height: 0;
-    left: 40%;
     position: absolute;
     top: 100%;
+    left: 40%;
     width: 0;
+    height: 0;
+    content: '';
+    border-style: solid;
+    border-width: 10px;
   }
 
   &.left {
@@ -171,11 +171,11 @@ const tooltipPosition = computed(() => {
   }
 
   button {
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
     background-color: transparent;
     border: 0;
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
   }
 }
 </style>
