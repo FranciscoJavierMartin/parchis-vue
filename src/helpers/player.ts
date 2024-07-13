@@ -27,7 +27,10 @@ export const TEMP_USERS: IUser[] = [
   },
 ];
 
-function getPlayersColors(boardColor: TBoardColors, totalPlayers: TTotalPlayers): ESufixColors[] {
+export function getPlayersColors(
+  boardColor: TBoardColors,
+  totalPlayers: TTotalPlayers,
+): ESufixColors[] {
   const playersColors: ESufixColors[] = [];
   const splitColor: string[] = boardColor.split('');
   const colors = splitColor.map((v) => ESufixColors[v as TSufixColors]);
