@@ -10,11 +10,4 @@
   </svg>
 </template>
 
-<script setup lang="ts">
-import type { IconProps } from '@/interfaces/icons';
-
-withDefaults(defineProps<IconProps>(), {
-  fill: 'white',
-  strokeWidth: 1.5,
-});
-</script>
+<script lang="ts" src="./icons.ts" />
