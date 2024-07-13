@@ -5,7 +5,7 @@ import type {
   TExitTilesValues,
   TFinalPositionsValues,
   TLocationBoardElements,
-} from '@/interfaces';
+} from '@/interfaces/board';
 
 /**
  * Store the walkthrought

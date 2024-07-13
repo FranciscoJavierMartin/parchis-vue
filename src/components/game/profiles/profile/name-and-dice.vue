@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import type { IDiceList } from '@/interfaces';
 import DiceFace from '@/components/game/components/dice/dice-face.vue';
+import type { IDiceList } from '@/interfaces/dice';
 
 interface NameAndDiceProps {
   name: string;

@@ -61,22 +61,17 @@ import BoardWrapper from '@/components/game/components/board-wrapper.vue';
 import ProfileSection from '@/components/game/profiles/profile-section.vue';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/utils/positions-board';
 import {
-  type IActionsTurn,
-  type IPlayer,
-  type ISelectTokenValues,
-  type IUser,
-  type TBoardColors,
-  type TDiceValues,
-  type TTotalPlayers,
-  type TTypeGame,
-} from '@/interfaces';
-import {
   getInitialDataPlayers,
   getInitialActionsTurnValue,
   getRandomValueDice,
 } from '@/utils/data-players';
 import { EBoardColors, EPositionProfiles } from '@/constants/board';
 import { ETypeGame } from '@/constants/game';
+import type { IActionsTurn, TTotalPlayers, TTypeGame } from '@/interfaces/game';
+import type { IPlayer, IUser } from '@/interfaces/user';
+import type { TBoardColors } from '@/interfaces/board';
+import type { TDiceValues } from '@/interfaces/dice';
+import type { ISelectTokenValues } from '@/interfaces/token';
 
 // TODO: Add types for socket
 interface GameProps {

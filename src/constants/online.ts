@@ -1,6 +1,7 @@
-import type { IOptionsGame, ISocketListenActions } from '@/interfaces';
 import { EActionsBoardGame, ENextStepGame } from '@/constants/game';
 import { TYPES_CHAT_MESSAGES } from '@/constants/chat';
+import type { ISocketListenActions } from '@/interfaces/online';
+import type { IOptionsGame } from '@/interfaces/game';
 
 /**
  * Delay before send end movement confirmation to socket

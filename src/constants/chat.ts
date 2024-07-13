@@ -1,4 +1,5 @@
-import type { IPredefinedChatMessages, ISocketError } from '@/interfaces';
+import type { IPredefinedChatMessages } from '@/interfaces/chat';
+import type { ISocketError } from '@/interfaces/online';
 
 /**
  * Errors in sockets

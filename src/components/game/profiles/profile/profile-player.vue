@@ -24,20 +24,20 @@
 </template>
 
 <script lang="ts" setup>
+import ProfileImage from '@/components/game/profiles/profile/profile-image.vue';
+import ProfileDice from '@/components/game/profiles/profile/profile-dice.vue';
+import NameAndDice from '@/components/game/profiles/profile/name-and-dice.vue';
+import ProfileRanking from '@/components/game/profiles/profile/profile-ranking.vue';
 import type {
-  IActionsTurn,
-  IPlayer,
   THandleDoneDice,
   THandleMuteChat,
   THandleSelectDice,
   THandleTimer,
   TPositionProfile,
   TPositionProfiles,
-} from '@/interfaces';
-import ProfileImage from '@/components/game/profiles/profile/profile-image.vue';
-import ProfileDice from '@/components/game/profiles/profile/profile-dice.vue';
-import NameAndDice from '@/components/game/profiles/profile/name-and-dice.vue';
-import ProfileRanking from '@/components/game/profiles/profile/profile-ranking.vue';
+} from '@/interfaces/profile';
+import type { IPlayer } from '@/interfaces/user';
+import type { IActionsTurn } from '@/interfaces/game';
 
 interface ProfilePlayerProps {
   basePosition: TPositionProfiles;
@@ -51,7 +51,7 @@ interface ProfilePlayerProps {
   handleMuteChat: THandleMuteChat;
 }
 
-const props = defineProps<ProfilePlayerProps>();
+defineProps<ProfilePlayerProps>();
 </script>
 
 <style scoped>

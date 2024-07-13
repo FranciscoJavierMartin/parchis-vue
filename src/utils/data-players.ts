@@ -1,15 +1,10 @@
-import type {
-  IActionsTurn,
-  IPlayer,
-  IUser,
-  TBoardColors,
-  TDiceValues,
-  TSufixColors,
-  TTotalPlayers,
-} from '@/interfaces';
 import { getRandomNumber } from './helpers';
 import { ESufixColors } from '@/constants/board';
 import { EActionsBoardGame } from '@/constants/game';
+import type { TBoardColors, TSufixColors } from '@/interfaces/board';
+import type { TDiceValues } from '@/interfaces/dice';
+import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
+import type { IPlayer, IUser } from '@/interfaces/user';
 
 // TODO: Remove
 export const TEMP_USERS: IUser[] = [

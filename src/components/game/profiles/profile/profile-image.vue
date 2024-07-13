@@ -18,9 +18,10 @@
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
 import GameAvatar from '@/components/avatar/game-avatar.vue';
-import type { IPlayer, THandleMuteChat, TPositionProfile } from '@/interfaces';
 import GameIcon from '@/components/icons/game-icon.vue';
 import { TIME_INTERVAL_CHRONOMETER } from '@/constants/game';
+import type { IPlayer } from '@/interfaces/user';
+import type { THandleMuteChat, TPositionProfile } from '@/interfaces/profile';
 
 interface ProfileImageProps {
   player: IPlayer;

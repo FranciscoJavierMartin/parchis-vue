@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { DICE_SIZE_TOOLTIP } from '@/constants/sizes';
-import type { TDiceValues } from '@/interfaces';
+import type { TDiceValues } from '@/interfaces/dice';
 
 interface DiceProps {
   value: TDiceValues;

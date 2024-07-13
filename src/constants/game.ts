@@ -1,4 +1,6 @@
-import type { IActionsMoveToken, IActionsTurn, TDiceValues } from '@/interfaces';
+import type { TDiceValues } from '@/interfaces/dice';
+import type { IActionsTurn } from '@/interfaces/game';
+import type { IActionsMoveToken } from '@/interfaces/token';
 
 export enum EActionsBoardGame {
   'ROLL_DICE' = 'ROLL_DICE',

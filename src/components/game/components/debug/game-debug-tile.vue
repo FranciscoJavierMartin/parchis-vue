@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { SIZE_TILE } from '@/constants/sizes';
-import type { ICoordinate } from '@/interfaces';
+import type { ICoordinate } from '@/interfaces/board';
 
 defineProps<{ coordinate: ICoordinate }>();
 </script>

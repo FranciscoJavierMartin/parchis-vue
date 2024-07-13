@@ -13,16 +13,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import type {
-  IActionsTurn,
-  IPlayer,
-  IProfileHandlers,
-  TPositionProfile,
-  TPositionProfiles,
-  TTotalPlayers,
-} from '@/interfaces';
 import ProfilePlayer from '@/components/game/profiles/profile/profile-player.vue';
 import { DEFAULT_VALUE_ACTION_TURN } from '@/constants/game';
+import type { IProfileHandlers, TPositionProfile, TPositionProfiles } from '@/interfaces/profile';
+import type { IPlayer } from '@/interfaces/user';
+import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
 
 // TODO: Extract in common (without position)
 interface ProfileSectionProps {

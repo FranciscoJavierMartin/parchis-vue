@@ -10,8 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import type { TShowTotalTokens } from '@/interfaces';
 import TotalTokens from '@/components/game/components/token/components/total-tokens/total-tokens.vue';
+import type { TShowTotalTokens } from '@/interfaces/token';
 
 interface ShowTotalTokensProps {
   totalTokens: TShowTotalTokens;

@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TColors } from '@/interfaces';
+import type { TColors } from '@/interfaces/board';
 import type { CSSProperties, StyleValue } from 'vue';
 
 interface PieceProps {
