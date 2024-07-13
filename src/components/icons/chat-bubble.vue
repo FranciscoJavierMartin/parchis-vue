@@ -14,19 +14,11 @@
   </svg>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import type { IconProps } from '@/interfaces/icons';
 
-export default defineComponent({
-  props: {
-    fill: {
-      type: String,
-      default: 'white',
-    },
-    strokeWidth: {
-      type: Number,
-      default: 1.5,
-    },
-  },
+withDefaults(defineProps<IconProps>(), {
+  fill: 'white',
+  strokeWidth: 1.5,
 });
 </script>
