@@ -3,13 +3,15 @@
     <div v-if="player.isOffline" class="game-profile-image-offline">Left</div>
     <PlayerAvatar :photo="player.photo" :name="player.name" class="game-profile-image-avatar" />
     <button
-      v-if="showMuteChat"
+      v-if="!showMuteChat"
       :aria-describedby="titleMuteChat"
       class="game-profile-mute-chat"
       :class="[position.toLowerCase(), { mute: player.isMuted }]"
       @click="() => handleMuteChat(player.index)"
     >
-      <!-- <GameIcon type="chat" :svg-styles="{ height: '20px', width: '20px', scale: 0.7 }" /> -->
+      <div class="icon-wrapper">
+        <ChatBubble />
+      </div>
     </button>
     <div v-if="startTimer && isRunning" class="game-profile-image-progress" />
   </div>
@@ -18,10 +20,10 @@
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
 import PlayerAvatar from '@/components/avatar/player-avatar.vue';
-// import GameIcon from '@/components/icons/game-icon.vue';
 import { TIME_INTERVAL_CHRONOMETER } from '@/constants/game';
 import type { IPlayer } from '@/interfaces/user';
 import type { THandleMuteChat, TPositionProfile } from '@/interfaces/profile';
+import ChatBubble from '@/components/icons/chat-bubble.vue';
 
 interface ProfileImageProps {
   player: IPlayer;
@@ -136,6 +138,7 @@ watch(
       justify-content: center;
       width: 20px;
       height: 20px;
+      color: white;
       background-color: #009688;
       border: 1px solid white;
       border-radius: 50%;
@@ -144,15 +147,12 @@ watch(
         rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
       svg {
-        width: 65%;
+        width: 80%;
       }
     }
 
     &.right .icon-wrapper {
       left: -5px;
-    }
-
-    &.left .icon-wrapper {
       transform: scaleX(-1);
     }
 
