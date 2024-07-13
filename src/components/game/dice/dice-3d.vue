@@ -1,6 +1,6 @@
 <template>
   <div
-    class="dice"
+    class="dice-3d"
     :class="[`roll-${diceValue}`, isRolling ? 'animation-rolling' : 'animation-none']"
     :style="{
       '--size-side': `${size}px`,
@@ -41,7 +41,7 @@ defineExpose({
 </script>
 
 <style scoped>
-.dice {
+.dice-3d {
   --half-size: calc(var(--size-side) / 2);
   position: relative;
   z-index: 0;

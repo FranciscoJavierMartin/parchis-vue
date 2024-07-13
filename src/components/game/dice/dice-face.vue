@@ -1,6 +1,6 @@
 <template>
   <div
-    class="game-dice"
+    class="dice-face"
     :class="[`dice-${value}`, { animate }]"
     :style="{ width: `${size}px`, height: `${size}px` }"
   />
@@ -20,7 +20,7 @@ withDefaults(defineProps<DiceProps>(), { size: DICE_SIZE_TOOLTIP, animate: false
 </script>
 
 <style scoped>
-.game-dice {
+.dice-face {
   --point: radial-gradient(circle, black 35%, rgba(255, 255, 255, 0) 50%);
   position: relative;
 
