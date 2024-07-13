@@ -19,23 +19,22 @@ import type { TDiceValues } from '@/interfaces/dice';
 import { getRandomNumber } from '@/helpers/random';
 
 defineProps<{ size: number }>();
+const emit = defineEmits(['rolling', 'newValue']);
 
 const isRolling = ref<boolean>(false);
 const diceValue = ref<number>(1);
 const randomRotationDegrees = ref<number>(0);
 
-// FIXME: Use isRolling. May with setTimeout
-// TODO: Emit value
 function rollDice(): void {
   diceValue.value = getRandomNumber(1, 6);
   randomRotationDegrees.value = Math.floor(100 + Math.random() * 400);
-  // TODO: Emit isRolling value
   isRolling.value = true;
+  emit('rolling', isRolling.value);
 
   setTimeout(() => {
-    // TODO: Emit value
-    // diceValue.value = 0;
+    emit('newValue', diceValue.value);
     isRolling.value = false;
+    emit('rolling', isRolling.value);
   }, 2050);
 }
 
