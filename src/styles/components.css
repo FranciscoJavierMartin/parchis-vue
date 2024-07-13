@@ -1,0 +1,32 @@
+.button {
+  cursor: pointer;
+  border: 2px solid #010f20;
+  border: none;
+  border-radius: 20px;
+  box-shadow:
+    rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.3) 0px -5px 0px inset;
+
+  &:active {
+    box-shadow: none;
+    transform: translateY(2px);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  &.yellow {
+    color: #8b5f00;
+    background-color: #f5d41f;
+  }
+
+  &.blue {
+    color: white;
+    background-color: #216ed0;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    cursor: auto;
+    opacity: 0.5;
+  }
+}
