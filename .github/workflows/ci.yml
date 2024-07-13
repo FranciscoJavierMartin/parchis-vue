@@ -37,6 +37,8 @@ jobs:
         run: pnpm install
       - name: Lint
         run: pnpm lint
+      - name: Lint style
+        run: pnpm stylelint
       - name: format
         run: pnpm format:check
       - name: build
