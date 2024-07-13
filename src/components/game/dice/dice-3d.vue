@@ -27,7 +27,7 @@ const randomRotationDegrees = ref<number>(0);
 
 function rollDice(): void {
   diceValue.value = getRandomNumber(1, 6);
-  randomRotationDegrees.value = Math.floor(100 + Math.random() * 400);
+  randomRotationDegrees.value = getRandomNumber(100, 500);
   isRolling.value = true;
   emit('rolling', isRolling.value);
 
