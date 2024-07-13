@@ -9,13 +9,16 @@ module.exports = {
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting',
     'prettier',
+    'plugin:prettier/recommended',
   ],
   parserOptions: {
     ecmaVersion: 'latest',
   },
   rules: {
+    'prettier/prettier': 'error',
     '@typescript-eslint/no-unused-vars': 'warn',
     'no-console': 'warn',
     'prefer-const': 'error',
+    'vue/multi-word-component-names': 'warn',
   },
 };
