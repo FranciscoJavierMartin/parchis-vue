@@ -26,6 +26,10 @@ const router = createRouter({
       name: 'about',
       component: () => import('@/views/OnlineView.vue'),
     },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/',
+    },
   ],
 });
 
