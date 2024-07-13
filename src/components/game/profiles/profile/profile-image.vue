@@ -3,15 +3,13 @@
     <div v-if="player.isOffline" class="game-profile-image-offline">Left</div>
     <PlayerAvatar :photo="player.photo" :name="player.name" class="game-profile-image-avatar" />
     <button
-      v-if="!showMuteChat"
+      v-if="showMuteChat"
       :aria-describedby="titleMuteChat"
       class="game-profile-mute-chat"
       :class="[position.toLowerCase(), { mute: player.isMuted }]"
       @click="() => handleMuteChat(player.index)"
     >
-      <div class="icon-wrapper">
-        <ChatBubble />
-      </div>
+      <ChatBubble class="icon-wrapper" />
     </button>
     <div v-if="startTimer && isRunning" class="game-profile-image-progress" />
   </div>
@@ -120,40 +118,36 @@ watch(
 
   .game-profile-mute-chat {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -5px;
+    right: -5px;
     z-index: 2;
-    width: 50px;
-    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: white;
     cursor: pointer;
-    background-color: transparent;
-    border: none;
+    background-color: #009688;
+    border: 1px solid white;
+    border-radius: 50%;
+    box-shadow:
+      rgba(0, 0, 0, 0.12) 0px 1px 3px,
+      rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
     .icon-wrapper {
       position: absolute;
-      top: -5px;
-      right: -5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      color: white;
-      background-color: #009688;
-      border: 1px solid white;
-      border-radius: 50%;
-      box-shadow:
-        rgba(0, 0, 0, 0.12) 0px 1px 3px,
-        rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
-      svg {
-        width: 80%;
-      }
+      top: 1px;
+      width: 80%;
     }
 
-    &.right .icon-wrapper {
-      left: -5px;
-      transform: scaleX(-1);
+    &.right {
+      right: auto;
+      left: -7px;
+
+      .icon-wrapper {
+        transform: scaleX(-1);
+      }
     }
 
     &.mute .icon-wrapper {
