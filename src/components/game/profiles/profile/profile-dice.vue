@@ -1,6 +1,6 @@
 <template>
   <div class="game-profile-dice" :class="{ hide: !showDice }">
-    <GameIcon type="arrow" />
+    <ArrowDown class="icon-wrapper" :stroke-width="3.5" />
     <button class="game-profile-dice-button" :disabled="disabledDice" @click="rollDice">
       <Dice3d ref="diceRef" :size="45" />
     </button>
@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import Dice3d from '@/components/game/dice/dice-3d.vue';
-import GameIcon from '@/components/icons/game-icon.vue';
+import ArrowDown from '@/components/icons/arrow-down.vue';
 import { ROLL_TIME_VALUE } from '@/constants/game';
 import type { TDiceValues } from '@/interfaces/dice';
 
@@ -77,12 +77,12 @@ function rollDice(): void {
   .icon-wrapper {
     position: absolute;
     top: -25px;
-    left: 25px;
+    left: 17px;
     z-index: 1;
-    width: 50px;
-    height: 50px;
+    width: 25px;
+    height: 25px;
+    color: white;
     filter: drop-shadow(0px -2px 1px black);
-    scale: 1.5;
     animation: move-arrow 0.5s infinite alternate;
   }
 

@@ -9,7 +9,7 @@
       :class="[position.toLowerCase(), { mute: player.isMuted }]"
       @click="() => handleMuteChat(player.index)"
     >
-      <GameIcon type="chat" :svg-styles="{ height: '20px', width: '20px', scale: 0.7 }" />
+      <!-- <GameIcon type="chat" :svg-styles="{ height: '20px', width: '20px', scale: 0.7 }" /> -->
     </button>
     <div v-if="startTimer && isRunning" class="game-profile-image-progress" />
   </div>
@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
 import PlayerAvatar from '@/components/avatar/player-avatar.vue';
-import GameIcon from '@/components/icons/game-icon.vue';
+// import GameIcon from '@/components/icons/game-icon.vue';
 import { TIME_INTERVAL_CHRONOMETER } from '@/constants/game';
 import type { IPlayer } from '@/interfaces/user';
 import type { THandleMuteChat, TPositionProfile } from '@/interfaces/profile';
