@@ -14,22 +14,10 @@
         />
         <!-- prettier-ignore-attribute -->
         <GameBoard :boardColor="(boardColor as EBoardColors)">
-          <GameToken
-            color="RED"
-            :coordinate="POSITION_ELEMENTS_BOARD.BOTTOM_LEFT.startPositions[0].coordinate"
-            type-tile="JAIL"
-            :index="0"
-            :dice-available="[]"
-            :total-tokens="1"
-            :position="1"
-            :enable-tooltip="false"
-            :is-moving="false"
-            :animated="false"
-            :position-tile="1"
-            :can-select-token="true"
+          <TokenList
             :dice-list="[]"
             :handle-selected-token="handleSelectedToken"
-            :debug="debug"
+            :list-token="listTokens"
           />
           <GameDebug v-if="debug" />
           <ShowTotalTokens :total-tokens="{}" />
@@ -52,12 +40,10 @@
 import { ref } from 'vue';
 import PageWrapper from '@/layout/page-wrapper.vue';
 import GameBoard from '@/components/game/board/game-board.vue';
-import GameToken from '@/components/game/token/game-token.vue';
 import GameDebug from '@/components/game/debug/game-debug.vue';
 import ShowTotalTokens from '@/components/game/token/components/total-tokens/show-total-tokens.vue';
 import BoardWrapper from '@/components/game/board/board-wrapper.vue';
 import ProfileSection from '@/components/game/profiles/profile-section.vue';
-import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/helpers/positions-board';
 import { EBoardColors, EPositionProfiles } from '@/constants/board';
 import { ETypeGame } from '@/constants/game';
 import type { IActionsTurn, TTotalPlayers, TTypeGame } from '@/interfaces/game';
@@ -68,6 +54,7 @@ import type { IListTokens, ISelectTokenValues } from '@/interfaces/token';
 import { getInitialDataPlayers } from '@/helpers/player';
 import { getInitialActionsTurnValue, getInitialPositionTokens } from '@/helpers/game';
 import { getRandomValueDice } from '@/helpers/random';
+import TokenList from '@/components/game/tokens/token-list.vue';
 
 // TODO: Add types for socket
 interface GameProps {
