@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import Game from '@/components/game/game.vue';
-import AppWrapper from '@/components/wrapper/app/app-wrapper.vue';
+import AppWrapper from '@/components/wrapper/app-wrapper.vue';
 import type { TTotalPlayers } from '@/interfaces/game';
 import { TEMP_USERS } from '@/helpers/player';
 
