@@ -11,7 +11,7 @@ import type { IListTokens, IToken } from '@/interfaces/token';
 import type { IPlayer } from '@/interfaces/user';
 import { getPlayersColors } from '@/helpers/player';
 import { EPositionGame, EtypeTile, type ESufixColors } from '@/constants/board';
-import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from './positions-board';
+import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/helpers/positions-board';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
   const { isOnline, isBot } = players[indexTurn];
