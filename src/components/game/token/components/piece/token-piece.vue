@@ -5,8 +5,14 @@
     :class="color.toLowerCase()"
     :style="{ width: 'var(--size-tile)', height: 'var(--size-tile)', ...(style as CSSProperties) }"
   >
-    <span v-if="debug" :style="{ width: 'var(--size-tile)', height: 'var(--size-tile)' }"
-      >{{ index }}
+    <span
+      v-if="debug"
+      :style="{
+        width: 'var(--size-tile)',
+        height: 'var(--size-tile)',
+      }"
+    >
+      {{ index }}
     </span>
   </div>
 </template>
