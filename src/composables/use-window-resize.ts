@@ -17,5 +17,6 @@ export default function useWindowResize() {
 
   onUnmounted(() => {
     window.onresize = null;
+    document.oncontextmenu = null;
   });
 }
