@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { PREFIX_RANKING } from '@/utils/constants';
+import { PREFIX_RANKING } from '@/constants/game';
 import { computed } from 'vue';
 
 interface ProfileRankingProps {

@@ -1,5 +1,5 @@
-import onWindowResise from '@/utils/resize-screen';
 import { onMounted, onUnmounted } from 'vue';
+import onWindowResise from '@/helpers/resize-screen';
 
 export default function useWindowResize() {
   onMounted(() => {
@@ -17,5 +17,6 @@ export default function useWindowResize() {
 
   onUnmounted(() => {
     window.onresize = null;
+    document.oncontextmenu = null;
   });
 }

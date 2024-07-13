@@ -32,7 +32,7 @@ useWindowResize();
   background-color: #00a6df;
   background-image: var(--bg-image);
 
-  @media only screen and (max-width: 420px) {
+  @media only screen and (width <= 420px) {
     background-color: unset;
     background-image: unset;
   }

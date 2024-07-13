@@ -11,15 +11,11 @@
 </template>
 
 <script setup lang="ts">
-import type {
-  IActionsTurn,
-  IPlayer,
-  IProfileHandlers,
-  TPositionProfiles,
-  TTotalPlayers,
-} from '@/interfaces';
-import { EPositionProfile } from '@/utils/constants';
 import ProfileWrapper from '@/components/game/profiles/profile-wrapper.vue';
+import { EPositionProfile } from '@/constants/board';
+import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
+import type { IProfileHandlers, TPositionProfiles } from '@/interfaces/profile';
+import type { IPlayer } from '@/interfaces/user';
 
 // TODO: Extract in common
 interface ProfileSectionProps {

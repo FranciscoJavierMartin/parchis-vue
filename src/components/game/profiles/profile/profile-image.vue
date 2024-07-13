@@ -1,7 +1,7 @@
 <template>
   <div class="game-profile-image">
     <div v-if="player.isOffline" class="game-profile-image-offline">Left</div>
-    <GameAvatar :photo="player.photo" :name="player.name" class="game-profile-image-avatar" />
+    <PlayerAvatar :photo="player.photo" :name="player.name" class="game-profile-image-avatar" />
     <button
       v-if="showMuteChat"
       :aria-describedby="titleMuteChat"
@@ -17,10 +17,11 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
-import GameAvatar from '@/components/avatar/game-avatar.vue';
-import type { IPlayer, THandleMuteChat, TPositionProfile } from '@/interfaces';
-import { TIME_INTERVAL_CHRONOMETER } from '@/utils/constants';
+import PlayerAvatar from '@/components/avatar/player-avatar.vue';
 import GameIcon from '@/components/icons/game-icon.vue';
+import { TIME_INTERVAL_CHRONOMETER } from '@/constants/game';
+import type { IPlayer } from '@/interfaces/user';
+import type { THandleMuteChat, TPositionProfile } from '@/interfaces/profile';
 
 interface ProfileImageProps {
   player: IPlayer;

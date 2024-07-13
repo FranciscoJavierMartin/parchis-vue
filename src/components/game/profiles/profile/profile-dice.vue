@@ -9,10 +9,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { TDiceValues } from '@/interfaces';
-import Dice3d from '@/components/game/components/dice/dice-3d.vue';
+import Dice3d from '@/components/game/dice/dice-3d.vue';
 import GameIcon from '@/components/icons/game-icon.vue';
-import { ROLL_TIME_VALUE } from '@/utils/constants';
+import { ROLL_TIME_VALUE } from '@/constants/game';
+import type { TDiceValues } from '@/interfaces/dice';
 
 interface ProfileDiceProps {
   disabledDice: boolean;
