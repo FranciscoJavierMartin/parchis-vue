@@ -59,7 +59,7 @@ import GameDebug from '@/components/game/components/debug/game-debug.vue';
 import ShowTotalTokens from '@/components/game/components/token/components/total-tokens/show-total-tokens.vue';
 import BoardWrapper from '@/components/game/components/board-wrapper.vue';
 import ProfileSection from '@/components/game/profiles/profile-section.vue';
-import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/utils/positions-board';
+import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/helpers/positions-board';
 import { EBoardColors, EPositionProfiles } from '@/constants/board';
 import { ETypeGame } from '@/constants/game';
 import type { IActionsTurn, TTotalPlayers, TTypeGame } from '@/interfaces/game';

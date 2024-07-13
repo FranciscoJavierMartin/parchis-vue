@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { POSITION_TILES } from '@/utils/positions-board';
+import { POSITION_TILES } from '@/helpers/positions-board';
 import { type CSSProperties, computed } from 'vue';
 
 interface TotalTokensProps {
