@@ -7,6 +7,7 @@
         :value="value"
         :size="16"
         animate
+        shadow
       />
     </div>
     <div v-else class="game-profile-name" :class="{ 'has-turn': hasTurn }">
