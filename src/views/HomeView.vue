@@ -6,9 +6,9 @@
 
 <script setup lang="ts">
 import Game from '@/components/game/game.vue';
-import AppWrapper from '@/components/wrapper/app/app-wrapper.vue';
-import type { TTotalPlayers } from '@/interfaces';
-import { TEMP_USERS } from '@/utils/data-players';
+import AppWrapper from '@/components/wrapper/app-wrapper.vue';
+import type { TTotalPlayers } from '@/interfaces/game';
+import { TEMP_USERS } from '@/helpers/player';
 
 // TODO: Use users.length instead of pass totalPlayers
 const totalPlayers = TEMP_USERS.length as TTotalPlayers;

@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { PREFIX_RANKING } from '@/utils/constants';
+import { PREFIX_RANKING } from '@/constants/game';
 import { computed } from 'vue';
 
 interface ProfileRankingProps {
@@ -19,18 +19,18 @@ const rankingPosition = computed<string>(() => `${props.value}${PREFIX_RANKING[p
 
 <style scoped>
 .game-profile-ranking {
-  align-items: center;
-  animation: bounceIn 1s both;
-  display: flex;
-  height: 50px;
-  justify-content: center;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 50px;
+  height: 50px;
+  animation: bounceIn 1s both;
 
   .game-profile-ranking-value {
-    color: #f8ea55;
     font-family: 'Arial Black', Gadget, sans-serif;
     font-size: 25px;
+    color: #f8ea55;
     text-shadow:
       0px 0px 0 rgb(235, 221, 72),
       0px 1px 0 rgb(222, 208, 59),

@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import type { IDiceList } from '@/interfaces';
-import DiceFace from '@/components/game/components/dice/dice-face.vue';
+import DiceFace from '@/components/game/dice/dice-face.vue';
+import type { IDiceList } from '@/interfaces/dice';
 
 interface NameAndDiceProps {
   name: string;
@@ -31,27 +31,27 @@ defineProps<NameAndDiceProps>();
 <style scoped>
 .game-profile-name-dice {
   display: flex;
+  width: 100%;
   height: 20px;
   margin: 8px 0;
-  width: 100%;
 
   .game-profile-dices {
     display: flex;
-    align-items: center;
     gap: 5px;
+    align-items: center;
   }
 
   .game-profile-name {
-    color: white;
+    width: 150px;
+    overflow: hidden;
     font-size: 15px;
     font-weight: bold;
-    opacity: 0.5;
-    overflow: hidden;
+    color: white;
     text-overflow: ellipsis;
     text-shadow: 1px 0px 3px black;
-    transition: all 500ms ease;
     white-space: nowrap;
-    width: 150px;
+    opacity: 0.5;
+    transition: all 500ms ease;
 
     &.has-turn {
       opacity: 1;

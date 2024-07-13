@@ -11,15 +11,11 @@
 </template>
 
 <script setup lang="ts">
-import type {
-  IActionsTurn,
-  IPlayer,
-  IProfileHandlers,
-  TPositionProfiles,
-  TTotalPlayers,
-} from '@/interfaces';
-import { EPositionProfile } from '@/utils/constants';
 import ProfileWrapper from '@/components/game/profiles/profile-wrapper.vue';
+import { EPositionProfile } from '@/constants/board';
+import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
+import type { IProfileHandlers, TPositionProfiles } from '@/interfaces/profile';
+import type { IPlayer } from '@/interfaces/user';
 
 // TODO: Extract in common
 interface ProfileSectionProps {
@@ -37,12 +33,12 @@ defineProps<ProfileSectionProps>();
 <style scoped>
 .game-profile-section {
   display: flex;
-  margin: 10px;
   width: 100%;
+  margin: 10px;
 
   .game-profile-section-container {
-    padding: 5px 10px;
     width: 50%;
+    padding: 5px 10px;
   }
 }
 </style>

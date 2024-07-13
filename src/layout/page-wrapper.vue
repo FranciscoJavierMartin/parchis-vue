@@ -16,21 +16,21 @@ const slots = useSlots();
 
 <style scoped>
 .page-wrapper {
-  align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  align-items: center;
   justify-content: center;
   width: 100%;
+  height: 100%;
 
   .page-wrapper-options {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
     position: absolute;
     top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
+    padding: 10px;
   }
 }
 </style>
