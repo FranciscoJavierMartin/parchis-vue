@@ -11,6 +11,7 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "stylelint": "stylelint --check \"*.{css,vue}\"",
     "format": "prettier --write src/",
     "format:check": "prettier --check src/",
     "prepare": "node .husky/install.mjs"
@@ -46,7 +47,6 @@
     "stylelint": "^16.7.0",
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-recess-order": "^5.0.1",
-    "stylelint-config-recommended-less": "^3.0.1",
     "stylelint-config-recommended-vue": "^1.5.0",
     "stylelint-config-standard": "^36.0.1",
     "stylelint-prettier": "^5.0.0",
