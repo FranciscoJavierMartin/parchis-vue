@@ -16,6 +16,7 @@
 import { ref } from 'vue';
 import DiceFace from '@/components/game/dice/dice-face.vue';
 import type { TDiceValues } from '@/interfaces/dice';
+import { getRandomNumber } from '@/helpers/random';
 
 defineProps<{ size: number }>();
 
@@ -26,13 +27,16 @@ const randomRotationDegrees = ref<number>(0);
 // FIXME: Use isRolling. May with setTimeout
 // TODO: Emit value
 function rollDice(): void {
-  const random = Math.floor(Math.random() * 10);
-  if (random >= 1 && random <= 6) {
-    randomRotationDegrees.value = Math.floor(100 + Math.random() * 400);
-    diceValue.value = random;
-  } else {
-    rollDice();
-  }
+  diceValue.value = getRandomNumber(1, 6);
+  randomRotationDegrees.value = Math.floor(100 + Math.random() * 400);
+  // TODO: Emit isRolling value
+  isRolling.value = true;
+
+  setTimeout(() => {
+    // TODO: Emit value
+    // diceValue.value = 0;
+    isRolling.value = false;
+  }, 2050);
 }
 
 defineExpose({
@@ -51,7 +55,7 @@ defineExpose({
   transform-style: preserve-3d;
 
   &.animation-rolling {
-    animation: rolling 1s;
+    animation: rolling 2s;
   }
 
   &.animation-none {
