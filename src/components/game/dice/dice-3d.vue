@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import DiceFace from '@/components/game/components/dice/dice-face.vue';
+import DiceFace from '@/components/game/dice/dice-face.vue';
 import type { TDiceValues } from '@/interfaces/dice';
 
 defineProps<{ size: number }>();

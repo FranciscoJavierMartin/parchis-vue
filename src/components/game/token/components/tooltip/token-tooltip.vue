@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import DiceFace from '@/components/game/components/dice/dice-face.vue';
+import DiceFace from '@/components/game/dice/dice-face.vue';
 import { DICE_SIZE_TOOLTIP, SIZE_BOARD, SIZE_TILE } from '@/constants/sizes';
 import { EColors } from '@/constants/board';
 import type { ICoordinate, TColors } from '@/interfaces/board';

@@ -32,6 +32,6 @@
 </template>
 
 <script setup lang="ts">
-import GameDebugTile from '@/components/game/components/debug/game-debug-tile.vue';
+import GameDebugTile from '@/components/game/debug/game-debug-tile.vue';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/helpers/positions-board';
 </script>

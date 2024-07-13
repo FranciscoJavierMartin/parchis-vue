@@ -53,11 +53,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import PageWrapper from '@/layout/page-wrapper.vue';
-import GameBoard from '@/components/game/components/game-board.vue';
-import GameToken from '@/components/game/components/token/game-token.vue';
-import GameDebug from '@/components/game/components/debug/game-debug.vue';
-import ShowTotalTokens from '@/components/game/components/token/components/total-tokens/show-total-tokens.vue';
-import BoardWrapper from '@/components/game/components/board-wrapper.vue';
+import GameBoard from '@/components/game/board/game-board.vue';
+import GameToken from '@/components/game/token/game-token.vue';
+import GameDebug from '@/components/game/debug/game-debug.vue';
+import ShowTotalTokens from '@/components/game/token/components/total-tokens/show-total-tokens.vue';
+import BoardWrapper from '@/components/game/board/board-wrapper.vue';
 import ProfileSection from '@/components/game/profiles/profile-section.vue';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/helpers/positions-board';
 import { EBoardColors, EPositionProfiles } from '@/constants/board';
