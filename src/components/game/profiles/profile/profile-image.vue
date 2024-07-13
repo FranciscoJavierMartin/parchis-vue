@@ -9,7 +9,7 @@
       :class="[position.toLowerCase(), { mute: player.isMuted }]"
       @click="() => handleMuteChat(player.index)"
     >
-      <GameIcon type="chat" :svg-styles="{ height: '20px', width: '20px', scale: 0.7 }" />
+      <ChatBubble class="icon-wrapper" />
     </button>
     <div v-if="startTimer && isRunning" class="game-profile-image-progress" />
   </div>
@@ -18,10 +18,10 @@
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
 import PlayerAvatar from '@/components/avatar/player-avatar.vue';
-import GameIcon from '@/components/icons/game-icon.vue';
 import { TIME_INTERVAL_CHRONOMETER } from '@/constants/game';
 import type { IPlayer } from '@/interfaces/user';
 import type { THandleMuteChat, TPositionProfile } from '@/interfaces/profile';
+import ChatBubble from '@/components/icons/chat-bubble.vue';
 
 interface ProfileImageProps {
   player: IPlayer;
@@ -118,42 +118,36 @@ watch(
 
   .game-profile-mute-chat {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -5px;
+    right: -5px;
     z-index: 2;
-    width: 50px;
-    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: white;
     cursor: pointer;
-    background-color: transparent;
-    border: none;
+    background-color: #009688;
+    border: 1px solid white;
+    border-radius: 50%;
+    box-shadow:
+      rgba(0, 0, 0, 0.12) 0px 1px 3px,
+      rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
     .icon-wrapper {
       position: absolute;
-      top: -5px;
-      right: -5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      background-color: #009688;
-      border: 1px solid white;
-      border-radius: 50%;
-      box-shadow:
-        rgba(0, 0, 0, 0.12) 0px 1px 3px,
-        rgba(0, 0, 0, 0.24) 0px 1px 2px;
+      top: 1px;
+      width: 80%;
+    }
 
-      svg {
-        width: 65%;
+    &.right {
+      right: auto;
+      left: -7px;
+
+      .icon-wrapper {
+        transform: scaleX(-1);
       }
-    }
-
-    &.right .icon-wrapper {
-      left: -5px;
-    }
-
-    &.left .icon-wrapper {
-      transform: scaleX(-1);
     }
 
     &.mute .icon-wrapper {
