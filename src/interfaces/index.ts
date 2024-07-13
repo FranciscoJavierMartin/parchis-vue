@@ -1,20 +1,20 @@
 import type {
-  EActionsBoardGame,
   EBoardColors,
   EColors,
-  ENextStepGame,
-  EOptionsGame,
   EPositionGame,
   EPositionProfile,
   EPositionProfiles,
-  ESounds,
   ESufixColors,
-  ETypeGame,
   EtypeTile,
+} from '@/constants/board';
+import type { TYPES_CHAT_MESSAGES } from '@/constants/chat';
+import type { EActionsBoardGame, ENextStepGame, ETypeGame } from '@/constants/game';
+import type {
+  EOptionsGame,
+  ESounds,
   SocketErrors,
-  TYPES_CHAT_MESSAGES,
   TYPES_ONLINE_GAMEPLAY,
-} from '@/utils/constants';
+} from '@/constants/online';
 
 export type TBoardColors = keyof typeof EBoardColors;
 export type TColors = keyof typeof EColors;

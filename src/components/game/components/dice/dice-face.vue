@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
+import { DICE_SIZE_TOOLTIP } from '@/constants/sizes';
 import type { TDiceValues } from '@/interfaces';
-import { DICE_SIZE_TOOLTIP } from '@/utils/constants';
 
 interface DiceProps {
   value: TDiceValues;

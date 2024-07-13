@@ -18,8 +18,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { ICoordinate, IDiceList, TColors } from '@/interfaces';
-import { EColors, DICE_SIZE_TOOLTIP, SIZE_TILE, SIZE_BOARD } from '@/utils/constants';
 import DiceFace from '@/components/game/components/dice/dice-face.vue';
+import { DICE_SIZE_TOOLTIP, SIZE_BOARD, SIZE_TILE } from '@/constants/sizes';
+import { EColors } from '@/constants/board';
 
 interface TokenTooltipProps {
   color: TColors;

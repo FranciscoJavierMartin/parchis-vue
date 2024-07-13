@@ -19,8 +19,8 @@
 import { computed, ref, watch } from 'vue';
 import GameAvatar from '@/components/avatar/game-avatar.vue';
 import type { IPlayer, THandleMuteChat, TPositionProfile } from '@/interfaces';
-import { TIME_INTERVAL_CHRONOMETER } from '@/utils/constants';
 import GameIcon from '@/components/icons/game-icon.vue';
+import { TIME_INTERVAL_CHRONOMETER } from '@/constants/game';
 
 interface ProfileImageProps {
   player: IPlayer;

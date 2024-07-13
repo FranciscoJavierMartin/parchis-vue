@@ -1,3 +1,4 @@
+import { SIZE_TILE } from '@/constants/sizes';
 import type {
   IPoint,
   IPositionsItems,
@@ -5,7 +6,6 @@ import type {
   TFinalPositionsValues,
   TLocationBoardElements,
 } from '@/interfaces';
-import { SIZE_TILE } from './constants';
 
 /**
  * Store the walkthrought

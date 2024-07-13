@@ -7,8 +7,9 @@ import type {
   TSufixColors,
   TTotalPlayers,
 } from '@/interfaces';
-import { EActionsBoardGame, ESufixColors } from '@/utils/constants';
 import { getRandomNumber } from './helpers';
+import { ESufixColors } from '@/constants/board';
+import { EActionsBoardGame } from '@/constants/game';
 
 // TODO: Remove
 export const TEMP_USERS: IUser[] = [

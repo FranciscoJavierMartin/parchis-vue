@@ -22,7 +22,7 @@ import type {
   TTotalPlayers,
 } from '@/interfaces';
 import ProfilePlayer from '@/components/game/profiles/profile/profile-player.vue';
-import { DEFAULT_VALUE_ACTION_TURN } from '@/utils/constants';
+import { DEFAULT_VALUE_ACTION_TURN } from '@/constants/game';
 
 // TODO: Extract in common (without position)
 interface ProfileSectionProps {

@@ -26,16 +26,12 @@
 <script setup lang="ts">
 import { computed, ref, watchEffect, type StyleValue } from 'vue';
 import type { IDiceList, ISelectTokenValues, IToken } from '@/interfaces';
-import {
-  BASE_ZINDEX_TOKEN,
-  EColors,
-  EtypeTile,
-  MAXIMUM_VISIBLE_TOKENS_PER_CELL,
-  ZINDEX_TOKEN_SELECT,
-} from '@/utils/constants';
+
 import TokenPiece from '@/components/game/components/token/components/piece/token-piece.vue';
 import TokenTooltip from '@/components/game/components/token/components/tooltip/token-tooltip.vue';
 import { vClickOutside } from '@/composables/use-click-outside';
+import { EColors, EtypeTile, MAXIMUM_VISIBLE_TOKENS_PER_CELL } from '@/constants/board';
+import { BASE_ZINDEX_TOKEN, ZINDEX_TOKEN_SELECT } from '@/constants/sizes';
 
 interface TokenProps extends IToken {
   diceList: IDiceList[];

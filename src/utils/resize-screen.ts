@@ -1,4 +1,4 @@
-import { BASE_HEIGHT, BASE_WIDTH } from '@/utils/constants';
+import { BASE_HEIGHT, BASE_WIDTH } from '@/constants/sizes';
 import { $, debounce, isMobile } from '@/utils/helpers';
 
 export default debounce(() => {

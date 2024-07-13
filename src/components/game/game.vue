@@ -70,12 +70,13 @@ import {
   type TTotalPlayers,
   type TTypeGame,
 } from '@/interfaces';
-import { EBoardColors, EPositionProfiles, ETypeGame } from '@/utils/constants';
 import {
   getInitialDataPlayers,
   getInitialActionsTurnValue,
   getRandomValueDice,
 } from '@/utils/data-players';
+import { EBoardColors, EPositionProfiles } from '@/constants/board';
+import { ETypeGame } from '@/constants/game';
 
 // TODO: Add types for socket
 interface GameProps {

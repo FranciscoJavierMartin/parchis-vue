@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
+import { SIZE_TILE } from '@/constants/sizes';
 import type { ICoordinate } from '@/interfaces';
-import { SIZE_TILE } from '@/utils/constants';
 
 defineProps<{ coordinate: ICoordinate }>();
 </script>

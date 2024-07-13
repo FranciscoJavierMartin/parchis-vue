@@ -18,8 +18,9 @@ import type {
   TPositionProfiles,
   TTotalPlayers,
 } from '@/interfaces';
-import { EPositionProfile } from '@/utils/constants';
+
 import ProfileWrapper from '@/components/game/profiles/profile-wrapper.vue';
+import { EPositionProfile } from '@/constants/board';
 
 // TODO: Extract in common
 interface ProfileSectionProps {
