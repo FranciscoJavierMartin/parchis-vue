@@ -1,4 +1,4 @@
-import { getRandomNumber } from './helpers';
+import { getRandomNumber } from '@/helpers/random';
 import { ESufixColors } from '@/constants/board';
 import { EActionsBoardGame } from '@/constants/game';
 import type { TBoardColors, TSufixColors } from '@/interfaces/board';
