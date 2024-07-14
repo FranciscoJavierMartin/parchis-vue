@@ -10,6 +10,21 @@
         {{ index }}
       </button>
     </div>
+    <div class="game-debug-selects">
+      <GameDebugSelect
+        v-for="[selectType, value] of Object.entries(selects)"
+        :key="selectType"
+        :value="value"
+        :disabled="options[selectType as TOptions].length === 0"
+        :title="selectType.toUpperCase()"
+        :options="options[selectType as TOptions]"
+        :on-change="
+          (value) => {
+            console.log({ value });
+          }
+        "
+      />
+    </div>
   </div>
 </template>
 
@@ -17,12 +32,13 @@
 import { ref } from 'vue';
 import { ETypeGame } from '@/constants/game';
 import { getOptionsSelects } from '@/helpers/debug';
-import type { TSelects } from '@/interfaces/debug';
+import type { TOptions, TSelects } from '@/interfaces/debug';
 import type { TDiceValues } from '@/interfaces/dice';
 import type { IActionsTurn, TTypeGame } from '@/interfaces/game';
 import type { THandleSelectDice } from '@/interfaces/profile';
 import type { IListTokens } from '@/interfaces/token';
 import type { IPlayer } from '@/interfaces/user';
+import GameDebugSelect from '@/components/game/debug/game-debug-select.vue';
 
 interface TokensDebugProps {
   players: IPlayer[];
@@ -56,6 +72,12 @@ const options = getOptionsSelects(selects.value, props.players, props.listTokens
       font-weight: bold;
       cursor: pointer;
     }
+  }
+
+  .game-debug-selects {
+    display: flex;
+    gap: 10px;
+    width: 100%;
   }
 }
 </style>
