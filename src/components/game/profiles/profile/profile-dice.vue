@@ -1,14 +1,14 @@
 <template>
   <div class="game-profile-dice" :class="{ hide: !showDice }">
-    <ArrowDown class="icon-wrapper" :stroke-width="3.5" />
-    <button class="game-profile-dice-button" :disabled="disabledDice" @click="rollDice">
-      <Dice3d ref="diceRef" :size="45" />
+    <ArrowDown v-if="!disabledDice" class="icon-wrapper" :stroke-width="3.5" />
+    <button class="game-profile-dice-button" :disabled="disabledDice" @click="handleSelectDice">
+      <Dice3d ref="diceRef" :size="45" @roll-done="rollDone" />
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import Dice3d from '@/components/game/dice/dice-3d.vue';
 import ArrowDown from '@/components/icons/arrow-down.vue';
 import { ROLL_TIME_VALUE } from '@/constants/game';
@@ -34,9 +34,20 @@ const diceRef = ref<typeof Dice3d | null>(null);
 // TODO: Adjust roll time in dice to this values (accept as a prop)
 const rollTime = props.value !== 0 ? ROLL_TIME_VALUE : 0;
 
-function rollDice(): void {
-  diceRef.value?.rollDice();
+function rollDone(): void {
+  if (props.value) {
+    props.handleDoneDice();
+  }
 }
+
+watch(
+  () => [props.value, props.diceRollNumber],
+  () => {
+    if (props.value !== 0 && props.diceRollNumber !== 0) {
+      diceRef.value?.rollDice(props.value);
+    }
+  },
+);
 </script>
 
 <style scoped>

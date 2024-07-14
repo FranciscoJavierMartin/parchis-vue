@@ -19,22 +19,20 @@ import type { TDiceValues } from '@/interfaces/dice';
 import { getRandomNumber } from '@/helpers/random';
 
 defineProps<{ size: number }>();
-const emit = defineEmits(['rolling', 'newValue']);
+const emit = defineEmits(['rollDone']);
 
 const isRolling = ref<boolean>(false);
-const diceValue = ref<number>(1);
+const diceValue = ref<TDiceValues>(1);
 const randomRotationDegrees = ref<number>(0);
 
-function rollDice(): void {
-  diceValue.value = getRandomNumber(1, 6);
+function rollDice(value: TDiceValues): void {
   randomRotationDegrees.value = getRandomNumber(100, 500);
   isRolling.value = true;
-  emit('rolling', isRolling.value);
 
   setTimeout(() => {
-    emit('newValue', diceValue.value);
+    diceValue.value = value;
     isRolling.value = false;
-    emit('rolling', isRolling.value);
+    emit('rollDone');
   }, 2050);
 }
 
