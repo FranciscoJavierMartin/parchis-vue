@@ -6,7 +6,7 @@
       :key="token.index"
       :dice-list="diceList"
       :debug="debug"
-      :is-disabled-ui="isDisabledUI"
+      :is-disabled-u-i="isDisabledUI"
       :handle-selected-token="handleSelectedToken"
     />
   </template>
@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import type { IDiceList } from '@/interfaces/dice';
 import type { IListTokens, ISelectTokenValues } from '@/interfaces/token';
-import GameToken from '../token/game-token.vue';
+import GameToken from '@/components/game/token/game-token.vue';
 
 interface TokenListProps {
   diceList: IDiceList[];
