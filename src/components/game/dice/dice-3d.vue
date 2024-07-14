@@ -20,7 +20,12 @@ import type { TDiceValues } from '@/interfaces/dice';
 import { getRandomNumber } from '@/helpers/random';
 import { ROLL_TIME_VALUE } from '@/constants/game';
 
-const props = withDefaults(defineProps<{ size: number; rollTime?: number }>(), {
+interface Dice3dProps {
+  size: number;
+  rollTime?: number;
+}
+
+const props = withDefaults(defineProps<Dice3dProps>(), {
   rollTime: ROLL_TIME_VALUE,
 });
 const emit = defineEmits(['rollDone']);
