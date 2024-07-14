@@ -61,8 +61,7 @@ defineExpose({
   transform-style: preserve-3d;
 
   &.animation-rolling {
-    animation-name: rolling;
-    animation-duration: var(--animation-duration);
+    animation: rolling var(--animation-duration);
   }
 
   &.animation-none {
