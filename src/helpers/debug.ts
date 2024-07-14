@@ -1,9 +1,10 @@
 import { LIST_TYPE_TILE } from '@/constants/debug';
-import type { TPositionGame, TtypeTile } from '@/interfaces/board';
+import type { ICoordinate, IPositionsItems, TPositionGame, TtypeTile } from '@/interfaces/board';
 import type { IOptions, TSelects } from '@/interfaces/debug';
 import type { IListTokens } from '@/interfaces/token';
 import type { IPlayer } from '@/interfaces/user';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES, SAFE_AREAS } from '@/helpers/positions-board';
+import { EtypeTile } from '@/constants/board';
 
 function getDebugPositionsTiles(type: number, position: TPositionGame): IOptions[] {
   const tileType = LIST_TYPE_TILE[type] as TtypeTile;
@@ -67,4 +68,44 @@ export function getOptionsSelects(
     type: typesOptions,
     position: positionOptions,
   };
+}
+
+function getDebugCoordinates(tileType: TtypeTile, positionGame: TPositionGame): IPositionsItems[] {
+  let coordinates: IPositionsItems[] = [];
+
+  switch (tileType) {
+    case EtypeTile.JAIL:
+      coordinates = POSITION_ELEMENTS_BOARD[positionGame].startPositions;
+      break;
+    case EtypeTile.NORMAL:
+      coordinates = POSITION_TILES;
+      break;
+    case EtypeTile.EXIT:
+      coordinates = POSITION_ELEMENTS_BOARD[positionGame].exitTiles;
+      break;
+    case EtypeTile.END:
+      coordinates = POSITION_ELEMENTS_BOARD[positionGame].finalPositions;
+      break;
+  }
+
+  return coordinates;
+}
+
+export function validateChangeToken(
+  selects: TSelects,
+  listTokens: IListTokens[],
+  setListToken: Function,
+): void {
+  const tileType = LIST_TYPE_TILE[selects.type] as TtypeTile;
+  const copyListTokens: IListTokens[] = JSON.parse(JSON.stringify(listTokens));
+  const { positionGame } = copyListTokens[selects.player];
+
+  const coordinates = getDebugCoordinates(tileType, positionGame);
+  const { coordinate } = coordinates[selects.position];
+
+  copyListTokens[selects.player].tokens[selects.token].coordinate = coordinate;
+  copyListTokens[selects.player].tokens[selects.token].typeTile = tileType;
+  copyListTokens[selects.player].tokens[selects.token].positionTile = selects.position;
+
+  //TODO: Assign
 }
