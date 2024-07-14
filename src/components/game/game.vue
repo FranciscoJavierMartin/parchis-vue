@@ -97,7 +97,7 @@ const listTokens = ref<IListTokens[]>(
   getInitialPositionTokens(props.boardColor, props.totalPlayers, players.value),
 );
 
-function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
+function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
   console.log('selectedTokenValues', selectedTokenValues);
 }
 
