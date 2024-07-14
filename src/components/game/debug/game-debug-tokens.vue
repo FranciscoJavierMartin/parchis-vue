@@ -15,11 +15,13 @@
 
 <script setup lang="ts">
 import { ETypeGame } from '@/constants/game';
+import type { TSelects } from '@/interfaces/debug';
 import type { TDiceValues } from '@/interfaces/dice';
 import type { IActionsTurn, TTypeGame } from '@/interfaces/game';
 import type { THandleSelectDice } from '@/interfaces/profile';
 import type { IListTokens } from '@/interfaces/token';
 import type { IPlayer } from '@/interfaces/user';
+import { ref } from 'vue';
 
 interface TokensDebugProps {
   players: IPlayer[];
@@ -31,6 +33,8 @@ interface TokensDebugProps {
 }
 
 withDefaults(defineProps<TokensDebugProps>(), { typeGame: ETypeGame.OFFLINE });
+
+const selects = ref<TSelects>({ player: -1, token: -1, type: -1, position: -1 });
 </script>
 
 <style scoped>

@@ -18,6 +18,7 @@
             :dice-list="[]"
             :handle-selected-token="handleSelectedToken"
             :list-token="listTokens"
+            :debug="debug"
           />
           <GameDebug v-if="debug" />
           <ShowTotalTokens :total-tokens="{}" />
