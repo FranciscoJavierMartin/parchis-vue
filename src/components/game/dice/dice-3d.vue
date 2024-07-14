@@ -5,7 +5,7 @@
     :style="{
       '--size-side': `${size}px`,
       '--random-rotation-degress': `${randomRotationDegrees}deg`,
-      '--animation-duration': `${ROLL_TIME_VALUE}s`,
+      '--animation-duration': `${rollTime}s`,
     }"
   >
     <!-- prettier-ignore-attribute -->
@@ -20,7 +20,9 @@ import type { TDiceValues } from '@/interfaces/dice';
 import { getRandomNumber } from '@/helpers/random';
 import { ROLL_TIME_VALUE } from '@/constants/game';
 
-defineProps<{ size: number }>();
+const props = withDefaults(defineProps<{ size: number; rollTime?: number }>(), {
+  rollTime: ROLL_TIME_VALUE,
+});
 const emit = defineEmits(['rollDone']);
 
 const isRolling = ref<boolean>(false);
@@ -35,7 +37,7 @@ function rollDice(value: TDiceValues): void {
   setTimeout(() => {
     isRolling.value = false;
     emit('rollDone');
-  }, ROLL_TIME_VALUE * 1000);
+  }, props.rollTime * 1000);
 }
 
 defineExpose({

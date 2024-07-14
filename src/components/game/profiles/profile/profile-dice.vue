@@ -2,7 +2,7 @@
   <div class="game-profile-dice" :class="{ hide: !showDice }">
     <ArrowDown v-if="!disabledDice" class="icon-wrapper" :stroke-width="3.5" />
     <button class="game-profile-dice-button" :disabled="disabledDice" @click="handleSelectDice">
-      <Dice3d ref="diceRef" :size="45" @roll-done="rollDone" />
+      <Dice3d ref="diceRef" :size="45" :roll-time="ROLL_TIME_VALUE" @roll-done="rollDone" />
     </button>
   </div>
 </template>
@@ -31,8 +31,6 @@ const props = withDefaults(defineProps<ProfileDiceProps>(), {
 });
 
 const diceRef = ref<typeof Dice3d | null>(null);
-// TODO: Adjust roll time in dice to this values (accept as a prop)
-const rollTime = props.value !== 0 ? ROLL_TIME_VALUE : 0;
 
 function rollDone(): void {
   if (props.value) {
