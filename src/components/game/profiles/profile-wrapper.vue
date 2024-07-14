@@ -67,7 +67,7 @@ const DISTRIBUTION_PROFILES: TPositionTotalPlayers = {
 };
 
 const indexProfile =
-  DISTRIBUTION_PROFILES[props.totalPlayers]?.[props.basePosition]?.[props.position] || 0;
+  DISTRIBUTION_PROFILES[props.totalPlayers][props.basePosition]?.[props.position] || 0;
 
 const hasTurn = computed<boolean>(
   () => indexProfile !== 0 && props.currentTurn === indexProfile - 1,
