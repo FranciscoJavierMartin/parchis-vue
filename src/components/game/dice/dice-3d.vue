@@ -28,9 +28,9 @@ const randomRotationDegrees = ref<number>(0);
 function rollDice(value: TDiceValues): void {
   randomRotationDegrees.value = getRandomNumber(100, 500);
   isRolling.value = true;
+  diceValue.value = value;
 
   setTimeout(() => {
-    diceValue.value = value;
     isRolling.value = false;
     emit('rollDone');
   }, 2050);
