@@ -19,7 +19,7 @@ export function getRandomValueDice(
   actionsTurn: IActionsTurn,
   diceValue?: TDiceValues,
 ): IActionsTurn {
-  const newActionsTurn = structuredClone(actionsTurn);
+  const newActionsTurn: IActionsTurn = JSON.parse(JSON.stringify(actionsTurn));
 
   newActionsTurn.diceValue = diceValue || randomValueDice();
   newActionsTurn.timerActivated = false;

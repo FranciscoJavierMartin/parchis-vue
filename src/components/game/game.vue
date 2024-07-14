@@ -103,7 +103,11 @@ function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
 function handleTimer(ends: boolean = false): void {}
 
 function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = false): void {
-  actionsTurn.value = getRandomValueDice(actionsTurn.value, diceValue);
+  actionsTurn.value = getRandomValueDice(
+    actionsTurn.value,
+    // TODO: Provisional fix. Fix later
+    typeof diceValue !== 'object' ? diceValue : undefined,
+  );
 }
 
 function handleDoneDice(isActionSocket: boolean = false): void {}
