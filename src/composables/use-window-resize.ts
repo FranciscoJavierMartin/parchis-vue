@@ -1,7 +1,7 @@
 import { onMounted, onUnmounted } from 'vue';
 import onWindowResise from '@/helpers/resize-screen';
 
-export default function useWindowResize() {
+export default function useWindowResize(): void {
   onMounted(() => {
     window.onresize = onWindowResise;
     onWindowResise();
