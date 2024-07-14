@@ -3,7 +3,7 @@ export default function debounce(fn: Function, delay: number) {
 
   // TODO: Add better types
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  return function (...args: any) {
+  return function (...args: any): void {
     if (timer) {
       clearTimeout(timer);
     }

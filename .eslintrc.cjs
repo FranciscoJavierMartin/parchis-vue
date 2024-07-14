@@ -46,5 +46,6 @@ module.exports = {
     '@typescript-eslint/ban-types': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 'error',
     '@typescript-eslint/method-signature-style': 'error',
+    '@typescript-eslint/explicit-function-return-type': 'error',
   },
 };

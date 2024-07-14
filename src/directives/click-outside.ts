@@ -3,7 +3,7 @@ import type { Directive } from 'vue';
 export const vClickOutside: Directive<HTMLElement, Function> = {
   mounted(element: HTMLElement, binding: { value: Function }) {
     const handler = binding.value;
-    (element as any).clickOutsideEventHandler = (event: MouseEvent) => {
+    (element as any).clickOutsideEventHandler = (event: MouseEvent): void => {
       if (!element.contains(event.target as Node)) {
         handler();
       }

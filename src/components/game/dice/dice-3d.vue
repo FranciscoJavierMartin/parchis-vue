@@ -5,6 +5,7 @@
     :style="{
       '--size-side': `${size}px`,
       '--random-rotation-degress': `${randomRotationDegrees}deg`,
+      '--animation-duration': `${rollTime}s`,
     }"
   >
     <!-- prettier-ignore-attribute -->
@@ -17,25 +18,31 @@ import { ref } from 'vue';
 import DiceFace from '@/components/game/dice/dice-face.vue';
 import type { TDiceValues } from '@/interfaces/dice';
 import { getRandomNumber } from '@/helpers/random';
+import { ROLL_TIME_VALUE } from '@/constants/game';
 
-defineProps<{ size: number }>();
-const emit = defineEmits(['rolling', 'newValue']);
+interface Dice3dProps {
+  size: number;
+  rollTime?: number;
+}
+
+const props = withDefaults(defineProps<Dice3dProps>(), {
+  rollTime: ROLL_TIME_VALUE,
+});
+const emit = defineEmits(['rollDone']);
 
 const isRolling = ref<boolean>(false);
-const diceValue = ref<number>(1);
+const diceValue = ref<TDiceValues>(1);
 const randomRotationDegrees = ref<number>(0);
 
-function rollDice(): void {
-  diceValue.value = getRandomNumber(1, 6);
+function rollDice(value: TDiceValues): void {
   randomRotationDegrees.value = getRandomNumber(100, 500);
   isRolling.value = true;
-  emit('rolling', isRolling.value);
+  diceValue.value = value;
 
   setTimeout(() => {
-    emit('newValue', diceValue.value);
     isRolling.value = false;
-    emit('rolling', isRolling.value);
-  }, 2050);
+    emit('rollDone');
+  }, props.rollTime * 1000);
 }
 
 defineExpose({
@@ -54,7 +61,7 @@ defineExpose({
   transform-style: preserve-3d;
 
   &.animation-rolling {
-    animation: rolling 2s;
+    animation: rolling var(--animation-duration);
   }
 
   &.animation-none {

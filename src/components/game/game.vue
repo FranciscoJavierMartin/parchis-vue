@@ -18,6 +18,7 @@
             :dice-list="[]"
             :handle-selected-token="handleSelectedToken"
             :list-token="listTokens"
+            :debug="debug"
           />
           <GameDebug v-if="debug" />
           <ShowTotalTokens :total-tokens="{}" />
@@ -32,6 +33,17 @@
           :actions-turn="actionsTurn"
         />
       </BoardWrapper>
+      <GameDebugTokens
+        v-if="debug"
+        v-bind="{
+          typeGame,
+          players,
+          listTokens,
+          actionsTurn,
+          handleSelectDice,
+        }"
+        :set-list-tokens="() => {}"
+      />
     </template>
   </PageWrapper>
 </template>
@@ -55,6 +67,7 @@ import { getInitialDataPlayers } from '@/helpers/player';
 import { getInitialActionsTurnValue, getInitialPositionTokens } from '@/helpers/game';
 import { getRandomValueDice } from '@/helpers/random';
 import TokenList from '@/components/game/tokens/token-list.vue';
+import GameDebugTokens from '@/components/game/debug/game-debug-tokens.vue';
 
 // TODO: Add types for socket
 interface GameProps {
@@ -84,14 +97,18 @@ const listTokens = ref<IListTokens[]>(
   getInitialPositionTokens(props.boardColor, props.totalPlayers, players.value),
 );
 
-function handleSelectedToken(selectedTokenValues: ISelectTokenValues) {
+function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
   console.log('selectedTokenValues', selectedTokenValues);
 }
 
 function handleTimer(ends: boolean = false): void {}
 
 function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = false): void {
-  actionsTurn.value = getRandomValueDice(actionsTurn.value, diceValue);
+  actionsTurn.value = getRandomValueDice(
+    actionsTurn.value,
+    // TODO: Provisional fix. Fix later
+    typeof diceValue !== 'object' ? diceValue : undefined,
+  );
 }
 
 function handleDoneDice(isActionSocket: boolean = false): void {}

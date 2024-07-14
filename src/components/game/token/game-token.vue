@@ -57,7 +57,7 @@ const props = withDefaults(defineProps<TokenProps>(), {
 
 const showTooltip = ref<boolean>(props.enableTooltip);
 
-function handleClickOutside() {
+function handleClickOutside(): void {
   showTooltip.value = false;
 }
 
