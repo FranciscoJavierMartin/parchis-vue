@@ -34,6 +34,7 @@ export function getInitialActionsTurnValue(indexTurn: number, players: IPlayer[]
   };
 }
 
+// If you replace the normal returned value, you can use a value to start from a state.
 export function getInitialPositionTokens(
   boardColor: TBoardColors,
   totalPlayers: TTotalPlayers,
