@@ -14,14 +14,15 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { ETypeGame } from '@/constants/game';
+import { getOptionsSelects } from '@/helpers/debug';
 import type { TSelects } from '@/interfaces/debug';
 import type { TDiceValues } from '@/interfaces/dice';
 import type { IActionsTurn, TTypeGame } from '@/interfaces/game';
 import type { THandleSelectDice } from '@/interfaces/profile';
 import type { IListTokens } from '@/interfaces/token';
 import type { IPlayer } from '@/interfaces/user';
-import { ref } from 'vue';
 
 interface TokensDebugProps {
   players: IPlayer[];
@@ -32,9 +33,10 @@ interface TokensDebugProps {
   setListTokens: Function;
 }
 
-withDefaults(defineProps<TokensDebugProps>(), { typeGame: ETypeGame.OFFLINE });
+const props = withDefaults(defineProps<TokensDebugProps>(), { typeGame: ETypeGame.OFFLINE });
 
 const selects = ref<TSelects>({ player: -1, token: -1, type: -1, position: -1 });
+const options = getOptionsSelects(selects.value, props.players, props.listTokens);
 </script>
 
 <style scoped>
