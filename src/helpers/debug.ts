@@ -109,3 +109,7 @@ export function validateChangeToken(
 
   //TODO: Assign
 }
+
+export function copyToClipboard(text: string = ''): void {
+  navigator.clipboard.writeText(text);
+}

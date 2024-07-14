@@ -10,7 +10,7 @@
         {{ index }}
       </button>
     </div>
-    <div class="game-debug-selects">
+    <div v-if="typeGame === ETypeGame.OFFLINE" class="game-debug-selects">
       <GameDebugSelect
         v-for="[selectType] of Object.entries(selects)"
         :key="selectType"
@@ -25,13 +25,16 @@
         "
       />
     </div>
+    <div v-if="typeGame === ETypeGame.OFFLINE" class="game-debug-copy">
+      <button :disabled="selects.position < 0" @click="handleCopyState">Copy state</button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { ETypeGame } from '@/constants/game';
-import { getOptionsSelects, validateChangeToken } from '@/helpers/debug';
+import { copyToClipboard, getOptionsSelects, validateChangeToken } from '@/helpers/debug';
 import type { TOptions, TSelects } from '@/interfaces/debug';
 import type { TDiceValues } from '@/interfaces/dice';
 import type { IActionsTurn, TTypeGame } from '@/interfaces/game';
@@ -82,6 +85,10 @@ function handleSelect(value: number, type: TOptions): void {
       break;
   }
 }
+
+function handleCopyState(): void {
+  copyToClipboard(JSON.stringify(props.listTokens));
+}
 </script>
 
 <style scoped>
@@ -107,6 +114,18 @@ function handleSelect(value: number, type: TOptions): void {
     display: flex;
     gap: 10px;
     width: 100%;
+  }
+
+  .game-debug-copy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+
+    button {
+      font-weight: bold;
+      cursor: pointer;
+    }
   }
 }
 </style>
