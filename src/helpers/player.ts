@@ -66,7 +66,7 @@ export function getInitialDataPlayers(
     isMuted: false,
     chatMessage: '',
     counterMessage: 0,
-    ranking: 0,
+    ranking: 1,
   }));
 
   return players;
