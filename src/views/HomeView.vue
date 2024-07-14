@@ -1,6 +1,6 @@
 <template>
   <AppWrapper>
-    <Game :debug="false" :users="TEMP_USERS" :initial-turn="0" :total-players="totalPlayers" />
+    <Game :debug="true" :users="TEMP_USERS" :initial-turn="0" :total-players="totalPlayers" />
   </AppWrapper>
 </template>
 
