@@ -13,6 +13,14 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest',
+    sourceType: 'module',
+    parser: '@typescript-eslint/parser',
+    project: [
+      './tsconfig.app.json',
+      './tsconfig.node.json',
+      './tsconfig.vitest.json',
+      './tsconfig.json',
+    ],
   },
   rules: {
     'prettier/prettier': 'error',
@@ -20,5 +28,6 @@ module.exports = {
     'no-console': 'warn',
     'prefer-const': 'error',
     'vue/multi-word-component-names': 'warn',
+    '@typescript-eslint/no-confusing-void-expression': 'error',
   },
 };
