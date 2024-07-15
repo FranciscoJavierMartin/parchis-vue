@@ -58,19 +58,25 @@
         v-model="playerSelected"
         :options="options['player']"
         title="Player"
-        :disabled="options['player'].length === 0"
+        :disabled="!options['player']?.length"
       />
       <GameDebugSelect
         v-model="tokenSelected"
         :options="options['token']"
         title="Token"
-        :disabled="options['token'].length === 0"
+        :disabled="!options['token']?.length"
       />
       <GameDebugSelect
         v-model="typeSelected"
         :options="options['type']"
         title="Type"
-        :disabled="options['type'].length === 0"
+        :disabled="!options['type']?.length"
+      />
+      <GameDebugSelect
+        v-model="positionSelected"
+        :options="options['position']"
+        title="Position"
+        :disabled="!options['position']?.length"
       />
     </div>
     <div v-if="typeGame === ETypeGame.OFFLINE" class="game-debug-copy">
@@ -82,13 +88,8 @@
 <script setup lang="ts">
 import { ref, computed, reactive, watch } from 'vue';
 import { ETypeGame } from '@/constants/game';
-import {
-  copyToClipboard,
-  getDebugPositionsTiles,
-  getOptionsSelects,
-  validateChangeToken,
-} from '@/helpers/debug';
-import type { IOptions, TOptions, TSelects } from '@/interfaces/debug';
+import { copyToClipboard, getOptionsSelects, validateChangeToken } from '@/helpers/debug';
+import type { TOptions, TSelects } from '@/interfaces/debug';
 import type { TDiceValues } from '@/interfaces/dice';
 import type { IActionsTurn, TTypeGame } from '@/interfaces/game';
 import type { THandleSelectDice } from '@/interfaces/profile';
@@ -114,6 +115,7 @@ const selects = reactive<TSelects>({ player: -1, token: -1, type: -1, position: 
 const playerSelected = ref<number>(-1);
 const tokenSelected = ref<number>(-1);
 const typeSelected = ref<number>(-1);
+const positionSelected = ref<number>(-1);
 
 const options = computed(() => getOptionsSelects(selects, props.players, props.listTokens));
 
@@ -162,6 +164,10 @@ watch(tokenSelected, (newValue) => {
 
 watch(typeSelected, (newValue) => {
   handleSelect(newValue, 'type');
+});
+
+watch(positionSelected, (newValue) => {
+  handleSelect(newValue, 'position');
 });
 </script>
 

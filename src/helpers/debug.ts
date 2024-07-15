@@ -46,7 +46,6 @@ export function getOptionsSelects(
   players: IPlayer[],
   listTokens: IListTokens[],
 ): { player: IOptions[]; token: IOptions[]; type: IOptions[]; position: IOptions[] } {
-  console.log(selects.player);
   const playerOptions: IOptions[] = players.map((v) => ({ id: v.index, label: v.color }));
   const tokenOptions: IOptions[] =
     selects.player >= 0
@@ -103,7 +102,7 @@ export function validateChangeToken(selects: TSelects, listTokens: IListTokens[]
 
   const coordinates = getDebugCoordinates(tileType, positionGame);
 
-  if (selects.player <= 0) {
+  if (selects.player >= 0 && selects.token >= 0) {
     const { coordinate } = coordinates[selects.position];
 
     copyListTokens[selects.player].tokens[selects.token].coordinate = coordinate;
