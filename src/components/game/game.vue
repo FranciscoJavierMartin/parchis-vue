@@ -115,7 +115,7 @@ function handleDoneDice(isActionSocket: boolean = false): void {}
 
 function handleMuteChat(playerIndex: number): void {}
 
-function updateTokens(event: any): void {
-  console.log(event);
+function updateTokens(newListTokens: IListTokens[]): void {
+  listTokens.value = newListTokens;
 }
 </script>
