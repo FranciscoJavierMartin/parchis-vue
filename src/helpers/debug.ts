@@ -102,7 +102,7 @@ export function validateChangeToken(selects: TSelects, listTokens: IListTokens[]
 
   const coordinates = getDebugCoordinates(tileType, positionGame);
 
-  if (selects.player >= 0 && selects.token >= 0) {
+  if (selects.player >= 0 && selects.token >= 0 && selects.position >= 0) {
     const { coordinate } = coordinates[selects.position];
 
     copyListTokens[selects.player].tokens[selects.token].coordinate = coordinate;
