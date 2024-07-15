@@ -42,7 +42,7 @@
           actionsTurn,
           handleSelectDice,
         }"
-        :set-list-tokens="() => {}"
+        @update-tokens="updateTokens"
       />
     </template>
   </PageWrapper>
@@ -114,4 +114,8 @@ function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = fal
 function handleDoneDice(isActionSocket: boolean = false): void {}
 
 function handleMuteChat(playerIndex: number): void {}
+
+function updateTokens(event: any): void {
+  console.log(event);
+}
 </script>

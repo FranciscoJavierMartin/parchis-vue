@@ -11,8 +11,8 @@
       </button>
     </div>
     <div v-if="typeGame === ETypeGame.OFFLINE" class="game-debug-selects">
-      <GameDebugSelect
-        v-for="[selectType] of Object.entries(selects)"
+      <!--<GameDebugSelect
+        v-for="selectType of Object.keys(selects)"
         :key="selectType"
         :value="selects[selectType as TOptions]"
         :disabled="options[selectType as TOptions].length === 0"
@@ -20,10 +20,40 @@
         :options="options[selectType as TOptions]"
         :on-change="
           (value) => {
+            console.log(value);
             handleSelect(+value, selectType as TOptions);
           }
         "
-      />
+      />-->
+      <!--<div v-for="selectType of Object.keys(selects)" :key="selectType">
+        {{ selects[selectType as TOptions] }}
+      </div>-->
+      <!--<select
+        :value="player"
+        @change="(event) => handleSelect((event.currentTarget as any).value, 'player')"
+      >
+        <option disabled value="-1">Player</option>
+        <option v-for="{ id, label } in options.player" :key="id" :value="id">{{ label }}</option>
+      </select>
+      <select
+        :value="token"
+        @change="(event) => handleSelect((event.currentTarget as any).value, 'token')"
+      >
+        <option disabled value="-1">Token</option>
+        <option v-for="{ id, label } in options.token" :key="id" :value="id">{{ label }}</option>
+      </select>-->
+      <select
+        v-for="selectType of Object.keys(selects)"
+        :key="selectType"
+        @change="
+          (event) => handleSelect((event.currentTarget as any).value, selectType as TOptions)
+        "
+      >
+        <option value="-1">{{ selectType.toUpperCase() }}</option>
+        <option v-for="{ label, id } in options[selectType as TOptions]" :key="id" :value="id">
+          {{ label }}
+        </option>
+      </select>
     </div>
     <div v-if="typeGame === ETypeGame.OFFLINE" class="game-debug-copy">
       <button :disabled="selects.position < 0" @click="handleCopyState">Copy state</button>
@@ -32,10 +62,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed, reactive } from 'vue';
 import { ETypeGame } from '@/constants/game';
-import { copyToClipboard, getOptionsSelects, validateChangeToken } from '@/helpers/debug';
-import type { TOptions, TSelects } from '@/interfaces/debug';
+import {
+  copyToClipboard,
+  getDebugPositionsTiles,
+  getOptionsSelects,
+  validateChangeToken,
+} from '@/helpers/debug';
+import type { IOptions, TOptions, TSelects } from '@/interfaces/debug';
 import type { TDiceValues } from '@/interfaces/dice';
 import type { IActionsTurn, TTypeGame } from '@/interfaces/game';
 import type { THandleSelectDice } from '@/interfaces/profile';
@@ -50,16 +85,47 @@ interface TokensDebugProps {
   actionsTurn: IActionsTurn;
   typeGame: TTypeGame;
   handleSelectDice: THandleSelectDice;
-  setListTokens: Function;
 }
 
 const props = withDefaults(defineProps<TokensDebugProps>(), { typeGame: ETypeGame.OFFLINE });
+const emit = defineEmits(['updateTokens']);
 
-const selects = ref<TSelects>({ player: -1, token: -1, type: -1, position: -1 });
-const options = getOptionsSelects(selects.value, props.players, props.listTokens);
+const selects = reactive<TSelects>({ player: -1, token: -1, type: -1, position: -1 });
+const player = ref<number>(-1);
+const token = ref<number>(-1);
+
+const options = computed(() => {
+  console.log(selects.player);
+  const playerOptions: IOptions[] = props.players.map((v) => ({ id: v.index, label: v.color }));
+  const tokenOptions: IOptions[] =
+    selects.player >= 0
+      ? props.listTokens[selects.player].tokens.map((v) => ({
+          id: v.index,
+          label: `Token ${v.index}`,
+        }))
+      : [];
+  const typesOptions: IOptions[] =
+    selects.token >= 0
+      ? LIST_TYPE_TILE.map((v, index) => ({
+          id: index,
+          label: v,
+        }))
+      : [];
+  const positionOptions =
+    selects.player >= 0
+      ? getDebugPositionsTiles(selects.type, props.listTokens[selects.player].positionGame)
+      : [];
+
+  return {
+    player: playerOptions,
+    token: tokenOptions,
+    type: typesOptions,
+    position: positionOptions,
+  };
+});
 
 function handleSelect(value: number, type: TOptions): void {
-  const copySelects = { ...selects.value };
+  const copySelects = { ...selects };
   copySelects[type] = value;
 
   switch (type) {
@@ -79,11 +145,16 @@ function handleSelect(value: number, type: TOptions): void {
       break;
     case 'position':
       //TODO: Emit event to update tokens
-      validateChangeToken(selects.value, props.listTokens, props.setListTokens);
-      break;
-    default:
+      emit('updateTokens', validateChangeToken(selects, props.listTokens));
       break;
   }
+
+  // selects.value = copySelects;
+
+  selects.player = copySelects.player;
+  selects.token = copySelects.token;
+  selects.type = copySelects.type;
+  selects.position = copySelects.position;
 }
 
 function handleCopyState(): void {
