@@ -66,6 +66,12 @@
         title="Token"
         :disabled="options['token'].length === 0"
       />
+      <GameDebugSelect
+        v-model="typeSelected"
+        :options="options['type']"
+        title="Type"
+        :disabled="options['type'].length === 0"
+      />
     </div>
     <div v-if="typeGame === ETypeGame.OFFLINE" class="game-debug-copy">
       <button :disabled="selects.position < 0" @click="handleCopyState">Copy state</button>
@@ -107,6 +113,7 @@ const selects = reactive<TSelects>({ player: -1, token: -1, type: -1, position: 
 
 const playerSelected = ref<number>(-1);
 const tokenSelected = ref<number>(-1);
+const typeSelected = ref<number>(-1);
 
 const options = computed(() => getOptionsSelects(selects, props.players, props.listTokens));
 
@@ -151,6 +158,10 @@ watch(playerSelected, (newValue) => {
 
 watch(tokenSelected, (newValue) => {
   handleSelect(newValue, 'token');
+});
+
+watch(typeSelected, (newValue) => {
+  handleSelect(newValue, 'type');
 });
 </script>
 
