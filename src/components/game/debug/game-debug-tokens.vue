@@ -55,12 +55,11 @@
         </option>
       </select>-->
       <GameDebugSelect
-        v-model="optionSelected"
+        v-model="playerSelected"
         :options="options['player']"
-        title="Test"
-        :disabled="false"
+        title="Player"
+        :disabled="options['player'].length === 0"
       />
-      {{ optionSelected }}
     </div>
     <div v-if="typeGame === ETypeGame.OFFLINE" class="game-debug-copy">
       <button :disabled="selects.position < 0" @click="handleCopyState">Copy state</button>
@@ -69,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive } from 'vue';
+import { ref, computed, reactive, watch } from 'vue';
 import { ETypeGame } from '@/constants/game';
 import {
   copyToClipboard,
@@ -99,7 +98,7 @@ const props = withDefaults(defineProps<TokensDebugProps>(), { typeGame: ETypeGam
 const emit = defineEmits(['updateTokens']);
 
 const selects = reactive<TSelects>({ player: -1, token: -1, type: -1, position: -1 });
-const optionSelected = ref<string | number>(-1);
+const playerSelected = ref<number>(-1);
 const options = computed(() => getOptionsSelects(selects, props.players, props.listTokens));
 
 function handleSelect(value: number, type: TOptions): void {
@@ -136,6 +135,10 @@ function handleSelect(value: number, type: TOptions): void {
 function handleCopyState(): void {
   copyToClipboard(JSON.stringify(props.listTokens));
 }
+
+watch(playerSelected, (newValue) => {
+  handleSelect(newValue, 'player');
+});
 </script>
 
 <style scoped>
