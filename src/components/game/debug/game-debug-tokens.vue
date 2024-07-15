@@ -42,7 +42,7 @@
         <option disabled value="-1">Token</option>
         <option v-for="{ id, label } in options.token" :key="id" :value="id">{{ label }}</option>
       </select>-->
-      <select
+      <!--<select
         v-for="selectType of Object.keys(selects)"
         :key="selectType"
         @change="
@@ -53,7 +53,14 @@
         <option v-for="{ label, id } in options[selectType as TOptions]" :key="id" :value="id">
           {{ label }}
         </option>
-      </select>
+      </select>-->
+      <GameDebugSelect
+        v-model="optionSelected"
+        :options="options['player']"
+        title="Test"
+        :disabled="false"
+      />
+      {{ optionSelected }}
     </div>
     <div v-if="typeGame === ETypeGame.OFFLINE" class="game-debug-copy">
       <button :disabled="selects.position < 0" @click="handleCopyState">Copy state</button>
@@ -76,7 +83,8 @@ import type { IActionsTurn, TTypeGame } from '@/interfaces/game';
 import type { THandleSelectDice } from '@/interfaces/profile';
 import type { IListTokens } from '@/interfaces/token';
 import type { IPlayer } from '@/interfaces/user';
-import GameDebugSelect from '@/components/game/debug/game-debug-select.vue';
+// import GameDebugSelect from '@/components/game/debug/game-debug-select.vue';
+import GameDebugSelect from '@/components/game/debug/game-select.vue';
 import { LIST_TYPE_TILE } from '@/constants/debug';
 
 interface TokensDebugProps {
@@ -91,7 +99,7 @@ const props = withDefaults(defineProps<TokensDebugProps>(), { typeGame: ETypeGam
 const emit = defineEmits(['updateTokens']);
 
 const selects = reactive<TSelects>({ player: -1, token: -1, type: -1, position: -1 });
-
+const optionSelected = ref<string | number>(-1);
 const options = computed(() => getOptionsSelects(selects, props.players, props.listTokens));
 
 function handleSelect(value: number, type: TOptions): void {
