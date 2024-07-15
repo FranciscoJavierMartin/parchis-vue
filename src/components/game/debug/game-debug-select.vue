@@ -1,7 +1,7 @@
 <template>
   <select :value="value" :disabled="disabled" @change="onSelect">
-    <option value="">{{ title }}</option>
-    <option v-for="{ id, label } in options" :key="id">{{ label }}</option>
+    <option value="-1">{{ title }}</option>
+    <option v-for="{ id, label } in options" :key="id" :value="id">{{ label }}</option>
   </select>
 </template>
 

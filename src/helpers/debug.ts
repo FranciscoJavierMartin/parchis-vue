@@ -1,12 +1,13 @@
 import { LIST_TYPE_TILE } from '@/constants/debug';
-import type { ICoordinate, IPositionsItems, TPositionGame, TtypeTile } from '@/interfaces/board';
+import type { IPositionsItems, TPositionGame, TtypeTile } from '@/interfaces/board';
 import type { IOptions, TSelects } from '@/interfaces/debug';
 import type { IListTokens } from '@/interfaces/token';
 import type { IPlayer } from '@/interfaces/user';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES, SAFE_AREAS } from '@/helpers/positions-board';
 import { EtypeTile } from '@/constants/board';
 
-function getDebugPositionsTiles(type: number, position: TPositionGame): IOptions[] {
+// TODO: Remove export
+export function getDebugPositionsTiles(type: number, position: TPositionGame): IOptions[] {
   const tileType = LIST_TYPE_TILE[type] as TtypeTile;
   let positionTilesOptions: IOptions[];
 
@@ -48,7 +49,10 @@ export function getOptionsSelects(
   const playerOptions: IOptions[] = players.map((v) => ({ id: v.index, label: v.color }));
   const tokenOptions: IOptions[] =
     selects.player >= 0
-      ? listTokens[selects.player].tokens.map((v) => ({ id: v.index, label: `Token ${v.index}` }))
+      ? listTokens[selects.player].tokens.map((v) => ({
+          id: v.index,
+          label: `Token ${v.index}`,
+        }))
       : [];
   const typesOptions: IOptions[] =
     selects.token >= 0
@@ -91,23 +95,22 @@ function getDebugCoordinates(tileType: TtypeTile, positionGame: TPositionGame): 
   return coordinates;
 }
 
-export function validateChangeToken(
-  selects: TSelects,
-  listTokens: IListTokens[],
-  setListToken: Function,
-): void {
+export function validateChangeToken(selects: TSelects, listTokens: IListTokens[]): IListTokens[] {
   const tileType = LIST_TYPE_TILE[selects.type] as TtypeTile;
   const copyListTokens: IListTokens[] = JSON.parse(JSON.stringify(listTokens));
   const { positionGame } = copyListTokens[selects.player];
 
   const coordinates = getDebugCoordinates(tileType, positionGame);
-  const { coordinate } = coordinates[selects.position];
 
-  copyListTokens[selects.player].tokens[selects.token].coordinate = coordinate;
-  copyListTokens[selects.player].tokens[selects.token].typeTile = tileType;
-  copyListTokens[selects.player].tokens[selects.token].positionTile = selects.position;
+  if (selects.player >= 0 && selects.token >= 0 && selects.position >= 0) {
+    const { coordinate } = coordinates[selects.position];
 
-  //TODO: Assign
+    copyListTokens[selects.player].tokens[selects.token].coordinate = coordinate;
+    copyListTokens[selects.player].tokens[selects.token].typeTile = tileType;
+    copyListTokens[selects.player].tokens[selects.token].positionTile = selects.position;
+  }
+
+  return copyListTokens;
 }
 
 export function copyToClipboard(text: string = ''): void {
