@@ -1,27 +1,24 @@
 <template>
-  <select :value="value" :disabled="disabled" @change="onSelect">
-    <option value="-1">{{ title }}</option>
-    <option v-for="{ id, label } in options" :key="id" :value="id">{{ label }}</option>
+  <select v-model="optionSelected">
+    <option :value="-1" disabled>{{ title }}</option>
+    <option v-for="{ id, label } in options" :key="id" :value="id">
+      {{ label }}
+    </option>
   </select>
 </template>
 
 <script setup lang="ts">
 import type { IOptions } from '@/interfaces/debug';
 
-interface SelectProps {
-  value: number | string;
+interface GameDebugSelectProps {
   title: string;
   options?: IOptions[];
   disabled?: boolean;
-  onChange: (value: number | string) => void;
 }
 
-const props = withDefaults(defineProps<SelectProps>(), {
+withDefaults(defineProps<GameDebugSelectProps>(), {
   options: [] as unknown as () => IOptions[],
-  disabled: false,
 });
 
-function onSelect(event: Event): void {
-  props.onChange((event.target as unknown as { value: string }).value);
-}
+const optionSelected = defineModel();
 </script>

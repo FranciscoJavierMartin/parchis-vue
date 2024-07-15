@@ -11,49 +11,6 @@
       </button>
     </div>
     <div v-if="typeGame === ETypeGame.OFFLINE" class="game-debug-selects">
-      <!--<GameDebugSelect
-        v-for="selectType of Object.keys(selects)"
-        :key="selectType"
-        :value="selects[selectType as TOptions]"
-        :disabled="options[selectType as TOptions].length === 0"
-        :title="selectType.toUpperCase()"
-        :options="options[selectType as TOptions]"
-        :on-change="
-          (value) => {
-            console.log(value);
-            handleSelect(+value, selectType as TOptions);
-          }
-        "
-      />-->
-      <!--<div v-for="selectType of Object.keys(selects)" :key="selectType">
-        {{ selects[selectType as TOptions] }}
-      </div>-->
-      <!--<select
-        :value="player"
-        @change="(event) => handleSelect((event.currentTarget as any).value, 'player')"
-      >
-        <option disabled value="-1">Player</option>
-        <option v-for="{ id, label } in options.player" :key="id" :value="id">{{ label }}</option>
-      </select>
-      <select
-        :value="token"
-        @change="(event) => handleSelect((event.currentTarget as any).value, 'token')"
-      >
-        <option disabled value="-1">Token</option>
-        <option v-for="{ id, label } in options.token" :key="id" :value="id">{{ label }}</option>
-      </select>-->
-      <!--<select
-        v-for="selectType of Object.keys(selects)"
-        :key="selectType"
-        @change="
-          (event) => handleSelect((event.currentTarget as any).value, selectType as TOptions)
-        "
-      >
-        <option value="-1">{{ selectType.toUpperCase() }}</option>
-        <option v-for="{ label, id } in options[selectType as TOptions]" :key="id" :value="id">
-          {{ label }}
-        </option>
-      </select>-->
       <GameDebugSelect
         v-model="playerSelected"
         :options="options['player']"
@@ -95,8 +52,7 @@ import type { IActionsTurn, TTypeGame } from '@/interfaces/game';
 import type { THandleSelectDice } from '@/interfaces/profile';
 import type { IListTokens } from '@/interfaces/token';
 import type { IPlayer } from '@/interfaces/user';
-// import GameDebugSelect from '@/components/game/debug/game-debug-select.vue';
-import GameDebugSelect from '@/components/game/debug/game-select.vue';
+import GameDebugSelect from '@/components/game/debug/game-debug-select.vue';
 import { LIST_TYPE_TILE } from '@/constants/debug';
 
 interface TokensDebugProps {
@@ -139,7 +95,6 @@ function handleSelect(value: number, type: TOptions): void {
       copySelects.position = -1;
       break;
     case 'position':
-      //TODO: Emit event to update tokens
       emit('updateTokens', validateChangeToken(selects, props.listTokens));
       break;
   }
