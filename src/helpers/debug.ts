@@ -50,7 +50,10 @@ export function getOptionsSelects(
   const playerOptions: IOptions[] = players.map((v) => ({ id: v.index, label: v.color }));
   const tokenOptions: IOptions[] =
     selects.player >= 0
-      ? listTokens[selects.player].tokens.map((v) => ({ id: v.index, label: `Token ${v.index}` }))
+      ? listTokens[selects.player].tokens.map((v) => ({
+          id: v.index,
+          label: `Token ${v.index}`,
+        }))
       : [];
   const typesOptions: IOptions[] =
     selects.token >= 0

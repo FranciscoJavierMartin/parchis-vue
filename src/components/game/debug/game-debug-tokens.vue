@@ -91,38 +91,8 @@ const props = withDefaults(defineProps<TokensDebugProps>(), { typeGame: ETypeGam
 const emit = defineEmits(['updateTokens']);
 
 const selects = reactive<TSelects>({ player: -1, token: -1, type: -1, position: -1 });
-const player = ref<number>(-1);
-const token = ref<number>(-1);
 
-const options = computed(() => {
-  console.log(selects.player);
-  const playerOptions: IOptions[] = props.players.map((v) => ({ id: v.index, label: v.color }));
-  const tokenOptions: IOptions[] =
-    selects.player >= 0
-      ? props.listTokens[selects.player].tokens.map((v) => ({
-          id: v.index,
-          label: `Token ${v.index}`,
-        }))
-      : [];
-  const typesOptions: IOptions[] =
-    selects.token >= 0
-      ? LIST_TYPE_TILE.map((v, index) => ({
-          id: index,
-          label: v,
-        }))
-      : [];
-  const positionOptions =
-    selects.player >= 0
-      ? getDebugPositionsTiles(selects.type, props.listTokens[selects.player].positionGame)
-      : [];
-
-  return {
-    player: playerOptions,
-    token: tokenOptions,
-    type: typesOptions,
-    position: positionOptions,
-  };
-});
+const options = computed(() => getOptionsSelects(selects, props.players, props.listTokens));
 
 function handleSelect(value: number, type: TOptions): void {
   const copySelects = { ...selects };
@@ -148,8 +118,6 @@ function handleSelect(value: number, type: TOptions): void {
       emit('updateTokens', validateChangeToken(selects, props.listTokens));
       break;
   }
-
-  // selects.value = copySelects;
 
   selects.player = copySelects.player;
   selects.token = copySelects.token;
