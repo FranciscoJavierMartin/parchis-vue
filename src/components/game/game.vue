@@ -128,8 +128,6 @@ function handleDoneDice(isActionSocket: boolean = false): void {
 
 function handleMuteChat(playerIndex: number): void {}
 
-// FIXME: Fails in update token. The output should be something like this:
-// GREEN player move Token! to tile normal to position 19
 function updateTokens(newListTokens: IListTokens[]): void {
   listTokens.value = newListTokens;
 }
