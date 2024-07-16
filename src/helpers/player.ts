@@ -13,7 +13,7 @@ export const TEMP_USERS: IUser[] = [
   {
     id: '2',
     name: 'Player 02',
-    isBot: true,
+    isBot: false,
   },
   {
     id: '3',

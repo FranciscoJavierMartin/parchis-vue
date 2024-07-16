@@ -117,13 +117,16 @@ function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = fal
 }
 
 function handleDoneDice(isActionSocket: boolean = false): void {
-  actionsTurn.value = validateDicesForTokens(
+  validateDicesForTokens(
     actionsTurn.value,
     currentTurn.value,
     listTokens.value,
     players.value,
     totalTokens.value,
-  );
+  ).then((res) => {
+    actionsTurn.value = res.actionsTurn;
+    currentTurn.value = res.nextTurn;
+  });
 }
 
 function handleMuteChat(playerIndex: number): void {}

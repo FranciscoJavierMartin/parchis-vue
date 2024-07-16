@@ -158,23 +158,20 @@ function validateThreeConsecutiveRolls(diceList: IDiceList[]): boolean {
 async function validateNextTurn(
   currentTurn: number,
   players: IPlayer[],
-  addLastDice?: boolean = false,
-  addDelayNextTurn?: boolean = false,
-): IActionsTurn {
+  actionsTurn: IActionsTurn,
+  addLastDice: boolean = false,
+  addDelayNextTurn: boolean = false,
+): Promise<{ actionsTurn: IActionsTurn; nextTurn: number }> {
+  let newActionTurn: IActionsTurn = JSON.parse(JSON.stringify(actionsTurn));
   let nextTurn = currentTurn;
 
   if (addLastDice) {
-    //TODO: Return
-    const newActionTurn: IActionsTurn = JSON.parse(JSON.stringify(actionTurn));
     const value = newActionTurn.diceValue as TDiceValues;
     newActionTurn.diceList.push({ key: Math.random(), value });
-
     newActionTurn.disabledDice = true;
     newActionTurn.timerActivated = false;
   }
-
   if (addDelayNextTurn) {
-    // TODO: Check
     await delay(250);
   }
 
@@ -185,23 +182,24 @@ async function validateNextTurn(
     const { finished, isOffline } = players[nextTurn];
 
     if (!finished && !isOffline) {
-      // TODO: Return
-      getInitialActionsTurnValue(nextTurn, players);
-      nextTurn;
+      newActionTurn = getInitialActionsTurnValue(nextTurn, players);
       break;
     }
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, no-constant-condition
   } while (true);
+
+  return { actionsTurn: newActionTurn, nextTurn };
 }
 
-export function validateDicesForTokens(
+export async function validateDicesForTokens(
   actionsTurn: IActionsTurn,
   currentTurn: number,
   listTokens: IListTokens[],
   players: IPlayer[],
   totalTokens: TShowTotalTokens,
-): IActionsTurn {
-  const copyActionsTurn: IActionsTurn = JSON.parse(JSON.stringify(actionsTurn));
+): Promise<{ actionsTurn: IActionsTurn; nextTurn: number }> {
+  let nextTurn: number = currentTurn;
+  let copyActionsTurn: IActionsTurn = JSON.parse(JSON.stringify(actionsTurn));
   const diceValue: TDiceValues = JSON.parse(JSON.stringify(copyActionsTurn.diceValue));
   copyActionsTurn.diceList.push({ key: Math.random(), value: diceValue });
 
@@ -209,8 +207,9 @@ export function validateDicesForTokens(
   const isThreeRolls = validateThreeConsecutiveRolls(copyActionsTurn.diceList);
 
   if (isThreeRolls) {
-    // TODO: Return
-    validateNextTurn(currentTurn, players, true, true);
+    const nextTurnValidated = await validateNextTurn(currentTurn, players, actionsTurn, true, true);
+    copyActionsTurn = nextTurnValidated.actionsTurn;
+    nextTurn = nextTurnValidated.nextTurn;
   } else if (
     diceValue === DICE_VALUE_GET_OUT_JAIL &&
     newTotalDicesAvailable < MAXIMUM_DICE_PER_TURN
@@ -218,9 +217,10 @@ export function validateDicesForTokens(
     copyActionsTurn.timerActivated = true;
     copyActionsTurn.disabledDice = validateDisabledDice(currentTurn, players);
     copyActionsTurn.actionsBoardGame = EActionsBoardGame.ROLL_DICE;
-    // TODO: Return copyActionsTurn
-  } else {
   }
 
-  return copyActionsTurn;
+  return {
+    actionsTurn: copyActionsTurn,
+    nextTurn,
+  };
 }
