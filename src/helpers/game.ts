@@ -17,6 +17,7 @@ import { getPlayersColors } from '@/helpers/player';
 import { EPositionGame, EtypeTile, type ESufixColors } from '@/constants/board';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/helpers/positions-board';
 import type { IDiceList, TDiceValues } from '@/interfaces/dice';
+import { delay } from '@/helpers/debounce';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
   const { isOnline, isBot } = players[indexTurn];
@@ -31,7 +32,7 @@ export function getInitialActionsTurnValue(indexTurn: number, players: IPlayer[]
     diceValue: 0,
     diceList: [
       { key: 1, value: 6 },
-      { key: 2, value: 5 },
+      { key: 2, value: 6 },
     ],
     diceRollNumber: 0,
     isDisabledUI: false,
@@ -154,6 +155,45 @@ function validateThreeConsecutiveRolls(diceList: IDiceList[]): boolean {
   return isConsecutiveDice;
 }
 
+async function validateNextTurn(
+  currentTurn: number,
+  players: IPlayer[],
+  addLastDice?: boolean = false,
+  addDelayNextTurn?: boolean = false,
+): IActionsTurn {
+  let nextTurn = currentTurn;
+
+  if (addLastDice) {
+    //TODO: Return
+    const newActionTurn: IActionsTurn = JSON.parse(JSON.stringify(actionTurn));
+    const value = newActionTurn.diceValue as TDiceValues;
+    newActionTurn.diceList.push({ key: Math.random(), value });
+
+    newActionTurn.disabledDice = true;
+    newActionTurn.timerActivated = false;
+  }
+
+  if (addDelayNextTurn) {
+    // TODO: Check
+    await delay(250);
+  }
+
+  // Iterate in an infinite loop until one is ready to play
+  do {
+    nextTurn = (nextTurn + 1) % players.length;
+
+    const { finished, isOffline } = players[nextTurn];
+
+    if (!finished && !isOffline) {
+      // TODO: Return
+      getInitialActionsTurnValue(nextTurn, players);
+      nextTurn;
+      break;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, no-constant-condition
+  } while (true);
+}
+
 export function validateDicesForTokens(
   actionsTurn: IActionsTurn,
   currentTurn: number,
@@ -169,6 +209,8 @@ export function validateDicesForTokens(
   const isThreeRolls = validateThreeConsecutiveRolls(copyActionsTurn.diceList);
 
   if (isThreeRolls) {
+    // TODO: Return
+    validateNextTurn(currentTurn, players, true, true);
   } else if (
     diceValue === DICE_VALUE_GET_OUT_JAIL &&
     newTotalDicesAvailable < MAXIMUM_DICE_PER_TURN
