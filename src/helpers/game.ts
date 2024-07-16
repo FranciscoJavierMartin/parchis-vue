@@ -1,4 +1,8 @@
-import { EActionsBoardGame } from '@/constants/game';
+import {
+  DICE_VALUE_GET_OUT_JAIL,
+  EActionsBoardGame,
+  MAXIMUM_DICE_PER_TURN,
+} from '@/constants/game';
 import type {
   ICoordinate,
   TBoardColors,
@@ -7,11 +11,12 @@ import type {
   TtypeTile,
 } from '@/interfaces/board';
 import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
-import type { IListTokens, IToken } from '@/interfaces/token';
+import type { IListTokens, IToken, TShowTotalTokens } from '@/interfaces/token';
 import type { IPlayer } from '@/interfaces/user';
 import { getPlayersColors } from '@/helpers/player';
 import { EPositionGame, EtypeTile, type ESufixColors } from '@/constants/board';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/helpers/positions-board';
+import type { IDiceList, TDiceValues } from '@/interfaces/dice';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
   const { isOnline, isBot } = players[indexTurn];
@@ -136,4 +141,44 @@ function getCoordinatesByTileType(
   }
 
   return coordinate;
+}
+
+function validateThreeConsecutiveRolls(diceList: IDiceList[]): boolean {
+  let isConsecutiveDice: boolean = false;
+
+  if (diceList.length === MAXIMUM_DICE_PER_TURN) {
+    const firstDice: TDiceValues = diceList[0].value;
+    isConsecutiveDice = diceList.every((v) => v.value === firstDice);
+  }
+
+  return isConsecutiveDice;
+}
+
+export function validateDicesForTokens(
+  actionsTurn: IActionsTurn,
+  currentTurn: number,
+  listTokens: IListTokens[],
+  players: IPlayer[],
+  totalTokens: TShowTotalTokens,
+): IActionsTurn {
+  const copyActionsTurn: IActionsTurn = JSON.parse(JSON.stringify(actionsTurn));
+  const diceValue: TDiceValues = JSON.parse(JSON.stringify(copyActionsTurn.diceValue));
+  copyActionsTurn.diceList.push({ key: Math.random(), value: diceValue });
+
+  const newTotalDicesAvailable = copyActionsTurn.diceList.length;
+  const isThreeRolls = validateThreeConsecutiveRolls(copyActionsTurn.diceList);
+
+  if (isThreeRolls) {
+  } else if (
+    diceValue === DICE_VALUE_GET_OUT_JAIL &&
+    newTotalDicesAvailable < MAXIMUM_DICE_PER_TURN
+  ) {
+    copyActionsTurn.timerActivated = true;
+    copyActionsTurn.disabledDice = validateDisabledDice(currentTurn, players);
+    copyActionsTurn.actionsBoardGame = EActionsBoardGame.ROLL_DICE;
+    // TODO: Return copyActionsTurn
+  } else {
+  }
+
+  return copyActionsTurn;
 }
