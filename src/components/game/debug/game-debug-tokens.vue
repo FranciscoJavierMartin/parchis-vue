@@ -45,13 +45,8 @@
 <script setup lang="ts">
 import { ref, computed, reactive, watch } from 'vue';
 import { ETypeGame } from '@/constants/game';
-import {
-  copyToClipboard,
-  getDebugPositionsTiles,
-  getOptionsSelects,
-  validateChangeToken,
-} from '@/helpers/debug';
-import type { IOptions, TOptions, TSelects } from '@/interfaces/debug';
+import { copyToClipboard, getOptionsSelects, validateChangeToken } from '@/helpers/debug';
+import type { TOptions, TSelects } from '@/interfaces/debug';
 import type { TDiceValues } from '@/interfaces/dice';
 import type { IActionsTurn, TTypeGame } from '@/interfaces/game';
 import type { THandleSelectDice } from '@/interfaces/profile';
@@ -78,34 +73,7 @@ const tokenSelected = ref<number>(-1);
 const typeSelected = ref<number>(-1);
 const positionSelected = ref<number>(-1);
 
-const options = computed(() => {
-  const playerOptions: IOptions[] = props.players.map((v) => ({ id: v.index, label: v.color }));
-  const tokenOptions: IOptions[] =
-    selects.player >= 0
-      ? props.listTokens[selects.player].tokens.map((v) => ({
-          id: v.index,
-          label: `Token ${v.index}`,
-        }))
-      : [];
-  const typesOptions: IOptions[] =
-    selects.token >= 0
-      ? LIST_TYPE_TILE.map((v, index) => ({
-          id: index,
-          label: v,
-        }))
-      : [];
-  const positionOptions: IOptions[] =
-    selects.type >= 0
-      ? getDebugPositionsTiles(selects.type, props.listTokens[selects.player].positionGame)
-      : [];
-
-  return {
-    player: playerOptions,
-    token: tokenOptions,
-    type: typesOptions,
-    position: positionOptions,
-  };
-});
+const options = computed(() => getOptionsSelects(selects, props.players, props.listTokens));
 
 function handleSelect(value: number, type: TOptions): void {
   const copySelects = { ...selects };

@@ -6,7 +6,7 @@ import type { IPlayer } from '@/interfaces/user';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES, SAFE_AREAS } from '@/helpers/positions-board';
 import { EtypeTile } from '@/constants/board';
 
-export function getDebugPositionsTiles(type: number, position: TPositionGame): IOptions[] {
+function getDebugPositionsTiles(type: number, position: TPositionGame): IOptions[] {
   const tileType = LIST_TYPE_TILE[type] as TtypeTile;
   let positionTilesOptions: IOptions[];
 
