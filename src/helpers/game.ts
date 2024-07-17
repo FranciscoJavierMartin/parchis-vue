@@ -23,6 +23,7 @@ import { EPositionGame, EtypeTile, type ESufixColors } from '@/constants/board';
 import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/helpers/positions-board';
 import type { IDiceList, TDiceValues } from '@/interfaces/dice';
 import { delay } from '@/helpers/debounce';
+import { TOKENS_JAIN_AND_OUTSITE } from '@/helpers/states';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
   const { isOnline, isBot } = players[indexTurn];
@@ -53,18 +54,20 @@ export function getInitialPositionTokens(
 ): IListTokens[] {
   const playersColors: ESufixColors[] = getPlayersColors(boardColor, totalPlayers);
   const tokensPosition: EPositionGame[] = getTokensPositionsOnBoard(totalPlayers);
-  return players.map<IListTokens>((player, index) => {
-    // Current user who is playing online, it is always at position 0.
-    const isCurrentOnlineUser: boolean = index === 0;
-    const { isBot = false, isOnline = false } = player;
-    const canSelectToken = isOnline ? isCurrentOnlineUser : !isBot;
-    const color = playersColors[index];
-    const positionGame = tokensPosition[index];
+  // return players.map<IListTokens>((player, index) => {
+  //   // Current user who is playing online, it is always at position 0.
+  //   const isCurrentOnlineUser: boolean = index === 0;
+  //   const { isBot = false, isOnline = false } = player;
+  //   const canSelectToken = isOnline ? isCurrentOnlineUser : !isBot;
+  //   const color = playersColors[index];
+  //   const positionGame = tokensPosition[index];
 
-    const tokens: IToken[] = getTokensInJail(positionGame, color, canSelectToken);
+  //   const tokens: IToken[] = getTokensInJail(positionGame, color, canSelectToken);
 
-    return { index, positionGame, tokens };
-  });
+  //   return { index, positionGame, tokens };
+  // });
+
+  return TOKENS_JAIN_AND_OUTSITE;
 }
 
 /**
