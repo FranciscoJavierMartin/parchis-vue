@@ -38,7 +38,7 @@ export function getInitialActionsTurnValue(indexTurn: number, players: IPlayer[]
     showDice: true,
     diceValue: 0,
     diceList: [
-      { key: 1, value: 6 },
+      // { key: 1, value: 6 },
       // { key: 2, value: 6 },
     ],
     diceRollNumber: 0,
@@ -214,7 +214,7 @@ function getTokensValueByCellType(listTokens: IListTokens): TTokenByPositionType
     );
 }
 
-function getUniquePositionTokenCell(tokens: IToken[]) {
+function getUniquePositionTokenCell(tokens: IToken[]): Record<number, number> {
   return tokens.reduce<Record<number, number>>((acc, { positionTile, index }) => {
     if (!((acc[positionTile] ?? -1) >= 0)) {
       acc[positionTile] = index;
@@ -222,6 +222,21 @@ function getUniquePositionTokenCell(tokens: IToken[]) {
 
     return acc;
   }, {});
+}
+
+function validateMovementTokenWithValueDice(
+  currentTurn: number,
+  diceValue: TDiceValues,
+  listTokens: IListTokens[],
+  positionGame: TPositionGame,
+  positionTile: number,
+): boolean {
+  const { exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
+  // TODO: Remove this linter exception
+  // eslint-disable-next-line prefer-const
+  let isValid: boolean = true;
+  console.log(exitTileIndex);
+  return isValid;
 }
 
 function validateDiceForTokenMovement(
@@ -249,8 +264,34 @@ function validateDiceForTokenMovement(
   );
   const canMoveTokens: boolean = totalTokensCanMove.length !== 0;
 
-  const tmpValueNormal = getUniquePositionTokenCell(NORMAL);
-  const tmpValueExit = getUniquePositionTokenCell(EXIT);
+  [NORMAL, EXIT].forEach((tokensEvaluate, evaluatedIndex) => {
+    if (tokensEvaluate.length) {
+      const positionAndToken = getUniquePositionTokenCell(tokensEvaluate);
+
+      Object.values(positionAndToken).forEach((positionTile) => {
+        const diceEvaluated: { diceValue: TDiceValues; isValid: boolean }[] = [];
+
+        const diceAvailable: IDiceList[] = [];
+
+        diceList.forEach(({ value: diceValue }) => {
+          const evaluated = diceEvaluated.find((v) => v.diceValue === diceValue);
+          let isValid: boolean = evaluated?.isValid ?? false;
+
+          if (!evaluated) {
+            if (evaluatedIndex === 0) {
+              isValid = validateMovementTokenWithValueDice(
+                currentTurn,
+                diceValue,
+                listTokens,
+                positionGame,
+                positionTile,
+              );
+            }
+          }
+        });
+      });
+    }
+  });
 
   return { canMoveTokens, copyListTokens };
 }
