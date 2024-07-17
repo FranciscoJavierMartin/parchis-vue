@@ -1,10 +1,11 @@
-import { LIST_TYPE_TILE } from '@/constants/debug';
-import type { IPositionsItems, TPositionGame, TtypeTile } from '@/interfaces/board';
-import type { IOptions, TSelects } from '@/interfaces/debug';
-import type { IListTokens } from '@/interfaces/token';
-import type { IPlayer } from '@/interfaces/user';
-import { POSITION_ELEMENTS_BOARD, POSITION_TILES, SAFE_AREAS } from '@/helpers/positions-board';
+import { cloneDeep } from '@/helpers/clone';
 import { EtypeTile } from '@/constants/board';
+import { LIST_TYPE_TILE } from '@/constants/debug';
+import { POSITION_ELEMENTS_BOARD, POSITION_TILES, SAFE_AREAS } from '@/helpers/positions-board';
+import type { IListTokens } from '@/interfaces/token';
+import type { IOptions, TSelects } from '@/interfaces/debug';
+import type { IPlayer } from '@/interfaces/user';
+import type { IPositionsItems, TPositionGame, TtypeTile } from '@/interfaces/board';
 
 function getDebugPositionsTiles(type: number, position: TPositionGame): IOptions[] {
   const tileType = LIST_TYPE_TILE[type] as TtypeTile;
@@ -96,7 +97,7 @@ function getDebugCoordinates(tileType: TtypeTile, positionGame: TPositionGame): 
 
 export function validateChangeToken(selects: TSelects, listTokens: IListTokens[]): IListTokens[] {
   const tileType = LIST_TYPE_TILE[selects.type] as TtypeTile;
-  const copyListTokens: IListTokens[] = JSON.parse(JSON.stringify(listTokens));
+  const copyListTokens: IListTokens[] = cloneDeep(listTokens);
   const { positionGame } = copyListTokens[selects.player];
 
   const coordinates = getDebugCoordinates(tileType, positionGame);
