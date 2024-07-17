@@ -1,5 +1,6 @@
-import type { TDiceValues } from '@/interfaces/dice';
+import { cloneDeep } from '@/helpers/clone';
 import type { IActionsTurn } from '@/interfaces/game';
+import type { TDiceValues } from '@/interfaces/dice';
 
 /**
  * Return a random number between min and max
@@ -19,7 +20,7 @@ export function getRandomValueDice(
   actionsTurn: IActionsTurn,
   diceValue?: TDiceValues,
 ): IActionsTurn {
-  const newActionsTurn: IActionsTurn = JSON.parse(JSON.stringify(actionsTurn));
+  const newActionsTurn: IActionsTurn = cloneDeep(actionsTurn);
 
   newActionsTurn.diceValue = diceValue || randomValueDice();
   newActionsTurn.timerActivated = false;
