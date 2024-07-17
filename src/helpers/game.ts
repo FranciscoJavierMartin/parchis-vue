@@ -11,7 +11,12 @@ import type {
   TtypeTile,
 } from '@/interfaces/board';
 import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
-import type { IListTokens, IToken, TShowTotalTokens } from '@/interfaces/token';
+import type {
+  IListTokens,
+  IToken,
+  TShowTotalTokens,
+  TTokenByPositionType,
+} from '@/interfaces/token';
 import type { IPlayer } from '@/interfaces/user';
 import { getPlayersColors } from '@/helpers/player';
 import { EPositionGame, EtypeTile, type ESufixColors } from '@/constants/board';
@@ -32,7 +37,7 @@ export function getInitialActionsTurnValue(indexTurn: number, players: IPlayer[]
     diceValue: 0,
     diceList: [
       { key: 1, value: 6 },
-      { key: 2, value: 6 },
+      // { key: 2, value: 6 },
     ],
     diceRollNumber: 0,
     isDisabledUI: false,
@@ -192,6 +197,18 @@ async function validateNextTurn(
   return { actionsTurn: newActionTurn, nextTurn };
 }
 
+function getTokensValueByCellType(listTokens: IListTokens): TTokenByPositionType {
+  return Object.keys(EtypeTile)
+    .map((type) => ({
+      [type]: listTokens.tokens.filter((token) => token.typeTile === type),
+    }))
+    .reduce<TTokenByPositionType>(
+      (acc, value) => ({ ...acc, ...value }),
+      // eslint-disable-next-line @typescript-eslint/prefer-reduce-type-parameter
+      {} as TTokenByPositionType,
+    );
+}
+
 export async function validateDicesForTokens(
   actionsTurn: IActionsTurn,
   currentTurn: number,
@@ -211,13 +228,19 @@ export async function validateDicesForTokens(
     const nextTurnValidated = await validateNextTurn(currentTurn, players, actionsTurn, true, true);
     copyActionsTurn = nextTurnValidated.actionsTurn;
     nextTurn = nextTurnValidated.nextTurn;
-  } else if (
-    diceValue === DICE_VALUE_GET_OUT_JAIL &&
-    newTotalDicesAvailable < MAXIMUM_DICE_PER_TURN
-  ) {
-    copyActionsTurn.timerActivated = true;
-    copyActionsTurn.disabledDice = validateDisabledDice(currentTurn, players);
-    copyActionsTurn.actionsBoardGame = EActionsBoardGame.ROLL_DICE;
+  } else {
+    const { JAIL, NORMAL } = getTokensValueByCellType(listTokens[currentTurn]);
+    const totalTokensNormalJailCells = JAIL.length + NORMAL.length;
+
+    if (
+      diceValue === DICE_VALUE_GET_OUT_JAIL &&
+      newTotalDicesAvailable < MAXIMUM_DICE_PER_TURN &&
+      totalTokensNormalJailCells > 0
+    ) {
+      copyActionsTurn.timerActivated = true;
+      copyActionsTurn.disabledDice = validateDisabledDice(currentTurn, players);
+      copyActionsTurn.actionsBoardGame = EActionsBoardGame.ROLL_DICE;
+    }
   }
 
   return {
