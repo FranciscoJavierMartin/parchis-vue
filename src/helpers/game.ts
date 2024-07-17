@@ -56,20 +56,20 @@ export function getInitialPositionTokens(
   const playersColors: ESufixColors[] = getPlayersColors(boardColor, totalPlayers);
   const tokensPosition: EPositionGame[] = getTokensPositionsOnBoard(totalPlayers);
   //TODO: Uncomment
-  return players.map<IListTokens>((player, index) => {
-    // Current user who is playing online, it is always at position 0.
-    const isCurrentOnlineUser: boolean = index === 0;
-    const { isBot = false, isOnline = false } = player;
-    const canSelectToken = isOnline ? isCurrentOnlineUser : !isBot;
-    const color = playersColors[index];
-    const positionGame = tokensPosition[index];
+  // return players.map<IListTokens>((player, index) => {
+  //   // Current user who is playing online, it is always at position 0.
+  //   const isCurrentOnlineUser: boolean = index === 0;
+  //   const { isBot = false, isOnline = false } = player;
+  //   const canSelectToken = isOnline ? isCurrentOnlineUser : !isBot;
+  //   const color = playersColors[index];
+  //   const positionGame = tokensPosition[index];
 
-    const tokens: IToken[] = getTokensInJail(positionGame, color, canSelectToken);
+  //   const tokens: IToken[] = getTokensInJail(positionGame, color, canSelectToken);
 
-    return { index, positionGame, tokens };
-  });
+  //   return { index, positionGame, tokens };
+  // });
 
-  // return TOKENS_JAIN_AND_OUTSITE;
+  return TOKENS_JAIN_AND_OUTSITE;
 }
 
 /**
@@ -214,6 +214,16 @@ function getTokensValueByCellType(listTokens: IListTokens): TTokenByPositionType
     );
 }
 
+function getUniquePositionTokenCell(tokens: IToken[]) {
+  return tokens.reduce<Record<number, number>>((acc, { positionTile, index }) => {
+    if (!((acc[positionTile] ?? -1) >= 0)) {
+      acc[positionTile] = index;
+    }
+
+    return acc;
+  }, {});
+}
+
 function validateDiceForTokenMovement(
   currentTurn: number,
   listTokens: IListTokens[],
@@ -238,6 +248,9 @@ function validateDiceForTokenMovement(
     (v) => v.diceAvailable.length,
   );
   const canMoveTokens: boolean = totalTokensCanMove.length !== 0;
+
+  const tmpValueNormal = getUniquePositionTokenCell(NORMAL);
+  const tmpValueExit = getUniquePositionTokenCell(EXIT);
 
   return { canMoveTokens, copyListTokens };
 }
