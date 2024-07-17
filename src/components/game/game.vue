@@ -125,6 +125,7 @@ function handleDoneDice(isActionSocket: boolean = false): void {
     totalTokens.value,
   ).then((res) => {
     actionsTurn.value = res.actionsTurn;
+    listTokens.value = res.listTokens;
     currentTurn.value = res.nextTurn;
   });
 }

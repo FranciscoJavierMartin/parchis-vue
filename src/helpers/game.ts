@@ -24,6 +24,7 @@ import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/helpers/positions-boa
 import type { IDiceList, TDiceValues } from '@/interfaces/dice';
 import { delay } from '@/helpers/debounce';
 import { TOKENS_JAIN_AND_OUTSITE } from '@/helpers/states';
+import { cloneDeep } from '@/helpers/clone';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
   const { isOnline, isBot } = players[indexTurn];
@@ -54,20 +55,21 @@ export function getInitialPositionTokens(
 ): IListTokens[] {
   const playersColors: ESufixColors[] = getPlayersColors(boardColor, totalPlayers);
   const tokensPosition: EPositionGame[] = getTokensPositionsOnBoard(totalPlayers);
-  // return players.map<IListTokens>((player, index) => {
-  //   // Current user who is playing online, it is always at position 0.
-  //   const isCurrentOnlineUser: boolean = index === 0;
-  //   const { isBot = false, isOnline = false } = player;
-  //   const canSelectToken = isOnline ? isCurrentOnlineUser : !isBot;
-  //   const color = playersColors[index];
-  //   const positionGame = tokensPosition[index];
+  //TODO: Uncomment
+  return players.map<IListTokens>((player, index) => {
+    // Current user who is playing online, it is always at position 0.
+    const isCurrentOnlineUser: boolean = index === 0;
+    const { isBot = false, isOnline = false } = player;
+    const canSelectToken = isOnline ? isCurrentOnlineUser : !isBot;
+    const color = playersColors[index];
+    const positionGame = tokensPosition[index];
 
-  //   const tokens: IToken[] = getTokensInJail(positionGame, color, canSelectToken);
+    const tokens: IToken[] = getTokensInJail(positionGame, color, canSelectToken);
 
-  //   return { index, positionGame, tokens };
-  // });
+    return { index, positionGame, tokens };
+  });
 
-  return TOKENS_JAIN_AND_OUTSITE;
+  // return TOKENS_JAIN_AND_OUTSITE;
 }
 
 /**
@@ -212,14 +214,43 @@ function getTokensValueByCellType(listTokens: IListTokens): TTokenByPositionType
     );
 }
 
+function validateDiceForTokenMovement(
+  currentTurn: number,
+  listTokens: IListTokens[],
+  diceList: IDiceList[],
+): {
+  canMoveTokens: boolean;
+  copyListTokens: IListTokens[];
+} {
+  const copyListTokens = cloneDeep(listTokens);
+  const { positionGame } = copyListTokens[currentTurn];
+  const { JAIL, NORMAL, EXIT } = getTokensValueByCellType(copyListTokens[currentTurn]);
+  const indexSixAvailable = diceList.findIndex((v) => v.value === DICE_VALUE_GET_OUT_JAIL);
+
+  if (JAIL.length && indexSixAvailable >= 0) {
+    JAIL.forEach(({ index }) => {
+      copyListTokens[currentTurn].tokens[index].diceAvailable = [diceList[indexSixAvailable]];
+    });
+  }
+
+  // TODO: Replace with some
+  const totalTokensCanMove = copyListTokens[currentTurn].tokens.filter(
+    (v) => v.diceAvailable.length,
+  );
+  const canMoveTokens: boolean = totalTokensCanMove.length !== 0;
+
+  return { canMoveTokens, copyListTokens };
+}
+
 export async function validateDicesForTokens(
   actionsTurn: IActionsTurn,
   currentTurn: number,
   listTokens: IListTokens[],
   players: IPlayer[],
   totalTokens: TShowTotalTokens,
-): Promise<{ actionsTurn: IActionsTurn; nextTurn: number }> {
+): Promise<{ actionsTurn: IActionsTurn; listTokens: IListTokens[]; nextTurn: number }> {
   let nextTurn: number = currentTurn;
+  let newListTokens: IListTokens[] = listTokens;
   let copyActionsTurn: IActionsTurn = JSON.parse(JSON.stringify(actionsTurn));
   const diceValue: TDiceValues = JSON.parse(JSON.stringify(copyActionsTurn.diceValue));
   copyActionsTurn.diceList.push({ key: Math.random(), value: diceValue });
@@ -243,11 +274,27 @@ export async function validateDicesForTokens(
       copyActionsTurn.timerActivated = true;
       copyActionsTurn.disabledDice = validateDisabledDice(currentTurn, players);
       copyActionsTurn.actionsBoardGame = EActionsBoardGame.ROLL_DICE;
+    } else {
+      const { canMoveTokens, copyListTokens } = validateDiceForTokenMovement(
+        currentTurn,
+        listTokens,
+        copyActionsTurn.diceList,
+      );
+
+      if (canMoveTokens) {
+        copyActionsTurn.timerActivated = true;
+        copyActionsTurn.disabledDice = true;
+        copyActionsTurn.showDice = false;
+        copyActionsTurn.actionsBoardGame = EActionsBoardGame.SELECT_TOKEN;
+
+        newListTokens = copyListTokens;
+      }
     }
   }
 
   return {
     actionsTurn: copyActionsTurn,
+    listTokens: newListTokens,
     nextTurn,
   };
 }
