@@ -171,12 +171,14 @@ async function validateNextTurn(
     newActionTurn.disabledDice = true;
     newActionTurn.timerActivated = false;
   }
+
   if (addDelayNextTurn) {
     await delay(250);
   }
 
-  // Iterate in an infinite loop until one is ready to play
-  do {
+  // Iterate in an infinite loop until one player is ready to play
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, no-constant-condition
+  while (true) {
     nextTurn = (nextTurn + 1) % players.length;
 
     const { finished, isOffline } = players[nextTurn];
@@ -185,8 +187,7 @@ async function validateNextTurn(
       newActionTurn = getInitialActionsTurnValue(nextTurn, players);
       break;
     }
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, no-constant-condition
-  } while (true);
+  }
 
   return { actionsTurn: newActionTurn, nextTurn };
 }
