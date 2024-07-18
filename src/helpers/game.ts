@@ -278,8 +278,7 @@ function getTotalTokensInCell(
   return { total, tokensByPosition };
 }
 
-// TODO: Rename
-function validateSafeArea(positionTile: number): boolean {
+function isSafeArea(positionTile: number): boolean {
   return SAFE_AREAS.includes(positionTile);
 }
 
@@ -303,7 +302,7 @@ function validateMovementTokenWithValueDice(
       if (i === diceValue - 1) {
         const totalTokensInCell = getTotalTokensInNormalCell(newPositionTile, listTokens);
 
-        if (totalTokensInCell.total >= 2 && !validateSafeArea(newPositionTile)) {
+        if (totalTokensInCell.total >= 2 && !isSafeArea(newPositionTile)) {
           const tokensSameTurn = totalTokensInCell.distribution[currentTurn] ?? [];
           if (tokensSameTurn.length) {
             isValid = false;
