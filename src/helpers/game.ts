@@ -241,24 +241,26 @@ function getTotalTokensInNormalCell(
   total: number;
   distribution: Record<number, number[]>;
 } {
-  let total = 0;
-  const distribution: Record<number, number[]> = {};
+  return listTokens.reduce<{
+    total: number;
+    distribution: Record<number, number[]>;
+  }>(
+    (acc, { tokens }, index: number) => {
+      const tokensInNormalCell = tokens.filter((t) => t.typeTile === EtypeTile.NORMAL);
+      const { total: newTotal, tokensByPosition } = getTotalTokensInCell(
+        positionTile,
+        tokensInNormalCell,
+      );
 
-  for (let i = 0; i < listTokens.length; i++) {
-    const tokensInNormalCell = listTokens[i].tokens.filter((v) => v.typeTile === EtypeTile.NORMAL);
+      if (newTotal) {
+        acc.total++;
+        acc.distribution[index] = tokensByPosition;
+      }
 
-    const { total: newTotal, tokensByPosition } = getTotalTokensInCell(
-      positionTile,
-      tokensInNormalCell,
-    );
-
-    if (newTotal) {
-      total += newTotal;
-      distribution[i] = tokensByPosition;
-    }
-  }
-
-  return { total, distribution };
+      return acc;
+    },
+    { total: 0, distribution: {} },
+  );
 }
 
 function getTotalTokensInCell(
