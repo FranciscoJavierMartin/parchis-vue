@@ -500,5 +500,32 @@ export function validateSelectedToken(
   copyActionsTurn.showDice = false;
   copyActionsTurn.timerActivated = false;
 
+  const copyListTokens = cloneDeep(listTokens);
+  const tokenSelected = copyListTokens[currentTurn].tokens[tokenIndex];
+
+  const positionTile = tokenSelected.positionTile;
+
+  // TODO: Refactor
+  copyListTokens[currentTurn].tokens.forEach((_, index) => {
+    if (copyListTokens[currentTurn].tokens[index].diceAvailable.length) {
+      copyListTokens[currentTurn].tokens[index].diceAvailable = [];
+      copyListTokens[currentTurn].tokens[index].enableTooltip = false;
+      copyListTokens[currentTurn].tokens[index].animated = false;
+      copyListTokens[currentTurn].tokens[index].isMoving = false;
+    }
+  });
+
+  copyListTokens[currentTurn].tokens[tokenIndex].isMoving = true;
+  copyListTokens[currentTurn].tokens[tokenIndex].totalTokens = 1;
+  copyListTokens[currentTurn].tokens[tokenIndex].position = 1;
+
+  if (tokenSelected.typeTile === EtypeTile.JAIL) {
+    totalCellMove = 1;
+  }
+
+  if ([EtypeTile.NORMAL, EtypeTile.EXIT].includes(tokenSelected.typeTile as EtypeTile)) {
+    const totalTokensInCell = getTotalTokensInNormalCell(positionTile, copyListTokens);
+  }
+
   return copyActionsTurn;
 }
