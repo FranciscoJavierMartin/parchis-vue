@@ -347,54 +347,56 @@ function validateDiceForTokenMovement(
     if (tokensEvaluate.length) {
       const positionAndToken = getUniquePositionTokenCell(tokensEvaluate);
 
-      Object.values(positionAndToken).forEach((positionTile) => {
-        const diceEvaluated: { diceValue: TDiceValues; isValid: boolean }[] = [];
+      Object.keys(positionAndToken)
+        .map((positionTile) => +positionTile)
+        .forEach((positionTile) => {
+          const diceEvaluated: { diceValue: TDiceValues; isValid: boolean }[] = [];
 
-        const diceAvailable: IDiceList[] = [];
+          const diceAvailable: IDiceList[] = [];
 
-        diceList.forEach((dice) => {
-          const evaluated = diceEvaluated.find((v) => v.diceValue === dice.value);
-          let isValid: boolean = evaluated?.isValid ?? false;
+          diceList.forEach((dice) => {
+            const evaluated = diceEvaluated.find((v) => v.diceValue === dice.value);
+            let isValid: boolean = evaluated?.isValid ?? false;
 
-          if (!evaluated) {
-            if (evaluatedIndex === 0) {
-              isValid = validateMovementTokenWithValueDice(
-                currentTurn,
-                dice.value,
-                listTokens,
-                positionGame,
-                positionTile,
-              );
-            } else {
-              const remainingCells = TOTAL_EXIT_TILES - positionTile - 1;
-              isValid = dice.value <= remainingCells;
-            }
-
-            diceEvaluated.push({ diceValue: dice.value, isValid });
-          }
-
-          if (isValid) {
-            diceAvailable.push(dice);
-          }
-
-          if (diceAvailable.length) {
-            let finalDiceAvailable = diceAvailable;
-
-            if (finalDiceAvailable.length >= 2) {
-              // TODO: Refactor to extract common logic
-              const firstDice = finalDiceAvailable[0];
-              const isSameDice = finalDiceAvailable.every((v) => v.value === firstDice.value);
-
-              if (isSameDice) {
-                finalDiceAvailable = [firstDice];
+            if (!evaluated) {
+              if (evaluatedIndex === 0) {
+                isValid = validateMovementTokenWithValueDice(
+                  currentTurn,
+                  dice.value,
+                  listTokens,
+                  positionGame,
+                  positionTile,
+                );
+              } else {
+                const remainingCells = TOTAL_EXIT_TILES - positionTile - 1;
+                isValid = dice.value <= remainingCells;
               }
+
+              diceEvaluated.push({ diceValue: dice.value, isValid });
             }
 
-            const indexToken = positionAndToken[positionTile];
-            copyListTokens[currentTurn].tokens[indexToken].diceAvailable = finalDiceAvailable;
-          }
+            if (isValid) {
+              diceAvailable.push(dice);
+            }
+
+            if (diceAvailable.length) {
+              let finalDiceAvailable = diceAvailable;
+
+              // if (finalDiceAvailable.length >= 2) {
+              //   // TODO: Refactor to extract common logic
+              //   const firstDice = finalDiceAvailable[0];
+              //   const isSameDice = finalDiceAvailable.every((v) => v.value === firstDice.value);
+
+              //   if (isSameDice) {
+              //     finalDiceAvailable = [firstDice];
+              //   }
+              // }
+
+              const indexToken = positionAndToken[positionTile];
+              copyListTokens[currentTurn].tokens[indexToken].diceAvailable = finalDiceAvailable;
+            }
+          });
         });
-      });
     }
   });
 

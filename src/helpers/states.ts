@@ -83,8 +83,8 @@ export const TOKENS_JAIN_AND_OUTSITE: IListTokens[] = [
       },
       {
         color: 'GREEN',
-        coordinate: { x: 39, y: 91 },
-        typeTile: 'JAIL',
+        coordinate: { x: 153, y: 182 },
+        typeTile: 'END',
         positionTile: 1,
         index: 1,
         diceAvailable: [],
@@ -97,8 +97,8 @@ export const TOKENS_JAIN_AND_OUTSITE: IListTokens[] = [
       },
       {
         color: 'GREEN',
-        coordinate: { x: 91, y: 39 },
-        typeTile: 'JAIL',
+        coordinate: { x: 153, y: 196 },
+        typeTile: 'END',
         positionTile: 2,
         index: 2,
         diceAvailable: [],
@@ -111,8 +111,8 @@ export const TOKENS_JAIN_AND_OUTSITE: IListTokens[] = [
       },
       {
         color: 'GREEN',
-        coordinate: { x: 91, y: 91 },
-        typeTile: 'JAIL',
+        coordinate: { x: 167, y: 182 },
+        typeTile: 'END',
         positionTile: 3,
         index: 3,
         diceAvailable: [],
@@ -131,9 +131,9 @@ export const TOKENS_JAIN_AND_OUTSITE: IListTokens[] = [
     tokens: [
       {
         color: 'YELLOW',
-        coordinate: { x: 273, y: 39 },
-        typeTile: 'JAIL',
-        positionTile: 0,
+        coordinate: { x: 156, y: 234 },
+        typeTile: 'NORMAL',
+        positionTile: 4,
         index: 0,
         diceAvailable: [],
         totalTokens: 1,
@@ -145,9 +145,9 @@ export const TOKENS_JAIN_AND_OUTSITE: IListTokens[] = [
       },
       {
         color: 'YELLOW',
-        coordinate: { x: 273, y: 91 },
-        typeTile: 'JAIL',
-        positionTile: 1,
+        coordinate: { x: 156, y: 234 },
+        typeTile: 'NORMAL',
+        positionTile: 4,
         index: 1,
         diceAvailable: [],
         totalTokens: 1,
