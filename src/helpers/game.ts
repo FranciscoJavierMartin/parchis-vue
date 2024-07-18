@@ -20,7 +20,13 @@ import type {
 import type { IPlayer } from '@/interfaces/user';
 import { getPlayersColors } from '@/helpers/player';
 import { EPositionGame, EtypeTile, type ESufixColors } from '@/constants/board';
-import { POSITION_ELEMENTS_BOARD, POSITION_TILES } from '@/helpers/positions-board';
+import {
+  POSITION_ELEMENTS_BOARD,
+  POSITION_TILES,
+  SAFE_AREAS,
+  TOTAL_EXIT_TILES,
+  TOTAL_TILES,
+} from '@/helpers/positions-board';
 import type { IDiceList, TDiceValues } from '@/interfaces/dice';
 import { delay } from '@/helpers/debounce';
 import { TOKENS_JAIN_AND_OUTSITE } from '@/helpers/states';
@@ -224,6 +230,58 @@ function getUniquePositionTokenCell(tokens: IToken[]): Record<number, number> {
   }, {});
 }
 
+function validateIncrementTokenMovement(positionTile: number): number {
+  return positionTile + 1 >= TOTAL_TILES ? 0 : positionTile + 1;
+}
+
+function getTotalTokensInNormalCell(
+  positionTile: number,
+  listTokens: IListTokens[],
+): {
+  total: number;
+  distribution: Record<number, number[]>;
+} {
+  return listTokens.reduce<{
+    total: number;
+    distribution: Record<number, number[]>;
+  }>(
+    (acc, { tokens }, index: number) => {
+      const tokensInNormalCell = tokens.filter((t) => t.typeTile === EtypeTile.NORMAL);
+      const { total: newTotal, tokensByPosition } = getTotalTokensInCell(
+        positionTile,
+        tokensInNormalCell,
+      );
+
+      if (newTotal) {
+        acc.total++;
+        acc.distribution[index] = tokensByPosition;
+      }
+
+      return acc;
+    },
+    { total: 0, distribution: {} },
+  );
+}
+
+function getTotalTokensInCell(
+  positionTile: number,
+  tokens: IToken[],
+): {
+  total: number;
+  tokensByPosition: number[];
+} {
+  const tokensByPosition = tokens
+    .filter((v) => v.positionTile === positionTile)
+    .map((v) => v.index);
+  const total = tokensByPosition.length;
+
+  return { total, tokensByPosition };
+}
+
+function isSafeArea(positionTile: number): boolean {
+  return SAFE_AREAS.includes(positionTile);
+}
+
 function validateMovementTokenWithValueDice(
   currentTurn: number,
   diceValue: TDiceValues,
@@ -232,11 +290,35 @@ function validateMovementTokenWithValueDice(
   positionTile: number,
 ): boolean {
   const { exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
-  // TODO: Remove this linter exception
-  // eslint-disable-next-line prefer-const
   let isValid: boolean = true;
-  console.log(exitTileIndex);
+  let newPositionTile = positionTile;
+
+  for (let i = 0; i < diceValue; i++) {
+    if (newPositionTile !== exitTileIndex) {
+      newPositionTile = validateIncrementTokenMovement(newPositionTile);
+      if (i === diceValue - 1) {
+        const totalTokensInCell = getTotalTokensInNormalCell(newPositionTile, listTokens);
+
+        if (totalTokensInCell.total >= 2 && !isSafeArea(newPositionTile)) {
+          const tokensSameTurn = totalTokensInCell.distribution[currentTurn] ?? [];
+          if (tokensSameTurn.length) {
+            isValid = false;
+          }
+        }
+      }
+    } else {
+      const remainingCells = diceValue - i;
+
+      if (remainingCells <= 0 || remainingCells > TOTAL_EXIT_TILES) {
+        isValid = false;
+      }
+    }
+  }
   return isValid;
+}
+
+function getDiceIndexSelected(diceList: IDiceList[], diceKey: number): number {
+  return diceList.findIndex((v) => v.key === diceKey);
 }
 
 function validateDiceForTokenMovement(
@@ -246,6 +328,9 @@ function validateDiceForTokenMovement(
 ): {
   canMoveTokens: boolean;
   copyListTokens: IListTokens[];
+  moveAutomatically: boolean;
+  tokenIndex: number;
+  diceIndex: number;
 } {
   const copyListTokens = cloneDeep(listTokens);
   const { positionGame } = copyListTokens[currentTurn];
@@ -258,12 +343,6 @@ function validateDiceForTokenMovement(
     });
   }
 
-  // TODO: Replace with some
-  const totalTokensCanMove = copyListTokens[currentTurn].tokens.filter(
-    (v) => v.diceAvailable.length,
-  );
-  const canMoveTokens: boolean = totalTokensCanMove.length !== 0;
-
   [NORMAL, EXIT].forEach((tokensEvaluate, evaluatedIndex) => {
     if (tokensEvaluate.length) {
       const positionAndToken = getUniquePositionTokenCell(tokensEvaluate);
@@ -273,27 +352,78 @@ function validateDiceForTokenMovement(
 
         const diceAvailable: IDiceList[] = [];
 
-        diceList.forEach(({ value: diceValue }) => {
-          const evaluated = diceEvaluated.find((v) => v.diceValue === diceValue);
+        diceList.forEach((dice) => {
+          const evaluated = diceEvaluated.find((v) => v.diceValue === dice.value);
           let isValid: boolean = evaluated?.isValid ?? false;
 
           if (!evaluated) {
             if (evaluatedIndex === 0) {
               isValid = validateMovementTokenWithValueDice(
                 currentTurn,
-                diceValue,
+                dice.value,
                 listTokens,
                 positionGame,
                 positionTile,
               );
+            } else {
+              const remainingCells = TOTAL_EXIT_TILES - positionTile - 1;
+              isValid = dice.value <= remainingCells;
             }
+
+            diceEvaluated.push({ diceValue: dice.value, isValid });
+          }
+
+          if (isValid) {
+            diceAvailable.push(dice);
+          }
+
+          if (diceAvailable.length) {
+            let finalDiceAvailable = diceAvailable;
+
+            if (finalDiceAvailable.length >= 2) {
+              // TODO: Refactor to extract common logic
+              const firstDice = finalDiceAvailable[0];
+              const isSameDice = finalDiceAvailable.every((v) => v.value === firstDice.value);
+
+              if (isSameDice) {
+                finalDiceAvailable = [firstDice];
+              }
+            }
+
+            const indexToken = positionAndToken[positionTile];
+            copyListTokens[currentTurn].tokens[indexToken].diceAvailable = finalDiceAvailable;
           }
         });
       });
     }
   });
 
-  return { canMoveTokens, copyListTokens };
+  const totalTokensCanMove = copyListTokens[currentTurn].tokens.filter(
+    (v) => v.diceAvailable.length,
+  );
+
+  let moveAutomatically: boolean = false;
+  let tokenIndex: number = 0;
+  let diceIndex: number = 0;
+
+  const canMoveTokens: boolean = totalTokensCanMove.length !== 0;
+
+  if (totalTokensCanMove.length === 1) {
+    const token = totalTokensCanMove[0];
+    const diceAvailable = token.diceAvailable;
+    tokenIndex = token.index;
+
+    if (diceAvailable.length === 1) {
+      moveAutomatically = true;
+      diceIndex = getDiceIndexSelected(diceList, diceAvailable[0].key);
+    }
+
+    if (diceAvailable.length >= 2) {
+      copyListTokens[currentTurn].tokens[token.index].enableTooltip = true;
+    }
+  }
+
+  return { canMoveTokens, copyListTokens, moveAutomatically, tokenIndex, diceIndex };
 }
 
 export async function validateDicesForTokens(
@@ -329,13 +459,12 @@ export async function validateDicesForTokens(
       copyActionsTurn.disabledDice = validateDisabledDice(currentTurn, players);
       copyActionsTurn.actionsBoardGame = EActionsBoardGame.ROLL_DICE;
     } else {
-      const { canMoveTokens, copyListTokens } = validateDiceForTokenMovement(
-        currentTurn,
-        listTokens,
-        copyActionsTurn.diceList,
-      );
+      const { canMoveTokens, copyListTokens, moveAutomatically, tokenIndex, diceIndex } =
+        validateDiceForTokenMovement(currentTurn, listTokens, copyActionsTurn.diceList);
 
-      if (canMoveTokens) {
+      if (moveAutomatically) {
+        // TODO: Return
+      } else if (canMoveTokens) {
         copyActionsTurn.timerActivated = true;
         copyActionsTurn.disabledDice = true;
         copyActionsTurn.showDice = false;

@@ -69,9 +69,9 @@ export const TOKENS_JAIN_AND_OUTSITE: IListTokens[] = [
     tokens: [
       {
         color: 'GREEN',
-        coordinate: { x: 39, y: 39 },
-        typeTile: 'JAIL',
-        positionTile: 0,
+        coordinate: { x: 52, y: 208 },
+        typeTile: 'NORMAL',
+        positionTile: 8,
         index: 0,
         diceAvailable: [],
         totalTokens: 1,
