@@ -314,6 +314,9 @@ function validateDiceForTokenMovement(
 ): {
   canMoveTokens: boolean;
   copyListTokens: IListTokens[];
+  moveAutomatically: boolean;
+  tokenIndex: number;
+  diceIndex: number;
 } {
   const copyListTokens = cloneDeep(listTokens);
   const { positionGame } = copyListTokens[currentTurn];
@@ -330,6 +333,11 @@ function validateDiceForTokenMovement(
   const totalTokensCanMove = copyListTokens[currentTurn].tokens.filter(
     (v) => v.diceAvailable.length,
   );
+
+  let moveAutomatically: boolean = false;
+  let tokenIndex: number = 0;
+  let diceIndex: number = 0;
+
   const canMoveTokens: boolean = totalTokensCanMove.length !== 0;
 
   [NORMAL, EXIT].forEach((tokensEvaluate, evaluatedIndex) => {
@@ -387,7 +395,21 @@ function validateDiceForTokenMovement(
     }
   });
 
-  return { canMoveTokens, copyListTokens };
+  if (totalTokensCanMove.length === 1) {
+    const token = totalTokensCanMove[0];
+    const diceAvailable = token.diceAvailable;
+
+    if (diceAvailable.length === 1) {
+      moveAutomatically = true;
+      diceIndex = getDiceIndexSelected(diceList, diceAvailable[0].key);
+    }
+
+    if (diceAvailable.length >= 2) {
+      copyListTokens[currentTurn].tokens[token.index].enableTooltip = true;
+    }
+  }
+
+  return { canMoveTokens, copyListTokens, moveAutomatically, tokenIndex, diceIndex };
 }
 
 export async function validateDicesForTokens(
@@ -423,11 +445,12 @@ export async function validateDicesForTokens(
       copyActionsTurn.disabledDice = validateDisabledDice(currentTurn, players);
       copyActionsTurn.actionsBoardGame = EActionsBoardGame.ROLL_DICE;
     } else {
-      const { canMoveTokens, copyListTokens } = validateDiceForTokenMovement(
-        currentTurn,
-        listTokens,
-        copyActionsTurn.diceList,
-      );
+      const { canMoveTokens, copyListTokens, moveAutomatically, tokenIndex, diceIndex } =
+        validateDiceForTokenMovement(currentTurn, listTokens, copyActionsTurn.diceList);
+
+      if (moveAutomatically) {
+        // TODO: Return
+      }
 
       if (canMoveTokens) {
         copyActionsTurn.timerActivated = true;

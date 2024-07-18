@@ -3,7 +3,7 @@
     <Game
       :debug="envVars.debug"
       :users="TEMP_USERS"
-      :initial-turn="0"
+      :initial-turn="1"
       :total-players="totalPlayers"
     />
   </AppWrapper>
