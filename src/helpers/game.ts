@@ -290,10 +290,7 @@ function validateMovementTokenWithValueDice(
   positionTile: number,
 ): boolean {
   const { exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
-  // TODO: Remove this linter exception
-  // eslint-disable-next-line prefer-const
   let isValid: boolean = true;
-
   let newPositionTile = positionTile;
 
   for (let i = 0; i < diceValue; i++) {
@@ -401,7 +398,6 @@ function validateDiceForTokenMovement(
     }
   });
 
-  // TODO: Replace with some
   const totalTokensCanMove = copyListTokens[currentTurn].tokens.filter(
     (v) => v.diceAvailable.length,
   );
@@ -468,9 +464,7 @@ export async function validateDicesForTokens(
 
       if (moveAutomatically) {
         // TODO: Return
-      }
-
-      if (canMoveTokens) {
+      } else if (canMoveTokens) {
         copyActionsTurn.timerActivated = true;
         copyActionsTurn.disabledDice = true;
         copyActionsTurn.showDice = false;
