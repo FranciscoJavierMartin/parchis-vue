@@ -234,7 +234,13 @@ function validateIncrementTokenMovement(positionTile: number): number {
   return positionTile + 1 >= TOTAL_TILES ? 0 : positionTile + 1;
 }
 
-function getTotalTokensInNormalCell(positionTile: number, listTokens: IListTokens[]) {
+function getTotalTokensInNormalCell(
+  positionTile: number,
+  listTokens: IListTokens[],
+): {
+  total: number;
+  distribution: Record<number, number[]>;
+} {
   let total = 0;
   const distribution: Record<number, number[]> = {};
 
@@ -255,7 +261,13 @@ function getTotalTokensInNormalCell(positionTile: number, listTokens: IListToken
   return { total, distribution };
 }
 
-function getTotalTokensInCell(positionTile: number, tokens: IToken[]) {
+function getTotalTokensInCell(
+  positionTile: number,
+  tokens: IToken[],
+): {
+  total: number;
+  tokensByPosition: number[];
+} {
   const tokensByPosition = tokens
     .filter((v) => v.positionTile === positionTile)
     .map((v) => v.index);
@@ -307,6 +319,10 @@ function validateMovementTokenWithValueDice(
   return isValid;
 }
 
+function getDiceIndexSelected(diceList: IDiceList[], diceKey: number): number {
+  return diceList.findIndex((v) => v.key === diceKey);
+}
+
 function validateDiceForTokenMovement(
   currentTurn: number,
   listTokens: IListTokens[],
@@ -329,17 +345,6 @@ function validateDiceForTokenMovement(
     });
   }
 
-  // TODO: Replace with some
-  const totalTokensCanMove = copyListTokens[currentTurn].tokens.filter(
-    (v) => v.diceAvailable.length,
-  );
-
-  let moveAutomatically: boolean = false;
-  let tokenIndex: number = 0;
-  let diceIndex: number = 0;
-
-  const canMoveTokens: boolean = totalTokensCanMove.length !== 0;
-
   [NORMAL, EXIT].forEach((tokensEvaluate, evaluatedIndex) => {
     if (tokensEvaluate.length) {
       const positionAndToken = getUniquePositionTokenCell(tokensEvaluate);
@@ -350,7 +355,7 @@ function validateDiceForTokenMovement(
         const diceAvailable: IDiceList[] = [];
 
         diceList.forEach((dice) => {
-          const evaluated = diceEvaluated.find((v) => v.diceValue === diceValue);
+          const evaluated = diceEvaluated.find((v) => v.diceValue === dice.value);
           let isValid: boolean = evaluated?.isValid ?? false;
 
           if (!evaluated) {
@@ -395,9 +400,21 @@ function validateDiceForTokenMovement(
     }
   });
 
+  // TODO: Replace with some
+  const totalTokensCanMove = copyListTokens[currentTurn].tokens.filter(
+    (v) => v.diceAvailable.length,
+  );
+
+  let moveAutomatically: boolean = false;
+  let tokenIndex: number = 0;
+  let diceIndex: number = 0;
+
+  const canMoveTokens: boolean = totalTokensCanMove.length !== 0;
+
   if (totalTokensCanMove.length === 1) {
     const token = totalTokensCanMove[0];
     const diceAvailable = token.diceAvailable;
+    tokenIndex = token.index;
 
     if (diceAvailable.length === 1) {
       moveAutomatically = true;
