@@ -124,7 +124,6 @@ function handleDoneDice(isActionSocket: boolean = false): void {
     players.value,
     totalTokens.value,
   ).then((res) => {
-    console.log(res.listTokens);
     actionsTurn.value = res.actionsTurn;
     listTokens.value = res.listTokens;
     currentTurn.value = res.nextTurn;

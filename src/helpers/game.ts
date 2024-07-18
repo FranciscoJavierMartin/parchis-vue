@@ -382,15 +382,15 @@ function validateDiceForTokenMovement(
             if (diceAvailable.length) {
               let finalDiceAvailable = diceAvailable;
 
-              // if (finalDiceAvailable.length >= 2) {
-              //   // TODO: Refactor to extract common logic
-              //   const firstDice = finalDiceAvailable[0];
-              //   const isSameDice = finalDiceAvailable.every((v) => v.value === firstDice.value);
+              if (finalDiceAvailable.length >= 2) {
+                // TODO: Refactor to extract common logic
+                const firstDice = finalDiceAvailable[0];
+                const isSameDice = finalDiceAvailable.every((v) => v.value === firstDice.value);
 
-              //   if (isSameDice) {
-              //     finalDiceAvailable = [firstDice];
-              //   }
-              // }
+                if (isSameDice) {
+                  finalDiceAvailable = [firstDice];
+                }
+              }
 
               const indexToken = positionAndToken[positionTile];
               copyListTokens[currentTurn].tokens[indexToken].diceAvailable = finalDiceAvailable;
