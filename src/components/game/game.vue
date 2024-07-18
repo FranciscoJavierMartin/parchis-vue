@@ -15,7 +15,7 @@
         <!-- prettier-ignore-attribute -->
         <GameBoard :boardColor="(boardColor as EBoardColors)">
           <TokenList
-            :dice-list="[]"
+            :dice-list="actionsTurn.diceList"
             :handle-selected-token="handleSelectedToken"
             :list-token="listTokens"
             :debug="debug"
@@ -124,6 +124,7 @@ function handleDoneDice(isActionSocket: boolean = false): void {
     players.value,
     totalTokens.value,
   ).then((res) => {
+    console.log(res.listTokens);
     actionsTurn.value = res.actionsTurn;
     listTokens.value = res.listTokens;
     currentTurn.value = res.nextTurn;
