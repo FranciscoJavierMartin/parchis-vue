@@ -61,8 +61,8 @@ export function getOptionsSelects(
           label: v,
         }))
       : [];
-  const positionOptions =
-    selects.player >= 0
+  const positionOptions: IOptions[] =
+    selects.type >= 0
       ? getDebugPositionsTiles(selects.type, listTokens[selects.player].positionGame)
       : [];
 
@@ -101,14 +101,11 @@ export function validateChangeToken(selects: TSelects, listTokens: IListTokens[]
   const { positionGame } = copyListTokens[selects.player];
 
   const coordinates = getDebugCoordinates(tileType, positionGame);
+  const { coordinate } = coordinates[selects.position];
 
-  if (selects.player >= 0 && selects.token >= 0 && selects.position >= 0) {
-    const { coordinate } = coordinates[selects.position];
-
-    copyListTokens[selects.player].tokens[selects.token].coordinate = coordinate;
-    copyListTokens[selects.player].tokens[selects.token].typeTile = tileType;
-    copyListTokens[selects.player].tokens[selects.token].positionTile = selects.position;
-  }
+  copyListTokens[selects.player].tokens[selects.token].coordinate = coordinate;
+  copyListTokens[selects.player].tokens[selects.token].typeTile = tileType;
+  copyListTokens[selects.player].tokens[selects.token].positionTile = selects.position;
 
   return copyListTokens;
 }

@@ -95,7 +95,7 @@ function handleSelect(value: number, type: TOptions): void {
       copySelects.position = -1;
       break;
     case 'position':
-      emit('updateTokens', validateChangeToken(selects, props.listTokens));
+      emit('updateTokens', validateChangeToken(copySelects, props.listTokens));
       break;
   }
 

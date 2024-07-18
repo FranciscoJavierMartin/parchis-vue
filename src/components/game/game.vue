@@ -21,7 +21,7 @@
             :debug="debug"
           />
           <GameDebug v-if="debug" />
-          <ShowTotalTokens :total-tokens="{}" />
+          <ShowTotalTokens :total-tokens="totalTokens" />
         </GameBoard>
         <!-- prettier-ignore-attribute -->
         <ProfileSection
@@ -62,9 +62,13 @@ import type { IActionsTurn, TTotalPlayers, TTypeGame } from '@/interfaces/game';
 import type { IPlayer, IUser } from '@/interfaces/user';
 import type { TBoardColors } from '@/interfaces/board';
 import type { TDiceValues } from '@/interfaces/dice';
-import type { IListTokens, ISelectTokenValues } from '@/interfaces/token';
+import type { IListTokens, ISelectTokenValues, TShowTotalTokens } from '@/interfaces/token';
 import { getInitialDataPlayers } from '@/helpers/player';
-import { getInitialActionsTurnValue, getInitialPositionTokens } from '@/helpers/game';
+import {
+  getInitialActionsTurnValue,
+  getInitialPositionTokens,
+  validateDicesForTokens,
+} from '@/helpers/game';
 import { getRandomValueDice } from '@/helpers/random';
 import TokenList from '@/components/game/tokens/token-list.vue';
 import GameDebugTokens from '@/components/game/debug/game-debug-tokens.vue';
@@ -96,6 +100,7 @@ const currentTurn = ref<number>(props.initialTurn);
 const listTokens = ref<IListTokens[]>(
   getInitialPositionTokens(props.boardColor, props.totalPlayers, players.value),
 );
+const totalTokens = ref<TShowTotalTokens>({});
 
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
   console.log('selectedTokenValues', selectedTokenValues);
@@ -111,7 +116,19 @@ function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = fal
   );
 }
 
-function handleDoneDice(isActionSocket: boolean = false): void {}
+function handleDoneDice(isActionSocket: boolean = false): void {
+  validateDicesForTokens(
+    actionsTurn.value,
+    currentTurn.value,
+    listTokens.value,
+    players.value,
+    totalTokens.value,
+  ).then((res) => {
+    actionsTurn.value = res.actionsTurn;
+    listTokens.value = res.listTokens;
+    currentTurn.value = res.nextTurn;
+  });
+}
 
 function handleMuteChat(playerIndex: number): void {}
 
