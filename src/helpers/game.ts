@@ -13,6 +13,7 @@ import type {
 import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
 import type {
   IListTokens,
+  ISelectTokenValues,
   IToken,
   TShowTotalTokens,
   TTokenByPositionType,
@@ -482,4 +483,22 @@ export async function validateDicesForTokens(
     listTokens: newListTokens,
     nextTurn,
   };
+}
+
+export function validateSelectedToken(
+  actionsTurn: IActionsTurn,
+  listTokens: IListTokens[],
+  currentTurn: number,
+  diceIndex: number,
+  tokenIndex: number,
+  totalTokens: TShowTotalTokens,
+): IActionsTurn {
+  const copyActionsTurn: IActionsTurn = cloneDeep(actionsTurn);
+  let totalCellMove: TDiceValues = copyActionsTurn.diceList[diceIndex].value;
+  copyActionsTurn.diceList.splice(diceIndex, 1);
+  copyActionsTurn.disabledDice = true;
+  copyActionsTurn.showDice = false;
+  copyActionsTurn.timerActivated = false;
+
+  return copyActionsTurn;
 }

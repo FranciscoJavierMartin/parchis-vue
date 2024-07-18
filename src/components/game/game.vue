@@ -68,6 +68,7 @@ import {
   getInitialActionsTurnValue,
   getInitialPositionTokens,
   validateDicesForTokens,
+  validateSelectedToken,
 } from '@/helpers/game';
 import { getRandomValueDice } from '@/helpers/random';
 import TokenList from '@/components/game/tokens/token-list.vue';
@@ -103,7 +104,14 @@ const listTokens = ref<IListTokens[]>(
 const totalTokens = ref<TShowTotalTokens>({});
 
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
-  console.log('selectedTokenValues', selectedTokenValues);
+  actionsTurn.value = validateSelectedToken(
+    actionsTurn.value,
+    listTokens.value,
+    currentTurn.value,
+    selectedTokenValues.diceIndex,
+    selectedTokenValues.tokenIndex,
+    totalTokens.value,
+  );
 }
 
 function handleTimer(ends: boolean = false): void {}
