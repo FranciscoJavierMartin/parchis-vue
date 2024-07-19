@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import PageWrapper from '@/layout/page-wrapper.vue';
 import GameBoard from '@/components/game/board/game-board.vue';
 import GameDebug from '@/components/game/debug/game-debug.vue';
@@ -57,7 +57,11 @@ import ShowTotalTokens from '@/components/game/token/components/total-tokens/sho
 import BoardWrapper from '@/components/game/board/board-wrapper.vue';
 import ProfileSection from '@/components/game/profiles/profile-section.vue';
 import { EBoardColors, EPositionProfiles } from '@/constants/board';
-import { ETypeGame, INITIAL_ACTIONS_MOVE_TOKEN } from '@/constants/game';
+import {
+  ETypeGame,
+  INITIAL_ACTIONS_MOVE_TOKEN,
+  TOKEN_MOVEMENT_INTERVAL_VALUE,
+} from '@/constants/game';
 import type { IActionsTurn, TTotalPlayers, TTypeGame } from '@/interfaces/game';
 import type { IPlayer, IUser } from '@/interfaces/user';
 import type { TBoardColors } from '@/interfaces/board';
@@ -73,6 +77,7 @@ import {
   getInitialActionsTurnValue,
   getInitialPositionTokens,
   validateDicesForTokens,
+  validateMovementToken,
   validateSelectedToken,
 } from '@/helpers/game';
 import { getRandomValueDice } from '@/helpers/random';
@@ -153,4 +158,28 @@ function handleMuteChat(playerIndex: number): void {}
 function updateTokens(newListTokens: IListTokens[]): void {
   listTokens.value = newListTokens;
 }
+
+watch(
+  () => actionsMoveToken.value.isRunning,
+  (newValue: boolean) => {
+    if (newValue) {
+      const interval = setInterval(() => {
+        const validatedTokenMovement = validateMovementToken(
+          actionsMoveToken.value,
+          actionsTurn.value,
+          currentTurn.value,
+          listTokens.value,
+          players.value,
+          totalTokens.value,
+        );
+
+        actionsMoveToken.value = validatedTokenMovement.actionsMoveToken;
+
+        if (!actionsMoveToken.value.isRunning) {
+          clearInterval(interval);
+        }
+      }, TOKEN_MOVEMENT_INTERVAL_VALUE);
+    }
+  },
+);
 </script>

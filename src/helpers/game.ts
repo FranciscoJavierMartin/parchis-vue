@@ -628,3 +628,34 @@ export function validateSelectedToken(
     },
   };
 }
+
+export function validateMovementToken(
+  actionsMoveToken: IActionsMoveToken,
+  actionsTurn: IActionsTurn,
+  currentTurn: number,
+  listTokens: IListTokens[],
+  players: IPlayer[],
+  totalTokens: TShowTotalTokens,
+): { actionsMoveToken: IActionsMoveToken } {
+  const copyActionsMoveToken: IActionsMoveToken = cloneDeep(actionsMoveToken);
+  const copyListTokens: IListTokens[] = cloneDeep(listTokens);
+
+  const { positionGame } = copyListTokens[currentTurn];
+  const { startTileIndex, exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
+  const { tokenIndex } = copyActionsMoveToken;
+  const tokenMove = copyListTokens[currentTurn].tokens[tokenIndex];
+  let positionTile: number = 0;
+  let goNextTurn: boolean = false;
+
+  copyActionsMoveToken.cellsCounter++;
+
+  if (copyActionsMoveToken.cellsCounter === copyActionsMoveToken.totalCellsMove) {
+    copyActionsMoveToken.isRunning = false;
+  }
+
+  console.log('Hello');
+
+  return {
+    actionsMoveToken: copyActionsMoveToken,
+  };
+}
