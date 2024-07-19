@@ -11,6 +11,7 @@
       v-for="position in data.startPositions"
       :key="position.index"
       :coordinate="position.coordinate"
+      inverted-color
     >
       {{ position.index }}
     </GameDebugTile>
