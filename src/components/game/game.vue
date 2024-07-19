@@ -104,7 +104,7 @@ const listTokens = ref<IListTokens[]>(
 const totalTokens = ref<TShowTotalTokens>({});
 
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
-  actionsTurn.value = validateSelectedToken(
+  const validatedSelectedToken = validateSelectedToken(
     actionsTurn.value,
     listTokens.value,
     currentTurn.value,
@@ -112,6 +112,9 @@ function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
     selectedTokenValues.tokenIndex,
     totalTokens.value,
   );
+
+  actionsTurn.value = validatedSelectedToken.actionsTurn;
+  totalTokens.value = validatedSelectedToken.totalTokens;
 }
 
 function handleTimer(ends: boolean = false): void {}

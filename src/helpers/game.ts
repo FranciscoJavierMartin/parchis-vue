@@ -20,7 +20,12 @@ import type {
 } from '@/interfaces/token';
 import type { IPlayer } from '@/interfaces/user';
 import { getPlayersColors } from '@/helpers/player';
-import { EPositionGame, EtypeTile, type ESufixColors } from '@/constants/board';
+import {
+  EPositionGame,
+  EtypeTile,
+  MAXIMUM_VISIBLE_TOKENS_PER_CELL,
+  type ESufixColors,
+} from '@/constants/board';
 import {
   POSITION_ELEMENTS_BOARD,
   POSITION_TILES,
@@ -485,6 +490,79 @@ export async function validateDicesForTokens(
   };
 }
 
+function validateTokenDistributionCell(
+  token: IToken,
+  listTokens: IListTokens[],
+  currentTurn: number,
+  totalTokens: TShowTotalTokens,
+  removeTokenFromCell: boolean = true,
+): { listTokens: IListTokens[]; totalTokens: TShowTotalTokens } {
+  const copyListTokens = cloneDeep(listTokens);
+  const copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
+  // TODO: Check condition
+  const positionTile = token.positionTile || 0;
+  const totalTokensToBeRemoved = removeTokenFromCell ? 1 : 0;
+
+  if (token.typeTile === EtypeTile.NORMAL) {
+    const totalTokensInCell = getTotalTokensInNormalCell(positionTile, copyListTokens);
+
+    if (totalTokensInCell.total >= 2) {
+      const totalTokensRemain = totalTokensInCell.total - totalTokensToBeRemoved;
+      let position: number = 1;
+
+      //TODO: REFACTOR
+      Object.keys(totalTokensInCell.distribution)
+        .map((playerIndex) => +playerIndex)
+        .forEach((playerIndex) => {
+          totalTokensInCell.distribution[playerIndex].forEach((index) => {
+            const evaluatedIndex: boolean = removeTokenFromCell
+              ? playerIndex === currentTurn
+                ? index !== token.index
+                : true
+              : true;
+
+            if (evaluatedIndex) {
+              copyListTokens[playerIndex].tokens[index].totalTokens = totalTokensRemain;
+              copyListTokens[playerIndex].tokens[index].position = position;
+              position++;
+            }
+          });
+        });
+
+      if (totalTokensInCell.total > MAXIMUM_VISIBLE_TOKENS_PER_CELL) {
+        if (totalTokensRemain > MAXIMUM_VISIBLE_TOKENS_PER_CELL) {
+          copyTotalTokens[positionTile] = totalTokensRemain;
+        } else if (copyTotalTokens[positionTile]) {
+          delete copyTotalTokens[positionTile];
+        }
+      }
+    }
+  }
+
+  if (token.typeTile === EtypeTile.EXIT) {
+    const { EXIT } = getTokensValueByCellType(copyListTokens[currentTurn]);
+    const totalTokensInCell = getTotalTokensInCell(positionTile, EXIT);
+
+    if (totalTokensInCell.total >= 2) {
+      const totalTokensRemain = totalTokensInCell.total - totalTokensToBeRemoved;
+      let position: number = 1;
+
+      totalTokensInCell.tokensByPosition.forEach((index) => {
+        if (index !== token.index || !removeTokenFromCell) {
+          copyListTokens[currentTurn].tokens[index].totalTokens = totalTokensRemain;
+          copyListTokens[currentTurn].tokens[index].position = position;
+          position++;
+        }
+      });
+    }
+  }
+
+  return {
+    listTokens: copyListTokens,
+    totalTokens: copyTotalTokens,
+  };
+}
+
 export function validateSelectedToken(
   actionsTurn: IActionsTurn,
   listTokens: IListTokens[],
@@ -492,18 +570,17 @@ export function validateSelectedToken(
   diceIndex: number,
   tokenIndex: number,
   totalTokens: TShowTotalTokens,
-): IActionsTurn {
+): { actionsTurn: IActionsTurn; totalTokens: TShowTotalTokens } {
   const copyActionsTurn: IActionsTurn = cloneDeep(actionsTurn);
-  let totalCellMove: TDiceValues = copyActionsTurn.diceList[diceIndex].value;
+  let copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
+  let totalCellsMove: TDiceValues = copyActionsTurn.diceList[diceIndex].value;
   copyActionsTurn.diceList.splice(diceIndex, 1);
   copyActionsTurn.disabledDice = true;
   copyActionsTurn.showDice = false;
   copyActionsTurn.timerActivated = false;
 
-  const copyListTokens = cloneDeep(listTokens);
+  let copyListTokens = cloneDeep(listTokens);
   const tokenSelected = copyListTokens[currentTurn].tokens[tokenIndex];
-
-  const positionTile = tokenSelected.positionTile;
 
   // TODO: Refactor
   copyListTokens[currentTurn].tokens.forEach((_, index) => {
@@ -520,12 +597,23 @@ export function validateSelectedToken(
   copyListTokens[currentTurn].tokens[tokenIndex].position = 1;
 
   if (tokenSelected.typeTile === EtypeTile.JAIL) {
-    totalCellMove = 1;
+    totalCellsMove = 1;
   }
 
   if ([EtypeTile.NORMAL, EtypeTile.EXIT].includes(tokenSelected.typeTile as EtypeTile)) {
-    const totalTokensInCell = getTotalTokensInNormalCell(positionTile, copyListTokens);
+    const tokensDistributionCell = validateTokenDistributionCell(
+      tokenSelected,
+      copyListTokens,
+      currentTurn,
+      totalTokens,
+      true,
+    );
+    copyListTokens = tokensDistributionCell.listTokens;
+    copyTotalTokens = tokensDistributionCell.totalTokens;
   }
 
-  return copyActionsTurn;
+  return {
+    actionsTurn: copyActionsTurn,
+    totalTokens: copyTotalTokens,
+  };
 }
