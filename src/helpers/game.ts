@@ -36,7 +36,7 @@ import {
 } from '@/helpers/positions-board';
 import type { IDiceList, TDiceValues } from '@/interfaces/dice';
 import { delay } from '@/helpers/debounce';
-import { TOKENS_JAIN_AND_OUTSITE } from '@/helpers/states';
+import { TOKENS_JAIL_AND_OUTSITE } from '@/helpers/states';
 import { cloneDeep } from '@/helpers/clone';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
@@ -50,10 +50,7 @@ export function getInitialActionsTurnValue(indexTurn: number, players: IPlayer[]
     disabledDice: validateDisabledDice(indexTurn, players),
     showDice: true,
     diceValue: 0,
-    diceList: [
-      // { key: 1, value: 6 },
-      // { key: 2, value: 6 },
-    ],
+    diceList: [],
     diceRollNumber: 0,
     isDisabledUI: false,
     actionsBoardGame: EActionsBoardGame.ROLL_DICE,
@@ -82,7 +79,7 @@ export function getInitialPositionTokens(
   //   return { index, positionGame, tokens };
   // });
 
-  return TOKENS_JAIN_AND_OUTSITE;
+  return TOKENS_JAIL_AND_OUTSITE;
 }
 
 /**
@@ -638,26 +635,66 @@ export function validateMovementToken(
   listTokens: IListTokens[],
   players: IPlayer[],
   totalTokens: TShowTotalTokens,
-): { actionsMoveToken: IActionsMoveToken } {
+): { actionsMoveToken: IActionsMoveToken; listTokens: IListTokens[] } {
   const copyActionsMoveToken: IActionsMoveToken = cloneDeep(actionsMoveToken);
   const copyListTokens: IListTokens[] = cloneDeep(listTokens);
 
   const { positionGame } = copyListTokens[currentTurn];
   const { startTileIndex, exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
   const { tokenIndex } = copyActionsMoveToken;
-  const tokenMove = copyListTokens[currentTurn].tokens[tokenIndex];
+  const tokenToBeMoved: IToken = copyListTokens[currentTurn].tokens[tokenIndex];
   let positionTile: number = 0;
-  let goNextTurn: boolean = false;
+  const goNextTurn: boolean = false;
+
+  if (tokenToBeMoved.typeTile === EtypeTile.JAIL) {
+    positionTile = startTileIndex;
+    copyListTokens[currentTurn].tokens[tokenIndex].animated = true;
+    copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.NORMAL;
+  }
+
+  copyListTokens[currentTurn].tokens[tokenIndex].positionTile = positionTile;
+  copyListTokens[currentTurn].tokens[tokenIndex].coordinate = getCoordinatesByTileType(
+    copyListTokens[currentTurn].tokens[tokenIndex].typeTile,
+    positionGame,
+    positionTile,
+  );
 
   copyActionsMoveToken.cellsCounter++;
 
   if (copyActionsMoveToken.cellsCounter === copyActionsMoveToken.totalCellsMove) {
-    copyActionsMoveToken.isRunning = false;
-  }
+    let rollDiceAgain: boolean = false;
+    let moveTokensAgain: boolean = true;
 
-  console.log('Hello');
+    copyActionsMoveToken.isRunning = false;
+    copyListTokens[currentTurn].tokens[tokenIndex].isMoving = false;
+
+    if (tokenToBeMoved.typeTile === EtypeTile.NORMAL) {
+      const isSafeTile = isSafeArea(positionTile);
+      const totalTokensInCell = getTotalTokensInNormalCell(positionTile, copyListTokens);
+
+      if (totalTokensInCell.total >= 2) {
+        const isSameToken =
+          (totalTokensInCell.distribution[currentTurn] ?? []).length === totalTokensInCell.total;
+        if (isSameToken || isSafeTile) {
+          const totalTokensRemain = totalTokensInCell.total;
+          let position: number = 1;
+
+          Object.entries(totalTokensInCell.distribution)
+            .map<[number, number[]]>(([playerIndex, tokens]) => [+playerIndex, tokens])
+            .forEach(([playerIndex, tokens]) => {
+              tokens.forEach((index) => {
+                copyListTokens[playerIndex].tokens[index].totalTokens = totalTokensRemain;
+                copyListTokens[playerIndex].tokens[index].position = position;
+                position++;
+              });
+            });
+        }
+      }
+    }
+  }
 
   return {
     actionsMoveToken: copyActionsMoveToken,
+    listTokens: copyListTokens,
   };
 }
