@@ -10,5 +10,5 @@ export const DICE_SIZE_TOOLTIP = SIZE_TILE + SIZE_TILE * 0.15;
 /**
  * Z index for tokens
  */
-export const BASE_ZINDEX_TOKEN = 1;
+export const BASE_ZINDEX_TOKEN = 2;
 export const ZINDEX_TOKEN_SELECT = 7;

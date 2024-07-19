@@ -6,6 +6,7 @@
       top: `${coordinate.y}px`,
       height: `${SIZE_TILE}px`,
       width: `${SIZE_TILE}px`,
+      color: invertedColor ? 'white' : 'black',
     }"
   >
     <slot />
@@ -16,7 +17,9 @@
 import { SIZE_TILE } from '@/constants/sizes';
 import type { ICoordinate } from '@/interfaces/board';
 
-defineProps<{ coordinate: ICoordinate }>();
+withDefaults(defineProps<{ coordinate: ICoordinate; invertedColor?: boolean }>(), {
+  invertedColor: false,
+});
 </script>
 
 <style scoped>
