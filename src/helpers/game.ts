@@ -681,7 +681,6 @@ export function validateMovementToken(
         const isSameToken =
           (totalTokensInCell.distribution[currentTurn] ?? []).length === totalTokensInCell.total;
         if (isSameToken || isSafeTile) {
-          console.log('original', totalTokensInCell);
           const totalTokensRemain = totalTokensInCell.total;
           let position: number = 1;
 
@@ -695,7 +694,6 @@ export function validateMovementToken(
               });
             });
 
-          console.log(totalTokensRemain);
           if (totalTokensRemain > MAXIMUM_VISIBLE_TOKENS_PER_CELL) {
             copyTotalTokens[positionTile] = totalTokensRemain;
           }
