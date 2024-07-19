@@ -574,6 +574,7 @@ export function validateSelectedToken(
 ): {
   actionsTurn: IActionsTurn;
   actionsMoveToken: IActionsMoveToken;
+  listTokens: IListTokens[];
   totalTokens: TShowTotalTokens;
 } {
   const copyActionsTurn: IActionsTurn = cloneDeep(actionsTurn);
@@ -620,6 +621,7 @@ export function validateSelectedToken(
   return {
     actionsTurn: copyActionsTurn,
     totalTokens: copyTotalTokens,
+    listTokens: copyListTokens,
     actionsMoveToken: {
       isRunning: true,
       tokenIndex,

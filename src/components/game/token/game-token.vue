@@ -104,7 +104,7 @@ const pieceStyle = computed<StyleValue>(() => {
   /**
    * The different scales depending on the number of pieces that exist in the same cell.
    */
-  const scales = ['0.85', '0.7', '0.6', '0.5'];
+  const scales = [0.85, 0.7, 0.6, 0.5];
 
   /**
    * The position of the token in the cell depending on the number of tokens that exist.
@@ -126,14 +126,16 @@ const pieceStyle = computed<StyleValue>(() => {
    * the 5th and 6th will have a scale of 0.
    * If token is at end, a smaller scale is set.
    */
-  const scale =
-    props.typeTile === EtypeTile.END
-      ? 0.45
-      : props.position <= MAXIMUM_VISIBLE_TOKENS_PER_CELL
-        ? scales[indexPosition]
-        : (props.canSelectToken && props.diceAvailable.length) || props.isMoving
-          ? scales[0]
-          : 0;
+  // TODO: Refactor to make a single expression
+  let scale: number = props.position <= MAXIMUM_VISIBLE_TOKENS_PER_CELL ? scales[indexPosition] : 0;
+
+  if ((props.canSelectToken && props.diceAvailable.length) || props.isMoving) {
+    scale = scales[0];
+  }
+
+  if (props.typeTile === EtypeTile.END) {
+    scale = 0.45;
+  }
 
   /**
    * Determine position in cell.

@@ -126,6 +126,7 @@ function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
 
   actionsTurn.value = validatedSelectedToken.actionsTurn;
   actionsMoveToken.value = validatedSelectedToken.actionsMoveToken;
+  listTokens.value = validatedSelectedToken.listTokens;
   totalTokens.value = validatedSelectedToken.totalTokens;
 }
 
