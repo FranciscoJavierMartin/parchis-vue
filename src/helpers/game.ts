@@ -257,7 +257,7 @@ function getTotalTokensInNormalCell(
       );
 
       if (newTotal) {
-        acc.total++;
+        acc.total += newTotal;
         acc.distribution[index] = tokensByPosition;
       }
 
@@ -635,9 +635,14 @@ export function validateMovementToken(
   listTokens: IListTokens[],
   players: IPlayer[],
   totalTokens: TShowTotalTokens,
-): { actionsMoveToken: IActionsMoveToken; listTokens: IListTokens[] } {
+): {
+  actionsMoveToken: IActionsMoveToken;
+  listTokens: IListTokens[];
+  totalTokens: TShowTotalTokens;
+} {
   const copyActionsMoveToken: IActionsMoveToken = cloneDeep(actionsMoveToken);
   const copyListTokens: IListTokens[] = cloneDeep(listTokens);
+  const copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
 
   const { positionGame } = copyListTokens[currentTurn];
   const { startTileIndex, exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
@@ -662,8 +667,8 @@ export function validateMovementToken(
   copyActionsMoveToken.cellsCounter++;
 
   if (copyActionsMoveToken.cellsCounter === copyActionsMoveToken.totalCellsMove) {
-    let rollDiceAgain: boolean = false;
-    let moveTokensAgain: boolean = true;
+    const rollDiceAgain: boolean = false;
+    const moveTokensAgain: boolean = true;
 
     copyActionsMoveToken.isRunning = false;
     copyListTokens[currentTurn].tokens[tokenIndex].isMoving = false;
@@ -676,6 +681,7 @@ export function validateMovementToken(
         const isSameToken =
           (totalTokensInCell.distribution[currentTurn] ?? []).length === totalTokensInCell.total;
         if (isSameToken || isSafeTile) {
+          console.log('original', totalTokensInCell);
           const totalTokensRemain = totalTokensInCell.total;
           let position: number = 1;
 
@@ -688,6 +694,11 @@ export function validateMovementToken(
                 position++;
               });
             });
+
+          console.log(totalTokensRemain);
+          if (totalTokensRemain > MAXIMUM_VISIBLE_TOKENS_PER_CELL) {
+            copyTotalTokens[positionTile] = totalTokensRemain;
+          }
         }
       }
     }
@@ -696,5 +707,6 @@ export function validateMovementToken(
   return {
     actionsMoveToken: copyActionsMoveToken,
     listTokens: copyListTokens,
+    totalTokens: copyTotalTokens,
   };
 }

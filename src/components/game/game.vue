@@ -176,6 +176,7 @@ watch(
 
         actionsMoveToken.value = validatedTokenMovement.actionsMoveToken;
         listTokens.value = validatedTokenMovement.listTokens;
+        totalTokens.value = validatedTokenMovement.totalTokens;
 
         if (!actionsMoveToken.value.isRunning) {
           clearInterval(interval);
