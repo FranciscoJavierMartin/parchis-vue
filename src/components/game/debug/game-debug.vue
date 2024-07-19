@@ -1,5 +1,6 @@
 <template>
   <template v-for="[key, data] in Object.entries(POSITION_ELEMENTS_BOARD)" :key="key">
+    <!-- TODO: Refactor to keep in one single loop -->
     <GameDebugTile
       v-for="position in data.exitTiles"
       :key="position.index"
@@ -11,6 +12,7 @@
       v-for="position in data.startPositions"
       :key="position.index"
       :coordinate="position.coordinate"
+      inverted-color
     >
       {{ position.index }}
     </GameDebugTile>
