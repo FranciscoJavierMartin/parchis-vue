@@ -667,7 +667,7 @@ export function validateMovementToken(
   copyActionsMoveToken.cellsCounter++;
 
   if (copyActionsMoveToken.cellsCounter === copyActionsMoveToken.totalCellsMove) {
-    const rollDiceAgain: boolean = false;
+    let rollDiceAgain: boolean = false;
     const moveTokensAgain: boolean = true;
 
     copyActionsMoveToken.isRunning = false;
@@ -678,9 +678,10 @@ export function validateMovementToken(
       const totalTokensInCell = getTotalTokensInNormalCell(positionTile, copyListTokens);
 
       if (totalTokensInCell.total >= 2) {
-        const isSameToken =
+        const isSameToken: boolean =
           (totalTokensInCell.distribution[currentTurn] ?? []).length === totalTokensInCell.total;
-        if (isSameToken || isSafeTile) {
+
+        if (!(isSameToken || isSafeTile)) {
           const totalTokensRemain = totalTokensInCell.total;
           let position: number = 1;
 
@@ -696,6 +697,23 @@ export function validateMovementToken(
 
           if (totalTokensRemain > MAXIMUM_VISIBLE_TOKENS_PER_CELL) {
             copyTotalTokens[positionTile] = totalTokensRemain;
+          } else {
+            const playerIndexToJail = Object.keys(totalTokensInCell.distribution)
+              .map((v) => +v)
+              .find((v) => v !== currentTurn);
+
+            if (playerIndexToJail !== undefined) {
+              const tokenIndexToJail = totalTokensInCell.distribution[playerIndexToJail][0];
+              const { positionGame: positionGameToJail } = copyListTokens[playerIndexToJail];
+              copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].animated = true;
+              copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].typeTile = EtypeTile.JAIL;
+              copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].positionTile =
+                tokenIndexToJail;
+              copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].coordinate =
+                getCoordinatesByTileType(EtypeTile.JAIL, positionGameToJail, tokenIndexToJail);
+
+              rollDiceAgain = true;
+            }
           }
         }
       }
