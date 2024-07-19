@@ -53,7 +53,9 @@ function getStartPositions(baseX: number, baseY: number): IPositionsItems[] {
 /**
  * Safe tiles index
  */
-export const SAFE_AREAS: number[] = [0, 8, 13, 21, 26, 34, 39, 47];
+// TODO: Undo
+// export const SAFE_AREAS: number[] = [0, 8, 13, 21, 26, 34, 39, 47];
+export const SAFE_AREAS: number[] = [8, 13, 21, 26, 34, 39, 47];
 
 export const POSITION_TILES: IPositionsItems[] = POINTS.flatMap((point) => {
   return calculatePosition(point);

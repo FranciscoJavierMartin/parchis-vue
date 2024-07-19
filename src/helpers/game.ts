@@ -711,6 +711,9 @@ export function validateMovementToken(
                 tokenIndexToJail;
               copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].coordinate =
                 getCoordinatesByTileType(EtypeTile.JAIL, positionGameToJail, tokenIndexToJail);
+              // TODO: Check
+              copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].totalTokens--;
+              copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].position--;
 
               rollDiceAgain = true;
             }
