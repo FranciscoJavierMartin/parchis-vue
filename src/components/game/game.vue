@@ -57,12 +57,17 @@ import ShowTotalTokens from '@/components/game/token/components/total-tokens/sho
 import BoardWrapper from '@/components/game/board/board-wrapper.vue';
 import ProfileSection from '@/components/game/profiles/profile-section.vue';
 import { EBoardColors, EPositionProfiles } from '@/constants/board';
-import { ETypeGame } from '@/constants/game';
+import { ETypeGame, INITIAL_ACTIONS_MOVE_TOKEN } from '@/constants/game';
 import type { IActionsTurn, TTotalPlayers, TTypeGame } from '@/interfaces/game';
 import type { IPlayer, IUser } from '@/interfaces/user';
 import type { TBoardColors } from '@/interfaces/board';
 import type { TDiceValues } from '@/interfaces/dice';
-import type { IListTokens, ISelectTokenValues, TShowTotalTokens } from '@/interfaces/token';
+import type {
+  IActionsMoveToken,
+  IListTokens,
+  ISelectTokenValues,
+  TShowTotalTokens,
+} from '@/interfaces/token';
 import { getInitialDataPlayers } from '@/helpers/player';
 import {
   getInitialActionsTurnValue,
@@ -98,6 +103,7 @@ const players = ref<IPlayer[]>(
 );
 const actionsTurn = ref<IActionsTurn>(getInitialActionsTurnValue(props.initialTurn, players.value));
 const currentTurn = ref<number>(props.initialTurn);
+const actionsMoveToken = ref<IActionsMoveToken>(INITIAL_ACTIONS_MOVE_TOKEN);
 const listTokens = ref<IListTokens[]>(
   getInitialPositionTokens(props.boardColor, props.totalPlayers, players.value),
 );
@@ -114,6 +120,7 @@ function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
   );
 
   actionsTurn.value = validatedSelectedToken.actionsTurn;
+  actionsMoveToken.value = validatedSelectedToken.actionsMoveToken;
   totalTokens.value = validatedSelectedToken.totalTokens;
 }
 

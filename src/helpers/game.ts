@@ -12,6 +12,7 @@ import type {
 } from '@/interfaces/board';
 import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
 import type {
+  IActionsMoveToken,
   IListTokens,
   ISelectTokenValues,
   IToken,
@@ -570,7 +571,11 @@ export function validateSelectedToken(
   diceIndex: number,
   tokenIndex: number,
   totalTokens: TShowTotalTokens,
-): { actionsTurn: IActionsTurn; totalTokens: TShowTotalTokens } {
+): {
+  actionsTurn: IActionsTurn;
+  actionsMoveToken: IActionsMoveToken;
+  totalTokens: TShowTotalTokens;
+} {
   const copyActionsTurn: IActionsTurn = cloneDeep(actionsTurn);
   let copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
   let totalCellsMove: TDiceValues = copyActionsTurn.diceList[diceIndex].value;
@@ -615,5 +620,11 @@ export function validateSelectedToken(
   return {
     actionsTurn: copyActionsTurn,
     totalTokens: copyTotalTokens,
+    actionsMoveToken: {
+      isRunning: true,
+      tokenIndex,
+      totalCellsMove,
+      cellsCounter: 0,
+    },
   };
 }
