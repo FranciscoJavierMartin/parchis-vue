@@ -178,7 +178,7 @@ watch(
         listTokens.value = validatedTokenMovement.listTokens;
         totalTokens.value = validatedTokenMovement.totalTokens;
 
-        if (!actionsMoveToken.value.isRunning) {
+        if (!validatedTokenMovement.actionsMoveToken.isRunning) {
           clearInterval(interval);
         }
       }, TOKEN_MOVEMENT_INTERVAL_VALUE);

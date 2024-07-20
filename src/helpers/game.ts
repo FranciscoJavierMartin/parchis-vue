@@ -182,8 +182,8 @@ async function validateNextTurn(
   addLastDice: boolean = false,
   addDelayNextTurn: boolean = false,
 ): Promise<{ actionsTurn: IActionsTurn; nextTurn: number }> {
-  let newActionTurn: IActionsTurn = JSON.parse(JSON.stringify(actionsTurn));
-  let nextTurn = currentTurn;
+  let newActionTurn: IActionsTurn = cloneDeep(actionsTurn);
+  let nextTurn: number = currentTurn;
 
   if (addLastDice) {
     const value = newActionTurn.diceValue as TDiceValues;
@@ -479,6 +479,16 @@ export async function validateDicesForTokens(
         newListTokens = copyListTokens;
       }
     }
+
+    const nextTurnValidated = await validateNextTurn(
+      currentTurn,
+      players,
+      actionsTurn,
+      false,
+      true,
+    );
+    copyActionsTurn = nextTurnValidated.actionsTurn;
+    nextTurn = nextTurnValidated.nextTurn;
   }
 
   return {
@@ -643,6 +653,7 @@ export function validateMovementToken(
   const copyActionsMoveToken: IActionsMoveToken = cloneDeep(actionsMoveToken);
   let copyListTokens: IListTokens[] = cloneDeep(listTokens);
   let copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
+  const copyCurrentTurn: number = currentTurn;
 
   const { positionGame } = copyListTokens[currentTurn];
   const { startTileIndex, exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
