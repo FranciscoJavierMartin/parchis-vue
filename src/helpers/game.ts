@@ -711,6 +711,18 @@ export function validateMovementToken(
     copyActionsMoveToken.isRunning = false;
     copyListTokens[currentTurn].tokens[tokenIndex].isMoving = false;
 
+    const { END } = getTokensValueByCellType(copyListTokens[currentTurn]);
+
+    if (tokenToBeMoved.typeTile === EtypeTile.END) {
+      END.forEach((tokenEnd: IToken) => {
+        const tokenIndexEndPosition = tokenEnd.index;
+        copyListTokens[currentTurn].tokens[tokenIndexEndPosition].positionTile =
+          tokenIndexEndPosition;
+        copyListTokens[currentTurn].tokens[tokenIndexEndPosition].coordinate =
+          getCoordinatesByTileType(EtypeTile.END, positionGame, tokenIndexEndPosition);
+      });
+    }
+
     if ([EtypeTile.NORMAL, EtypeTile.EXIT].includes(tokenToBeMoved.typeTile as EtypeTile)) {
       let distributeTokensCell: boolean = tokenToBeMoved.typeTile === EtypeTile.EXIT;
 
