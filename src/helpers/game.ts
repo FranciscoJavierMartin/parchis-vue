@@ -67,20 +67,20 @@ export function getInitialPositionTokens(
   const playersColors: ESufixColors[] = getPlayersColors(boardColor, totalPlayers);
   const tokensPosition: EPositionGame[] = getTokensPositionsOnBoard(totalPlayers);
   //TODO: Uncomment
-  // return players.map<IListTokens>((player, index) => {
-  //   // Current user who is playing online, it is always at position 0.
-  //   const isCurrentOnlineUser: boolean = index === 0;
-  //   const { isBot = false, isOnline = false } = player;
-  //   const canSelectToken = isOnline ? isCurrentOnlineUser : !isBot;
-  //   const color = playersColors[index];
-  //   const positionGame = tokensPosition[index];
+  return players.map<IListTokens>((player, index) => {
+    // Current user who is playing online, it is always at position 0.
+    const isCurrentOnlineUser: boolean = index === 0;
+    const { isBot = false, isOnline = false } = player;
+    const canSelectToken = isOnline ? isCurrentOnlineUser : !isBot;
+    const color = playersColors[index];
+    const positionGame = tokensPosition[index];
 
-  //   const tokens: IToken[] = getTokensInJail(positionGame, color, canSelectToken);
+    const tokens: IToken[] = getTokensInJail(positionGame, color, canSelectToken);
 
-  //   return { index, positionGame, tokens };
-  // });
+    return { index, positionGame, tokens };
+  });
 
-  return TOKENS_JAIL_AND_OUTSITE;
+  // return TOKENS_JAIL_AND_OUTSITE;
 }
 
 /**
@@ -698,13 +698,15 @@ export function validateMovementToken(
   players: IPlayer[],
   totalTokens: TShowTotalTokens,
 ): {
+  actionsTurn: IActionsTurn;
   actionsMoveToken: IActionsMoveToken;
   listTokens: IListTokens[];
   totalTokens: TShowTotalTokens;
   players: IPlayer[];
   gameOverState?: IGameOver;
 } {
-  const copyActionsMoveToken: IActionsMoveToken = cloneDeep(actionsMoveToken);
+  let copyActionsMoveToken: IActionsMoveToken = cloneDeep(actionsMoveToken);
+  let copyActionsTurn: IActionsTurn = cloneDeep(actionsTurn);
   let copyListTokens: IListTokens[] = cloneDeep(listTokens);
   let copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
   let copyPlayers: IPlayer[] = cloneDeep(players);
@@ -716,7 +718,7 @@ export function validateMovementToken(
   const { tokenIndex } = copyActionsMoveToken;
   const tokenToBeMoved: IToken = copyListTokens[currentTurn].tokens[tokenIndex];
   let positionTile: number = 0;
-  const goNextTurn: boolean = false;
+  let goNextTurn: boolean = false;
   let isGameOver: boolean = false;
 
   if (tokenToBeMoved.typeTile === EtypeTile.EXIT) {
@@ -754,7 +756,7 @@ export function validateMovementToken(
 
   if (copyActionsMoveToken.cellsCounter === copyActionsMoveToken.totalCellsMove) {
     let rollDiceAgain: boolean = false;
-    const moveTokensAgain: boolean = true;
+    let moveTokensAgain: boolean = true;
 
     copyActionsMoveToken.isRunning = false;
     copyListTokens[currentTurn].tokens[tokenIndex].isMoving = false;
@@ -837,9 +839,48 @@ export function validateMovementToken(
         copyListTokens = t.listTokens;
       }
     }
+
+    goNextTurn = copyActionsTurn.diceList.length === 0;
+
+    console.log({ goNextTurn });
+
+    if (copyActionsTurn.diceList.length && !rollDiceAgain) {
+      const {
+        canMoveTokens,
+        copyListTokens: newListTokens,
+        moveAutomatically,
+        tokenIndex,
+        diceIndex,
+      } = validateDiceForTokenMovement(copyCurrentTurn, copyListTokens, actionsTurn.diceList);
+      // copyListTokens = newListTokens;
+      console.log({ moveAutomatically });
+      if (moveAutomatically) {
+        const validatedTokenSelected = validateSelectedToken(
+          copyActionsTurn,
+          copyListTokens,
+          currentTurn,
+          diceIndex,
+          tokenIndex,
+          copyTotalTokens,
+        );
+
+        copyActionsTurn = validatedTokenSelected.actionsTurn;
+        copyActionsMoveToken = validatedTokenSelected.actionsMoveToken;
+        copyListTokens = validatedTokenSelected.listTokens;
+        copyTotalTokens = validatedTokenSelected.totalTokens;
+      } else {
+        goNextTurn = !canMoveTokens;
+
+        if (canMoveTokens) {
+          copyListTokens = newListTokens;
+          moveTokensAgain = true;
+        }
+      }
+    }
   }
 
   return {
+    actionsTurn: copyActionsTurn,
     actionsMoveToken: copyActionsMoveToken,
     listTokens: copyListTokens,
     totalTokens: copyTotalTokens,
