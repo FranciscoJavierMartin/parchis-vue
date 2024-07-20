@@ -64,7 +64,7 @@ interface TokensDebugProps {
 }
 
 const props = withDefaults(defineProps<TokensDebugProps>(), { typeGame: ETypeGame.OFFLINE });
-const emit = defineEmits(['updateTokens']);
+const emit = defineEmits<{ updateTokens: [listTokens: IListTokens[]] }>();
 
 const selects = reactive<TSelects>({ player: -1, token: -1, type: -1, position: -1 });
 
