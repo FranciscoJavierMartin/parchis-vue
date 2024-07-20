@@ -651,6 +651,15 @@ export function validateMovementToken(
   let positionTile: number = 0;
   const goNextTurn: boolean = false;
 
+  if (tokenToBeMoved.typeTile === EtypeTile.NORMAL) {
+    if (tokenToBeMoved.positionTile !== exitTileIndex) {
+      positionTile = validateIncrementTokenMovement(tokenToBeMoved.positionTile);
+    } else {
+      positionTile = 0;
+      copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.EXIT;
+    }
+  }
+
   if (tokenToBeMoved.typeTile === EtypeTile.JAIL) {
     positionTile = startTileIndex;
     copyListTokens[currentTurn].tokens[tokenIndex].animated = true;
