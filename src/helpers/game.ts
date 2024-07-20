@@ -682,7 +682,8 @@ export function validateMovementToken(
           (totalTokensInCell.distribution[currentTurn] ?? []).length === totalTokensInCell.total;
 
         if (!(isSameToken || isSafeTile)) {
-          const totalTokensRemain = totalTokensInCell.total;
+          //TODO: Check
+          const totalTokensRemain = totalTokensInCell.total - 1;
           let position: number = 1;
 
           Object.entries(totalTokensInCell.distribution)
@@ -711,9 +712,6 @@ export function validateMovementToken(
                 tokenIndexToJail;
               copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].coordinate =
                 getCoordinatesByTileType(EtypeTile.JAIL, positionGameToJail, tokenIndexToJail);
-              // TODO: Check
-              copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].totalTokens--;
-              copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].position--;
 
               rollDiceAgain = true;
             }
