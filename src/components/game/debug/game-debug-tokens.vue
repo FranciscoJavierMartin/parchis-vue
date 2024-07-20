@@ -5,7 +5,9 @@
         v-for="index in 6"
         :key="index"
         :disabled="actionsTurn.disabledDice"
-        @click="() => handleSelectDice(index as TDiceValues, false)"
+        @click="
+          () => emit('handleSelectDice', { diceValue: index as TDiceValues, isActionSocket: false })
+        "
       >
         {{ index }}
       </button>
@@ -49,7 +51,6 @@ import { copyToClipboard, getOptionsSelects, validateChangeToken } from '@/helpe
 import type { TOptions, TSelects } from '@/interfaces/debug';
 import type { TDiceValues } from '@/interfaces/dice';
 import type { IActionsTurn, TTypeGame } from '@/interfaces/game';
-import type { THandleSelectDice } from '@/interfaces/profile';
 import type { IListTokens } from '@/interfaces/token';
 import type { IPlayer } from '@/interfaces/user';
 import GameDebugSelect from '@/components/game/debug/game-debug-select.vue';
@@ -60,11 +61,13 @@ interface TokensDebugProps {
   listTokens: IListTokens[];
   actionsTurn: IActionsTurn;
   typeGame: TTypeGame;
-  handleSelectDice: THandleSelectDice;
 }
 
 const props = withDefaults(defineProps<TokensDebugProps>(), { typeGame: ETypeGame.OFFLINE });
-const emit = defineEmits<{ updateTokens: [listTokens: IListTokens[]] }>();
+const emit = defineEmits<{
+  updateTokens: [listTokens: IListTokens[]];
+  handleSelectDice: [data: { diceValue?: TDiceValues; isActionSocket?: boolean }];
+}>();
 
 const selects = reactive<TSelects>({ player: -1, token: -1, type: -1, position: -1 });
 

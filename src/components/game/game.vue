@@ -42,6 +42,7 @@
           actionsTurn,
           handleSelectDice,
         }"
+        @handle-select-dice="(event) => handleSelectDice(event.diceValue, event.isActionSocket)"
         @update-tokens="updateTokens"
       />
     </template>
