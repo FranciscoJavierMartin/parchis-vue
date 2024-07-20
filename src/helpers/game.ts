@@ -443,7 +443,7 @@ export async function validateDicesForTokens(
   actionsTurn: IActionsTurn;
   listTokens: IListTokens[];
   nextTurn: number;
-  actionsMoveToken: IActionsMoveToken | undefined;
+  actionsMoveToken?: IActionsMoveToken;
   totalTokens: TShowTotalTokens;
 }> {
   let nextTurn: number = currentTurn;
@@ -663,12 +663,30 @@ export function validateSelectedToken(
 function validatePlayerRankingGameOver(
   players: IPlayer[],
   ranking: TPlayerRankingPosition,
-): IGameOver {
+): { players: IPlayer[]; gameOverState: IGameOver } {
   const copyPlayers: IPlayer[] = cloneDeep(players);
 
+  const onlinePlayersNotFinished = copyPlayers.filter(
+    (player: IPlayer) => !player.isOffline && !player.finished,
+  );
+  const offlinePlayers = copyPlayers.filter(
+    (player: IPlayer) => player.isOffline && !player.finished,
+  );
+
+  const playersLeftRanking = [...onlinePlayersNotFinished, ...offlinePlayers];
+
+  playersLeftRanking.forEach((player: IPlayer) => {
+    ranking++;
+    copyPlayers[player.index].finished = true;
+    copyPlayers[player.index].ranking = ranking as TPlayerRankingPosition;
+  });
+
   return {
-    showModal: false,
-    gameOver: true,
+    players: copyPlayers,
+    gameOverState: {
+      showModal: false,
+      gameOver: true,
+    },
   };
 }
 
@@ -684,11 +702,13 @@ export function validateMovementToken(
   listTokens: IListTokens[];
   totalTokens: TShowTotalTokens;
   players: IPlayer[];
+  gameOverState?: IGameOver;
 } {
   const copyActionsMoveToken: IActionsMoveToken = cloneDeep(actionsMoveToken);
   let copyListTokens: IListTokens[] = cloneDeep(listTokens);
   let copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
   let copyPlayers: IPlayer[] = cloneDeep(players);
+  let gameOverState: IGameOver | undefined = undefined;
 
   const copyCurrentTurn: number = currentTurn;
   const { positionGame } = copyListTokens[currentTurn];
@@ -757,11 +777,17 @@ export function validateMovementToken(
         const totalPlayers = copyPlayers.filter((v) => !v.isOffline || v.finished).length;
         const totalPlayersEnd = copyPlayers.filter((v) => v.finished).length;
 
-        let ranking: TPlayerRankingPosition = totalPlayersEnd + 1;
+        const ranking: TPlayerRankingPosition = (totalPlayersEnd + 1) as TPlayerRankingPosition;
         isGameOver = ranking === totalPlayers - 1;
 
         copyPlayers[currentTurn].finished = true;
         copyPlayers[currentTurn].ranking = ranking;
+
+        if (isGameOver) {
+          const validatedGameOver = validatePlayerRankingGameOver(copyPlayers, ranking);
+          copyPlayers = validatedGameOver.players;
+          gameOverState = validatedGameOver.gameOverState;
+        }
       }
     }
 
@@ -818,5 +844,6 @@ export function validateMovementToken(
     listTokens: copyListTokens,
     totalTokens: copyTotalTokens,
     players: copyPlayers,
+    gameOverState,
   };
 }

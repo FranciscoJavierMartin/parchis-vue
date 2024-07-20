@@ -186,6 +186,10 @@ watch(
         totalTokens.value = validatedTokenMovement.totalTokens;
         players.value = validatedTokenMovement.players;
 
+        if (validatedTokenMovement.gameOverState) {
+          isGameOver.value = validatedTokenMovement.gameOverState;
+        }
+
         if (!validatedTokenMovement.actionsMoveToken.isRunning) {
           clearInterval(interval);
         }
