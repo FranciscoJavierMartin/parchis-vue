@@ -438,12 +438,20 @@ export async function validateDicesForTokens(
   listTokens: IListTokens[],
   players: IPlayer[],
   totalTokens: TShowTotalTokens,
-): Promise<{ actionsTurn: IActionsTurn; listTokens: IListTokens[]; nextTurn: number }> {
+): Promise<{
+  actionsTurn: IActionsTurn;
+  listTokens: IListTokens[];
+  nextTurn: number;
+  actionsMoveToken: IActionsMoveToken | undefined;
+  totalTokens: TShowTotalTokens;
+}> {
   let nextTurn: number = currentTurn;
   let newListTokens: IListTokens[] = listTokens;
   let copyActionsTurn: IActionsTurn = JSON.parse(JSON.stringify(actionsTurn));
   const diceValue: TDiceValues = JSON.parse(JSON.stringify(copyActionsTurn.diceValue));
   copyActionsTurn.diceList.push({ key: Math.random(), value: diceValue });
+  let newActionsMoveToken: IActionsMoveToken | undefined = undefined;
+  let copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
 
   const newTotalDicesAvailable = copyActionsTurn.diceList.length;
   const isThreeRolls = validateThreeConsecutiveRolls(copyActionsTurn.diceList);
@@ -479,6 +487,8 @@ export async function validateDicesForTokens(
         );
         copyActionsTurn = validatedTokenSelected.actionsTurn;
         newListTokens = validatedTokenSelected.listTokens;
+        newActionsMoveToken = validatedTokenSelected.actionsMoveToken;
+        copyTotalTokens = validatedTokenSelected.totalTokens;
       } else if (canMoveTokens) {
         copyActionsTurn.timerActivated = true;
         copyActionsTurn.disabledDice = true;
@@ -503,6 +513,8 @@ export async function validateDicesForTokens(
   return {
     actionsTurn: copyActionsTurn,
     listTokens: newListTokens,
+    actionsMoveToken: newActionsMoveToken,
+    totalTokens: copyTotalTokens,
     nextTurn,
   };
 }
@@ -676,7 +688,7 @@ export function validateMovementToken(
 
     if (positionTile === TOTAL_EXIT_TILES - 1) {
       positionTile = tokenToBeMoved.index;
-      copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.EXIT;
+      copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.END;
     }
   }
 
@@ -710,6 +722,21 @@ export function validateMovementToken(
 
     copyActionsMoveToken.isRunning = false;
     copyListTokens[currentTurn].tokens[tokenIndex].isMoving = false;
+
+    const { END } = getTokensValueByCellType(copyListTokens[currentTurn]);
+
+    if (tokenToBeMoved.typeTile === EtypeTile.END) {
+      END.forEach((tokenEnd: IToken) => {
+        const tokenIndexEndPosition = tokenEnd.index;
+        copyListTokens[currentTurn].tokens[tokenIndexEndPosition].positionTile =
+          tokenIndexEndPosition;
+        copyListTokens[currentTurn].tokens[tokenIndexEndPosition].coordinate =
+          getCoordinatesByTileType(EtypeTile.END, positionGame, tokenIndexEndPosition);
+      });
+
+      const finished = END.length === 4;
+      rollDiceAgain = !finished;
+    }
 
     if ([EtypeTile.NORMAL, EtypeTile.EXIT].includes(tokenToBeMoved.typeTile as EtypeTile)) {
       let distributeTokensCell: boolean = tokenToBeMoved.typeTile === EtypeTile.EXIT;

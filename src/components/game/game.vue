@@ -151,6 +151,11 @@ function handleDoneDice(isActionSocket: boolean = false): void {
     actionsTurn.value = res.actionsTurn;
     listTokens.value = res.listTokens;
     currentTurn.value = res.nextTurn;
+    totalTokens.value = res.totalTokens;
+
+    if (res.actionsMoveToken) {
+      actionsMoveToken.value = res.actionsMoveToken;
+    }
   });
 }
 
