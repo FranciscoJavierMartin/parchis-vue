@@ -469,7 +469,16 @@ export async function validateDicesForTokens(
         validateDiceForTokenMovement(currentTurn, listTokens, copyActionsTurn.diceList);
 
       if (moveAutomatically) {
-        // TODO: Return
+        const validatedTokenSelected = validateSelectedToken(
+          copyActionsTurn,
+          copyListTokens,
+          currentTurn,
+          diceIndex,
+          tokenIndex,
+          totalTokens,
+        );
+        copyActionsTurn = validatedTokenSelected.actionsTurn;
+        newListTokens = validatedTokenSelected.listTokens;
       } else if (canMoveTokens) {
         copyActionsTurn.timerActivated = true;
         copyActionsTurn.disabledDice = true;
@@ -477,18 +486,18 @@ export async function validateDicesForTokens(
         copyActionsTurn.actionsBoardGame = EActionsBoardGame.SELECT_TOKEN;
 
         newListTokens = copyListTokens;
+      } else {
+        const nextTurnValidated = await validateNextTurn(
+          currentTurn,
+          players,
+          actionsTurn,
+          false,
+          true,
+        );
+        copyActionsTurn = nextTurnValidated.actionsTurn;
+        nextTurn = nextTurnValidated.nextTurn;
       }
     }
-
-    const nextTurnValidated = await validateNextTurn(
-      currentTurn,
-      players,
-      actionsTurn,
-      false,
-      true,
-    );
-    copyActionsTurn = nextTurnValidated.actionsTurn;
-    nextTurn = nextTurnValidated.nextTurn;
   }
 
   return {
