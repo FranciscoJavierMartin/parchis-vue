@@ -690,6 +690,22 @@ export function validateMovementToken(
 
     copyActionsMoveToken.isRunning = false;
     copyListTokens[currentTurn].tokens[tokenIndex].isMoving = false;
+    const { EXIT } = getTokensValueByCellType(copyListTokens[currentTurn]);
+
+    if (tokenToBeMoved.typeTile === EtypeTile.EXIT) {
+      const totalTokensInCell = getTotalTokensInCell(positionTile, EXIT);
+
+      if (totalTokensInCell.total >= 2) {
+        const totalTokensRemain = totalTokensInCell.total;
+        let position: number = 1;
+
+        totalTokensInCell.tokensByPosition.forEach((index) => {
+          copyListTokens[currentTurn].tokens[index].totalTokens = totalTokensRemain;
+          copyListTokens[currentTurn].tokens[index].position = position;
+          position++;
+        });
+      }
+    }
 
     if (tokenToBeMoved.typeTile === EtypeTile.NORMAL) {
       const isSafeTile = isSafeArea(positionTile);

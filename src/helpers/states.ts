@@ -7,9 +7,9 @@ export const TOKENS_JAIL_AND_OUTSITE: IListTokens[] = [
     tokens: [
       {
         color: 'RED',
-        coordinate: { x: 39, y: 273 },
-        typeTile: 'JAIL',
-        positionTile: 0,
+        coordinate: { x: 182, y: 286 },
+        typeTile: 'EXIT',
+        positionTile: 2,
         index: 0,
         diceAvailable: [],
         totalTokens: 1,
@@ -35,9 +35,9 @@ export const TOKENS_JAIL_AND_OUTSITE: IListTokens[] = [
       },
       {
         color: 'RED',
-        coordinate: { x: 182, y: 338 },
-        typeTile: 'EXIT',
-        positionTile: 0,
+        coordinate: { x: 182, y: 364 },
+        typeTile: 'NORMAL',
+        positionTile: 50,
         index: 2,
         diceAvailable: [],
         totalTokens: 1,
