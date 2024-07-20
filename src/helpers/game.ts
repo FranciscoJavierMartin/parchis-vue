@@ -12,14 +12,21 @@ import type {
 } from '@/interfaces/board';
 import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
 import type {
+  IActionsMoveToken,
   IListTokens,
+  ISelectTokenValues,
   IToken,
   TShowTotalTokens,
   TTokenByPositionType,
 } from '@/interfaces/token';
 import type { IPlayer } from '@/interfaces/user';
 import { getPlayersColors } from '@/helpers/player';
-import { EPositionGame, EtypeTile, type ESufixColors } from '@/constants/board';
+import {
+  EPositionGame,
+  EtypeTile,
+  MAXIMUM_VISIBLE_TOKENS_PER_CELL,
+  type ESufixColors,
+} from '@/constants/board';
 import {
   POSITION_ELEMENTS_BOARD,
   POSITION_TILES,
@@ -29,7 +36,7 @@ import {
 } from '@/helpers/positions-board';
 import type { IDiceList, TDiceValues } from '@/interfaces/dice';
 import { delay } from '@/helpers/debounce';
-import { TOKENS_JAIN_AND_OUTSITE } from '@/helpers/states';
+import { TOKENS_JAIL_AND_OUTSITE } from '@/helpers/states';
 import { cloneDeep } from '@/helpers/clone';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
@@ -43,10 +50,7 @@ export function getInitialActionsTurnValue(indexTurn: number, players: IPlayer[]
     disabledDice: validateDisabledDice(indexTurn, players),
     showDice: true,
     diceValue: 0,
-    diceList: [
-      // { key: 1, value: 6 },
-      // { key: 2, value: 6 },
-    ],
+    diceList: [],
     diceRollNumber: 0,
     isDisabledUI: false,
     actionsBoardGame: EActionsBoardGame.ROLL_DICE,
@@ -75,7 +79,7 @@ export function getInitialPositionTokens(
   //   return { index, positionGame, tokens };
   // });
 
-  return TOKENS_JAIN_AND_OUTSITE;
+  return TOKENS_JAIL_AND_OUTSITE;
 }
 
 /**
@@ -178,8 +182,8 @@ async function validateNextTurn(
   addLastDice: boolean = false,
   addDelayNextTurn: boolean = false,
 ): Promise<{ actionsTurn: IActionsTurn; nextTurn: number }> {
-  let newActionTurn: IActionsTurn = JSON.parse(JSON.stringify(actionsTurn));
-  let nextTurn = currentTurn;
+  let newActionTurn: IActionsTurn = cloneDeep(actionsTurn);
+  let nextTurn: number = currentTurn;
 
   if (addLastDice) {
     const value = newActionTurn.diceValue as TDiceValues;
@@ -253,7 +257,7 @@ function getTotalTokensInNormalCell(
       );
 
       if (newTotal) {
-        acc.total++;
+        acc.total += newTotal;
         acc.distribution[index] = tokensByPosition;
       }
 
@@ -382,15 +386,15 @@ function validateDiceForTokenMovement(
             if (diceAvailable.length) {
               let finalDiceAvailable = diceAvailable;
 
-              // if (finalDiceAvailable.length >= 2) {
-              //   // TODO: Refactor to extract common logic
-              //   const firstDice = finalDiceAvailable[0];
-              //   const isSameDice = finalDiceAvailable.every((v) => v.value === firstDice.value);
+              if (finalDiceAvailable.length >= 2) {
+                // TODO: Refactor to extract common logic
+                const firstDice = finalDiceAvailable[0];
+                const isSameDice = finalDiceAvailable.every((v) => v.value === firstDice.value);
 
-              //   if (isSameDice) {
-              //     finalDiceAvailable = [firstDice];
-              //   }
-              // }
+                if (isSameDice) {
+                  finalDiceAvailable = [firstDice];
+                }
+              }
 
               const indexToken = positionAndToken[positionTile];
               copyListTokens[currentTurn].tokens[indexToken].diceAvailable = finalDiceAvailable;
@@ -434,12 +438,20 @@ export async function validateDicesForTokens(
   listTokens: IListTokens[],
   players: IPlayer[],
   totalTokens: TShowTotalTokens,
-): Promise<{ actionsTurn: IActionsTurn; listTokens: IListTokens[]; nextTurn: number }> {
+): Promise<{
+  actionsTurn: IActionsTurn;
+  listTokens: IListTokens[];
+  nextTurn: number;
+  actionsMoveToken: IActionsMoveToken | undefined;
+  totalTokens: TShowTotalTokens;
+}> {
   let nextTurn: number = currentTurn;
   let newListTokens: IListTokens[] = listTokens;
   let copyActionsTurn: IActionsTurn = JSON.parse(JSON.stringify(actionsTurn));
   const diceValue: TDiceValues = JSON.parse(JSON.stringify(copyActionsTurn.diceValue));
   copyActionsTurn.diceList.push({ key: Math.random(), value: diceValue });
+  let newActionsMoveToken: IActionsMoveToken | undefined = undefined;
+  let copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
 
   const newTotalDicesAvailable = copyActionsTurn.diceList.length;
   const isThreeRolls = validateThreeConsecutiveRolls(copyActionsTurn.diceList);
@@ -465,7 +477,18 @@ export async function validateDicesForTokens(
         validateDiceForTokenMovement(currentTurn, listTokens, copyActionsTurn.diceList);
 
       if (moveAutomatically) {
-        // TODO: Return
+        const validatedTokenSelected = validateSelectedToken(
+          copyActionsTurn,
+          copyListTokens,
+          currentTurn,
+          diceIndex,
+          tokenIndex,
+          totalTokens,
+        );
+        copyActionsTurn = validatedTokenSelected.actionsTurn;
+        newListTokens = validatedTokenSelected.listTokens;
+        newActionsMoveToken = validatedTokenSelected.actionsMoveToken;
+        copyTotalTokens = validatedTokenSelected.totalTokens;
       } else if (canMoveTokens) {
         copyActionsTurn.timerActivated = true;
         copyActionsTurn.disabledDice = true;
@@ -473,6 +496,16 @@ export async function validateDicesForTokens(
         copyActionsTurn.actionsBoardGame = EActionsBoardGame.SELECT_TOKEN;
 
         newListTokens = copyListTokens;
+      } else {
+        const nextTurnValidated = await validateNextTurn(
+          currentTurn,
+          players,
+          actionsTurn,
+          false,
+          true,
+        );
+        copyActionsTurn = nextTurnValidated.actionsTurn;
+        nextTurn = nextTurnValidated.nextTurn;
       }
     }
   }
@@ -480,6 +513,282 @@ export async function validateDicesForTokens(
   return {
     actionsTurn: copyActionsTurn,
     listTokens: newListTokens,
+    actionsMoveToken: newActionsMoveToken,
+    totalTokens: copyTotalTokens,
     nextTurn,
+  };
+}
+
+function validateTokenDistributionCell(
+  token: IToken,
+  listTokens: IListTokens[],
+  currentTurn: number,
+  totalTokens: TShowTotalTokens,
+  removeTokenFromCell: boolean = true,
+): { listTokens: IListTokens[]; totalTokens: TShowTotalTokens } {
+  const copyListTokens = cloneDeep(listTokens);
+  const copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
+  // TODO: Check condition
+  const positionTile = token.positionTile || 0;
+  const totalTokensToBeRemoved = removeTokenFromCell ? 1 : 0;
+
+  if (token.typeTile === EtypeTile.NORMAL) {
+    const totalTokensInCell = getTotalTokensInNormalCell(positionTile, copyListTokens);
+
+    if (totalTokensInCell.total >= 2) {
+      const totalTokensRemain = totalTokensInCell.total - totalTokensToBeRemoved;
+      let position: number = 1;
+
+      //TODO: REFACTOR
+      Object.keys(totalTokensInCell.distribution)
+        .map((playerIndex) => +playerIndex)
+        .forEach((playerIndex) => {
+          totalTokensInCell.distribution[playerIndex].forEach((index) => {
+            const evaluatedIndex: boolean = removeTokenFromCell
+              ? playerIndex === currentTurn
+                ? index !== token.index
+                : true
+              : true;
+
+            if (evaluatedIndex) {
+              copyListTokens[playerIndex].tokens[index].totalTokens = totalTokensRemain;
+              copyListTokens[playerIndex].tokens[index].position = position;
+              position++;
+            }
+          });
+        });
+
+      if (totalTokensInCell.total > MAXIMUM_VISIBLE_TOKENS_PER_CELL) {
+        if (totalTokensRemain > MAXIMUM_VISIBLE_TOKENS_PER_CELL) {
+          copyTotalTokens[positionTile] = totalTokensRemain;
+        } else if (copyTotalTokens[positionTile]) {
+          delete copyTotalTokens[positionTile];
+        }
+      }
+    }
+  }
+
+  if (token.typeTile === EtypeTile.EXIT) {
+    const { EXIT } = getTokensValueByCellType(copyListTokens[currentTurn]);
+    const totalTokensInCell = getTotalTokensInCell(positionTile, EXIT);
+
+    if (totalTokensInCell.total >= 2) {
+      const totalTokensRemain = totalTokensInCell.total - totalTokensToBeRemoved;
+      let position: number = 1;
+
+      totalTokensInCell.tokensByPosition.forEach((index) => {
+        if (index !== token.index || !removeTokenFromCell) {
+          copyListTokens[currentTurn].tokens[index].totalTokens = totalTokensRemain;
+          copyListTokens[currentTurn].tokens[index].position = position;
+          position++;
+        }
+      });
+    }
+  }
+
+  return {
+    listTokens: copyListTokens,
+    totalTokens: copyTotalTokens,
+  };
+}
+
+export function validateSelectedToken(
+  actionsTurn: IActionsTurn,
+  listTokens: IListTokens[],
+  currentTurn: number,
+  diceIndex: number,
+  tokenIndex: number,
+  totalTokens: TShowTotalTokens,
+): {
+  actionsTurn: IActionsTurn;
+  actionsMoveToken: IActionsMoveToken;
+  listTokens: IListTokens[];
+  totalTokens: TShowTotalTokens;
+} {
+  const copyActionsTurn: IActionsTurn = cloneDeep(actionsTurn);
+  let copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
+  let totalCellsMove: TDiceValues = copyActionsTurn.diceList[diceIndex].value;
+  copyActionsTurn.diceList.splice(diceIndex, 1);
+  copyActionsTurn.disabledDice = true;
+  copyActionsTurn.showDice = false;
+  copyActionsTurn.timerActivated = false;
+
+  let copyListTokens = cloneDeep(listTokens);
+  const tokenSelected = copyListTokens[currentTurn].tokens[tokenIndex];
+
+  // TODO: Refactor
+  copyListTokens[currentTurn].tokens.forEach((_, index) => {
+    if (copyListTokens[currentTurn].tokens[index].diceAvailable.length) {
+      copyListTokens[currentTurn].tokens[index].diceAvailable = [];
+      copyListTokens[currentTurn].tokens[index].enableTooltip = false;
+      copyListTokens[currentTurn].tokens[index].animated = false;
+      copyListTokens[currentTurn].tokens[index].isMoving = false;
+    }
+  });
+
+  copyListTokens[currentTurn].tokens[tokenIndex].isMoving = true;
+  copyListTokens[currentTurn].tokens[tokenIndex].totalTokens = 1;
+  copyListTokens[currentTurn].tokens[tokenIndex].position = 1;
+
+  if (tokenSelected.typeTile === EtypeTile.JAIL) {
+    totalCellsMove = 1;
+  }
+
+  if ([EtypeTile.NORMAL, EtypeTile.EXIT].includes(tokenSelected.typeTile as EtypeTile)) {
+    const tokensDistributionCell = validateTokenDistributionCell(
+      tokenSelected,
+      copyListTokens,
+      currentTurn,
+      totalTokens,
+      true,
+    );
+    copyListTokens = tokensDistributionCell.listTokens;
+    copyTotalTokens = tokensDistributionCell.totalTokens;
+  }
+
+  return {
+    actionsTurn: copyActionsTurn,
+    totalTokens: copyTotalTokens,
+    listTokens: copyListTokens,
+    actionsMoveToken: {
+      isRunning: true,
+      tokenIndex,
+      totalCellsMove,
+      cellsCounter: 0,
+    },
+  };
+}
+
+export function validateMovementToken(
+  actionsMoveToken: IActionsMoveToken,
+  actionsTurn: IActionsTurn,
+  currentTurn: number,
+  listTokens: IListTokens[],
+  players: IPlayer[],
+  totalTokens: TShowTotalTokens,
+): {
+  actionsMoveToken: IActionsMoveToken;
+  listTokens: IListTokens[];
+  totalTokens: TShowTotalTokens;
+} {
+  const copyActionsMoveToken: IActionsMoveToken = cloneDeep(actionsMoveToken);
+  let copyListTokens: IListTokens[] = cloneDeep(listTokens);
+  let copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
+  const copyCurrentTurn: number = currentTurn;
+
+  const { positionGame } = copyListTokens[currentTurn];
+  const { startTileIndex, exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
+  const { tokenIndex } = copyActionsMoveToken;
+  const tokenToBeMoved: IToken = copyListTokens[currentTurn].tokens[tokenIndex];
+  let positionTile: number = 0;
+  const goNextTurn: boolean = false;
+
+  if (tokenToBeMoved.typeTile === EtypeTile.EXIT) {
+    positionTile = tokenToBeMoved.positionTile + 1;
+
+    if (positionTile === TOTAL_EXIT_TILES - 1) {
+      positionTile = tokenToBeMoved.index;
+      copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.END;
+    }
+  }
+
+  if (tokenToBeMoved.typeTile === EtypeTile.NORMAL) {
+    if (tokenToBeMoved.positionTile !== exitTileIndex) {
+      positionTile = validateIncrementTokenMovement(tokenToBeMoved.positionTile);
+    } else {
+      positionTile = 0;
+      copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.EXIT;
+    }
+  }
+
+  if (tokenToBeMoved.typeTile === EtypeTile.JAIL) {
+    positionTile = startTileIndex;
+    copyListTokens[currentTurn].tokens[tokenIndex].animated = true;
+    copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.NORMAL;
+  }
+
+  copyListTokens[currentTurn].tokens[tokenIndex].positionTile = positionTile;
+  copyListTokens[currentTurn].tokens[tokenIndex].coordinate = getCoordinatesByTileType(
+    copyListTokens[currentTurn].tokens[tokenIndex].typeTile,
+    positionGame,
+    positionTile,
+  );
+
+  copyActionsMoveToken.cellsCounter++;
+
+  if (copyActionsMoveToken.cellsCounter === copyActionsMoveToken.totalCellsMove) {
+    let rollDiceAgain: boolean = false;
+    const moveTokensAgain: boolean = true;
+
+    copyActionsMoveToken.isRunning = false;
+    copyListTokens[currentTurn].tokens[tokenIndex].isMoving = false;
+
+    const { END } = getTokensValueByCellType(copyListTokens[currentTurn]);
+
+    if (tokenToBeMoved.typeTile === EtypeTile.END) {
+      END.forEach((tokenEnd: IToken) => {
+        const tokenIndexEndPosition = tokenEnd.index;
+        copyListTokens[currentTurn].tokens[tokenIndexEndPosition].positionTile =
+          tokenIndexEndPosition;
+        copyListTokens[currentTurn].tokens[tokenIndexEndPosition].coordinate =
+          getCoordinatesByTileType(EtypeTile.END, positionGame, tokenIndexEndPosition);
+      });
+
+      const finished = END.length === 4;
+      rollDiceAgain = !finished;
+    }
+
+    if ([EtypeTile.NORMAL, EtypeTile.EXIT].includes(tokenToBeMoved.typeTile as EtypeTile)) {
+      let distributeTokensCell: boolean = tokenToBeMoved.typeTile === EtypeTile.EXIT;
+
+      if (tokenToBeMoved.typeTile === EtypeTile.NORMAL) {
+        const isSafeTile = isSafeArea(positionTile);
+        const totalTokensInCell = getTotalTokensInNormalCell(positionTile, copyListTokens);
+
+        if (totalTokensInCell.total >= 2) {
+          const isSameToken: boolean =
+            (totalTokensInCell.distribution[currentTurn] ?? []).length === totalTokensInCell.total;
+          distributeTokensCell = isSameToken || isSafeTile;
+
+          if (!distributeTokensCell) {
+            const playerIndexToJail = Object.keys(totalTokensInCell.distribution)
+              .map((v) => +v)
+              .find((v) => v !== currentTurn);
+
+            if (playerIndexToJail !== undefined) {
+              const tokenIndexToJail = totalTokensInCell.distribution[playerIndexToJail][0];
+              const { positionGame: positionGameToJail } = copyListTokens[playerIndexToJail];
+              copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].animated = true;
+              copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].typeTile = EtypeTile.JAIL;
+              copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].positionTile =
+                tokenIndexToJail;
+              copyListTokens[playerIndexToJail].tokens[tokenIndexToJail].coordinate =
+                getCoordinatesByTileType(EtypeTile.JAIL, positionGameToJail, tokenIndexToJail);
+
+              rollDiceAgain = true;
+            }
+          }
+        }
+      }
+
+      if (distributeTokensCell) {
+        const t = validateTokenDistributionCell(
+          tokenToBeMoved,
+          copyListTokens,
+          currentTurn,
+          copyTotalTokens,
+          false,
+        );
+
+        copyTotalTokens = t.totalTokens;
+        copyListTokens = t.listTokens;
+      }
+    }
+  }
+
+  return {
+    actionsMoveToken: copyActionsMoveToken,
+    listTokens: copyListTokens,
+    totalTokens: copyTotalTokens,
   };
 }
