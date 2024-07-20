@@ -182,8 +182,8 @@ async function validateNextTurn(
   addLastDice: boolean = false,
   addDelayNextTurn: boolean = false,
 ): Promise<{ actionsTurn: IActionsTurn; nextTurn: number }> {
-  let newActionTurn: IActionsTurn = JSON.parse(JSON.stringify(actionsTurn));
-  let nextTurn = currentTurn;
+  let newActionTurn: IActionsTurn = cloneDeep(actionsTurn);
+  let nextTurn: number = currentTurn;
 
   if (addLastDice) {
     const value = newActionTurn.diceValue as TDiceValues;
@@ -469,7 +469,16 @@ export async function validateDicesForTokens(
         validateDiceForTokenMovement(currentTurn, listTokens, copyActionsTurn.diceList);
 
       if (moveAutomatically) {
-        // TODO: Return
+        const validatedTokenSelected = validateSelectedToken(
+          copyActionsTurn,
+          copyListTokens,
+          currentTurn,
+          diceIndex,
+          tokenIndex,
+          totalTokens,
+        );
+        copyActionsTurn = validatedTokenSelected.actionsTurn;
+        newListTokens = validatedTokenSelected.listTokens;
       } else if (canMoveTokens) {
         copyActionsTurn.timerActivated = true;
         copyActionsTurn.disabledDice = true;
@@ -477,6 +486,16 @@ export async function validateDicesForTokens(
         copyActionsTurn.actionsBoardGame = EActionsBoardGame.SELECT_TOKEN;
 
         newListTokens = copyListTokens;
+      } else {
+        const nextTurnValidated = await validateNextTurn(
+          currentTurn,
+          players,
+          actionsTurn,
+          false,
+          true,
+        );
+        copyActionsTurn = nextTurnValidated.actionsTurn;
+        nextTurn = nextTurnValidated.nextTurn;
       }
     }
   }
@@ -641,8 +660,9 @@ export function validateMovementToken(
   totalTokens: TShowTotalTokens;
 } {
   const copyActionsMoveToken: IActionsMoveToken = cloneDeep(actionsMoveToken);
-  const copyListTokens: IListTokens[] = cloneDeep(listTokens);
-  const copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
+  let copyListTokens: IListTokens[] = cloneDeep(listTokens);
+  let copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
+  const copyCurrentTurn: number = currentTurn;
 
   const { positionGame } = copyListTokens[currentTurn];
   const { startTileIndex, exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
@@ -690,49 +710,20 @@ export function validateMovementToken(
 
     copyActionsMoveToken.isRunning = false;
     copyListTokens[currentTurn].tokens[tokenIndex].isMoving = false;
-    const { EXIT } = getTokensValueByCellType(copyListTokens[currentTurn]);
 
-    if (tokenToBeMoved.typeTile === EtypeTile.EXIT) {
-      const totalTokensInCell = getTotalTokensInCell(positionTile, EXIT);
+    if ([EtypeTile.NORMAL, EtypeTile.EXIT].includes(tokenToBeMoved.typeTile as EtypeTile)) {
+      let distributeTokensCell: boolean = tokenToBeMoved.typeTile === EtypeTile.EXIT;
 
-      if (totalTokensInCell.total >= 2) {
-        const totalTokensRemain = totalTokensInCell.total;
-        let position: number = 1;
+      if (tokenToBeMoved.typeTile === EtypeTile.NORMAL) {
+        const isSafeTile = isSafeArea(positionTile);
+        const totalTokensInCell = getTotalTokensInNormalCell(positionTile, copyListTokens);
 
-        totalTokensInCell.tokensByPosition.forEach((index) => {
-          copyListTokens[currentTurn].tokens[index].totalTokens = totalTokensRemain;
-          copyListTokens[currentTurn].tokens[index].position = position;
-          position++;
-        });
-      }
-    }
+        if (totalTokensInCell.total >= 2) {
+          const isSameToken: boolean =
+            (totalTokensInCell.distribution[currentTurn] ?? []).length === totalTokensInCell.total;
+          distributeTokensCell = isSameToken || isSafeTile;
 
-    if (tokenToBeMoved.typeTile === EtypeTile.NORMAL) {
-      const isSafeTile = isSafeArea(positionTile);
-      const totalTokensInCell = getTotalTokensInNormalCell(positionTile, copyListTokens);
-
-      if (totalTokensInCell.total >= 2) {
-        const isSameToken: boolean =
-          (totalTokensInCell.distribution[currentTurn] ?? []).length === totalTokensInCell.total;
-
-        if (!(isSameToken || isSafeTile)) {
-          //TODO: Check
-          const totalTokensRemain = totalTokensInCell.total - 1;
-          let position: number = 1;
-
-          Object.entries(totalTokensInCell.distribution)
-            .map<[number, number[]]>(([playerIndex, tokens]) => [+playerIndex, tokens])
-            .forEach(([playerIndex, tokens]) => {
-              tokens.forEach((index) => {
-                copyListTokens[playerIndex].tokens[index].totalTokens = totalTokensRemain;
-                copyListTokens[playerIndex].tokens[index].position = position;
-                position++;
-              });
-            });
-
-          if (totalTokensRemain > MAXIMUM_VISIBLE_TOKENS_PER_CELL) {
-            copyTotalTokens[positionTile] = totalTokensRemain;
-          } else {
+          if (!distributeTokensCell) {
             const playerIndexToJail = Object.keys(totalTokensInCell.distribution)
               .map((v) => +v)
               .find((v) => v !== currentTurn);
@@ -751,6 +742,19 @@ export function validateMovementToken(
             }
           }
         }
+      }
+
+      if (distributeTokensCell) {
+        const t = validateTokenDistributionCell(
+          tokenToBeMoved,
+          copyListTokens,
+          currentTurn,
+          copyTotalTokens,
+          false,
+        );
+
+        copyTotalTokens = t.totalTokens;
+        copyListTokens = t.listTokens;
       }
     }
   }
