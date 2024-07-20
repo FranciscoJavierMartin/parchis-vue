@@ -2,6 +2,7 @@
 <template>
   <PageWrapper>
     <template #default>
+      <div v-if="isGameOver.showModal">Game over</div>
       <BoardWrapper>
         <!-- prettier-ignore-attribute -->
         <ProfileSection
@@ -62,7 +63,7 @@ import {
   INITIAL_ACTIONS_MOVE_TOKEN,
   TOKEN_MOVEMENT_INTERVAL_VALUE,
 } from '@/constants/game';
-import type { IActionsTurn, TTotalPlayers, TTypeGame } from '@/interfaces/game';
+import type { IActionsTurn, IGameOver, TTotalPlayers, TTypeGame } from '@/interfaces/game';
 import type { IPlayer, IUser } from '@/interfaces/user';
 import type { TBoardColors } from '@/interfaces/board';
 import type { TDiceValues } from '@/interfaces/dice';
@@ -113,6 +114,7 @@ const listTokens = ref<IListTokens[]>(
   getInitialPositionTokens(props.boardColor, props.totalPlayers, players.value),
 );
 const totalTokens = ref<TShowTotalTokens>({});
+const isGameOver = ref<IGameOver>({ gameOver: false, showModal: false });
 
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
   const validatedSelectedToken = validateSelectedToken(
@@ -182,6 +184,7 @@ watch(
         actionsMoveToken.value = validatedTokenMovement.actionsMoveToken;
         listTokens.value = validatedTokenMovement.listTokens;
         totalTokens.value = validatedTokenMovement.totalTokens;
+        players.value = validatedTokenMovement.players;
 
         if (!validatedTokenMovement.actionsMoveToken.isRunning) {
           clearInterval(interval);

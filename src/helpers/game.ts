@@ -10,7 +10,7 @@ import type {
   TPositionGame,
   TtypeTile,
 } from '@/interfaces/board';
-import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
+import type { IActionsTurn, IGameOver, TTotalPlayers } from '@/interfaces/game';
 import type {
   IActionsMoveToken,
   IListTokens,
@@ -38,6 +38,7 @@ import type { IDiceList, TDiceValues } from '@/interfaces/dice';
 import { delay } from '@/helpers/debounce';
 import { TOKENS_JAIL_AND_OUTSITE } from '@/helpers/states';
 import { cloneDeep } from '@/helpers/clone';
+import type { TPlayerRankingPosition } from '@/interfaces/profile';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
   const { isOnline, isBot } = players[indexTurn];
@@ -659,6 +660,18 @@ export function validateSelectedToken(
   };
 }
 
+function validatePlayerRankingGameOver(
+  players: IPlayer[],
+  ranking: TPlayerRankingPosition,
+): IGameOver {
+  const copyPlayers: IPlayer[] = cloneDeep(players);
+
+  return {
+    showModal: false,
+    gameOver: true,
+  };
+}
+
 export function validateMovementToken(
   actionsMoveToken: IActionsMoveToken,
   actionsTurn: IActionsTurn,
@@ -670,18 +683,21 @@ export function validateMovementToken(
   actionsMoveToken: IActionsMoveToken;
   listTokens: IListTokens[];
   totalTokens: TShowTotalTokens;
+  players: IPlayer[];
 } {
   const copyActionsMoveToken: IActionsMoveToken = cloneDeep(actionsMoveToken);
   let copyListTokens: IListTokens[] = cloneDeep(listTokens);
   let copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
-  const copyCurrentTurn: number = currentTurn;
+  let copyPlayers: IPlayer[] = cloneDeep(players);
 
+  const copyCurrentTurn: number = currentTurn;
   const { positionGame } = copyListTokens[currentTurn];
   const { startTileIndex, exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
   const { tokenIndex } = copyActionsMoveToken;
   const tokenToBeMoved: IToken = copyListTokens[currentTurn].tokens[tokenIndex];
   let positionTile: number = 0;
   const goNextTurn: boolean = false;
+  let isGameOver: boolean = false;
 
   if (tokenToBeMoved.typeTile === EtypeTile.EXIT) {
     positionTile = tokenToBeMoved.positionTile + 1;
@@ -736,6 +752,17 @@ export function validateMovementToken(
 
       const finished = END.length === 4;
       rollDiceAgain = !finished;
+
+      if (finished) {
+        const totalPlayers = copyPlayers.filter((v) => !v.isOffline || v.finished).length;
+        const totalPlayersEnd = copyPlayers.filter((v) => v.finished).length;
+
+        let ranking: TPlayerRankingPosition = totalPlayersEnd + 1;
+        isGameOver = ranking === totalPlayers - 1;
+
+        copyPlayers[currentTurn].finished = true;
+        copyPlayers[currentTurn].ranking = ranking;
+      }
     }
 
     if ([EtypeTile.NORMAL, EtypeTile.EXIT].includes(tokenToBeMoved.typeTile as EtypeTile)) {
@@ -790,5 +817,6 @@ export function validateMovementToken(
     actionsMoveToken: copyActionsMoveToken,
     listTokens: copyListTokens,
     totalTokens: copyTotalTokens,
+    players: copyPlayers,
   };
 }
