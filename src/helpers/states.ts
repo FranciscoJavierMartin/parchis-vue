@@ -35,9 +35,9 @@ export const TOKENS_JAIL_AND_OUTSITE: IListTokens[] = [
       },
       {
         color: 'RED',
-        coordinate: { x: 91, y: 273 },
-        typeTile: 'JAIL',
-        positionTile: 2,
+        coordinate: { x: 182, y: 338 },
+        typeTile: 'EXIT',
+        positionTile: 0,
         index: 2,
         diceAvailable: [],
         totalTokens: 1,
