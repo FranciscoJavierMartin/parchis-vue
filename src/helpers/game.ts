@@ -676,7 +676,7 @@ export function validateMovementToken(
 
     if (positionTile === TOTAL_EXIT_TILES - 1) {
       positionTile = tokenToBeMoved.index;
-      copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.EXIT;
+      copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.END;
     }
   }
 
@@ -721,6 +721,8 @@ export function validateMovementToken(
         copyListTokens[currentTurn].tokens[tokenIndexEndPosition].coordinate =
           getCoordinatesByTileType(EtypeTile.END, positionGame, tokenIndexEndPosition);
       });
+
+      const finished = END.length === 4;
     }
 
     if ([EtypeTile.NORMAL, EtypeTile.EXIT].includes(tokenToBeMoved.typeTile as EtypeTile)) {
