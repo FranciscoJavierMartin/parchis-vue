@@ -9,6 +9,7 @@
         v-bind="$props"
         :position="position"
         @handle-timer="(ends) => $emit('handleTimer', ends)"
+        @handle-select-dice="() => $emit('handleSelectDice')"
       />
     </div>
   </div>

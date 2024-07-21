@@ -6,12 +6,13 @@
         <!-- prettier-ignore-attribute -->
         <ProfileSection
           :base-position="EPositionProfiles.TOP"
-          :profile-handlers="{ handleDoneDice, handleMuteChat, handleSelectDice,  }"
+          :profile-handlers="{ handleDoneDice, handleMuteChat, }"
           :players="players"
           :total-players="(players.length as TTotalPlayers)"
           :current-turn="currentTurn"
           :actions-turn="actionsTurn"
           @handle-timer="handleTimer"
+          @handle-select-dice="handleSelectDice"
         />
         <!-- prettier-ignore-attribute -->
         <GameBoard :boardColor="(boardColor as EBoardColors)">
@@ -27,12 +28,13 @@
         <!-- prettier-ignore-attribute -->
         <ProfileSection
           :base-position="EPositionProfiles.BOTTOM"
-          :profile-handlers="{ handleDoneDice, handleMuteChat, handleSelectDice,  }"
+          :profile-handlers="{ handleDoneDice, handleMuteChat, }"
           :players="players"
           :total-players="(players.length as TTotalPlayers)"
           :current-turn="currentTurn"
           :actions-turn="actionsTurn"
           @handle-timer="handleTimer"
+          @handle-select-dice="handleSelectDice"
         />
       </BoardWrapper>
       <GameDebugTokens

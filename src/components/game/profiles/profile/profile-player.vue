@@ -17,7 +17,7 @@
       :dice-roll-number="actionsTurn.diceRollNumber"
       :value="actionsTurn.diceValue"
       @handle-done-dice="handleDoneDice"
-      @handle-select-dice="handleSelectDice"
+      @handle-select-dice="$emit('handleSelectDice')"
     />
     <ProfileRanking v-if="player.finished" :value="player.ranking" />
   </div>
@@ -31,7 +31,6 @@ import ProfileRanking from '@/components/game/profiles/profile/profile-ranking.v
 import type {
   THandleDoneDice,
   THandleMuteChat,
-  THandleSelectDice,
   TPositionProfile,
   TPositionProfiles,
 } from '@/interfaces/profile';
@@ -45,7 +44,6 @@ interface ProfilePlayerProps {
   player: IPlayer;
   position: TPositionProfile;
   actionsTurn: IActionsTurn;
-  handleSelectDice: THandleSelectDice;
   handleDoneDice: THandleDoneDice;
   handleMuteChat: THandleMuteChat;
 }

@@ -8,6 +8,7 @@
       :actions-turn="hasTurn ? actionsTurn : DEFAULT_VALUE_ACTION_TURN"
       :player="players[indexProfile - 1]"
       @handle-timer="(ends) => $emit('handleTimer', ends)"
+      @handle-select-dice="() => $emit('handleSelectDice')"
     />
   </div>
 </template>
