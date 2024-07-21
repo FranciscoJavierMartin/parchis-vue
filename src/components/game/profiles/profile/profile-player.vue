@@ -6,7 +6,7 @@
         :position="position"
         :start-timer="actionsTurn.timerActivated"
         @handle-mute-chat="handleMuteChat"
-        @handle-interval="handleTimer"
+        @handle-interval="(ends) => $emit('handleTimer', ends)"
       />
       <NameAndDice :name="player.name" :has-turn="hasTurn" :dice-available="actionsTurn.diceList" />
     </div>
@@ -32,12 +32,12 @@ import type {
   THandleDoneDice,
   THandleMuteChat,
   THandleSelectDice,
-  THandleTimer,
   TPositionProfile,
   TPositionProfiles,
 } from '@/interfaces/profile';
 import type { IPlayer } from '@/interfaces/user';
 import type { IActionsTurn } from '@/interfaces/game';
+import type { TDiceValues } from '@/interfaces/dice';
 
 interface ProfilePlayerProps {
   basePosition: TPositionProfiles;
@@ -45,13 +45,16 @@ interface ProfilePlayerProps {
   player: IPlayer;
   position: TPositionProfile;
   actionsTurn: IActionsTurn;
-  handleTimer: THandleTimer;
   handleSelectDice: THandleSelectDice;
   handleDoneDice: THandleDoneDice;
   handleMuteChat: THandleMuteChat;
 }
 
 defineProps<ProfilePlayerProps>();
+defineEmits<{
+  handleTimer: [ends: boolean, playerIndex?: number];
+  handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
+}>();
 </script>
 
 <style scoped>
