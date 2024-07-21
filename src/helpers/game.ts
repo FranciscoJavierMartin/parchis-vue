@@ -847,8 +847,6 @@ export function validateMovementToken(
 
     goNextTurn = copyActionsTurn.diceList.length === 0;
 
-    console.log({ goNextTurn });
-
     // FIXME: Bug start here
     if (copyActionsTurn.diceList.length && !rollDiceAgain) {
       const {
@@ -859,7 +857,6 @@ export function validateMovementToken(
         diceIndex,
       } = validateDiceForTokenMovement(currentTurn, copyListTokens, actionsTurn.diceList);
 
-      console.log({ moveAutomatically });
       if (moveAutomatically) {
         const validatedTokenSelected = validateSelectedToken(
           copyActionsTurn,

@@ -181,6 +181,7 @@ watch(
           totalTokens.value,
         );
 
+        actionsTurn.value = validatedTokenMovement.actionsTurn;
         actionsMoveToken.value = validatedTokenMovement.actionsMoveToken;
         listTokens.value = validatedTokenMovement.listTokens;
         totalTokens.value = validatedTokenMovement.totalTokens;
