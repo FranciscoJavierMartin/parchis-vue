@@ -3,6 +3,7 @@
     <div class="game-over-options">
       <div class="game-over-container">
         <GameOverRibbon title="Well played" />
+        <FirstPosition :first="first!" />
       </div>
     </div>
   </div>
@@ -13,6 +14,7 @@ import { onBeforeMount, ref } from 'vue';
 import { getOrganizedRanking } from '@/helpers/player';
 import type { IPlayer } from '@/interfaces/user';
 import GameOverRibbon from '@/components/game/over/game-over-ribbon.vue';
+import FirstPosition from '@/components/game/over/first-position.vue';
 
 interface GameOverProps {
   players: IPlayer[];
