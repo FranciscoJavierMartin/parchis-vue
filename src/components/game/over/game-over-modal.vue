@@ -5,7 +5,7 @@
         <GameOverRibbon title="Well played" />
         <FirstPosition :first="first!" />
         <div class="game-over-container-others">
-          <OtherPlayer v-for="player of players" :key="player.id" :player="player" />
+          <OtherPlayer v-for="player of others" :key="player.id" :player="player" />
         </div>
       </div>
     </div>
@@ -80,7 +80,6 @@ onBeforeMount(() => {
         gap: 15px;
         justify-content: center;
         width: 85%;
-        border: 1px solid red;
       }
     }
   }
