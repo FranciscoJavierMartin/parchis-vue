@@ -1,6 +1,6 @@
 <template>
   <div class="other-player-container">
-    <span class="position">{{ player.ranking }}</span>
+    <span class="position">{{ rankingPosition }}</span>
     <PlayerAvatar :photo="player.photo || ''" :name="player.name" />
     <div class="other-player-name game-over-color" :class="[player.color.toLowerCase()]">
       {{ player.name }}
@@ -9,14 +9,18 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import type { IPlayer } from '@/interfaces/user';
 import PlayerAvatar from '@/components/avatar/player-avatar.vue';
+import { getLabelRanking } from '@/helpers/player';
 
 interface OtherPlayerProps {
   player: IPlayer;
 }
 
-defineProps<OtherPlayerProps>();
+const props = defineProps<OtherPlayerProps>();
+
+const rankingPosition = computed<string>(() => getLabelRanking(props.player.ranking));
 </script>
 
 <style scoped>

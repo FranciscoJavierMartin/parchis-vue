@@ -3,7 +3,7 @@
     <div class="first-position-container-winner-photo">
       <WinnerCrown />
       <PlayerAvatar :photo="first.photo || ''" :name="first.name" />
-      <span class="position">{{ first.ranking }}</span>
+      <span class="position">{{ rankingPosition }}</span>
     </div>
     <div class="first-position-container-name game-over-color" :class="[first.color.toLowerCase()]">
       {{ first.name }}
@@ -12,15 +12,19 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import PlayerAvatar from '@/components/avatar/player-avatar.vue';
 import WinnerCrown from '@/components/icons/winner-crown.vue';
+import { getLabelRanking } from '@/helpers/player';
 import type { IPlayer } from '@/interfaces/user';
 
 interface FirstPositionProps {
   first: IPlayer;
 }
 
-defineProps<FirstPositionProps>();
+const props = defineProps<FirstPositionProps>();
+
+const rankingPosition = computed<string>(() => getLabelRanking(props.first.ranking));
 </script>
 
 <style scoped>
