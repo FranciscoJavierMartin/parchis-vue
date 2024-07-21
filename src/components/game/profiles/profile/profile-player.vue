@@ -93,15 +93,15 @@ defineEmits<{
       right: 55px;
     }
 
-    :deep(.game-profile-dices) {
+    &:deep(.game-profile-dices) {
       flex-direction: row-reverse;
     }
 
-    :deep(.game-profile-name-dice) {
+    &:deep(.game-profile-name-dice) {
       justify-content: flex-end;
     }
 
-    :deep(.game-profile-name) {
+    &:deep(.game-profile-name) {
       text-align: right;
     }
   }

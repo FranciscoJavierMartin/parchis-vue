@@ -50,8 +50,25 @@ onBeforeMount(() => {
     width: 75%;
     animation: fadeInLeft 500ms ease both;
 
-    /* .game-over-container {
-    } */
+    .game-over-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 35px 0 15px 0;
+      background: radial-gradient(circle, rgba(160, 34, 107, 1) 16%, rgba(95, 8, 98, 1) 100%);
+      border-radius: 5px;
+      box-shadow:
+        black 0px 0px 0px 3px,
+        #be835d 0px 0px 0px 6px,
+        rgb(255, 217, 19) 0px 0px 0px 9px;
+
+      &:deep(.game-over-ribbon) {
+        position: absolute;
+        top: -50px;
+      }
+    }
   }
 }
 </style>
