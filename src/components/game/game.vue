@@ -6,7 +6,6 @@
         <!-- prettier-ignore-attribute -->
         <ProfileSection
           :base-position="EPositionProfiles.TOP"
-          :profile-handlers="{ handleMuteChat, }"
           :players="players"
           :total-players="(players.length as TTotalPlayers)"
           :current-turn="currentTurn"
@@ -30,7 +29,6 @@
         <!-- prettier-ignore-attribute -->
         <ProfileSection
           :base-position="EPositionProfiles.BOTTOM"
-          :profile-handlers="{ handleMuteChat, }"
           :players="players"
           :total-players="(players.length as TTotalPlayers)"
           :current-turn="currentTurn"
