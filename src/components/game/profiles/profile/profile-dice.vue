@@ -32,8 +32,8 @@ const props = withDefaults(defineProps<ProfileDiceProps>(), {
   diceRollNumber: 0,
 });
 const emit = defineEmits<{
-  handleDoneDice: [];
-  handleSelectDice: [];
+  handleDoneDice: [isActionSocket?: boolean];
+  handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
 }>();
 
 const diceRef = ref<typeof Dice3d | null>(null);
