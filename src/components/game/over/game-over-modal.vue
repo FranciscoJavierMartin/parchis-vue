@@ -74,6 +74,14 @@ onBeforeMount(() => {
         position: absolute;
         top: -50px;
       }
+
+      .game-over-container-others {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        width: 85%;
+        border: 1px solid red;
+      }
     }
   }
 }
