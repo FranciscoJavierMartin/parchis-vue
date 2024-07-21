@@ -2,11 +2,11 @@
   <div class="game-profile" :class="[basePosition.toLowerCase(), position.toLowerCase()]">
     <div class="game-profile-dice-name">
       <ProfileImage
-        :handle-interval="(ends) => handleTimer(ends)"
         :player="player"
         :position="position"
         :start-timer="actionsTurn.timerActivated"
-        :handle-mute-chat="handleMuteChat"
+        @handle-mute-chat="handleMuteChat"
+        :handle-interval="(ends) => handleTimer(ends)"
       />
       <NameAndDice :name="player.name" :has-turn="hasTurn" :dice-available="actionsTurn.diceList" />
     </div>

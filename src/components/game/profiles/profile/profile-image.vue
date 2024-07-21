@@ -7,7 +7,7 @@
       :aria-describedby="titleMuteChat"
       class="game-profile-mute-chat"
       :class="[position.toLowerCase(), { mute: player.isMuted }]"
-      @click="() => handleMuteChat(player.index)"
+      @click="() => $emit('handleMuteChat', player.index)"
     >
       <ChatBubble class="icon-wrapper" />
     </button>
@@ -20,18 +20,19 @@ import { computed, ref, watch } from 'vue';
 import PlayerAvatar from '@/components/avatar/player-avatar.vue';
 import { TIME_INTERVAL_CHRONOMETER } from '@/constants/game';
 import type { IPlayer } from '@/interfaces/user';
-import type { THandleMuteChat, TPositionProfile } from '@/interfaces/profile';
+import type { TPositionProfile } from '@/interfaces/profile';
 import ChatBubble from '@/components/icons/chat-bubble.vue';
 
 interface ProfileImageProps {
   player: IPlayer;
   startTimer: boolean;
   position: TPositionProfile;
-  handleMuteChat: THandleMuteChat;
   handleInterval: (ends: boolean) => void;
 }
 
 const props = defineProps<ProfileImageProps>();
+const emit = defineEmits<{ handleMuteChat: [playerIndex: number] }>();
+
 const progress = ref<number>(1);
 const isRunning = ref<boolean>(false);
 
