@@ -718,10 +718,10 @@ export function validateMovementToken(
   let gameOverState: IGameOver | undefined = undefined;
 
   const copyCurrentTurn: number = currentTurn;
-  const { positionGame } = copyListTokens[currentTurn];
+  const { positionGame } = copyListTokens[copyCurrentTurn];
   const { startTileIndex, exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
   const { tokenIndex } = copyActionsMoveToken;
-  const tokenToBeMoved: IToken = copyListTokens[currentTurn].tokens[tokenIndex];
+  const tokenToBeMoved: IToken = copyListTokens[copyCurrentTurn].tokens[tokenIndex];
   let positionTile: number = 0;
   let goNextTurn: boolean = false;
   let isGameOver: boolean = false;
@@ -731,7 +731,7 @@ export function validateMovementToken(
 
     if (positionTile === TOTAL_EXIT_TILES - 1) {
       positionTile = tokenToBeMoved.index;
-      copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.END;
+      copyListTokens[copyCurrentTurn].tokens[tokenIndex].typeTile = EtypeTile.END;
     }
   }
 
@@ -740,19 +740,19 @@ export function validateMovementToken(
       positionTile = validateIncrementTokenMovement(tokenToBeMoved.positionTile);
     } else {
       positionTile = 0;
-      copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.EXIT;
+      copyListTokens[copyCurrentTurn].tokens[tokenIndex].typeTile = EtypeTile.EXIT;
     }
   }
 
   if (tokenToBeMoved.typeTile === EtypeTile.JAIL) {
     positionTile = startTileIndex;
-    copyListTokens[currentTurn].tokens[tokenIndex].animated = true;
-    copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.NORMAL;
+    copyListTokens[copyCurrentTurn].tokens[tokenIndex].animated = true;
+    copyListTokens[copyCurrentTurn].tokens[tokenIndex].typeTile = EtypeTile.NORMAL;
   }
 
-  copyListTokens[currentTurn].tokens[tokenIndex].positionTile = positionTile;
-  copyListTokens[currentTurn].tokens[tokenIndex].coordinate = getCoordinatesByTileType(
-    copyListTokens[currentTurn].tokens[tokenIndex].typeTile,
+  copyListTokens[copyCurrentTurn].tokens[tokenIndex].positionTile = positionTile;
+  copyListTokens[copyCurrentTurn].tokens[tokenIndex].coordinate = getCoordinatesByTileType(
+    copyListTokens[copyCurrentTurn].tokens[tokenIndex].typeTile,
     positionGame,
     positionTile,
   );
@@ -764,16 +764,16 @@ export function validateMovementToken(
     let moveTokensAgain: boolean = true;
 
     copyActionsMoveToken.isRunning = false;
-    copyListTokens[currentTurn].tokens[tokenIndex].isMoving = false;
+    copyListTokens[copyCurrentTurn].tokens[tokenIndex].isMoving = false;
 
-    const { END } = getTokensValueByCellType(copyListTokens[currentTurn]);
+    const { END } = getTokensValueByCellType(copyListTokens[copyCurrentTurn]);
 
     if (tokenToBeMoved.typeTile === EtypeTile.END) {
       END.forEach((tokenEnd: IToken) => {
         const tokenIndexEndPosition = tokenEnd.index;
-        copyListTokens[currentTurn].tokens[tokenIndexEndPosition].positionTile =
+        copyListTokens[copyCurrentTurn].tokens[tokenIndexEndPosition].positionTile =
           tokenIndexEndPosition;
-        copyListTokens[currentTurn].tokens[tokenIndexEndPosition].coordinate =
+        copyListTokens[copyCurrentTurn].tokens[tokenIndexEndPosition].coordinate =
           getCoordinatesByTileType(EtypeTile.END, positionGame, tokenIndexEndPosition);
       });
 
@@ -787,8 +787,8 @@ export function validateMovementToken(
         const ranking: TPlayerRankingPosition = (totalPlayersEnd + 1) as TPlayerRankingPosition;
         isGameOver = ranking === totalPlayers - 1;
 
-        copyPlayers[currentTurn].finished = true;
-        copyPlayers[currentTurn].ranking = ranking;
+        copyPlayers[copyCurrentTurn].finished = true;
+        copyPlayers[copyCurrentTurn].ranking = ranking;
 
         if (isGameOver) {
           const validatedGameOver = validatePlayerRankingGameOver(copyPlayers, ranking);
@@ -807,13 +807,14 @@ export function validateMovementToken(
 
         if (totalTokensInCell.total >= 2) {
           const isSameToken: boolean =
-            (totalTokensInCell.distribution[currentTurn] ?? []).length === totalTokensInCell.total;
+            (totalTokensInCell.distribution[copyCurrentTurn] ?? []).length ===
+            totalTokensInCell.total;
           distributeTokensCell = isSameToken || isSafeTile;
 
           if (!distributeTokensCell) {
             const playerIndexToJail = Object.keys(totalTokensInCell.distribution)
               .map((v) => +v)
-              .find((v) => v !== currentTurn);
+              .find((v) => v !== copyCurrentTurn);
 
             if (playerIndexToJail !== undefined) {
               const tokenIndexToJail = totalTokensInCell.distribution[playerIndexToJail][0];
@@ -835,7 +836,7 @@ export function validateMovementToken(
         const t = validateTokenDistributionCell(
           tokenToBeMoved,
           copyListTokens,
-          currentTurn,
+          copyCurrentTurn,
           copyTotalTokens,
           false,
         );
@@ -847,7 +848,6 @@ export function validateMovementToken(
 
     goNextTurn = copyActionsTurn.diceList.length === 0;
 
-    // FIXME: Bug start here
     if (copyActionsTurn.diceList.length && !rollDiceAgain) {
       const {
         canMoveTokens,
@@ -855,13 +855,13 @@ export function validateMovementToken(
         moveAutomatically,
         tokenIndex,
         diceIndex,
-      } = validateDiceForTokenMovement(currentTurn, copyListTokens, actionsTurn.diceList);
+      } = validateDiceForTokenMovement(copyCurrentTurn, copyListTokens, copyActionsTurn.diceList);
 
       if (moveAutomatically) {
         const validatedTokenSelected = validateSelectedToken(
           copyActionsTurn,
           copyListTokens,
-          currentTurn,
+          copyCurrentTurn,
           diceIndex,
           tokenIndex,
           copyTotalTokens,
