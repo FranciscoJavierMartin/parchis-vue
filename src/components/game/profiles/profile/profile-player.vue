@@ -16,8 +16,10 @@
       :show-dice="actionsTurn.showDice"
       :dice-roll-number="actionsTurn.diceRollNumber"
       :value="actionsTurn.diceValue"
-      @handle-done-dice="$emit('handleDoneDice')"
-      @handle-select-dice="$emit('handleSelectDice')"
+      @handle-done-dice="(isActionSocket) => $emit('handleDoneDice', isActionSocket)"
+      @handle-select-dice="
+        (diceValue, isActionSocket) => $emit('handleSelectDice', diceValue, isActionSocket)
+      "
     />
     <ProfileRanking v-if="player.finished" :value="player.ranking" />
   </div>

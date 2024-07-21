@@ -7,8 +7,10 @@
       :actions-turn="hasTurn ? actionsTurn : DEFAULT_VALUE_ACTION_TURN"
       :player="players[indexProfile - 1]"
       @handle-timer="(ends) => $emit('handleTimer', ends)"
-      @handle-select-dice="() => $emit('handleSelectDice')"
-      @handle-done-dice="() => $emit('handleDoneDice')"
+      @handle-select-dice="
+        (diceValue, isActionSocket) => $emit('handleSelectDice', diceValue, isActionSocket)
+      "
+      @handle-done-dice="(isActionSocket) => $emit('handleDoneDice', isActionSocket)"
       @handle-mute-chat="(playerIndex) => $emit('handleMuteChat', playerIndex)"
     />
   </div>
