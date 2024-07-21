@@ -28,7 +28,7 @@ interface Dice3dProps {
 const props = withDefaults(defineProps<Dice3dProps>(), {
   rollTime: ROLL_TIME_VALUE,
 });
-const emit = defineEmits(['rollDone']);
+const emit = defineEmits<{ rollDone: [] }>();
 
 const isRolling = ref<boolean>(false);
 const diceValue = ref<TDiceValues>(1);
