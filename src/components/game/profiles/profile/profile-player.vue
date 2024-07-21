@@ -16,8 +16,8 @@
       :show-dice="actionsTurn.showDice"
       :dice-roll-number="actionsTurn.diceRollNumber"
       :value="actionsTurn.diceValue"
-      :handle-done-dice="handleDoneDice"
-      :handle-select-dice="handleSelectDice"
+      @handle-done-dice="handleDoneDice"
+      @handle-select-dice="handleSelectDice"
     />
     <ProfileRanking v-if="player.finished" :value="player.ranking" />
   </div>
