@@ -1,7 +1,11 @@
 <template>
   <div class="game-profile-dice" :class="{ hide: !showDice }">
     <ArrowDown v-if="!disabledDice" class="icon-wrapper" :stroke-width="3.5" />
-    <button class="game-profile-dice-button" :disabled="disabledDice" @click="handleSelectDice">
+    <button
+      class="game-profile-dice-button"
+      :disabled="disabledDice"
+      @click="$emit('handleSelectDice')"
+    >
       <Dice3d ref="diceRef" :size="45" :roll-time="ROLL_TIME_VALUE" @roll-done="rollDone" />
     </button>
   </div>
@@ -19,8 +23,6 @@ interface ProfileDiceProps {
   showDice: boolean;
   value: 0 | TDiceValues;
   diceRollNumber: number;
-  handleDoneDice: () => void;
-  handleSelectDice: () => void;
 }
 
 const props = withDefaults(defineProps<ProfileDiceProps>(), {
@@ -29,12 +31,16 @@ const props = withDefaults(defineProps<ProfileDiceProps>(), {
   value: 0,
   diceRollNumber: 0,
 });
+const emit = defineEmits<{
+  handleDoneDice: [isActionSocket?: boolean];
+  handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
+}>();
 
 const diceRef = ref<typeof Dice3d | null>(null);
 
 function rollDone(): void {
   if (props.value) {
-    props.handleDoneDice();
+    emit('handleDoneDice');
   }
 }
 

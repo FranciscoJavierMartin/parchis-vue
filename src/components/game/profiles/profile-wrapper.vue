@@ -1,12 +1,18 @@
 <template>
   <div v-if="indexProfile">
     <ProfilePlayer
-      v-bind="profileHandlers"
       :base-position="basePosition"
       :position="position"
       :has-turn="hasTurn"
       :actions-turn="hasTurn ? actionsTurn : DEFAULT_VALUE_ACTION_TURN"
       :player="players[indexProfile - 1]"
+      @handle-timer="(ends: boolean) => $emit('handleTimer', ends)"
+      @handle-select-dice="
+        (diceValue?: TDiceValues, isActionSocket?: boolean) =>
+          $emit('handleSelectDice', diceValue, isActionSocket)
+      "
+      @handle-done-dice="(isActionSocket?: boolean) => $emit('handleDoneDice', isActionSocket)"
+      @handle-mute-chat="(playerIndex: number) => $emit('handleMuteChat', playerIndex)"
     />
   </div>
 </template>
@@ -15,9 +21,10 @@
 import { computed } from 'vue';
 import ProfilePlayer from '@/components/game/profiles/profile/profile-player.vue';
 import { DEFAULT_VALUE_ACTION_TURN } from '@/constants/game';
-import type { IProfileHandlers, TPositionProfile, TPositionProfiles } from '@/interfaces/profile';
+import type { TPositionProfile, TPositionProfiles } from '@/interfaces/profile';
 import type { IPlayer } from '@/interfaces/user';
 import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
+import type { TDiceValues } from '@/interfaces/dice';
 
 // TODO: Extract in common (without position)
 interface ProfileSectionProps {
@@ -25,12 +32,17 @@ interface ProfileSectionProps {
   currentTurn: number;
   players: IPlayer[];
   totalPlayers: TTotalPlayers;
-  profileHandlers: IProfileHandlers;
   actionsTurn: IActionsTurn;
   position: TPositionProfile;
 }
 
 const props = defineProps<ProfileSectionProps>();
+defineEmits<{
+  handleTimer: [ends: boolean, playerIndex?: number];
+  handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
+  handleDoneDice: [isActionSocket?: boolean];
+  handleMuteChat: [playerIndex: number];
+}>();
 
 type TPositionPlayerIndex = Record<TPositionProfile, number>;
 type TPositionBoard = Record<TPositionProfiles, Partial<TPositionPlayerIndex>>;

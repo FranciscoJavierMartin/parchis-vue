@@ -7,19 +7,22 @@
         <!-- prettier-ignore-attribute -->
         <ProfileSection
           :base-position="EPositionProfiles.TOP"
-          :profile-handlers="{ handleDoneDice, handleMuteChat, handleSelectDice, handleTimer }"
           :players="players"
           :total-players="(players.length as TTotalPlayers)"
           :current-turn="currentTurn"
           :actions-turn="actionsTurn"
+          @handle-timer="handleTimer"
+          @handle-select-dice="handleSelectDice"
+          @handle-done-dice="handleDoneDice"
+          @handle-mute-chat="handleMuteChat"
         />
         <!-- prettier-ignore-attribute -->
         <GameBoard :boardColor="(boardColor as EBoardColors)">
           <TokenList
             :dice-list="actionsTurn.diceList"
-            :handle-selected-token="handleSelectedToken"
             :list-token="listTokens"
             :debug="debug"
+            @handle-selected-token="handleSelectedToken"
           />
           <GameDebug v-if="debug" />
           <ShowTotalTokens :total-tokens="totalTokens" />
@@ -27,11 +30,14 @@
         <!-- prettier-ignore-attribute -->
         <ProfileSection
           :base-position="EPositionProfiles.BOTTOM"
-          :profile-handlers="{ handleDoneDice, handleMuteChat, handleSelectDice, handleTimer }"
           :players="players"
           :total-players="(players.length as TTotalPlayers)"
           :current-turn="currentTurn"
           :actions-turn="actionsTurn"
+          @handle-timer="handleTimer"
+          @handle-select-dice="handleSelectDice"
+          @handle-done-dice="handleDoneDice"
+          @handle-mute-chat="handleMuteChat"
         />
       </BoardWrapper>
       <GameDebugTokens
@@ -43,6 +49,7 @@
           actionsTurn,
           handleSelectDice,
         }"
+        @handle-select-dice="(event) => handleSelectDice(event.diceValue, event.isActionSocket)"
         @update-tokens="updateTokens"
       />
     </template>

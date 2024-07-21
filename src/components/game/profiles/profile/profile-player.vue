@@ -2,11 +2,11 @@
   <div class="game-profile" :class="[basePosition.toLowerCase(), position.toLowerCase()]">
     <div class="game-profile-dice-name">
       <ProfileImage
-        :handle-interval="(ends) => handleTimer(ends)"
         :player="player"
         :position="position"
         :start-timer="actionsTurn.timerActivated"
-        :handle-mute-chat="handleMuteChat"
+        @handle-mute-chat="(playerIndex: number) => $emit('handleMuteChat', playerIndex)"
+        @handle-interval="(ends: boolean) => $emit('handleTimer', ends)"
       />
       <NameAndDice :name="player.name" :has-turn="hasTurn" :dice-available="actionsTurn.diceList" />
     </div>
@@ -16,8 +16,11 @@
       :show-dice="actionsTurn.showDice"
       :dice-roll-number="actionsTurn.diceRollNumber"
       :value="actionsTurn.diceValue"
-      :handle-done-dice="handleDoneDice"
-      :handle-select-dice="handleSelectDice"
+      @handle-done-dice="(isActionSocket?: boolean) => $emit('handleDoneDice', isActionSocket)"
+      @handle-select-dice="
+        (diceValue?: TDiceValues, isActionSocket?: boolean) =>
+          $emit('handleSelectDice', diceValue, isActionSocket)
+      "
     />
     <ProfileRanking v-if="player.finished" :value="player.ranking" />
   </div>
@@ -28,16 +31,10 @@ import ProfileImage from '@/components/game/profiles/profile/profile-image.vue';
 import ProfileDice from '@/components/game/profiles/profile/profile-dice.vue';
 import NameAndDice from '@/components/game/profiles/profile/name-and-dice.vue';
 import ProfileRanking from '@/components/game/profiles/profile/profile-ranking.vue';
-import type {
-  THandleDoneDice,
-  THandleMuteChat,
-  THandleSelectDice,
-  THandleTimer,
-  TPositionProfile,
-  TPositionProfiles,
-} from '@/interfaces/profile';
+import type { TPositionProfile, TPositionProfiles } from '@/interfaces/profile';
 import type { IPlayer } from '@/interfaces/user';
 import type { IActionsTurn } from '@/interfaces/game';
+import type { TDiceValues } from '@/interfaces/dice';
 
 interface ProfilePlayerProps {
   basePosition: TPositionProfiles;
@@ -45,13 +42,15 @@ interface ProfilePlayerProps {
   player: IPlayer;
   position: TPositionProfile;
   actionsTurn: IActionsTurn;
-  handleTimer: THandleTimer;
-  handleSelectDice: THandleSelectDice;
-  handleDoneDice: THandleDoneDice;
-  handleMuteChat: THandleMuteChat;
 }
 
 defineProps<ProfilePlayerProps>();
+defineEmits<{
+  handleTimer: [ends: boolean, playerIndex?: number];
+  handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
+  handleDoneDice: [isActionSocket?: boolean];
+  handleMuteChat: [playerIndex: number];
+}>();
 </script>
 
 <style scoped>

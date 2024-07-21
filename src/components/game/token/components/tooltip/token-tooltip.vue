@@ -8,7 +8,7 @@
       v-for="dice in diceAvailable"
       :key="dice.key"
       :title="`Dice ${dice.value}`"
-      @click="() => handleTooltipDice(dice)"
+      @click="$emit('handleTooltipDice', dice)"
     >
       <DiceFace :value="dice.value" :size="DICE_SIZE_TOOLTIP" shadow />
     </button>
@@ -27,7 +27,6 @@ interface TokenTooltipProps {
   color: TColors;
   coordinate: ICoordinate;
   diceAvailable?: IDiceList[];
-  handleTooltipDice: (dice: IDiceList) => void;
 }
 
 const props = withDefaults(defineProps<TokenTooltipProps>(), {
@@ -35,6 +34,9 @@ const props = withDefaults(defineProps<TokenTooltipProps>(), {
   coordinate: { x: 0, y: 0 } as unknown as () => ICoordinate,
   diceAvailable: [] as unknown as () => IDiceList[],
 });
+defineEmits<{
+  handleTooltipDice: [dice: IDiceList];
+}>();
 
 function isCoordinateInRange(coordinate: ICoordinate): boolean {
   return (
