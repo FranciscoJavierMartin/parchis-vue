@@ -18,7 +18,7 @@
     :color="color"
     :coordinate="coordinate"
     :diceAvailable="diceAvailable"
-    :handleTooltipDice="handleTooltipDice"
+    @handle-tooltip-dice="handleTooltipDice"
     v-click-outside="handleClickOutside"
   />
 </template>
