@@ -1,6 +1,7 @@
 import {
   DICE_VALUE_GET_OUT_JAIL,
   EActionsBoardGame,
+  ENextStepGame,
   MAXIMUM_DICE_PER_TURN,
 } from '@/constants/game';
 import type {
@@ -10,7 +11,7 @@ import type {
   TPositionGame,
   TtypeTile,
 } from '@/interfaces/board';
-import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
+import type { IActionsTurn, IGameOver, TTotalPlayers } from '@/interfaces/game';
 import type {
   IActionsMoveToken,
   IListTokens,
@@ -38,6 +39,8 @@ import type { IDiceList, TDiceValues } from '@/interfaces/dice';
 import { delay } from '@/helpers/debounce';
 import { TOKENS_JAIL_AND_OUTSITE } from '@/helpers/states';
 import { cloneDeep } from '@/helpers/clone';
+import type { TPlayerRankingPosition } from '@/interfaces/profile';
+import type { IENextStepGame } from '@/interfaces/online';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
   const { isOnline, isBot } = players[indexTurn];
@@ -66,20 +69,20 @@ export function getInitialPositionTokens(
   const playersColors: ESufixColors[] = getPlayersColors(boardColor, totalPlayers);
   const tokensPosition: EPositionGame[] = getTokensPositionsOnBoard(totalPlayers);
   //TODO: Uncomment
-  // return players.map<IListTokens>((player, index) => {
-  //   // Current user who is playing online, it is always at position 0.
-  //   const isCurrentOnlineUser: boolean = index === 0;
-  //   const { isBot = false, isOnline = false } = player;
-  //   const canSelectToken = isOnline ? isCurrentOnlineUser : !isBot;
-  //   const color = playersColors[index];
-  //   const positionGame = tokensPosition[index];
+  return players.map<IListTokens>((player, index) => {
+    // Current user who is playing online, it is always at position 0.
+    const isCurrentOnlineUser: boolean = index === 0;
+    const { isBot = false, isOnline = false } = player;
+    const canSelectToken = isOnline ? isCurrentOnlineUser : !isBot;
+    const color = playersColors[index];
+    const positionGame = tokensPosition[index];
 
-  //   const tokens: IToken[] = getTokensInJail(positionGame, color, canSelectToken);
+    const tokens: IToken[] = getTokensInJail(positionGame, color, canSelectToken);
 
-  //   return { index, positionGame, tokens };
-  // });
+    return { index, positionGame, tokens };
+  });
 
-  return TOKENS_JAIL_AND_OUTSITE;
+  // return TOKENS_JAIL_AND_OUTSITE;
 }
 
 /**
@@ -225,12 +228,12 @@ function getTokensValueByCellType(listTokens: IListTokens): TTokenByPositionType
 }
 
 function getUniquePositionTokenCell(tokens: IToken[]): Record<number, number> {
-  return tokens.reduce<Record<number, number>>((acc, { positionTile, index }) => {
-    if (!((acc[positionTile] ?? -1) >= 0)) {
-      acc[positionTile] = index;
+  return tokens.reduce<Record<number, number>>((positionAndToken, { positionTile, index }) => {
+    if (!((positionAndToken[positionTile] ?? -1) >= 0)) {
+      positionAndToken[positionTile] = index;
     }
 
-    return acc;
+    return positionAndToken;
   }, {});
 }
 
@@ -295,7 +298,7 @@ function validateMovementTokenWithValueDice(
 ): boolean {
   const { exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
   let isValid: boolean = true;
-  let newPositionTile = positionTile;
+  let newPositionTile: number = positionTile;
 
   for (let i = 0; i < diceValue; i++) {
     if (newPositionTile !== exitTileIndex) {
@@ -305,7 +308,7 @@ function validateMovementTokenWithValueDice(
 
         if (totalTokensInCell.total >= 2 && !isSafeArea(newPositionTile)) {
           const tokensSameTurn = totalTokensInCell.distribution[currentTurn] ?? [];
-          if (tokensSameTurn.length) {
+          if (tokensSameTurn.length === 0) {
             isValid = false;
           }
         }
@@ -316,8 +319,11 @@ function validateMovementTokenWithValueDice(
       if (remainingCells <= 0 || remainingCells > TOTAL_EXIT_TILES) {
         isValid = false;
       }
+
+      break;
     }
   }
+
   return isValid;
 }
 
@@ -349,7 +355,7 @@ function validateDiceForTokenMovement(
 
   [NORMAL, EXIT].forEach((tokensEvaluate, evaluatedIndex) => {
     if (tokensEvaluate.length) {
-      const positionAndToken = getUniquePositionTokenCell(tokensEvaluate);
+      const positionAndToken: Record<number, number> = getUniquePositionTokenCell(tokensEvaluate);
 
       Object.keys(positionAndToken)
         .map((positionTile) => +positionTile)
@@ -372,7 +378,7 @@ function validateDiceForTokenMovement(
                   positionTile,
                 );
               } else {
-                const remainingCells = TOTAL_EXIT_TILES - positionTile - 1;
+                const remainingCells: number = TOTAL_EXIT_TILES - positionTile - 1;
                 isValid = dice.value <= remainingCells;
               }
 
@@ -382,29 +388,31 @@ function validateDiceForTokenMovement(
             if (isValid) {
               diceAvailable.push(dice);
             }
-
-            if (diceAvailable.length) {
-              let finalDiceAvailable = diceAvailable;
-
-              if (finalDiceAvailable.length >= 2) {
-                // TODO: Refactor to extract common logic
-                const firstDice = finalDiceAvailable[0];
-                const isSameDice = finalDiceAvailable.every((v) => v.value === firstDice.value);
-
-                if (isSameDice) {
-                  finalDiceAvailable = [firstDice];
-                }
-              }
-
-              const indexToken = positionAndToken[positionTile];
-              copyListTokens[currentTurn].tokens[indexToken].diceAvailable = finalDiceAvailable;
-            }
           });
+
+          if (diceAvailable.length) {
+            let finalDiceAvailable: IDiceList[] = diceAvailable;
+
+            if (finalDiceAvailable.length >= 2) {
+              // TODO: Refactor to extract common logic
+              const firstDice: IDiceList = finalDiceAvailable[0];
+              const isSameDice: boolean = finalDiceAvailable.every(
+                (v) => v.value === firstDice.value,
+              );
+
+              if (isSameDice) {
+                finalDiceAvailable = [firstDice];
+              }
+            }
+
+            const indexToken: number = positionAndToken[positionTile];
+            copyListTokens[currentTurn].tokens[indexToken].diceAvailable = finalDiceAvailable;
+          }
         });
     }
   });
 
-  const totalTokensCanMove = copyListTokens[currentTurn].tokens.filter(
+  const totalTokensCanMove: IToken[] = copyListTokens[currentTurn].tokens.filter(
     (v) => v.diceAvailable.length,
   );
 
@@ -416,7 +424,7 @@ function validateDiceForTokenMovement(
 
   if (totalTokensCanMove.length === 1) {
     const token = totalTokensCanMove[0];
-    const diceAvailable = token.diceAvailable;
+    const diceAvailable: IDiceList[] = token.diceAvailable;
     tokenIndex = token.index;
 
     if (diceAvailable.length === 1) {
@@ -425,7 +433,7 @@ function validateDiceForTokenMovement(
     }
 
     if (diceAvailable.length >= 2) {
-      copyListTokens[currentTurn].tokens[token.index].enableTooltip = true;
+      copyListTokens[currentTurn].tokens[tokenIndex].enableTooltip = true;
     }
   }
 
@@ -442,7 +450,7 @@ export async function validateDicesForTokens(
   actionsTurn: IActionsTurn;
   listTokens: IListTokens[];
   nextTurn: number;
-  actionsMoveToken: IActionsMoveToken | undefined;
+  actionsMoveToken?: IActionsMoveToken;
   totalTokens: TShowTotalTokens;
 }> {
   let nextTurn: number = currentTurn;
@@ -659,36 +667,110 @@ export function validateSelectedToken(
   };
 }
 
-export function validateMovementToken(
+function validatePlayerRankingGameOver(
+  players: IPlayer[],
+  ranking: TPlayerRankingPosition,
+): { players: IPlayer[]; gameOverState: IGameOver } {
+  const copyPlayers: IPlayer[] = cloneDeep(players);
+
+  const onlinePlayersNotFinished = copyPlayers.filter(
+    (player: IPlayer) => !player.isOffline && !player.finished,
+  );
+  const offlinePlayers = copyPlayers.filter(
+    (player: IPlayer) => player.isOffline && !player.finished,
+  );
+
+  const playersLeftRanking = [...onlinePlayersNotFinished, ...offlinePlayers];
+
+  playersLeftRanking.forEach((player: IPlayer) => {
+    ranking++;
+    copyPlayers[player.index].finished = true;
+    copyPlayers[player.index].ranking = ranking as TPlayerRankingPosition;
+  });
+
+  return {
+    players: copyPlayers,
+    gameOverState: {
+      showModal: false,
+      gameOver: true,
+    },
+  };
+}
+
+export async function getNextStepGame(
+  type: IENextStepGame,
+  actionsTurn: IActionsTurn,
+  currentTurn: number,
+  players: IPlayer[],
+): Promise<{ actionsTurn: IActionsTurn; currentTurn: number }> {
+  let copyActionsTurn: IActionsTurn = cloneDeep(actionsTurn);
+  let copyCurrentTurn: number = currentTurn;
+  const rollDiceAgain: boolean = type === ENextStepGame.ROLL_DICE_AGAIN;
+  const moveTokensAgain: boolean = type === ENextStepGame.MOVE_TOKENS_AGAIN;
+  const goNextTurn: boolean = type === ENextStepGame.NEXT_TURN;
+
+  if (rollDiceAgain || moveTokensAgain) {
+    copyActionsTurn.disabledDice = rollDiceAgain
+      ? validateDisabledDice(copyCurrentTurn, players)
+      : true;
+    copyActionsTurn.showDice = rollDiceAgain;
+    copyActionsTurn.timerActivated = true;
+    copyActionsTurn.isDisabledUI = false;
+    copyActionsTurn.actionsBoardGame =
+      EActionsBoardGame[rollDiceAgain ? 'ROLL_DICE' : 'SELECT_TOKEN'];
+  } else {
+    if (goNextTurn) {
+      const validatedNextTurn = await validateNextTurn(copyCurrentTurn, players, copyActionsTurn);
+      copyActionsTurn = validatedNextTurn.actionsTurn;
+      copyCurrentTurn = validatedNextTurn.nextTurn;
+    }
+  }
+
+  return {
+    actionsTurn: copyActionsTurn,
+    currentTurn: copyCurrentTurn,
+  };
+}
+
+export async function validateMovementToken(
   actionsMoveToken: IActionsMoveToken,
   actionsTurn: IActionsTurn,
   currentTurn: number,
   listTokens: IListTokens[],
   players: IPlayer[],
   totalTokens: TShowTotalTokens,
-): {
+): Promise<{
+  actionsTurn: IActionsTurn;
   actionsMoveToken: IActionsMoveToken;
   listTokens: IListTokens[];
   totalTokens: TShowTotalTokens;
-} {
-  const copyActionsMoveToken: IActionsMoveToken = cloneDeep(actionsMoveToken);
+  players: IPlayer[];
+  currentTurn: number;
+  gameOverState?: IGameOver;
+}> {
+  let copyActionsMoveToken: IActionsMoveToken = cloneDeep(actionsMoveToken);
+  let copyActionsTurn: IActionsTurn = cloneDeep(actionsTurn);
   let copyListTokens: IListTokens[] = cloneDeep(listTokens);
   let copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
-  const copyCurrentTurn: number = currentTurn;
+  let copyPlayers: IPlayer[] = cloneDeep(players);
+  let gameOverState: IGameOver | undefined = undefined;
+  let typeNextStep: ENextStepGame | null = null;
 
-  const { positionGame } = copyListTokens[currentTurn];
+  let copyCurrentTurn: number = currentTurn;
+  const { positionGame } = copyListTokens[copyCurrentTurn];
   const { startTileIndex, exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
   const { tokenIndex } = copyActionsMoveToken;
-  const tokenToBeMoved: IToken = copyListTokens[currentTurn].tokens[tokenIndex];
+  const tokenToBeMoved: IToken = copyListTokens[copyCurrentTurn].tokens[tokenIndex];
   let positionTile: number = 0;
-  const goNextTurn: boolean = false;
+  let goNextTurn: boolean = false;
+  let isGameOver: boolean = false;
 
   if (tokenToBeMoved.typeTile === EtypeTile.EXIT) {
     positionTile = tokenToBeMoved.positionTile + 1;
 
     if (positionTile === TOTAL_EXIT_TILES - 1) {
       positionTile = tokenToBeMoved.index;
-      copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.END;
+      copyListTokens[copyCurrentTurn].tokens[tokenIndex].typeTile = EtypeTile.END;
     }
   }
 
@@ -697,19 +779,19 @@ export function validateMovementToken(
       positionTile = validateIncrementTokenMovement(tokenToBeMoved.positionTile);
     } else {
       positionTile = 0;
-      copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.EXIT;
+      copyListTokens[copyCurrentTurn].tokens[tokenIndex].typeTile = EtypeTile.EXIT;
     }
   }
 
   if (tokenToBeMoved.typeTile === EtypeTile.JAIL) {
     positionTile = startTileIndex;
-    copyListTokens[currentTurn].tokens[tokenIndex].animated = true;
-    copyListTokens[currentTurn].tokens[tokenIndex].typeTile = EtypeTile.NORMAL;
+    copyListTokens[copyCurrentTurn].tokens[tokenIndex].animated = true;
+    copyListTokens[copyCurrentTurn].tokens[tokenIndex].typeTile = EtypeTile.NORMAL;
   }
 
-  copyListTokens[currentTurn].tokens[tokenIndex].positionTile = positionTile;
-  copyListTokens[currentTurn].tokens[tokenIndex].coordinate = getCoordinatesByTileType(
-    copyListTokens[currentTurn].tokens[tokenIndex].typeTile,
+  copyListTokens[copyCurrentTurn].tokens[tokenIndex].positionTile = positionTile;
+  copyListTokens[copyCurrentTurn].tokens[tokenIndex].coordinate = getCoordinatesByTileType(
+    copyListTokens[copyCurrentTurn].tokens[tokenIndex].typeTile,
     positionGame,
     positionTile,
   );
@@ -718,24 +800,41 @@ export function validateMovementToken(
 
   if (copyActionsMoveToken.cellsCounter === copyActionsMoveToken.totalCellsMove) {
     let rollDiceAgain: boolean = false;
-    const moveTokensAgain: boolean = true;
+    let moveTokensAgain: boolean = false;
 
     copyActionsMoveToken.isRunning = false;
-    copyListTokens[currentTurn].tokens[tokenIndex].isMoving = false;
+    copyListTokens[copyCurrentTurn].tokens[tokenIndex].isMoving = false;
 
-    const { END } = getTokensValueByCellType(copyListTokens[currentTurn]);
+    const { END } = getTokensValueByCellType(copyListTokens[copyCurrentTurn]);
 
     if (tokenToBeMoved.typeTile === EtypeTile.END) {
       END.forEach((tokenEnd: IToken) => {
         const tokenIndexEndPosition = tokenEnd.index;
-        copyListTokens[currentTurn].tokens[tokenIndexEndPosition].positionTile =
+        copyListTokens[copyCurrentTurn].tokens[tokenIndexEndPosition].positionTile =
           tokenIndexEndPosition;
-        copyListTokens[currentTurn].tokens[tokenIndexEndPosition].coordinate =
+        copyListTokens[copyCurrentTurn].tokens[tokenIndexEndPosition].coordinate =
           getCoordinatesByTileType(EtypeTile.END, positionGame, tokenIndexEndPosition);
       });
 
       const finished = END.length === 4;
       rollDiceAgain = !finished;
+
+      if (finished) {
+        const totalPlayers = copyPlayers.filter((v) => !v.isOffline || v.finished).length;
+        const totalPlayersEnd = copyPlayers.filter((v) => v.finished).length;
+
+        const ranking: TPlayerRankingPosition = (totalPlayersEnd + 1) as TPlayerRankingPosition;
+        isGameOver = ranking === totalPlayers - 1;
+
+        copyPlayers[copyCurrentTurn].finished = true;
+        copyPlayers[copyCurrentTurn].ranking = ranking;
+
+        if (isGameOver) {
+          const validatedGameOver = validatePlayerRankingGameOver(copyPlayers, ranking);
+          copyPlayers = validatedGameOver.players;
+          gameOverState = validatedGameOver.gameOverState;
+        }
+      }
     }
 
     if ([EtypeTile.NORMAL, EtypeTile.EXIT].includes(tokenToBeMoved.typeTile as EtypeTile)) {
@@ -747,13 +846,14 @@ export function validateMovementToken(
 
         if (totalTokensInCell.total >= 2) {
           const isSameToken: boolean =
-            (totalTokensInCell.distribution[currentTurn] ?? []).length === totalTokensInCell.total;
+            (totalTokensInCell.distribution[copyCurrentTurn] ?? []).length ===
+            totalTokensInCell.total;
           distributeTokensCell = isSameToken || isSafeTile;
 
           if (!distributeTokensCell) {
             const playerIndexToJail = Object.keys(totalTokensInCell.distribution)
               .map((v) => +v)
-              .find((v) => v !== currentTurn);
+              .find((v) => v !== copyCurrentTurn);
 
             if (playerIndexToJail !== undefined) {
               const tokenIndexToJail = totalTokensInCell.distribution[playerIndexToJail][0];
@@ -775,7 +875,7 @@ export function validateMovementToken(
         const t = validateTokenDistributionCell(
           tokenToBeMoved,
           copyListTokens,
-          currentTurn,
+          copyCurrentTurn,
           copyTotalTokens,
           false,
         );
@@ -784,11 +884,69 @@ export function validateMovementToken(
         copyListTokens = t.listTokens;
       }
     }
+
+    goNextTurn = copyActionsTurn.diceList.length === 0;
+
+    if (copyActionsTurn.diceList.length && !rollDiceAgain) {
+      const {
+        canMoveTokens,
+        copyListTokens: newListTokens,
+        moveAutomatically,
+        tokenIndex,
+        diceIndex,
+      } = validateDiceForTokenMovement(copyCurrentTurn, copyListTokens, copyActionsTurn.diceList);
+
+      if (moveAutomatically) {
+        const validatedTokenSelected = validateSelectedToken(
+          copyActionsTurn,
+          copyListTokens,
+          copyCurrentTurn,
+          diceIndex,
+          tokenIndex,
+          copyTotalTokens,
+        );
+
+        copyActionsTurn = validatedTokenSelected.actionsTurn;
+        copyActionsMoveToken = validatedTokenSelected.actionsMoveToken;
+        copyListTokens = validatedTokenSelected.listTokens;
+        copyTotalTokens = validatedTokenSelected.totalTokens;
+      } else {
+        goNextTurn = !canMoveTokens;
+
+        if (canMoveTokens) {
+          copyListTokens = newListTokens;
+          moveTokensAgain = true;
+        }
+      }
+    }
+
+    typeNextStep = rollDiceAgain
+      ? ENextStepGame.ROLL_DICE_AGAIN
+      : moveTokensAgain
+        ? ENextStepGame.MOVE_TOKENS_AGAIN
+        : goNextTurn
+          ? ENextStepGame.NEXT_TURN
+          : null;
+
+    if (!isGameOver && typeNextStep) {
+      const nextStepGame = await getNextStepGame(
+        typeNextStep,
+        copyActionsTurn,
+        copyCurrentTurn,
+        copyPlayers,
+      );
+      copyActionsTurn = nextStepGame.actionsTurn;
+      copyCurrentTurn = nextStepGame.currentTurn;
+    }
   }
 
   return {
+    actionsTurn: copyActionsTurn,
     actionsMoveToken: copyActionsMoveToken,
     listTokens: copyListTokens,
     totalTokens: copyTotalTokens,
+    players: copyPlayers,
+    currentTurn: copyCurrentTurn,
+    gameOverState,
   };
 }
