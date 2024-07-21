@@ -143,9 +143,8 @@ function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
 
 function handleTimer(ends: boolean = false): void {
   const { isBot } = players.value[currentTurn.value];
-  const makeAutomaticMovement: boolean = ends || isBot;
 
-  if (makeAutomaticMovement) {
+  if (ends || isBot) {
     if (actionsTurn.value.actionsBoardGame === EActionsBoardGame.ROLL_DICE) {
       handleSelectDice();
     }
