@@ -1,6 +1,7 @@
 import {
   DICE_VALUE_GET_OUT_JAIL,
   EActionsBoardGame,
+  ENextStepGame,
   MAXIMUM_DICE_PER_TURN,
 } from '@/constants/game';
 import type {
@@ -39,6 +40,7 @@ import { delay } from '@/helpers/debounce';
 import { TOKENS_JAIL_AND_OUTSITE } from '@/helpers/states';
 import { cloneDeep } from '@/helpers/clone';
 import type { TPlayerRankingPosition } from '@/interfaces/profile';
+import type { IENextStepGame } from '@/interfaces/online';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
   const { isOnline, isBot } = players[indexTurn];
@@ -695,29 +697,66 @@ function validatePlayerRankingGameOver(
   };
 }
 
-export function validateMovementToken(
+export async function getNextStepGame(
+  type: IENextStepGame,
+  actionsTurn: IActionsTurn,
+  currentTurn: number,
+  players: IPlayer[],
+): Promise<{ actionsTurn: IActionsTurn; currentTurn: number }> {
+  let copyActionsTurn: IActionsTurn = cloneDeep(actionsTurn);
+  let copyCurrentTurn: number = currentTurn;
+  const rollDiceAgain: boolean = type === ENextStepGame.ROLL_DICE_AGAIN;
+  const moveTokensAgain: boolean = type === ENextStepGame.MOVE_TOKENS_AGAIN;
+  const goNextTurn: boolean = type === ENextStepGame.NEXT_TURN;
+
+  if (rollDiceAgain || moveTokensAgain) {
+    copyActionsTurn.disabledDice = rollDiceAgain
+      ? validateDisabledDice(copyCurrentTurn, players)
+      : true;
+    copyActionsTurn.showDice = rollDiceAgain;
+    copyActionsTurn.timerActivated = true;
+    copyActionsTurn.isDisabledUI = false;
+    copyActionsTurn.actionsBoardGame =
+      EActionsBoardGame[rollDiceAgain ? 'ROLL_DICE' : 'SELECT_TOKEN'];
+  } else {
+    if (goNextTurn) {
+      const validatedNextTurn = await validateNextTurn(copyCurrentTurn, players, copyActionsTurn);
+      copyActionsTurn = validatedNextTurn.actionsTurn;
+      copyCurrentTurn = validatedNextTurn.nextTurn;
+    }
+  }
+
+  return {
+    actionsTurn: copyActionsTurn,
+    currentTurn: copyCurrentTurn,
+  };
+}
+
+export async function validateMovementToken(
   actionsMoveToken: IActionsMoveToken,
   actionsTurn: IActionsTurn,
   currentTurn: number,
   listTokens: IListTokens[],
   players: IPlayer[],
   totalTokens: TShowTotalTokens,
-): {
+): Promise<{
   actionsTurn: IActionsTurn;
   actionsMoveToken: IActionsMoveToken;
   listTokens: IListTokens[];
   totalTokens: TShowTotalTokens;
   players: IPlayer[];
+  currentTurn: number;
   gameOverState?: IGameOver;
-} {
+}> {
   let copyActionsMoveToken: IActionsMoveToken = cloneDeep(actionsMoveToken);
   let copyActionsTurn: IActionsTurn = cloneDeep(actionsTurn);
   let copyListTokens: IListTokens[] = cloneDeep(listTokens);
   let copyTotalTokens: TShowTotalTokens = cloneDeep(totalTokens);
   let copyPlayers: IPlayer[] = cloneDeep(players);
   let gameOverState: IGameOver | undefined = undefined;
+  let typeNextStep: ENextStepGame | null = null;
 
-  const copyCurrentTurn: number = currentTurn;
+  let copyCurrentTurn: number = currentTurn;
   const { positionGame } = copyListTokens[copyCurrentTurn];
   const { startTileIndex, exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
   const { tokenIndex } = copyActionsMoveToken;
@@ -761,7 +800,7 @@ export function validateMovementToken(
 
   if (copyActionsMoveToken.cellsCounter === copyActionsMoveToken.totalCellsMove) {
     let rollDiceAgain: boolean = false;
-    let moveTokensAgain: boolean = true;
+    let moveTokensAgain: boolean = false;
 
     copyActionsMoveToken.isRunning = false;
     copyListTokens[copyCurrentTurn].tokens[tokenIndex].isMoving = false;
@@ -880,6 +919,25 @@ export function validateMovementToken(
         }
       }
     }
+
+    typeNextStep = rollDiceAgain
+      ? ENextStepGame.ROLL_DICE_AGAIN
+      : moveTokensAgain
+        ? ENextStepGame.MOVE_TOKENS_AGAIN
+        : goNextTurn
+          ? ENextStepGame.NEXT_TURN
+          : null;
+
+    if (!isGameOver && typeNextStep) {
+      const nextStepGame = await getNextStepGame(
+        typeNextStep,
+        copyActionsTurn,
+        copyCurrentTurn,
+        copyPlayers,
+      );
+      copyActionsTurn = nextStepGame.actionsTurn;
+      copyCurrentTurn = nextStepGame.currentTurn;
+    }
   }
 
   return {
@@ -888,6 +946,7 @@ export function validateMovementToken(
     listTokens: copyListTokens,
     totalTokens: copyTotalTokens,
     players: copyPlayers,
+    currentTurn: copyCurrentTurn,
     gameOverState,
   };
 }

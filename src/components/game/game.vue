@@ -172,28 +172,29 @@ watch(
   (newValue: boolean) => {
     if (newValue) {
       const interval = setInterval(() => {
-        const validatedTokenMovement = validateMovementToken(
+        validateMovementToken(
           actionsMoveToken.value,
           actionsTurn.value,
           currentTurn.value,
           listTokens.value,
           players.value,
           totalTokens.value,
-        );
+        ).then((validatedTokenMovement) => {
+          actionsTurn.value = validatedTokenMovement.actionsTurn;
+          actionsMoveToken.value = validatedTokenMovement.actionsMoveToken;
+          listTokens.value = validatedTokenMovement.listTokens;
+          totalTokens.value = validatedTokenMovement.totalTokens;
+          players.value = validatedTokenMovement.players;
+          currentTurn.value = validatedTokenMovement.currentTurn;
 
-        actionsTurn.value = validatedTokenMovement.actionsTurn;
-        actionsMoveToken.value = validatedTokenMovement.actionsMoveToken;
-        listTokens.value = validatedTokenMovement.listTokens;
-        totalTokens.value = validatedTokenMovement.totalTokens;
-        players.value = validatedTokenMovement.players;
+          if (validatedTokenMovement.gameOverState) {
+            isGameOver.value = validatedTokenMovement.gameOverState;
+          }
 
-        if (validatedTokenMovement.gameOverState) {
-          isGameOver.value = validatedTokenMovement.gameOverState;
-        }
-
-        if (!validatedTokenMovement.actionsMoveToken.isRunning) {
-          clearInterval(interval);
-        }
+          if (!validatedTokenMovement.actionsMoveToken.isRunning) {
+            clearInterval(interval);
+          }
+        });
       }, TOKEN_MOVEMENT_INTERVAL_VALUE);
     }
   },
