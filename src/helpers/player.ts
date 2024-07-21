@@ -15,16 +15,16 @@ export const TEMP_USERS: IUser[] = [
     name: 'Player 02',
     isBot: false,
   },
-  {
-    id: '3',
-    name: 'Player 03',
-    isBot: false,
-  },
-  {
-    id: '4',
-    name: 'Player 04',
-    isBot: false,
-  },
+  // {
+  //   id: '3',
+  //   name: 'Player 03',
+  //   isBot: false,
+  // },
+  // {
+  //   id: '4',
+  //   name: 'Player 04',
+  //   isBot: false,
+  // },
 ];
 
 export function getPlayersColors(
