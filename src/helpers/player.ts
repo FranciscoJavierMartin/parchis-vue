@@ -2,6 +2,7 @@ import { ESufixColors } from '@/constants/board';
 import type { TBoardColors, TSufixColors } from '@/interfaces/board';
 import type { TTotalPlayers } from '@/interfaces/game';
 import type { IPlayer, IUser } from '@/interfaces/user';
+import { cloneDeep } from '@/helpers/clone';
 
 // TODO: Remove
 export const TEMP_USERS: IUser[] = [
@@ -70,4 +71,9 @@ export function getInitialDataPlayers(
   }));
 
   return players;
+}
+
+export function getOrganizedRanking(players: IPlayer[]): { first: IPlayer; others: IPlayer[] } {
+  const [first, ...others] = cloneDeep(players).sort((a, b) => a.ranking - b.ranking);
+  return { first, others };
 }
