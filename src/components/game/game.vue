@@ -66,6 +66,7 @@ import BoardWrapper from '@/components/game/board/board-wrapper.vue';
 import ProfileSection from '@/components/game/profiles/profile-section.vue';
 import { EBoardColors, EPositionProfiles } from '@/constants/board';
 import {
+  EActionsBoardGame,
   ETypeGame,
   INITIAL_ACTIONS_MOVE_TOKEN,
   TOKEN_MOVEMENT_INTERVAL_VALUE,
@@ -139,7 +140,16 @@ function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
   totalTokens.value = validatedSelectedToken.totalTokens;
 }
 
-function handleTimer(ends: boolean = false): void {}
+function handleTimer(ends: boolean = false): void {
+  const { isBot } = players.value[currentTurn.value];
+  const makeAutomaticMovement: boolean = ends || isBot;
+
+  if (makeAutomaticMovement) {
+    if (actionsTurn.value.actionsBoardGame === EActionsBoardGame.ROLL_DICE) {
+      handleSelectDice();
+    }
+  }
+}
 
 function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = false): void {
   actionsTurn.value = getRandomValueDice(
