@@ -37,7 +37,6 @@ interface TokenProps extends IToken {
   diceList: IDiceList[];
   isDisabledUI?: boolean;
   debug?: boolean;
-  handleSelectedToken: (selectedTokenValues: ISelectTokenValues) => void;
 }
 
 const props = withDefaults(defineProps<TokenProps>(), {
@@ -54,6 +53,9 @@ const props = withDefaults(defineProps<TokenProps>(), {
   isDisabledUI: false,
   debug: false,
 });
+const emit = defineEmits<{
+  handleSelectedToken: [selectedTokenValues: ISelectTokenValues];
+}>();
 
 const showTooltip = ref<boolean>(props.enableTooltip);
 
@@ -64,7 +66,7 @@ function handleClickOutside(): void {
 function handleClickDice(): void {
   if (props.diceAvailable.length === 1) {
     const diceIndex = props.diceList.findIndex((dice) => dice.key === props.diceAvailable[0].key);
-    props.handleSelectedToken({ diceIndex, tokenIndex: props.index });
+    emit('handleSelectedToken', { diceIndex, tokenIndex: props.index });
   } else {
     showTooltip.value = true;
   }
@@ -73,7 +75,7 @@ function handleClickDice(): void {
 function handleTooltipDice(dice: IDiceList): void {
   showTooltip.value = false;
   const diceIndex = props.diceList.findIndex((d) => d.key === dice.key);
-  props.handleSelectedToken({ diceIndex, tokenIndex: props.index });
+  emit('handleSelectedToken', { diceIndex, tokenIndex: props.index });
 }
 
 const zIndex = computed<number>(() => {

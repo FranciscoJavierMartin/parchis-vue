@@ -7,7 +7,10 @@
       :dice-list="diceList"
       :debug="debug"
       :is-disabled-u-i="isDisabledUI"
-      :handle-selected-token="handleSelectedToken"
+      @handle-selected-token="
+        (selectedTokenValues: ISelectTokenValues) =>
+          $emit('handleSelectedToken', selectedTokenValues)
+      "
     />
   </template>
 </template>
@@ -22,8 +25,8 @@ interface TokenListProps {
   listToken: IListTokens[];
   isDisabledUI?: boolean;
   debug?: boolean;
-  handleSelectedToken: (selectTokenValues: ISelectTokenValues) => void;
 }
 
 withDefaults(defineProps<TokenListProps>(), { isDisabledUI: false, debug: false });
+defineEmits<{ handleSelectedToken: [selectTokenValues: ISelectTokenValues] }>();
 </script>

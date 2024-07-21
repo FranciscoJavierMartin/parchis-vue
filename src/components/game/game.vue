@@ -20,9 +20,9 @@
         <GameBoard :boardColor="(boardColor as EBoardColors)">
           <TokenList
             :dice-list="actionsTurn.diceList"
-            :handle-selected-token="handleSelectedToken"
             :list-token="listTokens"
             :debug="debug"
+            @handle-selected-token="handleSelectedToken"
           />
           <GameDebug v-if="debug" />
           <ShowTotalTokens :total-tokens="totalTokens" />
