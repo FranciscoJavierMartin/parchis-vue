@@ -3,10 +3,10 @@ import type { IActionsTurn } from '@/interfaces/game';
 import type { TDiceValues } from '@/interfaces/dice';
 
 /**
- * Return a random number between min and max
+ * Return a random integer between min and max
  * @param min minimun value (included)
  * @param max maximun value (excluded)
- * @returns random number
+ * @returns random integer
  */
 export function getRandomNumber(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;

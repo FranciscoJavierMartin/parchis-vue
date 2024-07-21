@@ -41,6 +41,7 @@ import { TOKENS_JAIL_AND_OUTSITE } from '@/helpers/states';
 import { cloneDeep } from '@/helpers/clone';
 import type { TPlayerRankingPosition } from '@/interfaces/profile';
 import type { IENextStepGame } from '@/interfaces/online';
+import { getRandomNumber } from '@/helpers/random';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
   const { isOnline, isBot } = players[indexTurn];
@@ -949,4 +950,29 @@ export async function validateMovementToken(
     currentTurn: copyCurrentTurn,
     gameOverState,
   };
+}
+
+// TODO: Implement some king of strategy
+export function validateSelectTokenRandomly(
+  listTokens: IListTokens[],
+  diceList: IDiceList[],
+  currentTurn: number,
+): {
+  diceIndex: number;
+  tokenIndex: number;
+} {
+  const tokensCanBeMoved: IToken[] = listTokens[currentTurn].tokens.filter(
+    (token: IToken) => token.diceAvailable.length,
+  );
+  const randomIndexToken: number = getRandomNumber(0, tokensCanBeMoved.length - 1);
+  const token: IToken = tokensCanBeMoved[randomIndexToken];
+  const tokenIndex: number = token.index;
+  const diceAvailable: IDiceList[] = token.diceAvailable;
+  const diceIndexInTokenSelected: number = getRandomNumber(0, diceAvailable.length - 1);
+  const diceIndex: number = getDiceIndexSelected(
+    diceList,
+    diceAvailable[diceIndexInTokenSelected].key,
+  );
+
+  return { diceIndex, tokenIndex };
 }

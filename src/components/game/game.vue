@@ -66,6 +66,7 @@ import BoardWrapper from '@/components/game/board/board-wrapper.vue';
 import ProfileSection from '@/components/game/profiles/profile-section.vue';
 import { EBoardColors, EPositionProfiles } from '@/constants/board';
 import {
+  EActionsBoardGame,
   ETypeGame,
   INITIAL_ACTIONS_MOVE_TOKEN,
   TOKEN_MOVEMENT_INTERVAL_VALUE,
@@ -87,6 +88,7 @@ import {
   validateDicesForTokens,
   validateMovementToken,
   validateSelectedToken,
+  validateSelectTokenRandomly,
 } from '@/helpers/game';
 import { getRandomValueDice } from '@/helpers/random';
 import TokenList from '@/components/game/tokens/token-list.vue';
@@ -139,7 +141,24 @@ function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
   totalTokens.value = validatedSelectedToken.totalTokens;
 }
 
-function handleTimer(ends: boolean = false): void {}
+function handleTimer(ends: boolean = false): void {
+  const { isBot } = players.value[currentTurn.value];
+
+  if (ends || isBot) {
+    if (actionsTurn.value.actionsBoardGame === EActionsBoardGame.ROLL_DICE) {
+      handleSelectDice();
+    }
+
+    if (actionsTurn.value.actionsBoardGame === EActionsBoardGame.SELECT_TOKEN) {
+      const { diceIndex, tokenIndex } = validateSelectTokenRandomly(
+        listTokens.value,
+        actionsTurn.value.diceList,
+        currentTurn.value,
+      );
+      handleSelectedToken({ diceIndex, tokenIndex });
+    }
+  }
+}
 
 function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = false): void {
   actionsTurn.value = getRandomValueDice(
