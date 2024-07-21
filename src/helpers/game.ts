@@ -350,7 +350,7 @@ function validateDiceForTokenMovement(
 
   [NORMAL, EXIT].forEach((tokensEvaluate, evaluatedIndex) => {
     if (tokensEvaluate.length) {
-      const positionAndToken = getUniquePositionTokenCell(tokensEvaluate);
+      const positionAndToken: Record<number, number> = getUniquePositionTokenCell(tokensEvaluate);
 
       Object.keys(positionAndToken)
         .map((positionTile) => +positionTile)
@@ -373,7 +373,7 @@ function validateDiceForTokenMovement(
                   positionTile,
                 );
               } else {
-                const remainingCells = TOTAL_EXIT_TILES - positionTile - 1;
+                const remainingCells: number = TOTAL_EXIT_TILES - positionTile - 1;
                 isValid = dice.value <= remainingCells;
               }
 
@@ -383,29 +383,31 @@ function validateDiceForTokenMovement(
             if (isValid) {
               diceAvailable.push(dice);
             }
-
-            if (diceAvailable.length) {
-              let finalDiceAvailable = diceAvailable;
-
-              if (finalDiceAvailable.length >= 2) {
-                // TODO: Refactor to extract common logic
-                const firstDice = finalDiceAvailable[0];
-                const isSameDice = finalDiceAvailable.every((v) => v.value === firstDice.value);
-
-                if (isSameDice) {
-                  finalDiceAvailable = [firstDice];
-                }
-              }
-
-              const indexToken = positionAndToken[positionTile];
-              copyListTokens[currentTurn].tokens[indexToken].diceAvailable = finalDiceAvailable;
-            }
           });
+
+          if (diceAvailable.length) {
+            let finalDiceAvailable: IDiceList[] = diceAvailable;
+
+            if (finalDiceAvailable.length >= 2) {
+              // TODO: Refactor to extract common logic
+              const firstDice: IDiceList = finalDiceAvailable[0];
+              const isSameDice: boolean = finalDiceAvailable.every(
+                (v) => v.value === firstDice.value,
+              );
+
+              if (isSameDice) {
+                finalDiceAvailable = [firstDice];
+              }
+            }
+
+            const indexToken: number = positionAndToken[positionTile];
+            copyListTokens[currentTurn].tokens[indexToken].diceAvailable = finalDiceAvailable;
+          }
         });
     }
   });
 
-  const totalTokensCanMove = copyListTokens[currentTurn].tokens.filter(
+  const totalTokensCanMove: IToken[] = copyListTokens[currentTurn].tokens.filter(
     (v) => v.diceAvailable.length,
   );
 
@@ -417,7 +419,7 @@ function validateDiceForTokenMovement(
 
   if (totalTokensCanMove.length === 1) {
     const token = totalTokensCanMove[0];
-    const diceAvailable = token.diceAvailable;
+    const diceAvailable: IDiceList[] = token.diceAvailable;
     tokenIndex = token.index;
 
     if (diceAvailable.length === 1) {
@@ -426,7 +428,7 @@ function validateDiceForTokenMovement(
     }
 
     if (diceAvailable.length >= 2) {
-      copyListTokens[currentTurn].tokens[token.index].enableTooltip = true;
+      copyListTokens[currentTurn].tokens[tokenIndex].enableTooltip = true;
     }
   }
 
@@ -844,6 +846,7 @@ export function validateMovementToken(
 
     console.log({ goNextTurn });
 
+    // FIXME: Bug start here
     if (copyActionsTurn.diceList.length && !rollDiceAgain) {
       const {
         canMoveTokens,
@@ -851,8 +854,8 @@ export function validateMovementToken(
         moveAutomatically,
         tokenIndex,
         diceIndex,
-      } = validateDiceForTokenMovement(copyCurrentTurn, copyListTokens, actionsTurn.diceList);
-      // copyListTokens = newListTokens;
+      } = validateDiceForTokenMovement(currentTurn, copyListTokens, actionsTurn.diceList);
+
       console.log({ moveAutomatically });
       if (moveAutomatically) {
         const validatedTokenSelected = validateSelectedToken(
