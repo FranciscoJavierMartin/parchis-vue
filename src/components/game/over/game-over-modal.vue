@@ -4,6 +4,9 @@
       <div class="game-over-container">
         <GameOverRibbon title="Well played" />
         <FirstPosition :first="first!" />
+        <div class="game-over-container-others">
+          <OtherPlayer v-for="player of players" :key="player.id" :player="player" />
+        </div>
       </div>
     </div>
   </div>
@@ -15,6 +18,7 @@ import { getOrganizedRanking } from '@/helpers/player';
 import type { IPlayer } from '@/interfaces/user';
 import GameOverRibbon from '@/components/game/over/game-over-ribbon.vue';
 import FirstPosition from '@/components/game/over/first-position.vue';
+import OtherPlayer from '@/components/game/over/other-player.vue';
 
 interface GameOverProps {
   players: IPlayer[];
