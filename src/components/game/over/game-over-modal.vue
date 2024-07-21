@@ -12,6 +12,9 @@
         <button class="button blue">
           <ShareIcon />
         </button>
+        <button class="button yellow">
+          <HomeIcon />
+        </button>
       </div>
     </div>
   </div>
@@ -25,6 +28,7 @@ import GameOverRibbon from '@/components/game/over/game-over-ribbon.vue';
 import FirstPosition from '@/components/game/over/first-position.vue';
 import OtherPlayer from '@/components/game/over/other-player.vue';
 import ShareIcon from '@/components/icons/share-icon.vue';
+import HomeIcon from '@/components/icons/home-icon.vue';
 
 interface GameOverProps {
   players: IPlayer[];
@@ -86,6 +90,28 @@ onBeforeMount(() => {
         gap: 15px;
         justify-content: center;
         width: 85%;
+      }
+    }
+
+    .game-over-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      width: 100%;
+      margin-top: 20px;
+
+      .button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border: none;
+        border-radius: 10px;
+
+        &:deep(svg) {
+          width: 60%;
+        }
       }
     }
   }
