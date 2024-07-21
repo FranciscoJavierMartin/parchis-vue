@@ -8,6 +8,11 @@
           <OtherPlayer v-for="player of others" :key="player.id" :player="player" />
         </div>
       </div>
+      <div class="game-over-buttons">
+        <button class="button blue">
+          <ShareIcon />
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -19,6 +24,7 @@ import type { IPlayer } from '@/interfaces/user';
 import GameOverRibbon from '@/components/game/over/game-over-ribbon.vue';
 import FirstPosition from '@/components/game/over/first-position.vue';
 import OtherPlayer from '@/components/game/over/other-player.vue';
+import ShareIcon from '@/components/icons/share-icon.vue';
 
 interface GameOverProps {
   players: IPlayer[];
