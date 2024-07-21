@@ -226,12 +226,12 @@ function getTokensValueByCellType(listTokens: IListTokens): TTokenByPositionType
 }
 
 function getUniquePositionTokenCell(tokens: IToken[]): Record<number, number> {
-  return tokens.reduce<Record<number, number>>((acc, { positionTile, index }) => {
-    if (!((acc[positionTile] ?? -1) >= 0)) {
-      acc[positionTile] = index;
+  return tokens.reduce<Record<number, number>>((positionAndToken, { positionTile, index }) => {
+    if (!((positionAndToken[positionTile] ?? -1) >= 0)) {
+      positionAndToken[positionTile] = index;
     }
 
-    return acc;
+    return positionAndToken;
   }, {});
 }
 
@@ -296,7 +296,7 @@ function validateMovementTokenWithValueDice(
 ): boolean {
   const { exitTileIndex } = POSITION_ELEMENTS_BOARD[positionGame];
   let isValid: boolean = true;
-  let newPositionTile = positionTile;
+  let newPositionTile: number = positionTile;
 
   for (let i = 0; i < diceValue; i++) {
     if (newPositionTile !== exitTileIndex) {
@@ -306,7 +306,7 @@ function validateMovementTokenWithValueDice(
 
         if (totalTokensInCell.total >= 2 && !isSafeArea(newPositionTile)) {
           const tokensSameTurn = totalTokensInCell.distribution[currentTurn] ?? [];
-          if (tokensSameTurn.length) {
+          if (tokensSameTurn.length === 0) {
             isValid = false;
           }
         }
@@ -317,8 +317,11 @@ function validateMovementTokenWithValueDice(
       if (remainingCells <= 0 || remainingCells > TOTAL_EXIT_TILES) {
         isValid = false;
       }
+
+      break;
     }
   }
+
   return isValid;
 }
 
