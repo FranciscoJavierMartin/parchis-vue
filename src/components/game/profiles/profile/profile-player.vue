@@ -6,7 +6,7 @@
         :position="position"
         :start-timer="actionsTurn.timerActivated"
         @handle-mute-chat="handleMuteChat"
-        :handle-interval="(ends) => handleTimer(ends)"
+        @handle-interval="handleTimer"
       />
       <NameAndDice :name="player.name" :has-turn="hasTurn" :dice-available="actionsTurn.diceList" />
     </div>

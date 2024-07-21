@@ -27,11 +27,13 @@ interface ProfileImageProps {
   player: IPlayer;
   startTimer: boolean;
   position: TPositionProfile;
-  handleInterval: (ends: boolean) => void;
 }
 
 const props = defineProps<ProfileImageProps>();
-const emit = defineEmits<{ handleMuteChat: [playerIndex: number] }>();
+const emit = defineEmits<{
+  handleMuteChat: [playerIndex: number];
+  handleInterval: [ends: boolean];
+}>();
 
 const progress = ref<number>(1);
 const isRunning = ref<boolean>(false);
@@ -61,12 +63,12 @@ watch(
 
       // When it is a bot
       if (newProgress === 15) {
-        props.handleInterval(false);
+        emit('handleInterval', false);
       }
 
       if (newProgressIncreased === 100) {
         isRunning.value = false;
-        props.handleInterval(true);
+        emit('handleInterval', true);
       }
 
       setTimeout(() => {
