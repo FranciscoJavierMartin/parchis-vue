@@ -16,7 +16,7 @@
       :show-dice="actionsTurn.showDice"
       :dice-roll-number="actionsTurn.diceRollNumber"
       :value="actionsTurn.diceValue"
-      @handle-done-dice="handleDoneDice"
+      @handle-done-dice="$emit('handleDoneDice')"
       @handle-select-dice="$emit('handleSelectDice')"
     />
     <ProfileRanking v-if="player.finished" :value="player.ranking" />
@@ -28,12 +28,7 @@ import ProfileImage from '@/components/game/profiles/profile/profile-image.vue';
 import ProfileDice from '@/components/game/profiles/profile/profile-dice.vue';
 import NameAndDice from '@/components/game/profiles/profile/name-and-dice.vue';
 import ProfileRanking from '@/components/game/profiles/profile/profile-ranking.vue';
-import type {
-  THandleDoneDice,
-  THandleMuteChat,
-  TPositionProfile,
-  TPositionProfiles,
-} from '@/interfaces/profile';
+import type { THandleMuteChat, TPositionProfile, TPositionProfiles } from '@/interfaces/profile';
 import type { IPlayer } from '@/interfaces/user';
 import type { IActionsTurn } from '@/interfaces/game';
 import type { TDiceValues } from '@/interfaces/dice';
@@ -44,7 +39,6 @@ interface ProfilePlayerProps {
   player: IPlayer;
   position: TPositionProfile;
   actionsTurn: IActionsTurn;
-  handleDoneDice: THandleDoneDice;
   handleMuteChat: THandleMuteChat;
 }
 
@@ -52,6 +46,7 @@ defineProps<ProfilePlayerProps>();
 defineEmits<{
   handleTimer: [ends: boolean, playerIndex?: number];
   handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
+  handleDoneDice: [isActionSocket?: boolean];
 }>();
 </script>
 

@@ -9,6 +9,7 @@
       :player="players[indexProfile - 1]"
       @handle-timer="(ends) => $emit('handleTimer', ends)"
       @handle-select-dice="() => $emit('handleSelectDice')"
+      @handle-done-dice="() => $emit('handleDoneDice')"
     />
   </div>
 </template>
@@ -37,6 +38,7 @@ const props = defineProps<ProfileSectionProps>();
 defineEmits<{
   handleTimer: [ends: boolean, playerIndex?: number];
   handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
+  handleDoneDice: [isActionSocket?: boolean];
 }>();
 
 type TPositionPlayerIndex = Record<TPositionProfile, number>;

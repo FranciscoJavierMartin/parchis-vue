@@ -10,6 +10,7 @@
         :position="position"
         @handle-timer="(ends) => $emit('handleTimer', ends)"
         @handle-select-dice="() => $emit('handleSelectDice')"
+        @handle-done-dice="() => $emit('handleDoneDice')"
       />
     </div>
   </div>
@@ -37,6 +38,7 @@ defineProps<ProfileSectionProps>();
 defineEmits<{
   handleTimer: [ends: boolean, playerIndex?: number];
   handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
+  handleDoneDice: [isActionSocket?: boolean];
 }>();
 </script>
 
