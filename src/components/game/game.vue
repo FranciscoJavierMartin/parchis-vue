@@ -14,6 +14,7 @@
           @handle-timer="handleTimer"
           @handle-select-dice="handleSelectDice"
           @handle-done-dice="handleDoneDice"
+          @handle-mute-chat="handleMuteChat"
         />
         <!-- prettier-ignore-attribute -->
         <GameBoard :boardColor="(boardColor as EBoardColors)">
@@ -37,6 +38,7 @@
           @handle-timer="handleTimer"
           @handle-select-dice="handleSelectDice"
           @handle-done-dice="handleDoneDice"
+          @handle-mute-chat="handleMuteChat"
         />
       </BoardWrapper>
       <GameDebugTokens

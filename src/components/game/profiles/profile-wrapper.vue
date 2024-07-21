@@ -1,7 +1,6 @@
 <template>
   <div v-if="indexProfile">
     <ProfilePlayer
-      v-bind="profileHandlers"
       :base-position="basePosition"
       :position="position"
       :has-turn="hasTurn"
@@ -10,6 +9,7 @@
       @handle-timer="(ends) => $emit('handleTimer', ends)"
       @handle-select-dice="() => $emit('handleSelectDice')"
       @handle-done-dice="() => $emit('handleDoneDice')"
+      @handle-mute-chat="(playerIndex) => $emit('handleMuteChat', playerIndex)"
     />
   </div>
 </template>
@@ -18,7 +18,7 @@
 import { computed } from 'vue';
 import ProfilePlayer from '@/components/game/profiles/profile/profile-player.vue';
 import { DEFAULT_VALUE_ACTION_TURN } from '@/constants/game';
-import type { IProfileHandlers, TPositionProfile, TPositionProfiles } from '@/interfaces/profile';
+import type { TPositionProfile, TPositionProfiles } from '@/interfaces/profile';
 import type { IPlayer } from '@/interfaces/user';
 import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
 import type { TDiceValues } from '@/interfaces/dice';
@@ -29,7 +29,6 @@ interface ProfileSectionProps {
   currentTurn: number;
   players: IPlayer[];
   totalPlayers: TTotalPlayers;
-  profileHandlers: IProfileHandlers;
   actionsTurn: IActionsTurn;
   position: TPositionProfile;
 }
@@ -39,6 +38,7 @@ defineEmits<{
   handleTimer: [ends: boolean, playerIndex?: number];
   handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
   handleDoneDice: [isActionSocket?: boolean];
+  handleMuteChat: [playerIndex: number];
 }>();
 
 type TPositionPlayerIndex = Record<TPositionProfile, number>;

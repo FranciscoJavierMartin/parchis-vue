@@ -5,7 +5,7 @@
         :player="player"
         :position="position"
         :start-timer="actionsTurn.timerActivated"
-        @handle-mute-chat="handleMuteChat"
+        @handle-mute-chat="(playerIndex) => $emit('handleMuteChat', playerIndex)"
         @handle-interval="(ends) => $emit('handleTimer', ends)"
       />
       <NameAndDice :name="player.name" :has-turn="hasTurn" :dice-available="actionsTurn.diceList" />
@@ -28,7 +28,7 @@ import ProfileImage from '@/components/game/profiles/profile/profile-image.vue';
 import ProfileDice from '@/components/game/profiles/profile/profile-dice.vue';
 import NameAndDice from '@/components/game/profiles/profile/name-and-dice.vue';
 import ProfileRanking from '@/components/game/profiles/profile/profile-ranking.vue';
-import type { THandleMuteChat, TPositionProfile, TPositionProfiles } from '@/interfaces/profile';
+import type { TPositionProfile, TPositionProfiles } from '@/interfaces/profile';
 import type { IPlayer } from '@/interfaces/user';
 import type { IActionsTurn } from '@/interfaces/game';
 import type { TDiceValues } from '@/interfaces/dice';
@@ -39,7 +39,6 @@ interface ProfilePlayerProps {
   player: IPlayer;
   position: TPositionProfile;
   actionsTurn: IActionsTurn;
-  handleMuteChat: THandleMuteChat;
 }
 
 defineProps<ProfilePlayerProps>();
@@ -47,6 +46,7 @@ defineEmits<{
   handleTimer: [ends: boolean, playerIndex?: number];
   handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
   handleDoneDice: [isActionSocket?: boolean];
+  handleMuteChat: [playerIndex: number];
 }>();
 </script>
 

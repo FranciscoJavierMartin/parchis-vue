@@ -11,6 +11,7 @@
         @handle-timer="(ends) => $emit('handleTimer', ends)"
         @handle-select-dice="() => $emit('handleSelectDice')"
         @handle-done-dice="() => $emit('handleDoneDice')"
+        @handle-mute-chat="(playerIndex) => $emit('handleMuteChat', playerIndex)"
       />
     </div>
   </div>
@@ -21,7 +22,7 @@ import ProfileWrapper from '@/components/game/profiles/profile-wrapper.vue';
 import { EPositionProfile } from '@/constants/board';
 import type { TDiceValues } from '@/interfaces/dice';
 import type { IActionsTurn, TTotalPlayers } from '@/interfaces/game';
-import type { IProfileHandlers, TPositionProfiles } from '@/interfaces/profile';
+import type { TPositionProfiles } from '@/interfaces/profile';
 import type { IPlayer } from '@/interfaces/user';
 
 // TODO: Extract in common
@@ -30,7 +31,6 @@ interface ProfileSectionProps {
   currentTurn: number;
   players: IPlayer[];
   totalPlayers: TTotalPlayers;
-  profileHandlers: IProfileHandlers;
   actionsTurn: IActionsTurn;
 }
 
@@ -39,6 +39,7 @@ defineEmits<{
   handleTimer: [ends: boolean, playerIndex?: number];
   handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
   handleDoneDice: [isActionSocket?: boolean];
+  handleMuteChat: [playerIndex: number];
 }>();
 </script>
 
