@@ -88,6 +88,7 @@ import {
   validateDicesForTokens,
   validateMovementToken,
   validateSelectedToken,
+  validateSelectTokenRandomly,
 } from '@/helpers/game';
 import { getRandomValueDice } from '@/helpers/random';
 import TokenList from '@/components/game/tokens/token-list.vue';
@@ -147,6 +148,15 @@ function handleTimer(ends: boolean = false): void {
   if (makeAutomaticMovement) {
     if (actionsTurn.value.actionsBoardGame === EActionsBoardGame.ROLL_DICE) {
       handleSelectDice();
+    }
+
+    if (actionsTurn.value.actionsBoardGame === EActionsBoardGame.SELECT_TOKEN) {
+      const { diceIndex, tokenIndex } = validateSelectTokenRandomly(
+        listTokens.value,
+        actionsTurn.value.diceList,
+        currentTurn.value,
+      );
+      handleSelectedToken({ diceIndex, tokenIndex });
     }
   }
 }
