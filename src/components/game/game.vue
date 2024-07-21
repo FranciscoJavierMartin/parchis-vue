@@ -2,7 +2,7 @@
 <template>
   <PageWrapper>
     <template #default>
-      <div v-if="isGameOver.showModal">Game over</div>
+      <GameOverModal v-if="!isGameOver.showModal" :players="players" />
       <BoardWrapper>
         <!-- prettier-ignore-attribute -->
         <ProfileSection
@@ -93,6 +93,7 @@ import {
 import { getRandomValueDice } from '@/helpers/random';
 import TokenList from '@/components/game/tokens/token-list.vue';
 import GameDebugTokens from '@/components/game/debug/game-debug-tokens.vue';
+import GameOverModal from '@/components/game/over/game-over-modal.vue';
 
 // TODO: Add types for socket
 interface GameProps {
@@ -145,7 +146,7 @@ function handleTimer(ends: boolean = false): void {
   const { isBot } = players.value[currentTurn.value];
 
   // TODO: Remove false
-  if (false && ends || isBot) {
+  if ((false && ends) || isBot) {
     if (actionsTurn.value.actionsBoardGame === EActionsBoardGame.ROLL_DICE) {
       handleSelectDice();
     }
