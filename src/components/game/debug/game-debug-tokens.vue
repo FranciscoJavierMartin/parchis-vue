@@ -6,8 +6,7 @@
         :key="index"
         :disabled="actionsTurn.disabledDice"
         @click="
-          () =>
-            $emit('handleSelectDice', { diceValue: index as TDiceValues, isActionSocket: false })
+          $emit('handleSelectDice', { diceValue: index as TDiceValues, isActionSocket: false })
         "
       >
         {{ index }}

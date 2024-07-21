@@ -7,7 +7,7 @@
       :aria-describedby="titleMuteChat"
       class="game-profile-mute-chat"
       :class="[position.toLowerCase(), { mute: player.isMuted }]"
-      @click="() => $emit('handleMuteChat', player.index)"
+      @click="$emit('handleMuteChat', player.index)"
     >
       <ChatBubble class="icon-wrapper" />
     </button>

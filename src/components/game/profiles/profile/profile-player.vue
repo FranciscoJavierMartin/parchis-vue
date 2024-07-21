@@ -5,8 +5,8 @@
         :player="player"
         :position="position"
         :start-timer="actionsTurn.timerActivated"
-        @handle-mute-chat="(playerIndex) => $emit('handleMuteChat', playerIndex)"
-        @handle-interval="(ends) => $emit('handleTimer', ends)"
+        @handle-mute-chat="(playerIndex: number) => $emit('handleMuteChat', playerIndex)"
+        @handle-interval="(ends: boolean) => $emit('handleTimer', ends)"
       />
       <NameAndDice :name="player.name" :has-turn="hasTurn" :dice-available="actionsTurn.diceList" />
     </div>
@@ -16,9 +16,10 @@
       :show-dice="actionsTurn.showDice"
       :dice-roll-number="actionsTurn.diceRollNumber"
       :value="actionsTurn.diceValue"
-      @handle-done-dice="(isActionSocket) => $emit('handleDoneDice', isActionSocket)"
+      @handle-done-dice="(isActionSocket?: boolean) => $emit('handleDoneDice', isActionSocket)"
       @handle-select-dice="
-        (diceValue, isActionSocket) => $emit('handleSelectDice', diceValue, isActionSocket)
+        (diceValue?: TDiceValues, isActionSocket?: boolean) =>
+          $emit('handleSelectDice', diceValue, isActionSocket)
       "
     />
     <ProfileRanking v-if="player.finished" :value="player.ranking" />

@@ -8,12 +8,13 @@
       <ProfileWrapper
         v-bind="$props"
         :position="position"
-        @handle-timer="(ends) => $emit('handleTimer', ends)"
+        @handle-timer="(ends: boolean) => $emit('handleTimer', ends)"
         @handle-select-dice="
-          (diceValue, isActionSocket) => $emit('handleSelectDice', diceValue, isActionSocket)
+          (diceValue?: TDiceValues, isActionSocket?: boolean) =>
+            $emit('handleSelectDice', diceValue, isActionSocket)
         "
-        @handle-done-dice="(isActionSocket) => $emit('handleDoneDice', isActionSocket)"
-        @handle-mute-chat="(playerIndex) => $emit('handleMuteChat', playerIndex)"
+        @handle-done-dice="(isActionSocket?: boolean) => $emit('handleDoneDice', isActionSocket)"
+        @handle-mute-chat="(playerIndex: number) => $emit('handleMuteChat', playerIndex)"
       />
     </div>
   </div>

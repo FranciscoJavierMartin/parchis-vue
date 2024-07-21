@@ -6,12 +6,13 @@
       :has-turn="hasTurn"
       :actions-turn="hasTurn ? actionsTurn : DEFAULT_VALUE_ACTION_TURN"
       :player="players[indexProfile - 1]"
-      @handle-timer="(ends) => $emit('handleTimer', ends)"
+      @handle-timer="(ends: boolean) => $emit('handleTimer', ends)"
       @handle-select-dice="
-        (diceValue, isActionSocket) => $emit('handleSelectDice', diceValue, isActionSocket)
+        (diceValue?: TDiceValues, isActionSocket?: boolean) =>
+          $emit('handleSelectDice', diceValue, isActionSocket)
       "
-      @handle-done-dice="(isActionSocket) => $emit('handleDoneDice', isActionSocket)"
-      @handle-mute-chat="(playerIndex) => $emit('handleMuteChat', playerIndex)"
+      @handle-done-dice="(isActionSocket?: boolean) => $emit('handleDoneDice', isActionSocket)"
+      @handle-mute-chat="(playerIndex: number) => $emit('handleMuteChat', playerIndex)"
     />
   </div>
 </template>
