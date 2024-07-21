@@ -29,8 +29,7 @@ interface PieceProps {
 }
 
 withDefaults(defineProps<PieceProps>(), {
-  // TODO: Use a better type
-  style: {} as any,
+  style: {} as unknown as () => CSSProperties,
   index: 0,
   debug: false,
 });
