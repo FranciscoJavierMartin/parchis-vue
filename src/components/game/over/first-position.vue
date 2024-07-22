@@ -5,7 +5,10 @@
       <PlayerAvatar :photo="first.photo" :name="first.name" />
       <span class="position">{{ rankingPosition }}</span>
     </div>
-    <div class="first-position-container-name game-over-color" :class="[first.color.toLowerCase()]">
+    <div
+      class="ranking-player-name first-position-container-name game-over-color"
+      :class="[first.color.toLowerCase()]"
+    >
       {{ first.name }}
     </div>
   </div>
@@ -73,14 +76,7 @@ const rankingPosition = computed<string>(() => getLabelRanking(props.first.ranki
 
   .first-position-container-name {
     width: 200px;
-    margin-top: 5px;
-    overflow: hidden;
-    font-size: 13px;
-    text-align: center;
-    text-overflow: ellipsis;
-    text-shadow: 0px 0px 1px black;
-    text-transform: uppercase;
-    white-space: nowrap;
+    font-size: 15px;
 
     &.game-over-color.red {
       color: var(--game-red);

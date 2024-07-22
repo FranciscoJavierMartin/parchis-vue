@@ -2,7 +2,10 @@
   <div class="other-player-container">
     <span class="position">{{ rankingPosition }}</span>
     <PlayerAvatar :photo="player.photo" :name="player.name" />
-    <div class="other-player-name game-over-color" :class="[player.color.toLowerCase()]">
+    <div
+      class="ranking-player-name other-player-name game-over-color"
+      :class="[player.color.toLowerCase()]"
+    >
       {{ player.name }}
     </div>
   </div>
@@ -48,14 +51,8 @@ const rankingPosition = computed<string>(() => getLabelRanking(props.player.rank
 
   .other-player-name {
     width: 80px;
-    margin-top: 5px;
-    overflow: hidden;
     font-size: 12px;
     font-weight: bold;
-    text-align: center;
-    text-overflow: ellipsis;
-    text-shadow: 0px 0px 1px black;
-    white-space: nowrap;
   }
 
   /* TODO: Share styles with first position component */

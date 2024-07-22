@@ -30,3 +30,12 @@
     opacity: 0.5;
   }
 }
+
+.ranking-player-name {
+  margin-top: 5px;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-shadow: 0px 0px 1px black;
+  white-space: nowrap;
+}
