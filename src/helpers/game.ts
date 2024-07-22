@@ -692,7 +692,7 @@ function validatePlayerRankingGameOver(
   return {
     players: copyPlayers,
     gameOverState: {
-      showModal: false,
+      showModal: true,
       gameOver: true,
     },
   };

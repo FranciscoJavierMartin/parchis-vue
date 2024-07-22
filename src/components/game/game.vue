@@ -2,7 +2,7 @@
 <template>
   <PageWrapper>
     <template #default>
-      <GameOverModal v-if="!isGameOver.showModal" :players="players" />
+      <GameOverModal v-if="isGameOver.showModal" :players="players" />
       <BoardWrapper>
         <!-- prettier-ignore-attribute -->
         <ProfileSection
@@ -145,8 +145,7 @@ function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
 function handleTimer(ends: boolean = false): void {
   const { isBot } = players.value[currentTurn.value];
 
-  // TODO: Remove false
-  if ((false && ends) || isBot) {
+  if (ends || isBot) {
     if (actionsTurn.value.actionsBoardGame === EActionsBoardGame.ROLL_DICE) {
       handleSelectDice();
     }
