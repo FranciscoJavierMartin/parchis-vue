@@ -50,17 +50,17 @@ export const MAXIMUM_DICE_PER_TURN = 3;
 /**
  * Game chronometer
  */
-export const TIME_INTERVAL_CHRONOMETER = 0.5; // org (50), debug: 10,5,0.5
+export const TIME_INTERVAL_CHRONOMETER = 50; // org (50), debug: 10,5,0.5
 
 /**
  * Token movement in miliseconds.
  */
-export const TOKEN_MOVEMENT_INTERVAL_VALUE = 0.5; // org (200), debug 100,50,0.5
+export const TOKEN_MOVEMENT_INTERVAL_VALUE = 200; // org (200), debug 100,50,0.5
 
 /**
  * Dice rolling time
  */
-export const ROLL_TIME_VALUE = 0.1; // org (0.6), debug 0.1
+export const ROLL_TIME_VALUE = 0.6; // org (0.6), debug 0.1
 
 /**
  * Delay in show game over modal
