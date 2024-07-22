@@ -1,21 +1,5 @@
 <template>
-  <AppWrapper>
-    <Game
-      :debug="envVars.debug"
-      :users="TEMP_USERS"
-      :initial-turn="0"
-      :total-players="totalPlayers"
-    />
-  </AppWrapper>
+  <div>
+    <h1>Home</h1>
+  </div>
 </template>
-
-<script setup lang="ts">
-import Game from '@/components/game/game.vue';
-import AppWrapper from '@/components/wrapper/app-wrapper.vue';
-import type { TTotalPlayers } from '@/interfaces/game';
-import { TEMP_USERS } from '@/helpers/player';
-import { envVars } from '@/config/envVar';
-
-// TODO: Use users.length instead of pass totalPlayers
-const totalPlayers = TEMP_USERS.length as TTotalPlayers;
-</script>

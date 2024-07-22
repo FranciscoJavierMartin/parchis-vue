@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
-import OfflineView from '@/views/OfflineView.vue';
-import OnlineView from '@/views/OnlineView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,12 +13,12 @@ const router = createRouter({
     {
       path: '/offline',
       name: 'offline',
-      component: OfflineView,
+      component: async () => import('@/views/OfflineView.vue'),
     },
     {
       path: '/online',
       name: 'online',
-      component: OnlineView,
+      component: async () => import('@/views/OnlineView.vue'),
     },
     {
       path: '/about',
