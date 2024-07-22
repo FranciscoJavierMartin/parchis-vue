@@ -1,5 +1,5 @@
 <template>
-  <div class="game-over-wrapper">
+  <dialog ref="trapRef" class="game-over-wrapper">
     <div class="game-over-options">
       <div class="game-over-container">
         <GameOverRibbon title="Well played" />
@@ -17,7 +17,7 @@
         </button>
       </div>
     </div>
-  </div>
+  </dialog>
 </template>
 
 <script setup lang="ts">
@@ -29,6 +29,7 @@ import FirstPosition from '@/components/game/over/first-position.vue';
 import OtherPlayer from '@/components/game/over/other-player.vue';
 import ShareIcon from '@/components/icons/share-icon.vue';
 import HomeIcon from '@/components/icons/home-icon.vue';
+import useFocusTrap from '@/composables/use-focus-trap';
 
 interface GameOverProps {
   players: IPlayer[];
@@ -37,6 +38,7 @@ interface GameOverProps {
 const props = defineProps<GameOverProps>();
 const first = ref<IPlayer>();
 const others = ref<IPlayer[]>();
+const { trapRef } = useFocusTrap();
 
 onBeforeMount(() => {
   const rankingPlayers = getOrganizedRanking(props.players);
