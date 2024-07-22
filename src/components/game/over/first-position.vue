@@ -2,7 +2,7 @@
   <div class="first-position-container">
     <div class="first-position-container-winner-photo">
       <WinnerCrown />
-      <PlayerAvatar :photo="first.photo || ''" :name="first.name" />
+      <PlayerAvatar :photo="first.photo" :name="first.name" />
       <span class="position">{{ rankingPosition }}</span>
     </div>
     <div class="first-position-container-name game-over-color" :class="[first.color.toLowerCase()]">

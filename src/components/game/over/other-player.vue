@@ -1,7 +1,7 @@
 <template>
   <div class="other-player-container">
     <span class="position">{{ rankingPosition }}</span>
-    <PlayerAvatar :photo="player.photo || ''" :name="player.name" />
+    <PlayerAvatar :photo="player.photo" :name="player.name" />
     <div class="other-player-name game-over-color" :class="[player.color.toLowerCase()]">
       {{ player.name }}
     </div>
