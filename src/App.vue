@@ -1,13 +1,10 @@
 <template>
-  <Suspense>
+  <AppWrapper>
     <RouterView />
-    <template #fallback>
-      <LoadingIndicator />
-    </template>
-  </Suspense>
+  </AppWrapper>
 </template>
 
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import LoadingIndicator from '@/components/common/loading-indicator.vue';
+import AppWrapper from '@/components/wrapper/app-wrapper.vue';
 </script>

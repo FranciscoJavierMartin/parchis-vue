@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <PageWrapper>
     <h1>Home</h1>
-  </div>
+  </PageWrapper>
 </template>
+
+<script setup lang="ts">
+import PageWrapper from '@/layout/page-wrapper.vue';
+</script>
