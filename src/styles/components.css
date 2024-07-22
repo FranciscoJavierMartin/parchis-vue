@@ -30,3 +30,28 @@
     opacity: 0.5;
   }
 }
+
+.ranking-player-name {
+  margin-top: 5px;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-shadow: 0px 0px 1px black;
+  white-space: nowrap;
+
+  &.game-over-color.red {
+    color: var(--game-red);
+  }
+
+  &.game-over-color.blue {
+    color: var(--game-blue);
+  }
+
+  &.game-over-color.yellow {
+    color: var(--game-yellow);
+  }
+
+  &.game-over-color.green {
+    color: var(--game-green);
+  }
+}

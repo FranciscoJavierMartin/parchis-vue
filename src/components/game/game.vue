@@ -2,7 +2,7 @@
 <template>
   <PageWrapper>
     <template #default>
-      <div v-if="isGameOver.showModal">Game over</div>
+      <GameOverModal v-if="isGameOver.showModal" :players="players" />
       <BoardWrapper>
         <!-- prettier-ignore-attribute -->
         <ProfileSection
@@ -70,6 +70,7 @@ import {
   ETypeGame,
   INITIAL_ACTIONS_MOVE_TOKEN,
   TOKEN_MOVEMENT_INTERVAL_VALUE,
+  WAIT_SHOW_MODAL_GAME_OVER,
 } from '@/constants/game';
 import type { IActionsTurn, IGameOver, TTotalPlayers, TTypeGame } from '@/interfaces/game';
 import type { IPlayer, IUser } from '@/interfaces/user';
@@ -93,6 +94,7 @@ import {
 import { getRandomValueDice } from '@/helpers/random';
 import TokenList from '@/components/game/tokens/token-list.vue';
 import GameDebugTokens from '@/components/game/debug/game-debug-tokens.vue';
+import GameOverModal from '@/components/game/over/game-over-modal.vue';
 
 // TODO: Add types for socket
 interface GameProps {
@@ -213,9 +215,11 @@ watch(
           players.value = validatedTokenMovement.players;
           currentTurn.value = validatedTokenMovement.currentTurn;
 
-          if (validatedTokenMovement.gameOverState) {
-            isGameOver.value = validatedTokenMovement.gameOverState;
-          }
+          setTimeout(() => {
+            if (validatedTokenMovement.gameOverState) {
+              isGameOver.value = validatedTokenMovement.gameOverState;
+            }
+          }, WAIT_SHOW_MODAL_GAME_OVER);
 
           if (!validatedTokenMovement.actionsMoveToken.isRunning) {
             clearInterval(interval);

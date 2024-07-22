@@ -15,7 +15,6 @@ import type { IActionsTurn, IGameOver, TTotalPlayers } from '@/interfaces/game';
 import type {
   IActionsMoveToken,
   IListTokens,
-  ISelectTokenValues,
   IToken,
   TShowTotalTokens,
   TTokenByPositionType,
@@ -37,7 +36,6 @@ import {
 } from '@/helpers/positions-board';
 import type { IDiceList, TDiceValues } from '@/interfaces/dice';
 import { delay } from '@/helpers/debounce';
-import { TOKENS_JAIL_AND_OUTSITE } from '@/helpers/states';
 import { cloneDeep } from '@/helpers/clone';
 import type { TPlayerRankingPosition } from '@/interfaces/profile';
 import type { IENextStepGame } from '@/interfaces/online';
@@ -69,7 +67,7 @@ export function getInitialPositionTokens(
 ): IListTokens[] {
   const playersColors: ESufixColors[] = getPlayersColors(boardColor, totalPlayers);
   const tokensPosition: EPositionGame[] = getTokensPositionsOnBoard(totalPlayers);
-  //TODO: Uncomment
+
   return players.map<IListTokens>((player, index) => {
     // Current user who is playing online, it is always at position 0.
     const isCurrentOnlineUser: boolean = index === 0;
@@ -82,8 +80,6 @@ export function getInitialPositionTokens(
 
     return { index, positionGame, tokens };
   });
-
-  // return TOKENS_JAIL_AND_OUTSITE;
 }
 
 /**
@@ -692,7 +688,7 @@ function validatePlayerRankingGameOver(
   return {
     players: copyPlayers,
     gameOverState: {
-      showModal: false,
+      showModal: true,
       gameOver: true,
     },
   };

@@ -5,16 +5,17 @@
 </template>
 
 <script setup lang="ts">
-import { PREFIX_RANKING } from '@/constants/game';
 import { computed } from 'vue';
+import { getLabelRanking } from '@/helpers/player';
+import type { TPlayerRankingPosition } from '@/interfaces/profile';
 
 interface ProfileRankingProps {
-  value: number;
+  value: TPlayerRankingPosition;
 }
 
 const props = defineProps<ProfileRankingProps>();
 
-const rankingPosition = computed<string>(() => `${props.value}${PREFIX_RANKING[props.value - 1]}`);
+const rankingPosition = computed<string>(() => getLabelRanking(props.value));
 </script>
 
 <style scoped>
