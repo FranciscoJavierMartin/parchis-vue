@@ -5,12 +5,12 @@
       <PlayerAvatar :photo="first.photo" :name="first.name" />
       <span class="position">{{ rankingPosition }}</span>
     </div>
-    <div
+    <span
       class="ranking-player-name first-position-container-name game-over-color"
       :class="[first.color.toLowerCase()]"
     >
       {{ first.name }}
-    </div>
+    </span>
   </div>
 </template>
 
@@ -77,22 +77,6 @@ const rankingPosition = computed<string>(() => getLabelRanking(props.first.ranki
   .first-position-container-name {
     width: 200px;
     font-size: 15px;
-
-    &.game-over-color.red {
-      color: var(--game-red);
-    }
-
-    &.game-over-color.blue {
-      color: var(--game-blue);
-    }
-
-    &.game-over-color.yellow {
-      color: var(--game-yellow);
-    }
-
-    &.game-over-color.green {
-      color: var(--game-green);
-    }
   }
 }
 </style>
