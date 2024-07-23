@@ -83,3 +83,7 @@ export function getOrganizedRanking(players: IPlayer[]): { first: IPlayer; other
 export function getLabelRanking(ranking: TPlayerRankingPosition = 1): string {
   return `${ranking}${PREFIX_RANKING[ranking - 1]}`;
 }
+
+export function getInitialTotalPlayers(): TTotalPlayers {
+  return 4;
+}

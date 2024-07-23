@@ -13,12 +13,13 @@ import { ref } from 'vue';
 import PlayIcon from '@/components/icons/play-icon.vue';
 import SelectNumberPlayers from '@/components/base/select-number-players.vue';
 import type { DataOfflineGame, TTotalPlayers } from '@/interfaces/game';
+import { getInitialTotalPlayers } from '@/helpers/player';
 
 defineEmits<{
   updateData: [data: DataOfflineGame];
 }>();
 
-const totalPlayers = ref<TTotalPlayers>(2);
+const totalPlayers = ref<TTotalPlayers>(getInitialTotalPlayers());
 
 function handleSubmit(event: Event): void {
   event.preventDefault();
