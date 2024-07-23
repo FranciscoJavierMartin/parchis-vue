@@ -3,6 +3,9 @@
     <template #leftOption>
       <BackButton />
     </template>
+    <template #default>
+      <h1>Online</h1>
+    </template>
   </PageWrapper>
 </template>
 
