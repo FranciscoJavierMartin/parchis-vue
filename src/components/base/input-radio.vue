@@ -1,16 +1,21 @@
 <template>
   <label :for="label" class="form-control">
-    <input type="radio" :id="label" />
+    <input type="radio" :id="label" :value="value" v-model="totalPlayers" />
     {{ label }}
   </label>
 </template>
 
 <script setup lang="ts">
+import type { TTotalPlayers } from '@/interfaces/game';
+
 interface InputRadioProps {
   label: string;
+  value: TTotalPlayers;
 }
 
 defineProps<InputRadioProps>();
+
+const totalPlayers = defineModel();
 </script>
 
 <style scoped>

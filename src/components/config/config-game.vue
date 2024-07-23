@@ -1,6 +1,6 @@
 <template>
   <form @submit="handleSubmit" class="game-offline glass-effect">
-    <SelectNumberPlayers :number-players="[2, 3, 4]" v-model="numberOfPlayers" />
+    <SelectNumberPlayers :number-players="[2, 3, 4]" v-model="totalPlayers" />
     <button type="submit" class="button yellow game-offline-play">
       <PlayIcon fill="#8b5f00" />
       Play
@@ -18,7 +18,7 @@ defineEmits<{
   updateData: [data: DataOfflineGame];
 }>();
 
-const numberOfPlayers = ref<TTotalPlayers>(2);
+const totalPlayers = ref<TTotalPlayers>(2);
 
 function handleSubmit(event: Event): void {
   event.preventDefault();

@@ -1,6 +1,12 @@
 <template>
   <div class="game-select-number-players">
-    <InputRadio v-for="total of numberPlayers" :key="total" :value="total" :label="`${total}P`" />
+    <InputRadio
+      v-for="total of numberPlayers"
+      :key="total"
+      :value="total"
+      :label="`${total}P`"
+      v-model="totalPlayers"
+    />
   </div>
 </template>
 
@@ -9,14 +15,12 @@ import type { TTotalPlayers } from '@/interfaces/game';
 import InputRadio from '@/components/base/input-radio.vue';
 
 interface SelectNumberPlayersProps {
-  value?: TTotalPlayers;
   numberPlayers?: TTotalPlayers[];
-  modelValue: TTotalPlayers;
 }
 
 withDefaults(defineProps<SelectNumberPlayersProps>(), { numberPlayers: () => [2, 3, 4] });
 
-const numberOfPlayers = defineModel();
+const totalPlayers = defineModel();
 </script>
 
 <style scoped>
