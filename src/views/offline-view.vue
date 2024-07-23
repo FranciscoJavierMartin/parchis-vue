@@ -1,21 +1,21 @@
 <template>
-  <PageWrapper>
-    <Game
-      :debug="envVars.debug"
-      :users="TEMP_USERS"
-      :initial-turn="0"
-      :total-players="totalPlayers"
-    />
+  <div v-if="dataGame"></div>
+  <PageWrapper v-else>
+    <GameLogo />
+    <ConfigGame @update-data="updateDataGame" />
   </PageWrapper>
 </template>
 
 <script setup lang="ts">
-import Game from '@/components/game/game.vue';
-import type { TTotalPlayers } from '@/interfaces/game';
-import { TEMP_USERS } from '@/helpers/player';
-import { envVars } from '@/config/envVar';
+import { ref } from 'vue';
 import PageWrapper from '@/layout/page-wrapper.vue';
+import GameLogo from '@/components/common/game-logo.vue';
+import type { DataOfflineGame } from '@/interfaces/game';
+import ConfigGame from '@/components/config/config-game.vue';
 
-// TODO: Use users.length instead of pass totalPlayers
-const totalPlayers = TEMP_USERS.length as TTotalPlayers;
+const dataGame = ref<DataOfflineGame | null>(null);
+
+function updateDataGame(data: DataOfflineGame): void {
+  dataGame.value = data;
+}
 </script>
