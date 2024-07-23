@@ -1,4 +1,6 @@
-export const ROUTES = {
+import type { IRoutes } from '@/interfaces/routes';
+
+export const ROUTES: IRoutes = {
   HOME: {
     path: '/',
     name: 'home',
