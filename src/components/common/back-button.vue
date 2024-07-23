@@ -20,7 +20,7 @@ import ArrowLeft from '@/components/icons/arrow-left.vue';
 import BackConfirmationModal from '@/components/modals/back-confirmation-modal.vue';
 import { ROUTES } from '@/constants/routes';
 
-const isOpen: Ref<boolean> = ref<boolean>(true);
+const isOpen: Ref<boolean> = ref<boolean>(false);
 
 const router = useRouter();
 
