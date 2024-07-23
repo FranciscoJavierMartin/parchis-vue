@@ -62,6 +62,21 @@ defineEmits(['cancel', 'confirmation']);
     justify-content: space-evenly;
     width: 100%;
 
+    .button-no {
+      background-color: var(--game-red);
+    }
+
+    .button-yes {
+      background-color: var(--game-blue);
+
+      > div {
+        &:deep(svg) {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+
     .button-yes,
     .button-no {
       display: flex;
@@ -80,6 +95,7 @@ defineEmits(['cancel', 'confirmation']);
         filter: brightness(150%);
       }
 
+      /* stylelint-disable-next-line no-descending-specificity */
       > div {
         display: flex;
         gap: 5px;
@@ -89,21 +105,6 @@ defineEmits(['cancel', 'confirmation']);
         &:deep(svg) {
           width: 20px;
           height: 20px;
-        }
-      }
-    }
-
-    .button-no {
-      background-color: var(--game-red);
-    }
-
-    .button-yes {
-      background-color: var(--game-blue);
-
-      > div {
-        &:deep(svg) {
-          width: 16px;
-          height: 16px;
         }
       }
     }
