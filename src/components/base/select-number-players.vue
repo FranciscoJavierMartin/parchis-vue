@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import type { TTotalPlayers } from '@/interfaces/game';
 import InputRadio from '@/components/base/input-radio.vue';
+import type { TTotalPlayers } from '@/interfaces/game';
 
 interface SelectNumberPlayersProps {
   numberPlayers?: TTotalPlayers[];

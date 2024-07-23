@@ -9,10 +9,10 @@
 </template>
 
 <script setup lang="ts">
-import type { DataOfflineGame, TTotalPlayers } from '@/interfaces/game';
+import { ref } from 'vue';
 import PlayIcon from '@/components/icons/play-icon.vue';
 import SelectNumberPlayers from '@/components/base/select-number-players.vue';
-import { ref } from 'vue';
+import type { DataOfflineGame, TTotalPlayers } from '@/interfaces/game';
 
 defineEmits<{
   updateData: [data: DataOfflineGame];
