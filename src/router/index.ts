@@ -1,35 +1,30 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '@/views/HomeView.vue';
-import OfflineView from '@/views/OfflineView.vue';
-import OnlineView from '@/views/OnlineView.vue';
+import HomeView from '@/views/home-view.vue';
+import { ROUTES } from '@/constants/routes';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
+      ...ROUTES.HOME,
       component: HomeView,
     },
     {
-      path: '/offline',
-      name: 'offline',
-      component: OfflineView,
+      ...ROUTES.OFFLINE,
+      component: async () => import('@/views/offline-view.vue'),
     },
     {
-      path: '/online',
-      name: 'online',
-      component: OnlineView,
+      ...ROUTES.ONLINE,
+      component: async () => import('@/views/online-view.vue'),
     },
     {
-      path: '/about',
-      name: 'about',
-      component: async () => import('@/views/AboutView.vue'),
+      ...ROUTES.ABOUT,
+      component: async () => import('@/views/about-view.vue'),
     },
     {
       path: '/:pathMatch(.*)*',
-      redirect: '/',
+      redirect: ROUTES.HOME.path,
     },
   ],
 });

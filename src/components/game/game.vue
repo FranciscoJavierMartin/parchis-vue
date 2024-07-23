@@ -1,64 +1,59 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <PageWrapper>
-    <template #default>
-      <GameOverModal v-if="isGameOver.showModal" :players="players" />
-      <BoardWrapper>
-        <!-- prettier-ignore-attribute -->
-        <ProfileSection
-          :base-position="EPositionProfiles.TOP"
-          :players="players"
-          :total-players="(players.length as TTotalPlayers)"
-          :current-turn="currentTurn"
-          :actions-turn="actionsTurn"
-          @handle-timer="handleTimer"
-          @handle-select-dice="handleSelectDice"
-          @handle-done-dice="handleDoneDice"
-          @handle-mute-chat="handleMuteChat"
-        />
-        <!-- prettier-ignore-attribute -->
-        <GameBoard :boardColor="(boardColor as EBoardColors)">
-          <TokenList
-            :dice-list="actionsTurn.diceList"
-            :list-token="listTokens"
-            :debug="debug"
-            @handle-selected-token="handleSelectedToken"
-          />
-          <GameDebug v-if="debug" />
-          <ShowTotalTokens :total-tokens="totalTokens" />
-        </GameBoard>
-        <!-- prettier-ignore-attribute -->
-        <ProfileSection
-          :base-position="EPositionProfiles.BOTTOM"
-          :players="players"
-          :total-players="(players.length as TTotalPlayers)"
-          :current-turn="currentTurn"
-          :actions-turn="actionsTurn"
-          @handle-timer="handleTimer"
-          @handle-select-dice="handleSelectDice"
-          @handle-done-dice="handleDoneDice"
-          @handle-mute-chat="handleMuteChat"
-        />
-      </BoardWrapper>
-      <GameDebugTokens
-        v-if="debug"
-        v-bind="{
-          typeGame,
-          players,
-          listTokens,
-          actionsTurn,
-          handleSelectDice,
-        }"
-        @handle-select-dice="(event) => handleSelectDice(event.diceValue, event.isActionSocket)"
-        @update-tokens="updateTokens"
+  <GameOverModal v-if="isGameOver.showModal" :players="players" />
+  <BoardWrapper>
+    <!-- prettier-ignore-attribute -->
+    <ProfileSection
+      :base-position="EPositionProfiles.TOP"
+      :players="players"
+      :total-players="(players.length as TTotalPlayers)"
+      :current-turn="currentTurn"
+      :actions-turn="actionsTurn"
+      @handle-timer="handleTimer"
+      @handle-select-dice="handleSelectDice"
+      @handle-done-dice="handleDoneDice"
+      @handle-mute-chat="handleMuteChat"
+    />
+    <!-- prettier-ignore-attribute -->
+    <GameBoard :boardColor="(boardColor as EBoardColors)">
+      <TokenList
+        :dice-list="actionsTurn.diceList"
+        :list-token="listTokens"
+        :debug="debug"
+        @handle-selected-token="handleSelectedToken"
       />
-    </template>
-  </PageWrapper>
+      <GameDebug v-if="debug" />
+      <ShowTotalTokens :total-tokens="totalTokens" />
+    </GameBoard>
+    <!-- prettier-ignore-attribute -->
+    <ProfileSection
+      :base-position="EPositionProfiles.BOTTOM"
+      :players="players"
+      :total-players="(players.length as TTotalPlayers)"
+      :current-turn="currentTurn"
+      :actions-turn="actionsTurn"
+      @handle-timer="handleTimer"
+      @handle-select-dice="handleSelectDice"
+      @handle-done-dice="handleDoneDice"
+      @handle-mute-chat="handleMuteChat"
+    />
+  </BoardWrapper>
+  <GameDebugTokens
+    v-if="debug"
+    v-bind="{
+      typeGame,
+      players,
+      listTokens,
+      actionsTurn,
+      handleSelectDice,
+    }"
+    @handle-select-dice="(event) => handleSelectDice(event.diceValue, event.isActionSocket)"
+    @update-tokens="updateTokens"
+  />
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import PageWrapper from '@/layout/page-wrapper.vue';
 import GameBoard from '@/components/game/board/game-board.vue';
 import GameDebug from '@/components/game/debug/game-debug.vue';
 import ShowTotalTokens from '@/components/game/token/components/total-tokens/show-total-tokens.vue';
