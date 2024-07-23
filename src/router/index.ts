@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '@/views/HomeView.vue';
+import HomeView from '@/views/home-view.vue';
 import { ROUTES } from '@/constants/routes';
 
 const router = createRouter({
@@ -12,15 +12,15 @@ const router = createRouter({
     },
     {
       ...ROUTES.OFFLINE,
-      component: async () => import('@/views/OfflineView.vue'),
+      component: async () => import('@/views/offline-view.vue'),
     },
     {
       ...ROUTES.ONLINE,
-      component: async () => import('@/views/OnlineView.vue'),
+      component: async () => import('@/views/online-view.vue'),
     },
     {
       ...ROUTES.ABOUT,
-      component: async () => import('@/views/AboutView.vue'),
+      component: async () => import('@/views/about-view.vue'),
     },
     {
       path: '/:pathMatch(.*)*',
