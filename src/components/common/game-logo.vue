@@ -86,18 +86,18 @@ const DATA_LOGO: { letter: string; color: TColors }[] = [
     }
 
     .game-logo-letters {
-      align-items: center;
-      display: flex;
-      height: 30px;
-      justify-content: center;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 30px;
+      height: 30px;
 
       .game-logo-letter {
-        font-size: 40px;
         position: absolute;
         top: -23px;
         z-index: 10;
+        font-size: 40px;
         font-weight: bold;
         color: white;
         text-shadow:
@@ -118,10 +118,10 @@ const DATA_LOGO: { letter: string; color: TColors }[] = [
   }
 
   .game-logo-footer {
-    text-transform: uppercase;
     font-size: 25px;
-    color: #fdf182;
     font-weight: bold;
+    color: #fdf182;
+    text-transform: uppercase;
     background: #e6b31e;
     background: linear-gradient(to top, #e6b31e 34%, #fdf182 57%);
     -webkit-background-clip: text;
