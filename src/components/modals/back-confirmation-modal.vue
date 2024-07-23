@@ -46,6 +46,7 @@ defineEmits(['cancel', 'confirmation']);
     black 0px 0px 0px 3px,
     #be835d 0px 0px 0px 6px,
     rgb(255, 217, 19) 0px 0px 0px 9px;
+  animation: scaleUp 0.5s;
 
   &:deep(svg) {
     width: 20%;

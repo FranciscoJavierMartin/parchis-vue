@@ -102,3 +102,12 @@
     transform: translate3d(0, 100%, 0);
   }
 }
+
+@keyframes scaleUp {
+  from {
+    scale: 0.5;
+  }
+  to {
+    scale: 1;
+  }
+}
