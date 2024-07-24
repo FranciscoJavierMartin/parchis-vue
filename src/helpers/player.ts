@@ -7,6 +7,7 @@ import { getValueFromCache, isNumber } from '@/helpers/storage';
 import { PREFIX_RANKING } from '@/constants/game';
 import type { TPlayerRankingPosition } from '@/interfaces/profile';
 import { TOTAL_PLAYERS_CACHE } from '@/constants/storage';
+import type { IPlayerOffline } from '@/interfaces/player';
 
 // TODO: Remove
 export const TEMP_USERS: IUser[] = [
@@ -92,4 +93,8 @@ export function getInitialTotalPlayers(): TTotalPlayers {
     isNumber(dataFromCache) && dataFromCache >= 2 && dataFromCache <= 4 ? dataFromCache : 2;
 
   return totalPlayers;
+}
+
+export function getInitialDataOfflinePlayers(): IPlayerOffline[] {
+  return [];
 }
