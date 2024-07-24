@@ -3,11 +3,12 @@ import type { TBoardColors, TColors, TSufixColors } from '@/interfaces/board';
 import type { TTotalPlayers } from '@/interfaces/game';
 import type { IPlayer, IUser } from '@/interfaces/user';
 import { cloneDeep } from '@/helpers/clone';
-import { getDataFromCache, getValueFromCache, isNumber } from '@/helpers/storage';
+import { getValueFromCache, isNumber } from '@/helpers/storage';
 import { PREFIX_RANKING } from '@/constants/game';
 import type { TPlayerRankingPosition } from '@/interfaces/profile';
 import { BOARD_COLORS, PLAYERS_INFO, TOTAL_PLAYERS_CACHE } from '@/constants/storage';
 import type { IPlayerOffline } from '@/interfaces/player';
+import { guid } from '@/helpers/random';
 
 // TODO: Remove
 export const TEMP_USERS: IUser[] = [
@@ -97,13 +98,31 @@ export function getInitialTotalPlayers(): TTotalPlayers {
 
 export function getInitialDataOfflinePlayers(totalPlayers: TTotalPlayers): IPlayerOffline[] {
   const dataFromCache: IPlayerOffline[] = getValueFromCache<IPlayerOffline[]>(PLAYERS_INFO, []);
-  const initialDataPlayers: IPlayerOffline[] = [];
+
   const boardColors: string[] = getInitialBoardColors().split('');
   const firstColor = ESufixColors[boardColors[0] as TSufixColors] as TColors;
 
-  const { colors, boardColor } = getColorsByTotalPlayers(firstColor, totalPlayers, 0);
+  const { colors } = getColorsByTotalPlayers(firstColor, totalPlayers, 0);
 
-  console.log({ colors, boardColors });
+  const initialDataPlayers: IPlayerOffline[] = boardColors.map((_value: string, index: number) => {
+    const numPlayer: number = index + 1;
+    const disabled: boolean = !(numPlayer <= totalPlayers);
+
+    const color: TColors =
+      colors[index] || (ESufixColors[boardColors[index] as TSufixColors] as TColors);
+    const id = dataFromCache[index]?.id || guid();
+    const name = dataFromCache[index]?.name || `Player 0${numPlayer}`;
+    const isBot = dataFromCache[index]?.isBot ?? false;
+
+    return {
+      color,
+      disabled,
+      id,
+      index,
+      isBot,
+      name,
+    };
+  });
 
   return initialDataPlayers;
 }

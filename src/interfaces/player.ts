@@ -2,7 +2,7 @@ import type { TColors } from '@/interfaces/board';
 
 export interface IPlayerOffline {
   id: string;
-  index: string;
+  index: number;
   name: string;
   color: TColors;
   disabled: boolean;
