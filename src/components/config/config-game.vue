@@ -22,7 +22,7 @@ defineEmits<{
 }>();
 
 const totalPlayers = ref<TTotalPlayers>(getInitialTotalPlayers());
-const players = ref<IPlayerOffline[]>(getInitialDataOfflinePlayers());
+const players = ref<IPlayerOffline[]>(getInitialDataOfflinePlayers(totalPlayers.value));
 
 function handleSubmit(event: Event): void {
   event.preventDefault();

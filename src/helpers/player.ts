@@ -1,12 +1,12 @@
-import { ESufixColors } from '@/constants/board';
-import type { TBoardColors, TSufixColors } from '@/interfaces/board';
+import { EBoardColors, ESufixColors } from '@/constants/board';
+import type { TBoardColors, TColors, TSufixColors } from '@/interfaces/board';
 import type { TTotalPlayers } from '@/interfaces/game';
 import type { IPlayer, IUser } from '@/interfaces/user';
 import { cloneDeep } from '@/helpers/clone';
-import { getValueFromCache, isNumber } from '@/helpers/storage';
+import { getDataFromCache, getValueFromCache, isNumber } from '@/helpers/storage';
 import { PREFIX_RANKING } from '@/constants/game';
 import type { TPlayerRankingPosition } from '@/interfaces/profile';
-import { TOTAL_PLAYERS_CACHE } from '@/constants/storage';
+import { BOARD_COLORS, PLAYERS_INFO, TOTAL_PLAYERS_CACHE } from '@/constants/storage';
 import type { IPlayerOffline } from '@/interfaces/player';
 
 // TODO: Remove
@@ -95,6 +95,68 @@ export function getInitialTotalPlayers(): TTotalPlayers {
   return totalPlayers;
 }
 
-export function getInitialDataOfflinePlayers(): IPlayerOffline[] {
-  return [];
+export function getInitialDataOfflinePlayers(totalPlayers: TTotalPlayers): IPlayerOffline[] {
+  const dataFromCache: IPlayerOffline[] = getValueFromCache<IPlayerOffline[]>(PLAYERS_INFO, []);
+  const initialDataPlayers: IPlayerOffline[] = [];
+  const boardColors: string[] = getInitialBoardColors().split('');
+  const firstColor = ESufixColors[boardColors[0] as TSufixColors] as TColors;
+
+  const { colors, boardColor } = getColorsByTotalPlayers(firstColor, totalPlayers, 0);
+
+  console.log({ colors, boardColors });
+
+  return initialDataPlayers;
+}
+
+function getInitialBoardColors(): EBoardColors {
+  const dataFromCache: EBoardColors = getValueFromCache(BOARD_COLORS, EBoardColors.RGYB);
+  const boardColors = Object.keys(EBoardColors).includes(dataFromCache)
+    ? dataFromCache
+    : EBoardColors.RGYB;
+
+  return boardColors;
+}
+
+function getColorsByTotalPlayers(
+  color: TColors,
+  totalPlayers: TTotalPlayers,
+  index: number,
+): { boardColor: string | undefined; colors: TColors[] } {
+  const colors: { boardColor: string | undefined; colors: TColors[] } = {
+    boardColor: '',
+    colors: [],
+  };
+  const colorSuffix = color.substring(0, 1);
+
+  if (totalPlayers === 2) {
+    const indexSearch: number = index === 0 ? 0 : 2;
+    colors.boardColor = getBoardColorType(indexSearch, colorSuffix);
+    const splitColor: string[] = colors.boardColor?.split('') || [];
+    const sufixFirstColor: TSufixColors = (
+      index === 0 ? splitColor[0] : splitColor[2]
+    ) as TSufixColors;
+    const sufixSecondColor: TSufixColors = (
+      index === 0 ? splitColor[2] : splitColor[0]
+    ) as TSufixColors;
+
+    const firstColor: TColors = ESufixColors[sufixFirstColor] as TColors;
+    const secondColor: TColors = ESufixColors[sufixSecondColor] as TColors;
+
+    const oppositeIndex: number = index === 0 ? 1 : 0;
+    colors.colors[index] = color === firstColor ? firstColor : secondColor;
+    colors.colors[oppositeIndex] = color === secondColor ? secondColor : firstColor;
+  } else {
+    colors.boardColor = getBoardColorType(index, colorSuffix);
+    const splitColor: string[] = colors.boardColor?.split('') || [];
+
+    colors.colors = splitColor
+      .filter((_value: string, index: number) => index < totalPlayers)
+      .map((value: string) => ESufixColors[value as TSufixColors] as TColors);
+  }
+
+  return colors;
+}
+
+function getBoardColorType(index: number, colorSuffix: string): string | undefined {
+  return Object.keys(EBoardColors).find((color) => color.split('')[index] === colorSuffix);
 }
