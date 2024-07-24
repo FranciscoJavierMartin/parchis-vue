@@ -114,6 +114,14 @@ const DATA_LOGO: { letter: string; color: TColors }[] = [
           0 10px 10px rgba(0, 0, 0, 0.2),
           0 20px 20px rgba(0, 0, 0, 0.15);
       }
+
+      &:nth-child(odd) .game-logo-letter {
+        transform: rotate(10deg);
+      }
+
+      &:nth-child(even) .game-logo-letter {
+        transform: rotate(-10deg);
+      }
     }
   }
 
