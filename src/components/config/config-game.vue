@@ -1,6 +1,6 @@
 <template>
   <form @submit="handleSubmit" class="game-offline glass-effect">
-    <SelectNumberPlayers :number-players="[2, 3, 4]" v-model="totalPlayers" />
+    <SelectNumberPlayers v-model="totalPlayers" />
     <button type="submit" class="button yellow game-offline-play">
       <PlayIcon fill="#8b5f00" />
       Play
@@ -14,12 +14,14 @@ import PlayIcon from '@/components/icons/play-icon.vue';
 import SelectNumberPlayers from '@/components/base/select-number-players.vue';
 import type { DataOfflineGame, TTotalPlayers } from '@/interfaces/game';
 import { getInitialTotalPlayers } from '@/helpers/player';
+import type { IPlayerOffline } from '@/interfaces/player';
 
 defineEmits<{
   updateData: [data: DataOfflineGame];
 }>();
 
 const totalPlayers = ref<TTotalPlayers>(getInitialTotalPlayers());
+const players = ref<IPlayerOffline[]>();
 
 function handleSubmit(event: Event): void {
   event.preventDefault();

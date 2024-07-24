@@ -32,11 +32,11 @@ export function saveProperties<T>(
 
 export function getValueFromCache<T>(
   key: string = '',
-  initial: T,
+  fallbackValue: T,
   storageType: TStorageType = 'localStorage',
 ): T {
   const localCache = getDataFromCache<{ [key: string]: T }>(storageType);
-  return localCache[key] || initial;
+  return localCache[key] || fallbackValue;
 }
 
 export function deleteProperty(property: string, storageType: TStorageType = 'localStorage'): void {
@@ -59,4 +59,8 @@ function isValidJSON(json: string): boolean {
   }
 
   return isValid;
+}
+
+export function isNumber(value: unknown): value is number {
+  return typeof value === 'number' && !isNaN(value);
 }

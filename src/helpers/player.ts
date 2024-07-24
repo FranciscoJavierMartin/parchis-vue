@@ -3,8 +3,10 @@ import type { TBoardColors, TSufixColors } from '@/interfaces/board';
 import type { TTotalPlayers } from '@/interfaces/game';
 import type { IPlayer, IUser } from '@/interfaces/user';
 import { cloneDeep } from '@/helpers/clone';
+import { getValueFromCache, isNumber } from '@/helpers/storage';
 import { PREFIX_RANKING } from '@/constants/game';
 import type { TPlayerRankingPosition } from '@/interfaces/profile';
+import { TOTAL_PLAYERS_CACHE } from '@/constants/storage';
 
 // TODO: Remove
 export const TEMP_USERS: IUser[] = [
@@ -85,5 +87,9 @@ export function getLabelRanking(ranking: TPlayerRankingPosition = 1): string {
 }
 
 export function getInitialTotalPlayers(): TTotalPlayers {
-  return 4;
+  const dataFromCache: TTotalPlayers = getValueFromCache<TTotalPlayers>(TOTAL_PLAYERS_CACHE, 2);
+  const totalPlayers: TTotalPlayers =
+    isNumber(dataFromCache) && dataFromCache >= 2 && dataFromCache <= 4 ? dataFromCache : 2;
+
+  return totalPlayers;
 }
