@@ -28,7 +28,7 @@ defineEmits<{
 .game-offline-player {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   width: 90%;
   margin-bottom: 15px;
 }
