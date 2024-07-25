@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import PlayIcon from '@/components/icons/play-icon.vue';
 import SelectNumberPlayers from '@/components/base/select-number-players.vue';
 import PlayerInput from '@/components/config/player-input.vue';
@@ -30,6 +30,14 @@ const players = ref<IPlayerOffline[]>(getInitialDataOfflinePlayers(totalPlayers.
 function handleSubmit(event: Event): void {
   event.preventDefault();
 }
+
+watch(
+  totalPlayers,
+  (newValue: TTotalPlayers) => {
+    players.value = getInitialDataOfflinePlayers(newValue);
+  },
+  { immediate: true },
+);
 </script>
 
 <style scoped>
