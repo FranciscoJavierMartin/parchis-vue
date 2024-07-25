@@ -17,12 +17,6 @@ interface PlayerInputProps extends IPlayerOffline {}
 
 withDefaults(defineProps<PlayerInputProps>(), { name: '', disabled: false });
 
-defineEmits<{
-  isBot: [nextChecked: boolean];
-  updateName: [name: string];
-  changeColor: [color: TColors];
-}>();
-
 const tokenColor = defineModel<TColors>('color', { required: true });
 const playerName = defineModel<string>('name', { required: true });
 const isBot = defineModel<boolean>('isBot');

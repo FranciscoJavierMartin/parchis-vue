@@ -14,14 +14,6 @@
 import { EColors } from '@/constants/board';
 import type { TColors } from '@/interfaces/board';
 
-// interface SelectTokenColorTooltipProps {
-//   color: TColors;
-// }
-
-// defineProps<SelectTokenColorTooltipProps>();
-
-// defineEmits<{ updateColor: [color: TColors] }>();
-
 const color = defineModel<TColors>();
 
 function updateColor(buttonColor: EColors): void {
