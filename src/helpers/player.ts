@@ -3,7 +3,12 @@ import type { TBoardColors, TColors, TSufixColors } from '@/interfaces/board';
 import type { TTotalPlayers } from '@/interfaces/game';
 import type { IPlayer, IUser } from '@/interfaces/user';
 import { cloneDeep } from '@/helpers/clone';
-import { getValueFromCache, isNumber } from '@/helpers/storage';
+import {
+  getValueFromCache,
+  isNumber,
+  savePlayerDataCache,
+  saveProperties,
+} from '@/helpers/storage';
 import { PREFIX_RANKING } from '@/constants/game';
 import type { TPlayerRankingPosition } from '@/interfaces/profile';
 import { BOARD_COLORS, PLAYERS_INFO, TOTAL_PLAYERS_CACHE } from '@/constants/storage';
@@ -127,7 +132,7 @@ export function getInitialDataOfflinePlayers(totalPlayers: TTotalPlayers): IPlay
   return initialDataPlayers;
 }
 
-function getInitialBoardColors(): EBoardColors {
+export function getInitialBoardColors(): EBoardColors {
   const dataFromCache: EBoardColors = getValueFromCache(BOARD_COLORS, EBoardColors.RGYB);
   const boardColors = Object.keys(EBoardColors).includes(dataFromCache)
     ? dataFromCache
@@ -182,4 +187,33 @@ function getBoardColorType(index: number, colorSuffix: string): string | undefin
 
 export function sanizateTags(input: string): string {
   return input ? input.replace(/<\/?[^>]+(>|$)/g, '') : '';
+}
+
+export function changeTotalPlayers(
+  totalPlayers: TTotalPlayers,
+  players: IPlayerOffline[],
+): {
+  players: IPlayerOffline[];
+  boardColors: TBoardColors;
+} {
+  const copyPlayers = cloneDeep(players);
+  const copyTotalPlayers = totalPlayers;
+
+  const { colors, boardColor } = getColorsByTotalPlayers(copyPlayers[0].color, copyTotalPlayers, 0);
+
+  copyPlayers.forEach((_player: IPlayerOffline, index: number) => {
+    copyPlayers[index].disabled = !(index + 1 <= totalPlayers);
+
+    if (index < totalPlayers) {
+      copyPlayers[index].color = colors[index];
+    }
+  });
+
+  saveProperties({ totalPlayers, boardColor });
+  savePlayerDataCache(players);
+
+  return {
+    players: copyPlayers,
+    boardColors: boardColor as TBoardColors,
+  };
 }

@@ -23,9 +23,15 @@ import { ref, watch } from 'vue';
 import PlayIcon from '@/components/icons/play-icon.vue';
 import SelectNumberPlayers from '@/components/base/select-number-players.vue';
 import PlayerInput from '@/components/config/player-input.vue';
+import {
+  changeTotalPlayers,
+  getInitialBoardColors,
+  getInitialDataOfflinePlayers,
+  getInitialTotalPlayers,
+} from '@/helpers/player';
 import type { DataOfflineGame, TTotalPlayers } from '@/interfaces/game';
-import { getInitialDataOfflinePlayers, getInitialTotalPlayers } from '@/helpers/player';
 import type { IPlayerOffline } from '@/interfaces/player';
+import type { TBoardColors } from '@/interfaces/board';
 
 defineEmits<{
   updateData: [data: DataOfflineGame];
@@ -33,18 +39,18 @@ defineEmits<{
 
 const totalPlayers = ref<TTotalPlayers>(getInitialTotalPlayers());
 const players = ref<IPlayerOffline[]>(getInitialDataOfflinePlayers(totalPlayers.value));
+const boardColors = ref<TBoardColors>(getInitialBoardColors());
 
 function handleSubmit(event: Event): void {
   event.preventDefault();
 }
 
-watch(
-  totalPlayers,
-  (newValue: TTotalPlayers) => {
-    players.value = getInitialDataOfflinePlayers(newValue);
-  },
-  { immediate: true },
-);
+watch(totalPlayers, (newValue: TTotalPlayers) => {
+  const newValues = changeTotalPlayers(newValue, players.value);
+
+  players.value = newValues.players;
+  boardColors.value = newValues.boardColors;
+});
 </script>
 
 <style scoped>

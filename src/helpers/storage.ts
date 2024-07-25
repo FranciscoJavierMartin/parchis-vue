@@ -1,4 +1,5 @@
-import { CACHE_KEY } from '@/constants/storage';
+import { CACHE_KEY, PLAYERS_INFO } from '@/constants/storage';
+import type { IPlayerOffline } from '@/interfaces/player';
 import type { TStorageType } from '@/interfaces/storage';
 
 export function saveInCache<T>(data: T, storageType: TStorageType = 'localStorage'): void {
@@ -63,4 +64,14 @@ function isValidJSON(json: string): boolean {
 
 export function isNumber(value: unknown): value is number {
   return typeof value === 'number' && !isNaN(value);
+}
+
+export function savePlayerDataCache(players: IPlayerOffline[]): void {
+  const playerDataCache = players.map(({ id, name, isBot }) => ({
+    id,
+    name,
+    isBot,
+  }));
+
+  saveProperty(PLAYERS_INFO, playerDataCache);
 }
