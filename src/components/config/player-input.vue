@@ -1,7 +1,6 @@
 <template>
   <div class="game-offline-player">
     <SelectTokenColor :disabled="disabled" :color="color" />
-    {{ color }}
     {{ name }}
     {{ isBot ? 'Yes' : 'No' }}
   </div>
