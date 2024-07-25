@@ -32,6 +32,7 @@ import {
 import type { DataOfflineGame, TTotalPlayers } from '@/interfaces/game';
 import type { IPlayerOffline } from '@/interfaces/player';
 import type { TBoardColors } from '@/interfaces/board';
+import { savePlayerDataCache } from '@/helpers/storage';
 
 defineEmits<{
   updateData: [data: DataOfflineGame];
@@ -51,6 +52,14 @@ watch(totalPlayers, (newValue: TTotalPlayers) => {
   players.value = newValues.players;
   boardColors.value = newValues.boardColors;
 });
+
+watch(
+  players,
+  (newValue: IPlayerOffline[]) => {
+    savePlayerDataCache(newValue);
+  },
+  { deep: true },
+);
 </script>
 
 <style scoped>
