@@ -1,8 +1,8 @@
 <template>
   <div class="game-offline-player">
-    <SelectTokenColor :disabled="disabled" :color="color" />
-    <InputName :disabled="disabled" />
-    <BotSwitch :id="`${id}_bot_switch`" />
+    <SelectTokenColor :disabled="disabled" v-model="tokenColor" />
+    <InputName :disabled="disabled" v-model="playerName" />
+    <BotSwitch :id="`${id}_bot_switch`" v-model="isBot" />
   </div>
 </template>
 
@@ -17,11 +17,9 @@ interface PlayerInputProps extends IPlayerOffline {}
 
 withDefaults(defineProps<PlayerInputProps>(), { name: '', disabled: false });
 
-defineEmits<{
-  isBot: [nextChecked: boolean];
-  updateName: [name: string];
-  changeColor: [color: TColors];
-}>();
+const tokenColor = defineModel<TColors>('color', { required: true });
+const playerName = defineModel<string>('name', { required: true });
+const isBot = defineModel<boolean>('isBot');
 </script>
 
 <style scoped>

@@ -1,10 +1,10 @@
 <template>
   <input
-    class="game-offline-input-name"
     :disabled="disabled"
     maxlength="20"
     required
     v-model="playerName"
+    class="game-offline-input-name"
   />
 </template>
 

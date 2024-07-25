@@ -2,7 +2,14 @@
   <form @submit="handleSubmit" class="game-offline glass-effect">
     <SelectNumberPlayers v-model="totalPlayers" />
     <div class="game-offline-players">
-      <PlayerInput v-for="player in players" :key="player.id" v-bind="player" />
+      <PlayerInput
+        v-for="player in players"
+        :key="player.id"
+        v-bind="player"
+        v-model:color="player.color"
+        v-model:name="player.name"
+        v-model:is-bot="player.isBot"
+      />
     </div>
     <button type="submit" class="button yellow game-offline-play">
       <PlayIcon fill="#8b5f00" />
