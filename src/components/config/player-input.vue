@@ -1,7 +1,7 @@
 <template>
   <div class="game-offline-player">
     <SelectTokenColor :disabled="disabled" :color="color" />
-    {{ name }}
+    <InputName :disabled="disabled" />
     {{ isBot ? 'Yes' : 'No' }}
   </div>
 </template>
@@ -10,6 +10,7 @@
 import type { TColors } from '@/interfaces/board';
 import type { IPlayerOffline } from '@/interfaces/player';
 import SelectTokenColor from '@/components/config/select-token-color.vue';
+import InputName from '@/components/config/input-name.vue';
 
 interface PlayerInputProps extends IPlayerOffline {}
 

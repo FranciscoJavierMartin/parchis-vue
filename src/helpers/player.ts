@@ -179,3 +179,7 @@ function getColorsByTotalPlayers(
 function getBoardColorType(index: number, colorSuffix: string): string | undefined {
   return Object.keys(EBoardColors).find((color) => color.split('')[index] === colorSuffix);
 }
+
+export function sanizateTags(input: string): string {
+  return input ? input.replace(/<\/?[^>]+(>|$)/g, '') : '';
+}
