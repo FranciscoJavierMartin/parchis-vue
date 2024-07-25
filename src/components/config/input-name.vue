@@ -9,13 +9,19 @@
 </template>
 
 <script lang="ts" setup>
+import { sanizateTags } from '@/helpers/player';
+
 interface InputNameProps {
   disabled: boolean;
 }
 
 defineProps<InputNameProps>();
 
-const playerName = defineModel();
+const playerName = defineModel<string>({
+  set(value: string): string {
+    return sanizateTags(value);
+  },
+});
 </script>
 
 <style scoped>
