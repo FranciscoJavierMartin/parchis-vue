@@ -1,6 +1,6 @@
 <template>
   <div class="game-offline-player">
-    <SelectTokenColor :disabled="disabled" v-model="color1" />
+    <SelectTokenColor :disabled="disabled" v-model="tokenColor" />
     <InputName :disabled="disabled" />
     <BotSwitch :id="`${id}_bot_switch`" />
   </div>
@@ -23,7 +23,7 @@ defineEmits<{
   changeColor: [color: TColors];
 }>();
 
-const color1 = defineModel<TColors>({ required: true });
+const tokenColor = defineModel<TColors>('color', { required: true });
 </script>
 
 <style scoped>

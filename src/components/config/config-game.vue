@@ -6,7 +6,7 @@
         v-for="player in players"
         :key="player.id"
         v-bind="player"
-        v-model="player.color"
+        v-model:color="player.color"
       />
     </div>
     <button type="submit" class="button yellow game-offline-play">
