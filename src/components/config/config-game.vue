@@ -8,6 +8,7 @@
         v-bind="player"
         v-model:color="player.color"
         v-model:name="player.name"
+        v-model:is-bot="player.isBot"
       />
     </div>
     <button type="submit" class="button yellow game-offline-play">

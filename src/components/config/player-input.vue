@@ -2,7 +2,7 @@
   <div class="game-offline-player">
     <SelectTokenColor :disabled="disabled" v-model="tokenColor" />
     <InputName :disabled="disabled" v-model="playerName" />
-    <BotSwitch :id="`${id}_bot_switch`" />
+    <BotSwitch :id="`${id}_bot_switch`" v-model="isBot" />
   </div>
 </template>
 
@@ -25,6 +25,7 @@ defineEmits<{
 
 const tokenColor = defineModel<TColors>('color', { required: true });
 const playerName = defineModel<string>('name', { required: true });
+const isBot = defineModel<boolean>('isBot');
 </script>
 
 <style scoped>
