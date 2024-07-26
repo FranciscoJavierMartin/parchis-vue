@@ -9,6 +9,7 @@
         v-model:color="player.color"
         v-model:name="player.name"
         v-model:is-bot="player.isBot"
+        @update:color="(color) => handleColorDistribution(color, player.index)"
       />
     </div>
     <button type="submit" class="button yellow game-offline-play">
@@ -24,6 +25,7 @@ import PlayIcon from '@/components/icons/play-icon.vue';
 import SelectNumberPlayers from '@/components/base/select-number-players.vue';
 import PlayerInput from '@/components/config/player-input.vue';
 import {
+  changeColorPlayer,
   changeTotalPlayers,
   getInitialBoardColors,
   getInitialDataOfflinePlayers,
@@ -31,10 +33,10 @@ import {
 } from '@/helpers/player';
 import type { DataOfflineGame, TTotalPlayers } from '@/interfaces/game';
 import type { IPlayerOffline } from '@/interfaces/player';
-import type { TBoardColors } from '@/interfaces/board';
+import type { TBoardColors, TColors } from '@/interfaces/board';
 import { savePlayerDataCache } from '@/helpers/storage';
 
-defineEmits<{
+const emit = defineEmits<{
   updateData: [data: DataOfflineGame];
 }>();
 
@@ -44,6 +46,12 @@ const boardColors = ref<TBoardColors>(getInitialBoardColors());
 
 function handleSubmit(event: Event): void {
   event.preventDefault();
+}
+
+function handleColorDistribution(color: TColors, index: number): void {
+  const colorPlayers = changeColorPlayer(color, players.value, index, totalPlayers.value);
+  players.value = colorPlayers.players;
+  boardColors.value = colorPlayers.boardColors;
 }
 
 watch(totalPlayers, (newValue: TTotalPlayers) => {

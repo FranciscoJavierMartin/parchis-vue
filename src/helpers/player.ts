@@ -8,6 +8,7 @@ import {
   isNumber,
   savePlayerDataCache,
   saveProperties,
+  saveProperty,
 } from '@/helpers/storage';
 import { PREFIX_RANKING } from '@/constants/game';
 import type { TPlayerRankingPosition } from '@/interfaces/profile';
@@ -141,6 +142,7 @@ export function getInitialBoardColors(): EBoardColors {
   return boardColors;
 }
 
+// TODO: Return boardColors (with 's' at the end)
 function getColorsByTotalPlayers(
   color: TColors,
   totalPlayers: TTotalPlayers,
@@ -211,6 +213,27 @@ export function changeTotalPlayers(
 
   saveProperties({ totalPlayers, boardColor });
   savePlayerDataCache(players);
+
+  return {
+    players: copyPlayers,
+    boardColors: boardColor as TBoardColors,
+  };
+}
+
+export function changeColorPlayer(
+  color: TColors,
+  players: IPlayerOffline[],
+  index: number,
+  totalPlayers: TTotalPlayers,
+): { players: IPlayerOffline[]; boardColors: TBoardColors } {
+  const { colors, boardColor } = getColorsByTotalPlayers(color, totalPlayers, index);
+
+  const copyPlayers = players.map((player: IPlayerOffline, index: number) => ({
+    ...player,
+    color: colors[index],
+  }));
+
+  saveProperty(BOARD_COLORS, boardColor);
 
   return {
     players: copyPlayers,
