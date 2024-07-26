@@ -1,14 +1,21 @@
 import { EBoardColors, ESufixColors } from '@/constants/board';
 import type { TBoardColors, TColors, TSufixColors } from '@/interfaces/board';
-import type { TTotalPlayers } from '@/interfaces/game';
+import type { DataOfflineGame, TTotalPlayers } from '@/interfaces/game';
 import type { IPlayer, IUser } from '@/interfaces/user';
 import { cloneDeep } from '@/helpers/clone';
-import { getValueFromCache, isNumber } from '@/helpers/storage';
+import {
+  getValueFromCache,
+  isNumber,
+  savePlayerDataCache,
+  saveProperties,
+  saveProperty,
+} from '@/helpers/storage';
 import { PREFIX_RANKING } from '@/constants/game';
 import type { TPlayerRankingPosition } from '@/interfaces/profile';
 import { BOARD_COLORS, PLAYERS_INFO, TOTAL_PLAYERS_CACHE } from '@/constants/storage';
 import type { IPlayerOffline } from '@/interfaces/player';
-import { guid } from '@/helpers/random';
+import { getRandomNumber, guid } from '@/helpers/random';
+import botImage from '@/assets/images/bot.png';
 
 // TODO: Remove
 export const TEMP_USERS: IUser[] = [
@@ -127,7 +134,7 @@ export function getInitialDataOfflinePlayers(totalPlayers: TTotalPlayers): IPlay
   return initialDataPlayers;
 }
 
-function getInitialBoardColors(): EBoardColors {
+export function getInitialBoardColors(): EBoardColors {
   const dataFromCache: EBoardColors = getValueFromCache(BOARD_COLORS, EBoardColors.RGYB);
   const boardColors = Object.keys(EBoardColors).includes(dataFromCache)
     ? dataFromCache
@@ -136,6 +143,7 @@ function getInitialBoardColors(): EBoardColors {
   return boardColors;
 }
 
+// TODO: Return boardColors (with 's' at the end)
 function getColorsByTotalPlayers(
   color: TColors,
   totalPlayers: TTotalPlayers,
@@ -182,4 +190,73 @@ function getBoardColorType(index: number, colorSuffix: string): string | undefin
 
 export function sanizateTags(input: string): string {
   return input ? input.replace(/<\/?[^>]+(>|$)/g, '') : '';
+}
+
+export function changeTotalPlayers(
+  totalPlayers: TTotalPlayers,
+  players: IPlayerOffline[],
+): {
+  players: IPlayerOffline[];
+  boardColors: TBoardColors;
+} {
+  const copyPlayers = cloneDeep(players);
+  const copyTotalPlayers = totalPlayers;
+
+  const { colors, boardColor } = getColorsByTotalPlayers(copyPlayers[0].color, copyTotalPlayers, 0);
+
+  copyPlayers.forEach((_player: IPlayerOffline, index: number) => {
+    copyPlayers[index].disabled = !(index + 1 <= totalPlayers);
+
+    if (index < totalPlayers) {
+      copyPlayers[index].color = colors[index];
+    }
+  });
+
+  saveProperties({ totalPlayers, boardColor });
+  savePlayerDataCache(players);
+
+  return {
+    players: copyPlayers,
+    boardColors: boardColor as TBoardColors,
+  };
+}
+
+export function changeColorPlayer(
+  color: TColors,
+  players: IPlayerOffline[],
+  index: number,
+  totalPlayers: TTotalPlayers,
+): { players: IPlayerOffline[]; boardColors: TBoardColors } {
+  const { colors, boardColor } = getColorsByTotalPlayers(color, totalPlayers, index);
+
+  const copyPlayers = players.map((player: IPlayerOffline, index: number) => ({
+    ...player,
+    color: colors[index],
+  }));
+
+  saveProperty(BOARD_COLORS, boardColor);
+
+  return {
+    players: copyPlayers,
+    boardColors: boardColor as TBoardColors,
+  };
+}
+
+export function getGameData(
+  totalPlayers: TTotalPlayers,
+  players: IPlayerOffline[],
+  boardColors: TBoardColors,
+): DataOfflineGame {
+  const initialTurn: number = getRandomNumber(0, totalPlayers - 1);
+
+  const users: IUser[] = players
+    .filter(({ disabled }) => !disabled)
+    .map(({ id, name, isBot }) => ({ id, name, isBot, photo: isBot ? botImage : undefined }));
+
+  return {
+    initialTurn,
+    users,
+    totalPlayers,
+    boardColor: boardColors,
+  };
 }

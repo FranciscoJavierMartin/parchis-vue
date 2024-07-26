@@ -1,21 +1,27 @@
 <template>
   <input
-    class="game-offline-input-name"
     :disabled="disabled"
     maxlength="20"
     required
     v-model="playerName"
+    class="game-offline-input-name"
   />
 </template>
 
 <script lang="ts" setup>
+import { sanizateTags } from '@/helpers/player';
+
 interface InputNameProps {
   disabled: boolean;
 }
 
 defineProps<InputNameProps>();
 
-const playerName = defineModel();
+const playerName = defineModel<string>({
+  set(value: string): string {
+    return sanizateTags(value);
+  },
+});
 </script>
 
 <style scoped>

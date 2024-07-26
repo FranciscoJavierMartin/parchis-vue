@@ -19,8 +19,8 @@ const botSwitch = defineModel();
 .bot-switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 50px;
+  height: 27px;
 
   .slider {
     position: absolute;
@@ -30,16 +30,16 @@ const botSwitch = defineModel();
     left: 0;
     cursor: pointer;
     background-color: #ccc;
-    border-radius: 34px;
+    border-radius: 28px;
     -webkit-transition: 0.4s;
     transition: 0.4s;
 
     &::before {
       position: absolute;
-      bottom: 4px;
-      left: 4px;
-      width: 26px;
-      height: 26px;
+      bottom: 2px;
+      left: 2px;
+      width: 23px;
+      height: 23px;
       content: '';
       background-color: white;
       border-radius: 50%;
@@ -57,9 +57,9 @@ const botSwitch = defineModel();
       background-color: #2196f3;
 
       &::before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
+        -webkit-transform: translateX(23px);
+        -ms-transform: translateX(23px);
+        transform: translateX(23px);
       }
     }
 

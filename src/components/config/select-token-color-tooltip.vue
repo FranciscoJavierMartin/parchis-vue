@@ -2,8 +2,10 @@
   <div class="select-token-color-tooltip glass-effect">
     <button
       v-for="buttonColor in EColors"
+      type="button"
       :key="buttonColor"
       :class="[buttonColor.toLowerCase(), { selected: buttonColor === color }]"
+      @click="updateColor(buttonColor)"
     />
   </div>
 </template>
@@ -12,11 +14,11 @@
 import { EColors } from '@/constants/board';
 import type { TColors } from '@/interfaces/board';
 
-interface SelectTokenColorTooltipProps {
-  color: TColors;
-}
+const color = defineModel<TColors>();
 
-defineProps<SelectTokenColorTooltipProps>();
+function updateColor(buttonColor: EColors): void {
+  color.value = buttonColor;
+}
 </script>
 
 <style scoped>

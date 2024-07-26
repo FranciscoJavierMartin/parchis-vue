@@ -1,5 +1,7 @@
 <template>
-  <div v-if="dataGame"></div>
+  <div v-if="dataGame">
+    <Game v-bind="dataGame" />
+  </div>
   <PageWrapper v-else>
     <GameLogo />
     <ConfigGame @update-data="updateDataGame" />
@@ -12,6 +14,7 @@ import PageWrapper from '@/layout/page-wrapper.vue';
 import GameLogo from '@/components/common/game-logo.vue';
 import type { DataOfflineGame } from '@/interfaces/game';
 import ConfigGame from '@/components/config/config-game.vue';
+import Game from '@/components/game/game.vue';
 
 const dataGame = ref<DataOfflineGame | null>(null);
 

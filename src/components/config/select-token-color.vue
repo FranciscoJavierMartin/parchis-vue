@@ -1,8 +1,8 @@
 <template>
   <div class="game-offline-token-wrapper">
     <button
-      :disabled="disabled"
       type="button"
+      :disabled="disabled"
       class="game-offline-token-color"
       @click="handleShowTooltip"
     >
@@ -10,7 +10,7 @@
     </button>
     <SelectTokenColorTooltip
       v-if="showTooltip"
-      :color="color"
+      v-model="color"
       v-click-outside="handleClickOutside"
     />
   </div>
@@ -25,16 +25,13 @@ import { vClickOutside } from '@/directives/click-outside';
 
 interface SelectTokenColorProps {
   disabled: boolean;
-  color: TColors;
 }
 
 defineProps<SelectTokenColorProps>();
 
-defineEmits<{
-  changeColor: [color: TColors];
-}>();
-
 const showTooltip = ref<boolean>(false);
+
+const color = defineModel<TColors>({ required: true });
 
 function handleShowTooltip(): void {
   showTooltip.value = !showTooltip.value;
