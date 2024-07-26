@@ -18,7 +18,7 @@ import GearIcon from '@/components/icons/gear-icon.vue';
   border-radius: 5px;
 
   &:deep(svg) {
-    width: 60%;
+    width: 50%;
   }
 }
 </style>
