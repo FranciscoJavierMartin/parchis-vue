@@ -1,6 +1,6 @@
 import { EBoardColors, ESufixColors } from '@/constants/board';
 import type { TBoardColors, TColors, TSufixColors } from '@/interfaces/board';
-import type { TTotalPlayers } from '@/interfaces/game';
+import type { DataOfflineGame, TTotalPlayers } from '@/interfaces/game';
 import type { IPlayer, IUser } from '@/interfaces/user';
 import { cloneDeep } from '@/helpers/clone';
 import {
@@ -14,7 +14,8 @@ import { PREFIX_RANKING } from '@/constants/game';
 import type { TPlayerRankingPosition } from '@/interfaces/profile';
 import { BOARD_COLORS, PLAYERS_INFO, TOTAL_PLAYERS_CACHE } from '@/constants/storage';
 import type { IPlayerOffline } from '@/interfaces/player';
-import { guid } from '@/helpers/random';
+import { getRandomNumber, guid } from '@/helpers/random';
+import botImage from '@/assets/images/bot.png';
 
 // TODO: Remove
 export const TEMP_USERS: IUser[] = [
@@ -238,5 +239,24 @@ export function changeColorPlayer(
   return {
     players: copyPlayers,
     boardColors: boardColor as TBoardColors,
+  };
+}
+
+export function getGameData(
+  totalPlayers: TTotalPlayers,
+  players: IPlayerOffline[],
+  boardColors: TBoardColors,
+): DataOfflineGame {
+  const initialTurn: number = getRandomNumber(0, totalPlayers - 1);
+
+  const users: IUser[] = players
+    .filter(({ disabled }) => !disabled)
+    .map(({ id, name, isBot }) => ({ id, name, isBot, photo: isBot ? botImage : undefined }));
+
+  return {
+    initialTurn,
+    users,
+    totalPlayers,
+    boardColor: boardColors,
   };
 }

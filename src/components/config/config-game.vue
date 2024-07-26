@@ -27,6 +27,7 @@ import PlayerInput from '@/components/config/player-input.vue';
 import {
   changeColorPlayer,
   changeTotalPlayers,
+  getGameData,
   getInitialBoardColors,
   getInitialDataOfflinePlayers,
   getInitialTotalPlayers,
@@ -46,6 +47,7 @@ const boardColors = ref<TBoardColors>(getInitialBoardColors());
 
 function handleSubmit(event: Event): void {
   event.preventDefault();
+  emit('updateData', getGameData(totalPlayers.value, players.value, boardColors.value));
 }
 
 function handleColorDistribution(color: TColors, index: number): void {
