@@ -1,29 +1,26 @@
 <template>
   <div class="menu-option">
-    <!-- <component :is="icon" fill="none" /> -->
-    <span>
-      {{ icon }}
-    </span>
+    <component :is="model?.valueOf() ? icon : mutedIcon" fill="none" />
     <label class="menu-option-label">
       {{ label }}
     </label>
-    <OptionSwitch v-model="model" :id="`menu-option-${label}`" />
+    <OptionSwitch :id="`menu-option-${label}`" v-model="model" />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Component, Raw } from 'vue';
+import { type Component, type Raw } from 'vue';
 import OptionSwitch from '@/components/options/option-switch.vue';
 
 interface MenuOptionProp {
   label: string;
-  // icon: Raw<Component>;
-  icon: any;
+  icon: Raw<Component>;
+  mutedIcon: Raw<Component>;
 }
 
 defineProps<MenuOptionProp>();
 
-const model = defineModel();
+const model = defineModel<boolean>();
 </script>
 
 <style scoped>

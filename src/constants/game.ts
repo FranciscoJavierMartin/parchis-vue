@@ -88,5 +88,4 @@ export const PREFIX_RANKING = ['st', 'nd', 'rd', 'th'];
 export const ROOM_RANGE = 5;
 
 export const OptionsGameStateSymbol = Symbol('OptionsGameState');
-export const OptionsGameToogleOptionsSymbol = Symbol('OptionsGameToogleOptions');
 export const OptionsGamePlaySoundSymbol = Symbol('OptionsGamePlaySound');
