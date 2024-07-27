@@ -11,7 +11,8 @@
         <MenuOption
           v-for="(option, index) of options"
           :key="option.label"
-          v-bind="option"
+          :label="option.label"
+          :icon="option.checked ? option.icon : option.iconMuted"
           v-model="options[index].checked"
         />
       </div>
@@ -20,22 +21,43 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, type Component } from 'vue';
 import BaseModal from '@/components/base/base-modal.vue';
 import XMarkIcon from '@/components/icons/x-mark-icon.vue';
 import MenuOption from '@/components/options/menu-option.vue';
+import SoundIcon from '@/components/icons/sound-icon.vue';
+import MusicIcon from '@/components/icons/music-icon.vue';
+import MutedSoundIcon from '@/components/icons/muted-sound-icon.vue';
+import MutedMusicIcon from '@/components/icons/muted-music-icon.vue';
+import ChatBubble from '@/components/icons/chat-bubble.vue';
+import MutedChatBubble from '@/components/icons/muted-chat-bubble.vue';
 
 defineEmits<{ close: [] }>();
 
-const options = ref([
+const options = ref<
+  {
+    label: string;
+    icon: Component;
+    iconMuted: Component;
+    checked: boolean;
+  }[]
+>([
   {
     label: 'Sound',
-    icon: 'sound',
+    icon: SoundIcon,
+    iconMuted: MutedSoundIcon,
     checked: false,
   },
   {
     label: 'Music',
-    icon: 'music',
+    icon: MusicIcon,
+    iconMuted: MutedMusicIcon,
+    checked: false,
+  },
+  {
+    label: 'Chat',
+    icon: ChatBubble,
+    iconMuted: MutedChatBubble,
     checked: false,
   },
 ]);
