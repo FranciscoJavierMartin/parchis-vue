@@ -1,3 +1,4 @@
+import { defineComponent, provide, reactive, readonly, toRefs } from 'vue';
 import {
   OptionsGameStateSymbol,
   OptionsGameToogleOptionsSymbol,
@@ -8,7 +9,6 @@ import { OPTIONS_GAME } from '@/constants/storage';
 import { getValueFromCache, saveProperty } from '@/helpers/storage';
 import type { IOptionsGame } from '@/interfaces/game';
 import type { IEOptionsGame, IESounds } from '@/interfaces/online';
-import { defineComponent, provide, reactive, readonly } from 'vue';
 
 export default defineComponent({
   name: 'OptionsGameProvider',
@@ -28,7 +28,7 @@ export default defineComponent({
       }
     }
 
-    provide(OptionsGameStateSymbol, readonly(optionsGame));
+    provide(OptionsGameStateSymbol, toRefs(readonly(optionsGame)));
     provide(OptionsGameToogleOptionsSymbol, toogleOptions);
     provide(OptionsGamePlaySoundSymbol, playSound);
   },

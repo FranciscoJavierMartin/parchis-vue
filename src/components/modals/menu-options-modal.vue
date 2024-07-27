@@ -8,12 +8,20 @@
         </button>
       </div>
       <div class="menu-options-options">
-        <MenuOption
+        <!-- <MenuOption
           v-for="(option, index) of options"
           :key="option.label"
           :label="option.label"
           :icon="option.checked ? option.icon : option.iconMuted"
           v-model="options[index].checked"
+          :icon="optionsGame[option] ? options[type].icon : options[type].mutedIcon"
+        /> -->
+        <MenuOption
+          v-for="option of Object.keys(optionsGame)"
+          :key="option"
+          :label="option"
+          :icon="optionsGame[option]"
+          :model-value="optionsGame[option]"
         />
       </div>
     </div>
@@ -21,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { markRaw, ref, type Component, type Raw } from 'vue';
+import { inject, markRaw, ref, type Component, type Raw } from 'vue';
 import BaseModal from '@/components/base/base-modal.vue';
 import XMarkIcon from '@/components/icons/x-mark-icon.vue';
 import MenuOption from '@/components/options/menu-option.vue';
@@ -31,36 +39,55 @@ import MutedSoundIcon from '@/components/icons/muted-sound-icon.vue';
 import MutedMusicIcon from '@/components/icons/muted-music-icon.vue';
 import ChatBubble from '@/components/icons/chat-bubble.vue';
 import MutedChatBubble from '@/components/icons/muted-chat-bubble.vue';
+import { OptionsGameStateSymbol } from '@/constants/game';
+import type { IOptionsGame } from '@/interfaces/game';
 
 defineEmits<{ close: [] }>();
 
-const options = ref<
-  {
-    label: string;
-    icon: Raw<Component>;
-    iconMuted: Raw<Component>;
-    checked: boolean;
-  }[]
->([
-  {
-    label: 'Sound',
+const optionsGame: IOptionsGame = inject<IOptionsGame>(OptionsGameStateSymbol) as IOptionsGame;
+
+const options: Record<keyof IOptionsGame, { icon: Raw<Component>; mutedIcon: Raw<Component> }> = {
+  SOUND: {
     icon: markRaw(SoundIcon),
-    iconMuted: markRaw(MutedSoundIcon),
-    checked: false,
+    mutedIcon: markRaw(MutedSoundIcon),
   },
-  {
-    label: 'Music',
+  MUSIC: {
     icon: markRaw(MusicIcon),
-    iconMuted: markRaw(MutedMusicIcon),
-    checked: false,
+    mutedIcon: markRaw(MutedMusicIcon),
   },
-  {
-    label: 'Chat',
+  CHAT: {
     icon: markRaw(ChatBubble),
-    iconMuted: markRaw(MutedChatBubble),
-    checked: false,
+    mutedIcon: markRaw(MutedChatBubble),
   },
-]);
+};
+
+// const options = ref<
+//   {
+//     label: string;
+//     icon: Raw<Component>;
+//     iconMuted: Raw<Component>;
+//     checked: boolean;
+//   }[]
+// >([
+//   {
+//     label: 'Sound',
+//     icon: markRaw(SoundIcon),
+//     iconMuted: markRaw(MutedSoundIcon),
+//     checked: false,
+//   },
+//   {
+//     label: 'Music',
+//     icon: markRaw(MusicIcon),
+//     iconMuted: markRaw(MutedMusicIcon),
+//     checked: false,
+//   },
+//   {
+//     label: 'Chat',
+//     icon: markRaw(ChatBubble),
+//     iconMuted: markRaw(MutedChatBubble),
+//     checked: false,
+//   },
+// ]);
 </script>
 
 <style scoped>

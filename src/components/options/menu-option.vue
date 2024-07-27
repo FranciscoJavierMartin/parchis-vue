@@ -1,6 +1,9 @@
 <template>
   <div class="menu-option">
-    <component :is="icon" fill="none" />
+    <!-- <component :is="icon" fill="none" /> -->
+    <span>
+      {{ icon }}
+    </span>
     <label class="menu-option-label">
       {{ label }}
     </label>
@@ -14,7 +17,8 @@ import OptionSwitch from '@/components/options/option-switch.vue';
 
 interface MenuOptionProp {
   label: string;
-  icon: Raw<Component>;
+  // icon: Raw<Component>;
+  icon: any;
 }
 
 defineProps<MenuOptionProp>();
@@ -45,7 +49,6 @@ const model = defineModel();
     margin: 0 15px;
     font-size: 30px;
     font-weight: bold;
-
     text-transform: capitalize;
   }
 }
