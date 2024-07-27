@@ -14,8 +14,7 @@
           :label="option"
           :icon="icon"
           :mutedIcon="mutedIcon"
-          :value="(optionsGame[option as EOptionsGame] as any).value"
-          @input="() => toogleOptions(option as EOptionsGame)"
+          v-model="optionsGame[option as EOptionsGame]"
         />
       </div>
     </div>
@@ -33,16 +32,13 @@ import MutedSoundIcon from '@/components/icons/muted-sound-icon.vue';
 import MutedMusicIcon from '@/components/icons/muted-music-icon.vue';
 import ChatBubble from '@/components/icons/chat-bubble.vue';
 import MutedChatBubble from '@/components/icons/muted-chat-bubble.vue';
-import { OptionsGameStateSymbol, OptionsGameToogleOptionsSymbol } from '@/constants/game';
+import { OptionsGameStateSymbol } from '@/constants/game';
 import type { IOptionsGame } from '@/interfaces/game';
-import type { IEOptionsGame } from '@/interfaces/online';
 import type { EOptionsGame } from '@/constants/online';
 
 defineEmits<{ close: [] }>();
 
 const optionsGame: IOptionsGame = inject<IOptionsGame>(OptionsGameStateSymbol)!;
-
-const toogleOptions = inject<(type: IEOptionsGame) => void>(OptionsGameToogleOptionsSymbol)!;
 
 const options: Record<keyof IOptionsGame, { icon: Raw<Component>; mutedIcon: Raw<Component> }> = {
   SOUND: {
