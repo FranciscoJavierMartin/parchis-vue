@@ -7,7 +7,7 @@
     <label class="menu-option-label">
       {{ label }}
     </label>
-    <OptionSwitch v-model="model" :id="`menu-option-${label}`" />
+    <OptionSwitch :id="`menu-option-${label}`" :value="value" @input="$emit('input', $event)" />
   </div>
 </template>
 
@@ -17,13 +17,15 @@ import OptionSwitch from '@/components/options/option-switch.vue';
 
 interface MenuOptionProp {
   label: string;
-  // icon: Raw<Component>;
-  icon: any;
+  icon: Raw<Component>;
+  value: boolean;
 }
 
 defineProps<MenuOptionProp>();
 
-const model = defineModel();
+defineEmits<{
+  input: [event: Event];
+}>();
 </script>
 
 <style scoped>
