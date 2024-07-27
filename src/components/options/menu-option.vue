@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, type Component, type Raw } from 'vue';
+import { type Component, type Raw } from 'vue';
 import OptionSwitch from '@/components/options/option-switch.vue';
 
 interface MenuOptionProp {
@@ -19,18 +19,11 @@ interface MenuOptionProp {
   value: boolean;
 }
 
-const p = defineProps<MenuOptionProp>();
+defineProps<MenuOptionProp>();
 
 defineEmits<{
   input: [event: Event];
 }>();
-
-watch(
-  () => p.value,
-  (newValue) => {
-    console.log(newValue);
-  },
-);
 </script>
 
 <style scoped>
