@@ -11,7 +11,8 @@
         <MenuOption
           v-for="(option, index) of options"
           :key="option.label"
-          v-bind="option"
+          :label="option.label"
+          :icon="option.iconFalse && !option.checked ? option.iconFalse : option.icon"
           v-model="options[index].checked"
         />
       </div>
@@ -20,19 +21,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, type Component } from 'vue';
 import BaseModal from '@/components/base/base-modal.vue';
 import XMarkIcon from '@/components/icons/x-mark-icon.vue';
 import MenuOption from '@/components/options/menu-option.vue';
 import SoundIcon from '@/components/icons/sound-icon.vue';
 import MusicIcon from '@/components/icons/music-icon.vue';
+import MutedSoundIcon from '@/components/icons/muted-sound-icon.vue';
 
 defineEmits<{ close: [] }>();
 
-const options = ref([
+const options = ref<
+  {
+    label: string;
+    icon: Component;
+    iconFalse?: Component;
+    checked: boolean;
+  }[]
+>([
   {
     label: 'Sound',
     icon: SoundIcon,
+    iconFalse: MutedSoundIcon,
     checked: false,
   },
   {

@@ -1,19 +1,20 @@
 <template>
   <div class="menu-option">
     <component :is="icon" fill="none" />
-    <div class="menu-option-label">
+    <label class="menu-option-label">
       {{ label }}
-    </div>
+    </label>
     <OptionSwitch v-model="model" :id="`menu-option-${label}`" />
   </div>
 </template>
 
 <script setup lang="ts">
+import type { Component } from 'vue';
 import OptionSwitch from '@/components/options/option-switch.vue';
 
 interface MenuOptionProp {
   label: string;
-  icon: any;
+  icon: Component;
 }
 
 defineProps<MenuOptionProp>();
