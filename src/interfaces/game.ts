@@ -38,7 +38,7 @@ export interface DataOfflineGame {
  */
 export type IOptionsGame = Record<IEOptionsGame, boolean>;
 
-export interface IOptionsContext {
+export interface IOptionsProvider {
   optionsGame: IOptionsGame;
   toogleOptions: (type: IEOptionsGame) => void;
   playSound: (type: IESounds) => void;
