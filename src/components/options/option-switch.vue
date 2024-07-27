@@ -1,6 +1,12 @@
 <template>
   <label :for="id" class="option-switch">
-    <input :id="id" type="checkbox" :value="value" @input="$emit('input', $event)" />
+    <input
+      :id="id"
+      type="checkbox"
+      :checked="value"
+      :value="value"
+      @input="$emit('input', $event)"
+    />
     <span class="slider" />
   </label>
 </template>
@@ -8,7 +14,7 @@
 <script setup lang="ts">
 interface OptionSwitchProps {
   id: string;
-  value: string | number | boolean;
+  value: boolean;
 }
 
 defineProps<OptionSwitchProps>();

@@ -1,9 +1,6 @@
 <template>
   <div class="menu-option">
-    <!-- <component :is="icon" fill="none" /> -->
-    <span>
-      {{ icon }}
-    </span>
+    <component :is="value ? icon : mutedIcon" fill="none" />
     <label class="menu-option-label">
       {{ label }}
     </label>
@@ -12,20 +9,28 @@
 </template>
 
 <script setup lang="ts">
-import type { Component, Raw } from 'vue';
+import { watch, type Component, type Raw } from 'vue';
 import OptionSwitch from '@/components/options/option-switch.vue';
 
 interface MenuOptionProp {
   label: string;
   icon: Raw<Component>;
+  mutedIcon: Raw<Component>;
   value: boolean;
 }
 
-defineProps<MenuOptionProp>();
+const p = defineProps<MenuOptionProp>();
 
 defineEmits<{
   input: [event: Event];
 }>();
+
+watch(
+  () => p.value,
+  (newValue) => {
+    console.log(newValue);
+  },
+);
 </script>
 
 <style scoped>

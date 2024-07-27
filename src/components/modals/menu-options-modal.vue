@@ -16,15 +16,16 @@
           v-model="options[index].checked"
           :icon="optionsGame[option] ? options[type].icon : options[type].mutedIcon"
         /> -->
-        <!--<MenuOption
-          v-for="option of Object.keys(options)"
+        <MenuOption
+          v-for="[option, { icon, mutedIcon }] of Object.entries(options)"
           :key="option"
           :label="option"
-          :icon="optionsGame[option]"
-          v-model="optionsGame[option]"
-          @update:model-value="toogleOptions(option)"
-        />-->
-        <div
+          :icon="icon"
+          :mutedIcon="mutedIcon"
+          :value="optionsGame[option].value"
+          @input="() => toogleOptions(option)"
+        />
+        <!-- <div
           v-for="[key, value] of Object.entries(optionsGame)"
           :key="key"
           style="display: flex; justify-content: space-between"
@@ -33,12 +34,12 @@
           <span>{{ optionsGame[key] }}</span>
           <span>{{ typeof optionsGame[key] }}</span>
           <!-- <input type="checkbox" :value="optionsGame[key]" @input="() => toogleOptions(key)" /> -->
-          <OptionSwitch
+        <!-- <OptionSwitch
             :id="`menu-option-${key}`"
             :value="optionsGame[key]"
             @input="() => toogleOptions(key)"
-          />
-        </div>
+          /> -->
+        <!-- </div>  -->
       </div>
     </div>
   </BaseModal>
