@@ -28,6 +28,7 @@ import MenuOption from '@/components/options/menu-option.vue';
 import SoundIcon from '@/components/icons/sound-icon.vue';
 import MusicIcon from '@/components/icons/music-icon.vue';
 import MutedSoundIcon from '@/components/icons/muted-sound-icon.vue';
+import MutedMusicIcon from '@/components/icons/muted-music-icon.vue';
 
 defineEmits<{ close: [] }>();
 
@@ -48,6 +49,7 @@ const options = ref<
   {
     label: 'Music',
     icon: MusicIcon,
+    iconFalse: MutedMusicIcon,
     checked: false,
   },
 ]);
