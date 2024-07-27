@@ -12,7 +12,7 @@
           v-for="(option, index) of options"
           :key="option.label"
           :label="option.label"
-          :icon="option.iconFalse && !option.checked ? option.iconFalse : option.icon"
+          :icon="option.checked ? option.icon : option.iconMuted"
           v-model="options[index].checked"
         />
       </div>
@@ -29,6 +29,8 @@ import SoundIcon from '@/components/icons/sound-icon.vue';
 import MusicIcon from '@/components/icons/music-icon.vue';
 import MutedSoundIcon from '@/components/icons/muted-sound-icon.vue';
 import MutedMusicIcon from '@/components/icons/muted-music-icon.vue';
+import ChatBubble from '@/components/icons/chat-bubble.vue';
+import MutedChatBubble from '@/components/icons/muted-chat-bubble.vue';
 
 defineEmits<{ close: [] }>();
 
@@ -36,20 +38,26 @@ const options = ref<
   {
     label: string;
     icon: Component;
-    iconFalse?: Component;
+    iconMuted: Component;
     checked: boolean;
   }[]
 >([
   {
     label: 'Sound',
     icon: SoundIcon,
-    iconFalse: MutedSoundIcon,
+    iconMuted: MutedSoundIcon,
     checked: false,
   },
   {
     label: 'Music',
     icon: MusicIcon,
-    iconFalse: MutedMusicIcon,
+    iconMuted: MutedMusicIcon,
+    checked: false,
+  },
+  {
+    label: 'Chat',
+    icon: ChatBubble,
+    iconMuted: MutedChatBubble,
     checked: false,
   },
 ]);
