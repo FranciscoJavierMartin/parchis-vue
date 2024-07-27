@@ -7,15 +7,38 @@
           <XMarkIcon :stroke-width="3.5" />
         </button>
       </div>
+      <div class="menu-options-options">
+        <MenuOption
+          v-for="option of options"
+          :key="option.label"
+          v-bind="option"
+          v-model="option.modelValue"
+        />
+      </div>
     </div>
   </BaseModal>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import BaseModal from '@/components/base/base-modal.vue';
 import XMarkIcon from '@/components/icons/x-mark-icon.vue';
+import MenuOption from '@/components/options/menu-option.vue';
 
 defineEmits<{ close: [] }>();
+
+const options = [
+  {
+    label: 'Sound',
+    icon: 'sound',
+    modelValue: ref<boolean>(false),
+  },
+  {
+    label: 'Music',
+    icon: 'music',
+    modelValue: ref<boolean>(false),
+  },
+];
 </script>
 
 <style scoped>
@@ -72,6 +95,11 @@ defineEmits<{ close: [] }>();
         transform: translateY(0);
       }
     }
+  }
+
+  .menu-options-options {
+    padding: 20px;
+    width: 100%;
   }
 }
 </style>
