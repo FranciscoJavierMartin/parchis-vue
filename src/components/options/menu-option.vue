@@ -9,12 +9,12 @@
 </template>
 
 <script setup lang="ts">
-import type { Component } from 'vue';
+import type { Component, Raw } from 'vue';
 import OptionSwitch from '@/components/options/option-switch.vue';
 
 interface MenuOptionProp {
   label: string;
-  icon: Component;
+  icon: Raw<Component>;
 }
 
 defineProps<MenuOptionProp>();

@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type Component } from 'vue';
+import { markRaw, ref, type Component, type Raw } from 'vue';
 import BaseModal from '@/components/base/base-modal.vue';
 import XMarkIcon from '@/components/icons/x-mark-icon.vue';
 import MenuOption from '@/components/options/menu-option.vue';
@@ -37,27 +37,27 @@ defineEmits<{ close: [] }>();
 const options = ref<
   {
     label: string;
-    icon: Component;
-    iconMuted: Component;
+    icon: Raw<Component>;
+    iconMuted: Raw<Component>;
     checked: boolean;
   }[]
 >([
   {
     label: 'Sound',
-    icon: SoundIcon,
-    iconMuted: MutedSoundIcon,
+    icon: markRaw(SoundIcon),
+    iconMuted: markRaw(MutedSoundIcon),
     checked: false,
   },
   {
     label: 'Music',
-    icon: MusicIcon,
-    iconMuted: MutedMusicIcon,
+    icon: markRaw(MusicIcon),
+    iconMuted: markRaw(MutedMusicIcon),
     checked: false,
   },
   {
     label: 'Chat',
-    icon: ChatBubble,
-    iconMuted: MutedChatBubble,
+    icon: markRaw(ChatBubble),
+    iconMuted: markRaw(MutedChatBubble),
     checked: false,
   },
 ]);
