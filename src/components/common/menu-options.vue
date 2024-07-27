@@ -1,11 +1,21 @@
 <template>
-  <button class="button blue menu-options-button">
+  <button class="button blue menu-options-button" @click="handleShowOptions">
     <GearIcon />
   </button>
+  <MenuOptionsModal v-if="isOpen" />
 </template>
 
 <script setup lang="ts">
 import GearIcon from '@/components/icons/gear-icon.vue';
+import MenuOptionsModal from '@/components/modals/menu-options-modal.vue';
+
+import { ref, type Ref } from 'vue';
+
+const isOpen: Ref<boolean> = ref<boolean>(false);
+
+function handleShowOptions(): void {
+  isOpen.value = true;
+}
 </script>
 
 <style scoped>
