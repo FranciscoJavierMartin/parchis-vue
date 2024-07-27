@@ -1,10 +1,10 @@
 <template>
   <div class="menu-option">
-    <component :is="value ? icon : mutedIcon" fill="none" />
+    <component :is="model?.valueOf() ? icon : mutedIcon" fill="none" />
     <label class="menu-option-label">
       {{ label }}
     </label>
-    <OptionSwitch :id="`menu-option-${label}`" :value="value" @input="$emit('input', $event)" />
+    <OptionSwitch :id="`menu-option-${label}`" v-model="model" />
   </div>
 </template>
 
@@ -16,14 +16,11 @@ interface MenuOptionProp {
   label: string;
   icon: Raw<Component>;
   mutedIcon: Raw<Component>;
-  value: boolean;
 }
 
 defineProps<MenuOptionProp>();
 
-defineEmits<{
-  input: [event: Event];
-}>();
+const model = defineModel<boolean>();
 </script>
 
 <style scoped>
