@@ -22,9 +22,9 @@ const model = defineModel();
 
 <style scoped>
 .menu-option {
-  width: 100%;
   display: flex;
   align-items: center;
+  width: 100%;
   padding-bottom: 15px;
   border-bottom: 1px solid #8c8792;
 
@@ -33,12 +33,12 @@ const model = defineModel();
   }
 
   .menu-option-label {
-    color: white;
+    width: 60%;
+    margin: 0 15px;
     font-size: 30px;
     font-weight: bold;
-    margin: 0 15px;
+    color: white;
     text-transform: capitalize;
-    width: 60%;
   }
 }
 </style>

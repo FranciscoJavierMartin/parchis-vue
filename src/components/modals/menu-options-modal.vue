@@ -9,10 +9,10 @@
       </div>
       <div class="menu-options-options">
         <MenuOption
-          v-for="option of options"
+          v-for="(option, index) of options"
           :key="option.label"
           v-bind="option"
-          v-model="option.modelValue"
+          v-model="options[index].checked"
         />
       </div>
     </div>
@@ -27,18 +27,18 @@ import MenuOption from '@/components/options/menu-option.vue';
 
 defineEmits<{ close: [] }>();
 
-const options = [
+const options = ref([
   {
     label: 'Sound',
     icon: 'sound',
-    modelValue: ref<boolean>(false),
+    checked: false,
   },
   {
     label: 'Music',
     icon: 'music',
-    modelValue: ref<boolean>(false),
+    checked: false,
   },
-];
+]);
 </script>
 
 <style scoped>
@@ -98,8 +98,8 @@ const options = [
   }
 
   .menu-options-options {
-    padding: 20px;
     width: 100%;
+    padding: 20px;
   }
 }
 </style>
