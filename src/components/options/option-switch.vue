@@ -1,6 +1,6 @@
 <template>
   <label :for="id" class="option-switch">
-    <input :id="id" type="checkbox" v-model="optionSwitch" />
+    <input :id="id" type="checkbox" :checked="model" v-model="model" />
     <span class="slider" />
   </label>
 </template>
@@ -12,7 +12,7 @@ interface OptionSwitchProps {
 
 defineProps<OptionSwitchProps>();
 
-const optionSwitch = defineModel();
+const model = defineModel<boolean>();
 </script>
 
 <style scoped>
