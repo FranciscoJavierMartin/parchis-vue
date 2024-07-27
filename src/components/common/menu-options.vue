@@ -2,7 +2,7 @@
   <button class="button blue menu-options-button" @click="handleShowOptions">
     <GearIcon />
   </button>
-  <MenuOptionsModal v-if="isOpen" />
+  <MenuOptionsModal v-if="isOpen" @close="closeModal" />
 </template>
 
 <script setup lang="ts">
@@ -15,6 +15,10 @@ const isOpen: Ref<boolean> = ref<boolean>(false);
 
 function handleShowOptions(): void {
   isOpen.value = true;
+}
+
+function closeModal(): void {
+  isOpen.value = false;
 }
 </script>
 
