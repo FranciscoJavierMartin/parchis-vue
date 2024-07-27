@@ -16,13 +16,23 @@
           v-model="options[index].checked"
           :icon="optionsGame[option] ? options[type].icon : options[type].mutedIcon"
         /> -->
-        <MenuOption
-          v-for="option of Object.keys(optionsGame)"
+        <!--<MenuOption
+          v-for="option of Object.keys(options)"
           :key="option"
           :label="option"
           :icon="optionsGame[option]"
-          :model-value="optionsGame[option]"
-        />
+          v-model="optionsGame[option]"
+          @update:model-value="toogleOptions(option)"
+        />-->
+        <div
+          v-for="[key, value] of Object.entries(optionsGame)"
+          :key="key"
+          style="display: flex; justify-content: space-between"
+        >
+          <span>{{ key }}</span>
+          <span>{{ optionsGame[key] }}</span>
+          <input type="checkbox" :value="optionsGame[key]" @input="() => toogleOptions(key)" />
+        </div>
       </div>
     </div>
   </BaseModal>
@@ -39,12 +49,15 @@ import MutedSoundIcon from '@/components/icons/muted-sound-icon.vue';
 import MutedMusicIcon from '@/components/icons/muted-music-icon.vue';
 import ChatBubble from '@/components/icons/chat-bubble.vue';
 import MutedChatBubble from '@/components/icons/muted-chat-bubble.vue';
-import { OptionsGameStateSymbol } from '@/constants/game';
+import { OptionsGameStateSymbol, OptionsGameToogleOptionsSymbol } from '@/constants/game';
 import type { IOptionsGame } from '@/interfaces/game';
+import type { IEOptionsGame } from '@/interfaces/online';
 
 defineEmits<{ close: [] }>();
 
-const optionsGame: IOptionsGame = inject<IOptionsGame>(OptionsGameStateSymbol) as IOptionsGame;
+const optionsGame: IOptionsGame = inject<IOptionsGame>(OptionsGameStateSymbol)!;
+
+const toogleOptions = inject<(type: IEOptionsGame) => void>(OptionsGameToogleOptionsSymbol)!;
 
 const options: Record<keyof IOptionsGame, { icon: Raw<Component>; mutedIcon: Raw<Component> }> = {
   SOUND: {

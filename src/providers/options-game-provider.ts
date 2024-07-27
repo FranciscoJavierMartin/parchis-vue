@@ -18,8 +18,11 @@ export default defineComponent({
     );
 
     function toogleOptions(type: IEOptionsGame): void {
+      console.log(optionsGame[type]);
       optionsGame[type] = !optionsGame[type];
-      saveProperty(OPTIONS_GAME, optionsGame);
+      console.log(optionsGame[type]);
+      console.log('----------');
+      // saveProperty(OPTIONS_GAME, optionsGame);
     }
 
     function playSound(type: IESounds): void {
@@ -28,7 +31,7 @@ export default defineComponent({
       }
     }
 
-    provide(OptionsGameStateSymbol, toRefs(readonly(optionsGame)));
+    provide(OptionsGameStateSymbol, toRefs(optionsGame));
     provide(OptionsGameToogleOptionsSymbol, toogleOptions);
     provide(OptionsGamePlaySoundSymbol, playSound);
   },
