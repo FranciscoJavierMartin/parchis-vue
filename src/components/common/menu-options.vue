@@ -11,7 +11,7 @@ import MenuOptionsModal from '@/components/modals/menu-options-modal.vue';
 
 import { ref, type Ref } from 'vue';
 
-const isOpen: Ref<boolean> = ref<boolean>(true);
+const isOpen: Ref<boolean> = ref<boolean>(false);
 
 function handleShowOptions(): void {
   isOpen.value = true;
