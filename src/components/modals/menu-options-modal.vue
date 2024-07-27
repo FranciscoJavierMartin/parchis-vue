@@ -31,7 +31,13 @@
         >
           <span>{{ key }}</span>
           <span>{{ optionsGame[key] }}</span>
-          <input type="checkbox" :value="optionsGame[key]" @input="() => toogleOptions(key)" />
+          <span>{{ typeof optionsGame[key] }}</span>
+          <!-- <input type="checkbox" :value="optionsGame[key]" @input="() => toogleOptions(key)" /> -->
+          <OptionSwitch
+            :id="`menu-option-${key}`"
+            :value="optionsGame[key]"
+            @input="() => toogleOptions(key)"
+          />
         </div>
       </div>
     </div>
@@ -52,6 +58,7 @@ import MutedChatBubble from '@/components/icons/muted-chat-bubble.vue';
 import { OptionsGameStateSymbol, OptionsGameToogleOptionsSymbol } from '@/constants/game';
 import type { IOptionsGame } from '@/interfaces/game';
 import type { IEOptionsGame } from '@/interfaces/online';
+import OptionSwitch from '../options/option-switch.vue';
 
 defineEmits<{ close: [] }>();
 

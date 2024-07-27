@@ -1,18 +1,29 @@
 <template>
   <label :for="id" class="option-switch">
-    <input :id="id" type="checkbox" v-model="optionSwitch" />
+    <input
+      :id="id"
+      type="checkbox"
+      :value="value"
+      @input="$emit('input', $event)"
+      @change="$emit('change', $event)"
+    />
     <span class="slider" />
   </label>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T">
 interface OptionSwitchProps {
   id: string;
+  value: string | number | boolean;
 }
 
 defineProps<OptionSwitchProps>();
 
-const optionSwitch = defineModel();
+defineEmits<{
+  (e: 'update:modelValue', value: string): void;
+  (e: 'input', event: Event): void;
+  (e: 'change', event: Event): void;
+}>();
 </script>
 
 <style scoped>
