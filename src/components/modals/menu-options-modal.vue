@@ -14,8 +14,8 @@
           :label="option"
           :icon="icon"
           :mutedIcon="mutedIcon"
-          :value="optionsGame[option].value"
-          @input="() => toogleOptions(option)"
+          :value="(optionsGame[option as EOptionsGame] as any).value"
+          @input="() => toogleOptions(option as EOptionsGame)"
         />
       </div>
     </div>
@@ -36,6 +36,7 @@ import MutedChatBubble from '@/components/icons/muted-chat-bubble.vue';
 import { OptionsGameStateSymbol, OptionsGameToogleOptionsSymbol } from '@/constants/game';
 import type { IOptionsGame } from '@/interfaces/game';
 import type { IEOptionsGame } from '@/interfaces/online';
+import type { EOptionsGame } from '@/constants/online';
 
 defineEmits<{ close: [] }>();
 
