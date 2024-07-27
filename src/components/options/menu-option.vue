@@ -1,5 +1,6 @@
 <template>
   <div class="menu-option">
+    <component :is="icon" fill="none" />
     <div class="menu-option-label">
       {{ label }}
     </div>
@@ -12,7 +13,7 @@ import OptionSwitch from '@/components/options/option-switch.vue';
 
 interface MenuOptionProp {
   label: string;
-  icon: string;
+  icon: any;
 }
 
 defineProps<MenuOptionProp>();
@@ -26,10 +27,16 @@ const model = defineModel();
   align-items: center;
   width: 100%;
   padding-bottom: 15px;
+  color: white;
   border-bottom: 1px solid #8c8792;
 
   &:not(:first-child) {
     margin-top: 20px;
+  }
+
+  &:deep(svg) {
+    width: 40px;
+    height: 40px;
   }
 
   .menu-option-label {
@@ -37,7 +44,7 @@ const model = defineModel();
     margin: 0 15px;
     font-size: 30px;
     font-weight: bold;
-    color: white;
+
     text-transform: capitalize;
   }
 }

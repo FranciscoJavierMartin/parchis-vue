@@ -24,18 +24,20 @@ import { ref } from 'vue';
 import BaseModal from '@/components/base/base-modal.vue';
 import XMarkIcon from '@/components/icons/x-mark-icon.vue';
 import MenuOption from '@/components/options/menu-option.vue';
+import SoundIcon from '@/components/icons/sound-icon.vue';
+import MusicIcon from '@/components/icons/music-icon.vue';
 
 defineEmits<{ close: [] }>();
 
 const options = ref([
   {
     label: 'Sound',
-    icon: 'sound',
+    icon: SoundIcon,
     checked: false,
   },
   {
     label: 'Music',
-    icon: 'music',
+    icon: MusicIcon,
     checked: false,
   },
 ]);
