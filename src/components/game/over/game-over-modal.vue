@@ -9,9 +9,13 @@
         </div>
       </div>
       <div class="game-over-buttons">
-        <button class="button blue">
-          <ShareIcon />
-        </button>
+        <MenuShare :data="dataShare">
+          <template #default="{ onClick }">
+            <button class="button blue" @click="onClick">
+              <ShareIcon />
+            </button>
+          </template>
+        </MenuShare>
         <button class="button yellow">
           <HomeIcon />
         </button>
@@ -34,6 +38,12 @@ import useFocusTrap from '@/composables/use-focus-trap';
 interface GameOverProps {
   players: IPlayer[];
 }
+
+const dataShare: ShareData = {
+  title: 'Parchis',
+  text: "Let's play Parchis",
+  url: window.location.href,
+};
 
 const props = defineProps<GameOverProps>();
 const first = ref<IPlayer>();
