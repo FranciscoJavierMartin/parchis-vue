@@ -2,6 +2,16 @@ export class Sprite<T extends string> {
   private ctx: AudioContext;
   private audioBuffer: AudioBuffer;
 
+  /**
+   * Class constructor
+   * @param src Sounds file path
+   * @param tracks Record<
+   *  'Track name',
+   *  [
+   *    startTime in milliseconds,
+   *    duration in milliseconds
+   *  ]>
+   */
   constructor(
     private src: string,
     private tracks: Record<T, number[]>,
@@ -11,7 +21,12 @@ export class Sprite<T extends string> {
   }
 
   public play(track: T): void {
-    // const startTime: number = this.tracks[track][0] / 1000;
+    const startTime: number = this.tracks[track][0] / 1000;
+    const duration = this.tracks[track][1] / 1000;
+    const trackSource = this.ctx.createBufferSource();
+    trackSource.buffer = this.audioBuffer;
+    trackSource.connect(this.ctx.destination);
+    trackSource.start(this.ctx.currentTime, startTime, duration);
   }
 
   private async init(): Promise<void> {

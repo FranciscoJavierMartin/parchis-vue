@@ -36,11 +36,21 @@ export default defineComponent({
       GAMER_OVER: [3900, 6000],
     });
 
-    sounds.play('CHAT');
+    function onClickEvent(e: MouseEvent): void {
+      const target = e.target as Element;
+      const elements: string[] = ['a', 'button', 'input', 'svg', 'path', 'line'];
+
+      if (
+        elements.includes(target.tagName.toLowerCase()) ||
+        elements.includes(target.parentElement?.tagName.toLowerCase() || '')
+      ) {
+        playSound(ESounds.CLICK);
+      }
+    }
 
     function playSound(type: IESounds): void {
       if (optionsGame.SOUND) {
-        console.log('Play', type);
+        sounds.play(type);
       }
     }
 
@@ -56,18 +66,6 @@ export default defineComponent({
 
       saveProperty(OPTIONS_GAME, optionsGame);
     });
-
-    function onClickEvent(e: MouseEvent): void {
-      const target = e.target as Element;
-      const elements: string[] = ['a', 'button', 'input', 'svg', 'path', 'line'];
-
-      if (
-        elements.includes(target.tagName.toLowerCase()) ||
-        elements.includes(target.parentElement?.tagName.toLowerCase() || '')
-      ) {
-        playSound(ESounds.CLICK);
-      }
-    }
 
     onMounted(() => {
       window.addEventListener('click', onClickEvent);
