@@ -1,6 +1,6 @@
 export class Sprite<T extends string> {
   private ctx: AudioContext;
-  private audioBuffer: AudioBuffer;
+  private audioBuffer!: AudioBuffer;
 
   /**
    * Class constructor
