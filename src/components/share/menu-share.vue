@@ -10,7 +10,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import ShareModal from '@/components/modals/share-modal.vue';
-import { SHARE_AVAILABLE, shareLink } from '@/helpers/share';
+import { shareLink } from '@/helpers/share';
+import { SHARE_AVAILABLE } from '@/constants/share';
 
 interface ShareProps {
   data: ShareData;
@@ -20,7 +21,7 @@ interface ShareProps {
 const props = withDefaults(defineProps<ShareProps>(), { useNativeOption: true });
 
 const useNativeVersionBrowser: boolean = SHARE_AVAILABLE && props.useNativeOption;
-const isModalVisible = ref<boolean>(true);
+const isModalVisible = ref<boolean>(false);
 
 function onClick(): void {
   if (useNativeVersionBrowser) {
