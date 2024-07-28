@@ -1,6 +1,6 @@
 <template>
   <div v-if="dataGame">
-    <Game v-bind="dataGame" />
+    <Game v-bind="dataGame" :debug="envVars.debug" />
   </div>
   <PageWrapper v-else>
     <template #leftOption>
@@ -25,6 +25,7 @@ import Game from '@/components/game/game.vue';
 import MenuOptions from '@/components/common/menu-options.vue';
 import BackButton from '@/components/common/back-button.vue';
 import type { DataOfflineGame } from '@/interfaces/game';
+import { envVars } from '@/config/envVar';
 
 const dataGame = ref<DataOfflineGame | null>(null);
 
