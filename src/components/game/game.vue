@@ -45,7 +45,6 @@
       players,
       listTokens,
       actionsTurn,
-      handleSelectDice,
     }"
     @handle-select-dice="(event) => handleSelectDice(event.diceValue, event.isActionSocket)"
     @update-tokens="updateTokens"
@@ -53,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { inject, ref, watch } from 'vue';
 import GameBoard from '@/components/game/board/game-board.vue';
 import GameDebug from '@/components/game/debug/game-debug.vue';
 import ShowTotalTokens from '@/components/game/token/components/total-tokens/show-total-tokens.vue';
@@ -64,6 +63,7 @@ import {
   EActionsBoardGame,
   ETypeGame,
   INITIAL_ACTIONS_MOVE_TOKEN,
+  OptionsGamePlaySoundSymbol,
   TOKEN_MOVEMENT_INTERVAL_VALUE,
   WAIT_SHOW_MODAL_GAME_OVER,
 } from '@/constants/game';
@@ -90,6 +90,8 @@ import { getRandomValueDice } from '@/helpers/random';
 import TokenList from '@/components/game/tokens/token-list.vue';
 import GameDebugTokens from '@/components/game/debug/game-debug-tokens.vue';
 import GameOverModal from '@/components/game/over/game-over-modal.vue';
+import type { TPlaySoundFunction } from '@/interfaces/sounds';
+import { ESounds } from '@/constants/online';
 
 // TODO: Add types for socket
 interface GameProps {
@@ -121,6 +123,8 @@ const listTokens = ref<IListTokens[]>(
 );
 const totalTokens = ref<TShowTotalTokens>({});
 const isGameOver = ref<IGameOver>({ gameOver: false, showModal: false });
+
+const playSound: TPlaySoundFunction = inject<TPlaySoundFunction>(OptionsGamePlaySoundSymbol)!;
 
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
   const validatedSelectedToken = validateSelectedToken(
@@ -163,6 +167,7 @@ function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = fal
     // TODO: Provisional fix. Fix later
     typeof diceValue !== 'object' ? diceValue : undefined,
   );
+  playSound(ESounds.ROLL_DICE);
 }
 
 function handleDoneDice(isActionSocket: boolean = false): void {
@@ -172,6 +177,7 @@ function handleDoneDice(isActionSocket: boolean = false): void {
     listTokens.value,
     players.value,
     totalTokens.value,
+    playSound,
   ).then((res) => {
     actionsTurn.value = res.actionsTurn;
     listTokens.value = res.listTokens;
@@ -202,6 +208,7 @@ watch(
           listTokens.value,
           players.value,
           totalTokens.value,
+          playSound,
         ).then((validatedTokenMovement) => {
           actionsTurn.value = validatedTokenMovement.actionsTurn;
           actionsMoveToken.value = validatedTokenMovement.actionsMoveToken;

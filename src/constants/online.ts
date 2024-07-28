@@ -1,7 +1,7 @@
 import { EActionsBoardGame, ENextStepGame } from '@/constants/game';
 import { TYPES_CHAT_MESSAGES } from '@/constants/chat';
 import type { ISocketListenActions } from '@/interfaces/online';
-import type { IOptionsGame } from '@/interfaces/game';
+import type { TOptionsGame } from '@/interfaces/sounds';
 
 /**
  * Delay before send end movement confirmation to socket
@@ -89,7 +89,7 @@ export enum ESounds {
   CLICK = 'CLICK',
 }
 
-export const INITIAL_OPTIONS_GAME: IOptionsGame = {
+export const INITIAL_OPTIONS_GAME: TOptionsGame = {
   [EOptionsGame.SOUND]: true,
   [EOptionsGame.MUSIC]: true,
   [EOptionsGame.CHAT]: true,

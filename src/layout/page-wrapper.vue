@@ -1,8 +1,10 @@
 <template>
   <div class="page-wrapper">
     <div v-if="slots.leftOption || slots.rightOption" class="page-wrapper-options">
-      <slot name="leftOption" />
-      <slot name="rightOption" />
+      <slot v-if="slots.leftOption" name="leftOption" />
+      <div v-else />
+      <slot v-if="slots.rightOption" name="rightOption" />
+      <div v-else />
     </div>
     <slot />
   </div>

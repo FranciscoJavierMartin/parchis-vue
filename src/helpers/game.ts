@@ -40,6 +40,8 @@ import { cloneDeep } from '@/helpers/clone';
 import type { TPlayerRankingPosition } from '@/interfaces/profile';
 import type { IENextStepGame } from '@/interfaces/online';
 import { getRandomNumber } from '@/helpers/random';
+import type { TPlaySoundFunction } from '@/interfaces/sounds';
+import { ESounds } from '@/constants/online';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
   const { isOnline, isBot } = players[indexTurn];
@@ -443,6 +445,7 @@ export async function validateDicesForTokens(
   listTokens: IListTokens[],
   players: IPlayer[],
   totalTokens: TShowTotalTokens,
+  playSound: TPlaySoundFunction,
 ): Promise<{
   actionsTurn: IActionsTurn;
   listTokens: IListTokens[];
@@ -460,6 +463,10 @@ export async function validateDicesForTokens(
 
   const newTotalDicesAvailable = copyActionsTurn.diceList.length;
   const isThreeRolls = validateThreeConsecutiveRolls(copyActionsTurn.diceList);
+
+  if (diceValue === DICE_VALUE_GET_OUT_JAIL) {
+    playSound(ESounds.GET_SIX);
+  }
 
   if (isThreeRolls) {
     const nextTurnValidated = await validateNextTurn(currentTurn, players, actionsTurn, true, true);
@@ -667,6 +674,7 @@ export function validateSelectedToken(
 function validatePlayerRankingGameOver(
   players: IPlayer[],
   ranking: TPlayerRankingPosition,
+  playSound: TPlaySoundFunction,
 ): { players: IPlayer[]; gameOverState: IGameOver } {
   const copyPlayers: IPlayer[] = cloneDeep(players);
 
@@ -678,6 +686,8 @@ function validatePlayerRankingGameOver(
   );
 
   const playersLeftRanking = [...onlinePlayersNotFinished, ...offlinePlayers];
+
+  playSound(ESounds.GAMER_OVER);
 
   playersLeftRanking.forEach((player: IPlayer) => {
     ranking++;
@@ -736,6 +746,7 @@ export async function validateMovementToken(
   listTokens: IListTokens[],
   players: IPlayer[],
   totalTokens: TShowTotalTokens,
+  playSound: TPlaySoundFunction,
 ): Promise<{
   actionsTurn: IActionsTurn;
   actionsMoveToken: IActionsMoveToken;
@@ -761,6 +772,8 @@ export async function validateMovementToken(
   let positionTile: number = 0;
   let goNextTurn: boolean = false;
   let isGameOver: boolean = false;
+
+  playSound(ESounds.TOKEN_MOVE);
 
   if (tokenToBeMoved.typeTile === EtypeTile.EXIT) {
     positionTile = tokenToBeMoved.positionTile + 1;
@@ -827,7 +840,7 @@ export async function validateMovementToken(
         copyPlayers[copyCurrentTurn].ranking = ranking;
 
         if (isGameOver) {
-          const validatedGameOver = validatePlayerRankingGameOver(copyPlayers, ranking);
+          const validatedGameOver = validatePlayerRankingGameOver(copyPlayers, ranking, playSound);
           copyPlayers = validatedGameOver.players;
           gameOverState = validatedGameOver.gameOverState;
         }

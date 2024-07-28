@@ -86,3 +86,6 @@ export const PREFIX_RANKING = ['st', 'nd', 'rd', 'th'];
  * Room range
  */
 export const ROOM_RANGE = 5;
+
+export const OptionsGameStateSymbol = Symbol('OptionsGameState');
+export const OptionsGamePlaySoundSymbol = Symbol('OptionsGamePlaySound');
