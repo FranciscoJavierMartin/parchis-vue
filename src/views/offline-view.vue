@@ -1,8 +1,5 @@
 <template>
-  <div v-if="dataGame">
-    <Game v-bind="dataGame" :debug="envVars.debug" />
-  </div>
-  <PageWrapper v-else>
+  <PageWrapper>
     <template #leftOption>
       <BackButton />
     </template>
@@ -10,8 +7,13 @@
       <MenuOptions />
     </template>
     <template #default>
-      <GameLogo />
-      <ConfigGame @update-data="updateDataGame" />
+      <div v-if="dataGame">
+        <Game v-bind="dataGame" :debug="envVars.debug" />
+      </div>
+      <template v-else>
+        <GameLogo />
+        <ConfigGame @update-data="updateDataGame" />
+      </template>
     </template>
   </PageWrapper>
 </template>

@@ -1,47 +1,54 @@
 <template>
   <PageWrapper>
-    <div class="about-page">
-      <GameLogo />
-      <p>
-        The origins of
-        <a
-          title="Ludo"
-          href="https://en.wikipedia.org/wiki/Parch%C3%ADs"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Parchis
-        </a>
-        can be traced back to ancient India, where it was known as "Pachisi." Initially played by
-        royalty, it soon became popular among people from all walks of life. As it spread to other
-        regions, including England and the United States, it underwent various transformations and
-        adaptations, eventually evolving into the beloved game we know today as Parchis.
-      </p>
-      <p>
-        Parchis Vue is a game developed using
-        <a title="Vue.JS" href="https://vuejs.org/" target="_blank" rel="noopener noreferrer">
-          Vue.js
-        </a>
-        and
-        <a
-          title="TypeScript"
-          href="https://www.typescriptlang.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          TypeScript
-        </a>
-        , this digital adaptation stays true to the essence of the original game while offering a
-        fresh and engaging experience for modern players.
-      </p>
-    </div>
-    <RouterLink :to="{ name: ROUTES.HOME.name }" class="button yellow"> Home </RouterLink>
+    <template #leftOption>
+      <BackButton />
+    </template>
+    <template #rightOption>
+      <MenuOptions />
+    </template>
+    <template #default>
+      <div class="about-page">
+        <GameLogo />
+        <p>
+          The origins of
+          <a
+            title="Ludo"
+            href="https://en.wikipedia.org/wiki/Parch%C3%ADs"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Parchis
+          </a>
+          can be traced back to ancient India, where it was known as "Pachisi." Initially played by
+          royalty, it soon became popular among people from all walks of life. As it spread to other
+          regions, including England and the United States, it underwent various transformations and
+          adaptations, eventually evolving into the beloved game we know today as Parchis.
+        </p>
+        <p>
+          Parchis Vue is a game developed using
+          <a title="Vue.JS" href="https://vuejs.org/" target="_blank" rel="noopener noreferrer">
+            Vue.js
+          </a>
+          and
+          <a
+            title="TypeScript"
+            href="https://www.typescriptlang.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            TypeScript </a
+          >, this digital adaptation stays true to the essence of the original game while offering a
+          fresh and engaging experience for modern players.
+        </p>
+      </div>
+    </template>
   </PageWrapper>
 </template>
 
 <script setup lang="ts">
 import GameLogo from '@/components/common/game-logo.vue';
-import { ROUTES } from '@/constants/routes';
+import MenuOptions from '@/components/common/menu-options.vue';
+import BackButton from '@/components/common/back-button.vue';
 import PageWrapper from '@/layout/page-wrapper.vue';
 </script>
 
