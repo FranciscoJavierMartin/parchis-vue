@@ -8,6 +8,7 @@
 </template>
 
 <script lang="ts" setup>
+// TODO: Rename component to ShareButton
 import { ref } from 'vue';
 import ShareModal from '@/components/modals/share-modal.vue';
 import { shareLink } from '@/helpers/share';
