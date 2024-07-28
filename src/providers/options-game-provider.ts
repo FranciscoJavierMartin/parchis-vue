@@ -4,7 +4,7 @@ import { getValueFromCache, saveProperty } from '@/helpers/storage';
 import { Sprite } from '@/helpers/sounds';
 import { OptionsGameStateSymbol, OptionsGamePlaySoundSymbol } from '@/constants/game';
 import { OPTIONS_GAME } from '@/constants/storage';
-import type { IOptionsGame } from '@/interfaces/game';
+import type { TOptionsGame } from '@/interfaces/sounds';
 import type { IESounds } from '@/interfaces/online';
 import backgroundMusic from '@/assets/sounds/background.mp3';
 import soundsSource from '@/assets/sounds/soundsSource.mp3';
@@ -12,7 +12,7 @@ import soundsSource from '@/assets/sounds/soundsSource.mp3';
 export default defineComponent({
   name: 'OptionsGameProvider',
   setup() {
-    const optionsGame = reactive<IOptionsGame>(
+    const optionsGame = reactive<TOptionsGame>(
       getValueFromCache(OPTIONS_GAME, INITIAL_OPTIONS_GAME),
     );
 
@@ -58,7 +58,7 @@ export default defineComponent({
     provide(OptionsGameStateSymbol, optionsGame);
     provide(OptionsGamePlaySoundSymbol, playSound);
 
-    watch(optionsGame, (newValue: IOptionsGame) => {
+    watch(optionsGame, (newValue: TOptionsGame) => {
       if (newValue.MUSIC) {
         audio.play();
       } else {
