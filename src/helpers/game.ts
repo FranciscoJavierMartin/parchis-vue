@@ -743,6 +743,7 @@ export async function validateMovementToken(
   listTokens: IListTokens[],
   players: IPlayer[],
   totalTokens: TShowTotalTokens,
+  playSound: TPlaySoundFunction,
 ): Promise<{
   actionsTurn: IActionsTurn;
   actionsMoveToken: IActionsMoveToken;
@@ -768,6 +769,8 @@ export async function validateMovementToken(
   let positionTile: number = 0;
   let goNextTurn: boolean = false;
   let isGameOver: boolean = false;
+
+  playSound(ESounds.TOKEN_MOVE);
 
   if (tokenToBeMoved.typeTile === EtypeTile.EXIT) {
     positionTile = tokenToBeMoved.positionTile + 1;

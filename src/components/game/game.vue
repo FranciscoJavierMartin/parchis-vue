@@ -209,6 +209,7 @@ watch(
           listTokens.value,
           players.value,
           totalTokens.value,
+          playSound,
         ).then((validatedTokenMovement) => {
           actionsTurn.value = validatedTokenMovement.actionsTurn;
           actionsMoveToken.value = validatedTokenMovement.actionsMoveToken;
