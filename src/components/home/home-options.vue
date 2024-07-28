@@ -1,6 +1,6 @@
 <template>
   <div class="home-options">
-    <RouterLink :to="{ name: ROUTES.ONLINE.name }" class="button blue">
+    <RouterLink v-if="!serviceError" :to="{ name: ROUTES.ONLINE.name }" class="button blue">
       <LinkIcon fill="#8b5f00" />
       Play online
     </RouterLink>

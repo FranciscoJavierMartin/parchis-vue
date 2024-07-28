@@ -2,8 +2,8 @@
   <PageWrapper>
     <template #default>
       <GameLogo />
-      <HomeOptions />
-      <HomeAlert />
+      <HomeOptions :serviceError="false" />
+      <HomeAlert v-if="false" />
     </template>
     <template #rightOption>
       <MenuOptions />
