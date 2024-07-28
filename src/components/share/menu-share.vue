@@ -1,8 +1,11 @@
 <template>
   <slot :onClick="onClick" />
+  <ShareModal v-if="!useNativeVersionBrowser && isModalVisible" />
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
+import ShareModal from '@/components/modals/share-modal.vue';
 import { SHARE_AVAILABLE, shareLink } from '@/helpers/share';
 
 interface ShareProps {
@@ -13,10 +16,13 @@ interface ShareProps {
 const props = withDefaults(defineProps<ShareProps>(), { useNativeOption: true });
 
 const useNativeVersionBrowser: boolean = SHARE_AVAILABLE && props.useNativeOption;
+const isModalVisible = ref<boolean>(true);
 
 function onClick(): void {
   if (useNativeVersionBrowser) {
     shareLink(props.data);
+  } else {
+    isModalVisible.value = true;
   }
 }
 </script>
