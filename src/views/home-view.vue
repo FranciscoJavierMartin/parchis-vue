@@ -18,9 +18,3 @@ import MenuOptions from '@/components/common/menu-options.vue';
 import HomeOptions from '@/components/home/home-options.vue';
 import HomeAlert from '@/components/home/home-alert.vue';
 </script>
-
-<style scoped>
-.links {
-  display: flex;
-}
-</style>
