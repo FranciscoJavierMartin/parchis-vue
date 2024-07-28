@@ -10,6 +10,11 @@
           Play online
         </RouterLink>
         <RouterLink :to="{ name: ROUTES.ABOUT.name }" class="button yellow"> About </RouterLink>
+        <MenuShare :data="dataShare">
+          <template #default="{ onClick }">
+            <button @click="onClick">Share</button>
+          </template>
+        </MenuShare>
       </div>
     </template>
     <template #rightOption>
@@ -22,7 +27,14 @@
 import GameLogo from '@/components/common/game-logo.vue';
 import PageWrapper from '@/layout/page-wrapper.vue';
 import MenuOptions from '@/components/common/menu-options.vue';
+import MenuShare from '@/components/share/menu-share.vue';
 import { ROUTES } from '@/constants/routes';
+
+const dataShare: ShareData = {
+  title: 'Parchis',
+  text: "Let's play Parchis",
+  url: window.location.href,
+};
 </script>
 
 <style scoped>
