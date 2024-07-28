@@ -1,6 +1,6 @@
-import { defineComponent, provide, reactive, watch } from 'vue';
+import { defineComponent, onBeforeUnmount, onMounted, provide, reactive, watch } from 'vue';
 import { OptionsGameStateSymbol, OptionsGamePlaySoundSymbol } from '@/constants/game';
-import { INITIAL_OPTIONS_GAME } from '@/constants/online';
+import { ESounds, INITIAL_OPTIONS_GAME } from '@/constants/online';
 import { OPTIONS_GAME } from '@/constants/storage';
 import { getValueFromCache, saveProperty } from '@/helpers/storage';
 import type { IOptionsGame } from '@/interfaces/game';
@@ -36,6 +36,26 @@ export default defineComponent({
       }
 
       saveProperty(OPTIONS_GAME, optionsGame);
+    });
+
+    function onClickEvent(e: MouseEvent): void {
+      const target = e.target as Element;
+      const elements: string[] = ['a', 'button', 'input', 'svg', 'path', 'line'];
+
+      if (
+        elements.includes(target.tagName.toLowerCase()) ||
+        elements.includes(target.parentElement?.tagName.toLowerCase() || '')
+      ) {
+        playSound(ESounds.CLICK);
+      }
+    }
+
+    onMounted(() => {
+      window.addEventListener('click', onClickEvent);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('click', onClickEvent);
     });
   },
   render() {
