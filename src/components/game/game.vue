@@ -92,6 +92,7 @@ import TokenList from '@/components/game/tokens/token-list.vue';
 import GameDebugTokens from '@/components/game/debug/game-debug-tokens.vue';
 import GameOverModal from '@/components/game/over/game-over-modal.vue';
 import type { TPlaySoundFunction } from '@/interfaces/sounds';
+import { ESounds } from '@/constants/online';
 
 // TODO: Add types for socket
 interface GameProps {
@@ -167,6 +168,7 @@ function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = fal
     // TODO: Provisional fix. Fix later
     typeof diceValue !== 'object' ? diceValue : undefined,
   );
+  playSound(ESounds.ROLL_DICE);
 }
 
 function handleDoneDice(isActionSocket: boolean = false): void {
