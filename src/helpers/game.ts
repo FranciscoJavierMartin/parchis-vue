@@ -674,6 +674,7 @@ export function validateSelectedToken(
 function validatePlayerRankingGameOver(
   players: IPlayer[],
   ranking: TPlayerRankingPosition,
+  playSound: TPlaySoundFunction,
 ): { players: IPlayer[]; gameOverState: IGameOver } {
   const copyPlayers: IPlayer[] = cloneDeep(players);
 
@@ -685,6 +686,8 @@ function validatePlayerRankingGameOver(
   );
 
   const playersLeftRanking = [...onlinePlayersNotFinished, ...offlinePlayers];
+
+  playSound(ESounds.GAMER_OVER);
 
   playersLeftRanking.forEach((player: IPlayer) => {
     ranking++;
@@ -837,7 +840,7 @@ export async function validateMovementToken(
         copyPlayers[copyCurrentTurn].ranking = ranking;
 
         if (isGameOver) {
-          const validatedGameOver = validatePlayerRankingGameOver(copyPlayers, ranking);
+          const validatedGameOver = validatePlayerRankingGameOver(copyPlayers, ranking, playSound);
           copyPlayers = validatedGameOver.players;
           gameOverState = validatedGameOver.gameOverState;
         }
