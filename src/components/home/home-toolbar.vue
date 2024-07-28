@@ -37,21 +37,21 @@ defineProps<HomeToolbarProps>();
 
 <style scoped>
 .home-toolbar {
-  align-items: center;
-  animation: bounceIn 0.8s ease both;
   display: flex;
   gap: 20px;
+  align-items: center;
   justify-content: center;
-  margin-top: 30px;
   width: 50%;
+  margin-top: 30px;
+  animation: bounceIn 0.8s ease both;
 
   .button {
-    align-items: center;
-    border-radius: 5px;
     display: flex;
-    height: 50px;
+    align-items: center;
     justify-content: center;
     width: 50px;
+    height: 50px;
+    border-radius: 5px;
 
     &:deep(svg) {
       width: 30px;
