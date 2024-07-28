@@ -1,8 +1,8 @@
 <template>
   <div class="modal-share-buttons">
-    <div v-for="buttonData of BUTTONS" :key="buttonData.icon" class="modal-share-button">
+    <div v-for="buttonData of BUTTONS" :key="buttonData.label" class="modal-share-button">
       <button :title="`Share in ${buttonData.label}`">
-        <!-- <component /> -->
+        <component :is="buttonData.icon" />
       </button>
       <span>{{ buttonData.label }}</span>
     </div>
