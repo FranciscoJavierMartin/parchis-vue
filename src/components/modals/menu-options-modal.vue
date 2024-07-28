@@ -33,14 +33,14 @@ import MutedMusicIcon from '@/components/icons/muted-music-icon.vue';
 import ChatBubble from '@/components/icons/chat-bubble.vue';
 import MutedChatBubble from '@/components/icons/muted-chat-bubble.vue';
 import { OptionsGameStateSymbol } from '@/constants/game';
-import type { IOptionsGame } from '@/interfaces/game';
+import type { TOptionsGame } from '@/interfaces/sounds';
 import type { EOptionsGame } from '@/constants/online';
 
 defineEmits<{ close: [] }>();
 
-const optionsGame: IOptionsGame = inject<IOptionsGame>(OptionsGameStateSymbol)!;
+const optionsGame: TOptionsGame = inject<TOptionsGame>(OptionsGameStateSymbol)!;
 
-const options: Record<keyof IOptionsGame, { icon: Raw<Component>; mutedIcon: Raw<Component> }> = {
+const options: Record<keyof TOptionsGame, { icon: Raw<Component>; mutedIcon: Raw<Component> }> = {
   SOUND: {
     icon: markRaw(SoundIcon),
     mutedIcon: markRaw(MutedSoundIcon),
