@@ -40,6 +40,8 @@ import { cloneDeep } from '@/helpers/clone';
 import type { TPlayerRankingPosition } from '@/interfaces/profile';
 import type { IENextStepGame } from '@/interfaces/online';
 import { getRandomNumber } from '@/helpers/random';
+import type { TPlaySoundFunction } from '@/interfaces/sounds';
+import { ESounds } from '@/constants/online';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
   const { isOnline, isBot } = players[indexTurn];
@@ -443,6 +445,7 @@ export async function validateDicesForTokens(
   listTokens: IListTokens[],
   players: IPlayer[],
   totalTokens: TShowTotalTokens,
+  playSound: TPlaySoundFunction,
 ): Promise<{
   actionsTurn: IActionsTurn;
   listTokens: IListTokens[];
@@ -460,6 +463,10 @@ export async function validateDicesForTokens(
 
   const newTotalDicesAvailable = copyActionsTurn.diceList.length;
   const isThreeRolls = validateThreeConsecutiveRolls(copyActionsTurn.diceList);
+
+  if (diceValue === DICE_VALUE_GET_OUT_JAIL) {
+    playSound(ESounds.GET_SIX);
+  }
 
   if (isThreeRolls) {
     const nextTurnValidated = await validateNextTurn(currentTurn, players, actionsTurn, true, true);

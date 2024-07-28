@@ -178,6 +178,7 @@ function handleDoneDice(isActionSocket: boolean = false): void {
     listTokens.value,
     players.value,
     totalTokens.value,
+    playSound,
   ).then((res) => {
     actionsTurn.value = res.actionsTurn;
     listTokens.value = res.listTokens;
