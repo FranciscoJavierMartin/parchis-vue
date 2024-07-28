@@ -20,6 +20,7 @@ export default defineComponent({
     const audio = new Audio(backgroundMusic);
     audio.volume = 0.5;
     audio.loop = true;
+    // TODO: Uncomment
     // audio.autoplay = optionsGame.MUSIC;
 
     // Sprite music
