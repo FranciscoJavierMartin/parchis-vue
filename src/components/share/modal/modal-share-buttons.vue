@@ -20,3 +20,32 @@ defineProps<ModalShareButtonsProps>();
 
 defineEmits<{ close: [isShare?: boolean] }>();
 </script>
+
+<style scoped>
+.modal-share-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .modal-share-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+
+    button {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+    }
+
+    span {
+      font-size: 13px;
+    }
+  }
+}
+</style>
