@@ -1,6 +1,10 @@
 <template>
   <slot :onClick="onClick" />
-  <ShareModal v-if="!useNativeVersionBrowser && isModalVisible" />
+  <ShareModal
+    v-if="!useNativeVersionBrowser && isModalVisible"
+    :data="data"
+    @close="onCloseModal"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -24,5 +28,13 @@ function onClick(): void {
   } else {
     isModalVisible.value = true;
   }
+}
+
+function onCloseModal(isShare: boolean = false): void {
+  if (isShare) {
+    // TODO: Show toast with successful message
+  }
+
+  isModalVisible.value = false;
 }
 </script>

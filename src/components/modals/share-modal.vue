@@ -1,7 +1,7 @@
 <template>
   <BaseModal>
     <div ref="trapRef" class="modal-share-wrapper">
-      <h1>Hello world</h1>
+      <ModalShareHeader @close="$emit('close')" />
     </div>
   </BaseModal>
 </template>
@@ -9,6 +9,15 @@
 <script setup lang="ts">
 import BaseModal from '@/components/base/base-modal.vue';
 import useFocusTrap from '@/composables/use-focus-trap';
+import ModalShareHeader from '@/components/share/modal/modal-share-header.vue';
+
+interface ShareModalProps {
+  data: ShareData;
+}
+
+defineProps<ShareModalProps>();
+
+defineEmits<{ close: [isShare?: boolean] }>();
 
 const { trapRef } = useFocusTrap();
 </script>
