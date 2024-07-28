@@ -19,7 +19,7 @@ export function shareLink(data: ShareData): void {
     });
 }
 
-type TButtons = {
+export type TButtons = {
   icon: Raw<Component>;
   label: string;
   action: string;

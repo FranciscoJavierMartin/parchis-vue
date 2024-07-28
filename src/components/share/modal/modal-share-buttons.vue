@@ -1,7 +1,7 @@
 <template>
   <div class="modal-share-buttons">
     <div v-for="buttonData of BUTTONS" :key="buttonData.label" class="modal-share-button">
-      <button :title="`Share in ${buttonData.label}`">
+      <button :title="`Share in ${buttonData.label}`" @click="handleClick(buttonData)">
         <component :is="buttonData.icon" />
       </button>
       <span>{{ buttonData.label }}</span>
@@ -10,15 +10,31 @@
 </template>
 
 <script setup lang="ts">
-import { BUTTONS } from '@/helpers/share';
+import { copyToClipboard } from '@/helpers/debug';
+import { BUTTONS, type TButtons } from '@/helpers/share';
 
 interface ModalShareButtonsProps {
-  data: ShareData;
+  data: Omit<ShareData, 'files'>;
 }
 
-defineProps<ModalShareButtonsProps>();
+const props = defineProps<ModalShareButtonsProps>();
 
-defineEmits<{ close: [isShare?: boolean] }>();
+const emit = defineEmits<{ close: [isShare?: boolean] }>();
+
+function handleClick(buttonData: TButtons): void {
+  if (buttonData.action === 'copy') {
+    copyToClipboard(`${props.data.text} ${props.data.url}`);
+  } else {
+    const url: string = Object.keys(props.data).reduce<string>(
+      (acc, key) =>
+        acc.replace(`DATA_${key.toUpperCase}`, encodeURIComponent(props.data[key as never])),
+      buttonData.url!,
+    );
+    window.open(url, '_blank');
+  }
+
+  emit('close', true);
+}
 </script>
 
 <style scoped>
