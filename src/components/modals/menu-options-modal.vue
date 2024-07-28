@@ -1,6 +1,6 @@
 <template>
   <BaseModal>
-    <div class="menu-options-modal">
+    <div ref="trapRef" class="menu-options-modal">
       <div class="modal-options-header">
         Options
         <button title="Close" class="button menu-options-close" @click="$emit('close')">
@@ -35,8 +35,11 @@ import MutedChatBubble from '@/components/icons/muted-chat-bubble.vue';
 import { OptionsGameStateSymbol } from '@/constants/game';
 import type { TOptionsGame } from '@/interfaces/sounds';
 import type { EOptionsGame } from '@/constants/online';
+import useFocusTrap from '@/composables/use-focus-trap';
 
 defineEmits<{ close: [] }>();
+
+const { trapRef } = useFocusTrap();
 
 const optionsGame: TOptionsGame = inject<TOptionsGame>(OptionsGameStateSymbol)!;
 
