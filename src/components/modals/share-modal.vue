@@ -2,6 +2,7 @@
   <BaseModal>
     <div ref="trapRef" class="modal-share-wrapper">
       <ModalShareHeader @close="$emit('close')" />
+      <ModalShareButtons :data="data" @close="$emit('close')" />
     </div>
   </BaseModal>
 </template>
@@ -10,6 +11,7 @@
 import BaseModal from '@/components/base/base-modal.vue';
 import useFocusTrap from '@/composables/use-focus-trap';
 import ModalShareHeader from '@/components/share/modal/modal-share-header.vue';
+import ModalShareButtons from '@/components/share/modal/modal-share-buttons.vue';
 
 interface ShareModalProps {
   data: ShareData;
