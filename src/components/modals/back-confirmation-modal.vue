@@ -7,6 +7,7 @@
       <div class="buttons-container">
         <button class="button-yes" @click="$emit('confirmation')">
           <div>
+            <!-- TODO: Increase stroke width -->
             <BaseIcon type="check" />
             <span>Yes</span>
           </div>
