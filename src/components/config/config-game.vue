@@ -13,7 +13,7 @@
       />
     </div>
     <button type="submit" class="button yellow game-offline-play">
-      <PlayIcon fill="#8b5f00" />
+      <BaseIcon type="play" fill="#8b5f00" />
       Play
     </button>
   </form>
@@ -21,7 +21,6 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import PlayIcon from '@/components/icons/play-icon.vue';
 import SelectNumberPlayers from '@/components/base/select-number-players.vue';
 import PlayerInput from '@/components/config/player-input.vue';
 import {
@@ -36,6 +35,7 @@ import type { DataOfflineGame, TTotalPlayers } from '@/interfaces/game';
 import type { IPlayerOffline } from '@/interfaces/player';
 import type { TBoardColors, TColors } from '@/interfaces/board';
 import { savePlayerDataCache } from '@/helpers/storage';
+import BaseIcon from '../icons/base-icon.vue';
 
 const emit = defineEmits<{
   updateData: [data: DataOfflineGame];
@@ -103,7 +103,7 @@ watch(
     text-transform: uppercase;
     border-radius: 10px;
 
-    &:deep(svg) {
+    .icon-wrapper {
       width: 30px;
       height: 30px;
     }

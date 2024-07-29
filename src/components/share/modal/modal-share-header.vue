@@ -2,13 +2,13 @@
   <div class="modal-share-header">
     <h4>{{ label }}</h4>
     <button @click="$emit('close')">
-      <XMarkIcon fill="black" />
+      <BaseIcon type="close" fill="black" />
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import XMarkIcon from '@/components/icons/x-mark-icon.vue';
+import BaseIcon from '@/components/icons/base-icon.vue';
 
 interface ModalShareHeaderProps {
   label?: string;

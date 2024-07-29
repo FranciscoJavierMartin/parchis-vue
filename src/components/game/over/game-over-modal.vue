@@ -12,7 +12,7 @@
         <MenuShare :data="dataShare">
           <template #default="{ onClick }">
             <button class="button blue" @click="onClick">
-              <ShareIcon />
+              <BaseIcon type="share" />
             </button>
           </template>
         </MenuShare>
@@ -30,10 +30,9 @@ import { getOrganizedRanking } from '@/helpers/player';
 import type { IPlayer } from '@/interfaces/user';
 import GameOverRibbon from '@/components/game/over/game-over-ribbon.vue';
 import FirstPosition from '@/components/game/over/first-position.vue';
-import OtherPlayer from '@/components/game/over/other-player.vue';
-import ShareIcon from '@/components/icons/share-icon.vue';
-import useFocusTrap from '@/composables/use-focus-trap';
 import BaseIcon from '@/components/icons/base-icon.vue';
+import OtherPlayer from '@/components/game/over/other-player.vue';
+import useFocusTrap from '@/composables/use-focus-trap';
 
 interface GameOverProps {
   players: IPlayer[];
