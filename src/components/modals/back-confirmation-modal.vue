@@ -43,7 +43,7 @@ defineEmits(['cancel', 'confirmation']);
     rgb(255, 217, 19) 0px 0px 0px 9px;
   animation: scaleUp 0.5s;
 
-  .icon-wrapper {
+  .icon-info {
     width: 20%;
   }
 
