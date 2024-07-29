@@ -4,9 +4,11 @@
       <BaseIcon type="info" />
     </RouterLink>
     <MenuShare :data="dataShare">
-      <button class="button blue" title="Share">
-        <BaseIcon type="share" />
-      </button>
+      <template #default="{ onClick }">
+        <button title="Share" class="button blue" @click="onClick">
+          <BaseIcon type="share" />
+        </button>
+      </template>
     </MenuShare>
     <a v-if="isAuth" :href="API_LOGOUT" class="button blue" title="Logout">
       <BaseIcon type="logout" />

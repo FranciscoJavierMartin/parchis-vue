@@ -1,13 +1,13 @@
-import type { Component, Raw } from 'vue';
+import type { TypeIcon } from './icons';
 
 export type TButtonShare =
   | {
-      icon: Raw<Component>;
+      icon: 'copy';
       label: 'Copy';
       action: 'copy';
     }
   | {
-      icon: Raw<Component>;
+      icon: TypeIcon;
       label: string;
       action: string;
       url: string;
