@@ -9,7 +9,7 @@
       :class="[position.toLowerCase(), { mute: player.isMuted }]"
       @click="$emit('handleMuteChat', player.index)"
     >
-      <ChatBubble class="icon-wrapper" />
+      <BaseIcon type="chat" />
     </button>
     <div v-if="startTimer && isRunning" class="game-profile-image-progress" />
   </div>
@@ -18,10 +18,10 @@
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
 import PlayerAvatar from '@/components/avatar/player-avatar.vue';
+import BaseIcon from '@/components/icons/base-icon.vue';
 import { TIME_INTERVAL_CHRONOMETER } from '@/constants/game';
 import type { IPlayer } from '@/interfaces/user';
 import type { TPositionProfile } from '@/interfaces/profile';
-import ChatBubble from '@/components/icons/chat-bubble.vue';
 
 interface ProfileImageProps {
   player: IPlayer;
