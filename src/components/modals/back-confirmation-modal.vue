@@ -1,19 +1,19 @@
 <template>
   <BaseModal>
     <div class="confirm-modal">
-      <InfoIcon fill="transparent" />
+      <BaseIcon type="info" />
       <h2 class="title">Exit</h2>
       <span class="text">Are you sure you want to quit the game?</span>
       <div class="buttons-container">
         <button class="button-yes" @click="$emit('confirmation')">
           <div>
-            <CheckIcon :stroke-width="5.5" />
+            <BaseIcon type="check" />
             <span>Yes</span>
           </div>
         </button>
         <button class="button-no" @click="$emit('cancel')">
           <div>
-            <XMarkIcon :stroke-width="3.5" />
+            <BaseIcon type="close" />
             <span>No</span>
           </div>
         </button>
@@ -24,9 +24,7 @@
 
 <script setup lang="ts">
 import BaseModal from '@/components/base/base-modal.vue';
-import InfoIcon from '@/components/icons/info-icon.vue';
-import CheckIcon from '@/components/icons/check-icon.vue';
-import XMarkIcon from '@/components/icons/x-mark-icon.vue';
+import BaseIcon from '@/components/icons/base-icon.vue';
 
 defineEmits(['cancel', 'confirmation']);
 </script>
@@ -48,7 +46,7 @@ defineEmits(['cancel', 'confirmation']);
     rgb(255, 217, 19) 0px 0px 0px 9px;
   animation: scaleUp 0.5s;
 
-  &:deep(svg) {
+  .icon-wrapper {
     width: 20%;
   }
 
@@ -70,7 +68,7 @@ defineEmits(['cancel', 'confirmation']);
       background-color: var(--game-blue);
 
       > div {
-        &:deep(svg) {
+        .icon-wrapper {
           width: 16px;
           height: 16px;
         }
@@ -102,7 +100,7 @@ defineEmits(['cancel', 'confirmation']);
         align-items: center;
         justify-content: center;
 
-        &:deep(svg) {
+        .icon-wrapper {
           width: 20px;
           height: 20px;
         }
