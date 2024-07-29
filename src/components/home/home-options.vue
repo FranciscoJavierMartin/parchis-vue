@@ -45,7 +45,7 @@ withDefaults(defineProps<HomeOptionsProps>(), { serviceError: false });
     text-transform: uppercase;
     border-radius: 10px;
 
-    &:deep(svg) {
+    .icon-wrapper {
       width: 30px;
     }
   }
