@@ -2,6 +2,7 @@
   <div class="icon-wrapper" :class="`icon-${type}`">
     <svg :viewBox="showIcon.viewBox">
       <path v-for="(d, key) of showIcon.path" :key="key" :d="d" :fill="fill" />
+      <line v-if="isMuted" x1="24" y1="0" x2="0" y2="24" :stroke-width="2.0" stroke="white" />
     </svg>
   </div>
 </template>
@@ -14,9 +15,13 @@ import type { TypeIcon } from '@/interfaces/icons';
 interface GameIconProps {
   type: TypeIcon;
   fill?: string;
+  isMuted?: boolean;
 }
 
-const props = withDefaults(defineProps<GameIconProps>(), { fill: 'white' });
+const props = withDefaults(defineProps<GameIconProps>(), {
+  fill: 'white',
+  isMuted: false,
+});
 
 const showIcon = computed(() => ICONS_DATA[props.type]);
 </script>

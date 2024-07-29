@@ -8,13 +8,14 @@
         </button>
       </div>
       <div class="menu-options-options">
+        <!-- prettier-ignore-attribute -->
         <MenuOption
-          v-for="[option, { icon, mutedIcon }] of Object.entries(options)"
-          :key="option"
-          :label="option"
-          :icon="icon"
-          :mutedIcon="mutedIcon"
-          v-model="optionsGame[option as EOptionsGame]"
+          v-for="[key, value] of Object.entries(optionsGame)"
+          v-model="optionsGame[key as EOptionsGame]"
+          :key="key"
+          :label="key"
+          :isMuted="value"
+          :icon="(key.toLowerCase() as TypeIcon)"
         />
       </div>
     </div>
@@ -22,42 +23,21 @@
 </template>
 
 <script setup lang="ts">
-import { inject, markRaw, type Component, type Raw } from 'vue';
+import { inject } from 'vue';
 import BaseIcon from '@/components/icons/base-icon.vue';
 import BaseModal from '@/components/base/base-modal.vue';
 import MenuOption from '@/components/options/menu-option.vue';
-import SoundIcon from '@/components/icons/sound-icon.vue';
-import MusicIcon from '@/components/icons/music-icon.vue';
-import MutedSoundIcon from '@/components/icons/muted-sound-icon.vue';
-import MutedMusicIcon from '@/components/icons/muted-music-icon.vue';
-import ChatBubble from '@/components/icons/chat-bubble.vue';
-import MutedChatBubble from '@/components/icons/muted-chat-bubble.vue';
 import { OptionsGameStateSymbol } from '@/constants/game';
 import type { TOptionsGame } from '@/interfaces/sounds';
 import type { EOptionsGame } from '@/constants/online';
 import useFocusTrap from '@/composables/use-focus-trap';
+import type { TypeIcon } from '@/interfaces/icons';
 
 defineEmits<{ close: [] }>();
 
 const { trapRef } = useFocusTrap();
 
 const optionsGame: TOptionsGame = inject<TOptionsGame>(OptionsGameStateSymbol)!;
-
-// TODO: Use base icon
-const options: Record<keyof TOptionsGame, { icon: Raw<Component>; mutedIcon: Raw<Component> }> = {
-  SOUND: {
-    icon: markRaw(SoundIcon),
-    mutedIcon: markRaw(MutedSoundIcon),
-  },
-  MUSIC: {
-    icon: markRaw(MusicIcon),
-    mutedIcon: markRaw(MutedMusicIcon),
-  },
-  CHAT: {
-    icon: markRaw(ChatBubble),
-    mutedIcon: markRaw(MutedChatBubble),
-  },
-};
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
   <div class="menu-option">
-    <component :is="model?.valueOf() ? icon : mutedIcon" fill="none" />
+    <BaseIcon :type="icon" :is-muted="isMuted" />
     <label class="menu-option-label">
       {{ label }}
     </label>
@@ -9,13 +9,14 @@
 </template>
 
 <script setup lang="ts">
-import { type Component, type Raw } from 'vue';
 import OptionSwitch from '@/components/options/option-switch.vue';
+import BaseIcon from '@/components/icons/base-icon.vue';
+import type { TypeIcon } from '@/interfaces/icons';
 
 interface MenuOptionProp {
   label: string;
-  icon: Raw<Component>;
-  mutedIcon: Raw<Component>;
+  icon: TypeIcon;
+  isMuted: boolean;
 }
 
 defineProps<MenuOptionProp>();
@@ -36,7 +37,7 @@ const model = defineModel<boolean>();
     margin-top: 20px;
   }
 
-  &:deep(svg) {
+  .icon-wrapper {
     width: 40px;
     height: 40px;
   }
