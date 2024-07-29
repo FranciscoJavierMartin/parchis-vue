@@ -1,5 +1,5 @@
 <template>
-  <svg viewBox="0 0 36 36">
+  <svg viewBox="0 0 36 36" class="winner-crown">
     <path fill="#F4900C" d="M14.174 17.075L6.75 7.594l-3.722 9.481z"></path>
     <path fill="#F4900C" d="M17.938 5.534l-6.563 12.389H24.5z"></path>
     <path fill="#F4900C" d="M21.826 17.075l7.424-9.481l3.722 9.481z"></path>

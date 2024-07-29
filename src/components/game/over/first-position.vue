@@ -48,7 +48,7 @@ const rankingPosition = computed<string>(() => getLabelRanking(props.first.ranki
   .first-position-container-winner-photo {
     position: relative;
 
-    &:deep(svg) {
+    .winner-crown {
       position: absolute;
       top: -36px;
       left: 5px;

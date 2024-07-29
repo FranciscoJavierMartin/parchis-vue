@@ -30,7 +30,7 @@ function closeModal(): void {
   height: 35px;
   border-radius: 5px;
 
-  &:deep(svg) {
+  .icon-wrapper {
     width: 50%;
   }
 }
