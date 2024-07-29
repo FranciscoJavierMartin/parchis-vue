@@ -43,6 +43,7 @@ const { trapRef } = useFocusTrap();
 
 const optionsGame: TOptionsGame = inject<TOptionsGame>(OptionsGameStateSymbol)!;
 
+// TODO: Use base icon
 const options: Record<keyof TOptionsGame, { icon: Raw<Component>; mutedIcon: Raw<Component> }> = {
   SOUND: {
     icon: markRaw(SoundIcon),
