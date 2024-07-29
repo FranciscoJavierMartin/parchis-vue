@@ -1,12 +1,12 @@
 <template>
   <div class="home-alert">
-    <InfoIcon fill="#856404" />
+    <BaseIcon type="info" fill="#856404" />
     <span> Something went wrong connecting to the server, please <a href="#">try again</a>. </span>
   </div>
 </template>
 
 <script setup lang="ts">
-import InfoIcon from '@/components/icons/info-icon.vue';
+import BaseIcon from '@/components/icons/base-icon.vue';
 </script>
 
 <style scoped>
@@ -24,7 +24,7 @@ import InfoIcon from '@/components/icons/info-icon.vue';
     rgba(0, 0, 0, 0.16) 0px 3px 6px,
     rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
-  &:deep(svg) {
+  .icon-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;

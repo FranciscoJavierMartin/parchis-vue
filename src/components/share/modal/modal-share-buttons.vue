@@ -6,7 +6,7 @@
       class="modal-share-button"
     >
       <button :title="`Share in ${buttonData.label}`" @click="handleClick(buttonData)">
-        <component :is="buttonData.icon" />
+        <BaseIcon :type="buttonData.icon" fill="black" />
       </button>
       <span>{{ buttonData.label }}</span>
     </div>
@@ -17,6 +17,7 @@
 import { copyToClipboard } from '@/helpers/debug';
 import type { TButtonShare } from '@/interfaces/share';
 import { BUTTONS_SHARE_SOCIAL } from '@/constants/share';
+import BaseIcon from '@/components/icons/base-icon.vue';
 
 interface ModalShareButtonsProps {
   data: Omit<ShareData, 'files'>;

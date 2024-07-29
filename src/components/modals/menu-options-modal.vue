@@ -4,17 +4,17 @@
       <div class="modal-options-header">
         Options
         <button title="Close" class="button menu-options-close" @click="$emit('close')">
-          <XMarkIcon :stroke-width="3.5" />
+          <BaseIcon type="close" />
         </button>
       </div>
       <div class="menu-options-options">
+        <!-- prettier-ignore-attribute -->
         <MenuOption
-          v-for="[option, { icon, mutedIcon }] of Object.entries(options)"
-          :key="option"
-          :label="option"
-          :icon="icon"
-          :mutedIcon="mutedIcon"
-          v-model="optionsGame[option as EOptionsGame]"
+          v-for="key of Object.keys(optionsGame)"
+          v-model="optionsGame[key as EOptionsGame]"
+          :key="key"
+          :label="key"
+          :icon="(key.toLowerCase() as TypeIcon)"
         />
       </div>
     </div>
@@ -22,41 +22,21 @@
 </template>
 
 <script setup lang="ts">
-import { inject, markRaw, type Component, type Raw } from 'vue';
+import { inject } from 'vue';
+import BaseIcon from '@/components/icons/base-icon.vue';
 import BaseModal from '@/components/base/base-modal.vue';
-import XMarkIcon from '@/components/icons/x-mark-icon.vue';
 import MenuOption from '@/components/options/menu-option.vue';
-import SoundIcon from '@/components/icons/sound-icon.vue';
-import MusicIcon from '@/components/icons/music-icon.vue';
-import MutedSoundIcon from '@/components/icons/muted-sound-icon.vue';
-import MutedMusicIcon from '@/components/icons/muted-music-icon.vue';
-import ChatBubble from '@/components/icons/chat-bubble.vue';
-import MutedChatBubble from '@/components/icons/muted-chat-bubble.vue';
 import { OptionsGameStateSymbol } from '@/constants/game';
 import type { TOptionsGame } from '@/interfaces/sounds';
 import type { EOptionsGame } from '@/constants/online';
 import useFocusTrap from '@/composables/use-focus-trap';
+import type { TypeIcon } from '@/interfaces/icons';
 
 defineEmits<{ close: [] }>();
 
 const { trapRef } = useFocusTrap();
 
 const optionsGame: TOptionsGame = inject<TOptionsGame>(OptionsGameStateSymbol)!;
-
-const options: Record<keyof TOptionsGame, { icon: Raw<Component>; mutedIcon: Raw<Component> }> = {
-  SOUND: {
-    icon: markRaw(SoundIcon),
-    mutedIcon: markRaw(MutedSoundIcon),
-  },
-  MUSIC: {
-    icon: markRaw(MusicIcon),
-    mutedIcon: markRaw(MutedMusicIcon),
-  },
-  CHAT: {
-    icon: markRaw(ChatBubble),
-    mutedIcon: markRaw(MutedChatBubble),
-  },
-};
 </script>
 
 <style scoped>
@@ -103,13 +83,13 @@ const options: Record<keyof TOptionsGame, { icon: Raw<Component>; mutedIcon: Raw
       background-color: #a7051d;
       border-radius: 5px;
 
-      &:deep(svg) {
+      .icon-wrapper {
         width: 60%;
         height: 60%;
         transform: translateY(-2px);
       }
 
-      &:active:deep(svg) {
+      &:active .icon-wrapper {
         transform: translateY(0);
       }
     }

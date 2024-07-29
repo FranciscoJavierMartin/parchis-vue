@@ -1,21 +1,18 @@
 <template>
   <BaseModal>
     <div class="confirm-modal">
-      <InfoIcon fill="transparent" />
+      <BaseIcon type="info" />
       <h2 class="title">Exit</h2>
       <span class="text">Are you sure you want to quit the game?</span>
       <div class="buttons-container">
-        <button class="button-yes" @click="$emit('confirmation')">
-          <div>
-            <CheckIcon :stroke-width="5.5" />
-            <span>Yes</span>
-          </div>
+        <button class="button blue button-yes" @click="$emit('confirmation')">
+          <!-- TODO: Increase stroke width -->
+          <BaseIcon type="check" />
+          <span>Yes</span>
         </button>
-        <button class="button-no" @click="$emit('cancel')">
-          <div>
-            <XMarkIcon :stroke-width="3.5" />
-            <span>No</span>
-          </div>
+        <button class="button red button-no" @click="$emit('cancel')">
+          <BaseIcon type="close" />
+          <span>No</span>
         </button>
       </div>
     </div>
@@ -24,9 +21,7 @@
 
 <script setup lang="ts">
 import BaseModal from '@/components/base/base-modal.vue';
-import InfoIcon from '@/components/icons/info-icon.vue';
-import CheckIcon from '@/components/icons/check-icon.vue';
-import XMarkIcon from '@/components/icons/x-mark-icon.vue';
+import BaseIcon from '@/components/icons/base-icon.vue';
 
 defineEmits(['cancel', 'confirmation']);
 </script>
@@ -48,7 +43,7 @@ defineEmits(['cancel', 'confirmation']);
     rgb(255, 217, 19) 0px 0px 0px 9px;
   animation: scaleUp 0.5s;
 
-  &:deep(svg) {
+  .icon-info {
     width: 20%;
   }
 
@@ -62,23 +57,12 @@ defineEmits(['cancel', 'confirmation']);
     justify-content: space-evenly;
     width: 100%;
 
-    .button-no {
-      background-color: var(--game-red);
-    }
-
-    .button-yes {
+    .button.blue {
       background-color: var(--game-blue);
-
-      > div {
-        &:deep(svg) {
-          width: 16px;
-          height: 16px;
-        }
-      }
     }
 
-    .button-yes,
-    .button-no {
+    .button.blue,
+    .button.red {
       display: flex;
       gap: 10px;
       align-items: center;
@@ -95,17 +79,9 @@ defineEmits(['cancel', 'confirmation']);
         filter: brightness(150%);
       }
 
-      /* stylelint-disable-next-line no-descending-specificity */
-      > div {
-        display: flex;
-        gap: 5px;
-        align-items: center;
-        justify-content: center;
-
-        &:deep(svg) {
-          width: 20px;
-          height: 20px;
-        }
+      .icon-wrapper {
+        width: 16px;
+        height: 16px;
       }
     }
   }

@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import type { TColors } from '@/interfaces/board';
 import type { CSSProperties, StyleValue } from 'vue';
+import type { TColors } from '@/interfaces/board';
 
 interface PieceProps {
   color: TColors;

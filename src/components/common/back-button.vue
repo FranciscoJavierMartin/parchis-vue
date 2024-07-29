@@ -1,9 +1,9 @@
 <template>
   <button v-if="withConfirmation" class="button blue game-back-button" @click="handleBackButton">
-    <ArrowLeft />
+    <BaseIcon type="back" />
   </button>
   <RouterLink v-else :to="{ name: to }" class="button blue game-back-button">
-    <ArrowLeft />
+    <BaseIcon type="back" />
   </RouterLink>
   <BackConfirmationModal
     v-if="isOpen"
@@ -15,9 +15,9 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue';
 import { useRouter } from 'vue-router';
-import type { TRoutesName } from '@/interfaces/routes';
-import ArrowLeft from '@/components/icons/arrow-left.vue';
+import BaseIcon from '@/components/icons/base-icon.vue';
 import BackConfirmationModal from '@/components/modals/back-confirmation-modal.vue';
+import type { TRoutesName } from '@/interfaces/routes';
 import { ROUTES } from '@/constants/routes';
 
 const isOpen: Ref<boolean> = ref<boolean>(false);
@@ -53,7 +53,7 @@ function handleCancelButton(): void {
   height: 35px;
   border-radius: 5px;
 
-  &:deep(svg) {
+  .icon-wrapper {
     width: 80%;
   }
 }

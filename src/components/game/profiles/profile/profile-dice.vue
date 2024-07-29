@@ -1,6 +1,6 @@
 <template>
   <div class="game-profile-dice" :class="{ hide: !showDice }">
-    <ArrowDown v-if="!disabledDice" class="icon-wrapper" :stroke-width="3.5" />
+    <BaseIcon type="arrow" />
     <button
       class="game-profile-dice-button"
       :disabled="disabledDice"
@@ -14,9 +14,9 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import Dice3d from '@/components/game/dice/dice-3d.vue';
-import ArrowDown from '@/components/icons/arrow-down.vue';
 import { ROLL_TIME_VALUE } from '@/constants/game';
 import type { TDiceValues } from '@/interfaces/dice';
+import BaseIcon from '@/components/icons/base-icon.vue';
 
 interface ProfileDiceProps {
   disabledDice: boolean;

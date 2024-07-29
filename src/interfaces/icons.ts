@@ -1,4 +1,3 @@
-export interface IconProps {
-  fill?: string;
-  strokeWidth?: number;
-}
+import type { ICONS_DATA } from '@/constants/icons';
+
+export type TypeIcon = keyof typeof ICONS_DATA;

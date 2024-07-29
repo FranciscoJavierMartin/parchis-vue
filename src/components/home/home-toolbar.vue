@@ -1,25 +1,25 @@
 <template>
   <div class="home-toolbar">
     <RouterLink :to="{ name: ROUTES.ABOUT.name }" class="button blue" title="About">
-      <InfoIcon fill="none" />
+      <BaseIcon type="info" />
     </RouterLink>
     <MenuShare :data="dataShare">
-      <button class="button blue" title="Share">
-        <ShareIcon />
-      </button>
+      <template #default="{ onClick }">
+        <button title="Share" class="button blue" @click="onClick">
+          <BaseIcon type="share" />
+        </button>
+      </template>
     </MenuShare>
-    <a :href="API_LOGOUT" class="button blue" title="Logout">
-      <!-- Logout icon -->
-      Logout
+    <a v-if="isAuth" :href="API_LOGOUT" class="button blue" title="Logout">
+      <BaseIcon type="logout" />
     </a>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ROUTES } from '@/constants/routes';
-import InfoIcon from '@/components/icons/info-icon.vue';
-import ShareIcon from '@/components/icons/share-icon.vue';
 import MenuShare from '@/components/share/menu-share.vue';
+import BaseIcon from '@/components/icons/base-icon.vue';
+import { ROUTES } from '@/constants/routes';
 import { API_LOGOUT } from '@/constants/online';
 
 interface HomeToolbarProps {
@@ -53,7 +53,7 @@ defineProps<HomeToolbarProps>();
     height: 50px;
     border-radius: 5px;
 
-    &:deep(svg) {
+    .icon-wrapper {
       width: 30px;
     }
   }

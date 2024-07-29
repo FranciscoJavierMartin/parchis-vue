@@ -1,19 +1,19 @@
 <template>
   <div class="home-options">
     <RouterLink v-if="!serviceError" :to="{ name: ROUTES.ONLINE.name }" class="button blue">
-      <LinkIcon fill="#8b5f00" />
+      <BaseIcon type="online" />
       Play online
     </RouterLink>
     <RouterLink :to="{ name: ROUTES.OFFLINE.name }" class="button yellow">
-      <LinkIcon fill="#8b5f00" />
+      <BaseIcon type="offline" fill="#8b5f00" />
       Play offline
     </RouterLink>
   </div>
 </template>
 
 <script setup lang="ts">
+import BaseIcon from '@/components/icons/base-icon.vue';
 import { ROUTES } from '@/constants/routes';
-import LinkIcon from '@/components/icons/link-icon.vue';
 
 interface HomeOptionsProps {
   serviceError?: boolean;
@@ -45,7 +45,7 @@ withDefaults(defineProps<HomeOptionsProps>(), { serviceError: false });
     text-transform: uppercase;
     border-radius: 10px;
 
-    &:deep(svg) {
+    .icon-wrapper {
       width: 30px;
     }
   }
