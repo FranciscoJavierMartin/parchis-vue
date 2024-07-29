@@ -24,6 +24,11 @@
     background-color: #216ed0;
   }
 
+  &.red {
+    color: white;
+    background-color: var(--game-red);
+  }
+
   &:disabled {
     pointer-events: none;
     cursor: auto;

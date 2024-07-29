@@ -5,18 +5,14 @@
       <h2 class="title">Exit</h2>
       <span class="text">Are you sure you want to quit the game?</span>
       <div class="buttons-container">
-        <button class="button-yes" @click="$emit('confirmation')">
-          <div>
-            <!-- TODO: Increase stroke width -->
-            <BaseIcon type="check" />
-            <span>Yes</span>
-          </div>
+        <button class="button blue button-yes" @click="$emit('confirmation')">
+          <!-- TODO: Increase stroke width -->
+          <BaseIcon type="check" />
+          <span>Yes</span>
         </button>
-        <button class="button-no" @click="$emit('cancel')">
-          <div>
-            <BaseIcon type="close" />
-            <span>No</span>
-          </div>
+        <button class="button red button-no" @click="$emit('cancel')">
+          <BaseIcon type="close" />
+          <span>No</span>
         </button>
       </div>
     </div>
@@ -61,23 +57,12 @@ defineEmits(['cancel', 'confirmation']);
     justify-content: space-evenly;
     width: 100%;
 
-    .button-no {
-      background-color: var(--game-red);
-    }
-
-    .button-yes {
+    .button.blue {
       background-color: var(--game-blue);
-
-      > div {
-        .icon-wrapper {
-          width: 16px;
-          height: 16px;
-        }
-      }
     }
 
-    .button-yes,
-    .button-no {
+    .button.blue,
+    .button.red {
       display: flex;
       gap: 10px;
       align-items: center;
@@ -94,17 +79,9 @@ defineEmits(['cancel', 'confirmation']);
         filter: brightness(150%);
       }
 
-      /* stylelint-disable-next-line no-descending-specificity */
-      > div {
-        display: flex;
-        gap: 5px;
-        align-items: center;
-        justify-content: center;
-
-        .icon-wrapper {
-          width: 20px;
-          height: 20px;
-        }
+      .icon-wrapper {
+        width: 16px;
+        height: 16px;
       }
     }
   }
