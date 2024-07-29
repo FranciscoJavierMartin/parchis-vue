@@ -4,7 +4,7 @@
       <div class="modal-options-header">
         Options
         <button title="Close" class="button menu-options-close" @click="$emit('close')">
-          <XMarkIcon :stroke-width="3.5" />
+          <BaseIcon type="close" />
         </button>
       </div>
       <div class="menu-options-options">
@@ -23,8 +23,8 @@
 
 <script setup lang="ts">
 import { inject, markRaw, type Component, type Raw } from 'vue';
+import BaseIcon from '@/components/icons/base-icon.vue';
 import BaseModal from '@/components/base/base-modal.vue';
-import XMarkIcon from '@/components/icons/x-mark-icon.vue';
 import MenuOption from '@/components/options/menu-option.vue';
 import SoundIcon from '@/components/icons/sound-icon.vue';
 import MusicIcon from '@/components/icons/music-icon.vue';
@@ -103,13 +103,13 @@ const options: Record<keyof TOptionsGame, { icon: Raw<Component>; mutedIcon: Raw
       background-color: #a7051d;
       border-radius: 5px;
 
-      &:deep(svg) {
+      .icon-wrapper {
         width: 60%;
         height: 60%;
         transform: translateY(-2px);
       }
 
-      &:active:deep(svg) {
+      &:active .icon-wrapper {
         transform: translateY(0);
       }
     }
