@@ -10,11 +10,10 @@
       <div class="menu-options-options">
         <!-- prettier-ignore-attribute -->
         <MenuOption
-          v-for="[key, value] of Object.entries(optionsGame)"
+          v-for="key of Object.keys(optionsGame)"
           v-model="optionsGame[key as EOptionsGame]"
           :key="key"
           :label="key"
-          :isMuted="value"
           :icon="(key.toLowerCase() as TypeIcon)"
         />
       </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="menu-option">
-    <BaseIcon :type="icon" :is-muted="isMuted" />
+    <BaseIcon :type="icon" :is-muted="!model" />
     <label class="menu-option-label">
       {{ label }}
     </label>
@@ -16,7 +16,6 @@ import type { TypeIcon } from '@/interfaces/icons';
 interface MenuOptionProp {
   label: string;
   icon: TypeIcon;
-  isMuted: boolean;
 }
 
 defineProps<MenuOptionProp>();
