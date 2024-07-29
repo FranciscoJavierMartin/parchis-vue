@@ -7,6 +7,7 @@ import LinkedinIcon from '@/components/icons/linkedin-icon.vue';
 
 export const SHARE_AVAILABLE: boolean = 'share' in navigator;
 
+// TODO: Use base icon
 export const BUTTONS_SHARE_SOCIAL: TButtonShare[] = [
   {
     icon: markRaw(CopyIcon),

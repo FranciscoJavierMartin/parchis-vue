@@ -17,7 +17,7 @@
           </template>
         </MenuShare>
         <button class="button yellow">
-          <HomeIcon />
+          <BaseIcon type="home" />
         </button>
       </div>
     </div>
@@ -32,8 +32,8 @@ import GameOverRibbon from '@/components/game/over/game-over-ribbon.vue';
 import FirstPosition from '@/components/game/over/first-position.vue';
 import OtherPlayer from '@/components/game/over/other-player.vue';
 import ShareIcon from '@/components/icons/share-icon.vue';
-import HomeIcon from '@/components/icons/home-icon.vue';
 import useFocusTrap from '@/composables/use-focus-trap';
+import BaseIcon from '@/components/icons/base-icon.vue';
 
 interface GameOverProps {
   players: IPlayer[];
@@ -121,7 +121,7 @@ onBeforeMount(() => {
         border: none;
         border-radius: 10px;
 
-        &:deep(svg) {
+        .icon-wrapper {
           width: 60%;
         }
       }
