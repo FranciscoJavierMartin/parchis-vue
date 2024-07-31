@@ -88,8 +88,8 @@ import {
 } from '@game/helpers/game';
 import { getRandomValueDice } from '@common/helpers/random';
 import TokenList from '@tokens/components/tokens/token-list.vue';
-import GameDebugTokens from '@/modules/debug/components/game-debug-tokens/debug-tokens.vue';
-import GameOverModal from '@game/components/over/game-over-modal.vue';
+import GameDebugTokens from '@debug/components/debug-tokens/debug-tokens.vue';
+import GameOverModal from '@/modules/game/components/over/game-over-modal/game-over-modal.vue';
 import type { TPlaySoundFunction } from '@sounds/interfaces/sounds';
 import { ESounds } from '@online/constants/online';
 
