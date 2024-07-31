@@ -27,10 +27,10 @@
 </template>
 
 <script lang="ts" setup>
-import ProfileImage from '@profiles/components/profile-image.vue';
-import ProfileDice from '@profiles/components/profile-dice.vue';
-import NameAndDice from '@profiles/components/name-and-dice.vue';
-import ProfileRanking from '@profiles/components/profile-ranking.vue';
+import ProfileImage from '@/modules/profiles/components/profile-image/profile-image.vue';
+import ProfileDice from '@/modules/profiles/components/profile-dice/profile-dice.vue';
+import NameAndDice from '@/modules/profiles/components/name-and-dice/name-and-dice.vue';
+import ProfileRanking from '@/modules/profiles/components/profile-ranking/profile-ranking.vue';
 import type { TPositionProfile, TPositionProfiles } from '@profiles/interfaces/profile';
 import type { IPlayer } from '@players/interfaces/user';
 import type { IActionsTurn } from '@game/interfaces/game';

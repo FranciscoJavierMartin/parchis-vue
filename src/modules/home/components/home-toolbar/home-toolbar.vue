@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import MenuShare from '@share/components/menu-share.vue';
+import MenuShare from '@/modules/share/components/share-button/share-button.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import { ROUTES } from '@/router/routes';
 import { API_LOGOUT } from '@online/constants/online';

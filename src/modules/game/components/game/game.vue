@@ -57,7 +57,7 @@ import GameBoard from '@board/components/game-board.vue';
 import GameDebug from '@debug/components/game-debug/game-debug.vue';
 import ShowTotalTokens from '@tokens/components/token/components/total-tokens/show-total-tokens.vue';
 import BoardWrapper from '@board/components/board-wrapper.vue';
-import ProfileSection from '@profiles/layouts/profile-section.vue';
+import ProfileSection from '@/modules/profiles/layouts/profile-section/profile-section.vue';
 import { EBoardColors, EPositionProfiles } from '@board/constants/board';
 import {
   EActionsBoardGame,

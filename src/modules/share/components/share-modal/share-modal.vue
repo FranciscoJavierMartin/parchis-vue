@@ -10,8 +10,8 @@
 <script setup lang="ts">
 import BaseModal from '@common/components/base/base-modal/base-modal.vue';
 import useFocusTrap from '@/modules/common/composables/use-focus-trap/use-focus-trap';
-import ModalShareHeader from '@share/components/modal-share-header.vue';
-import ModalShareButtons from '@share/components/modal-share-buttons.vue';
+import ModalShareHeader from '@/modules/share/components/modal-share-header/modal-share-header.vue';
+import ModalShareButtons from '@/modules/share/components/modal-share-buttons/modal-share-buttons.vue';
 
 interface ShareModalProps {
   data: ShareData;

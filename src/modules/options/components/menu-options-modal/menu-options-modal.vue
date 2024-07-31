@@ -25,7 +25,7 @@
 import { inject } from 'vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import BaseModal from '@common/components/base/base-modal/base-modal.vue';
-import MenuOption from '@options/components/menu-option.vue';
+import MenuOption from '@/modules/options/components/menu-option/menu-option.vue';
 import { OptionsGameStateSymbol } from '@game/constants/game';
 import type { TOptionsGame } from '@sounds/interfaces/sounds';
 import type { EOptionsGame } from '@online/constants/online';

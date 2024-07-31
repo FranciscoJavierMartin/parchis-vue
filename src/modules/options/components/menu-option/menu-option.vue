@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import OptionSwitch from '@options/components/option-switch.vue';
+import OptionSwitch from '@/modules/options/components/option-switch/option-switch.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import type { TypeIcon } from '@common/interfaces/icons';
 

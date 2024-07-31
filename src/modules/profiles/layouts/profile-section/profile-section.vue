@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import ProfileWrapper from '@profiles/layouts/profile-wrapper.vue';
+import ProfileWrapper from '@/modules/profiles/layouts/profile-wrapper/profile-wrapper.vue';
 import { EPositionProfile } from '@board/constants/board';
 import type { TDiceValues } from '@dice/interfaces/dice';
 import type { IActionsTurn, TTotalPlayers } from '@game/interfaces/game';
