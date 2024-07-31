@@ -7,11 +7,11 @@
 </template>
 
 <script setup lang="ts">
-import type { TColors } from '@/modules/board/interfaces/board';
-import type { IPlayerOffline } from '@/modules/players/interfaces/player';
-import SelectTokenColor from '@/modules/players/components/select-token-color/select-token-color.vue';
-import InputName from '@/modules/players/components/input-name/input-name.vue';
-import BotSwitch from '@/modules/players/components/bot-switch/bot-switch.vue';
+import type { TColors } from '@board/interfaces/board';
+import type { IPlayerOffline } from '@players/interfaces/player';
+import SelectTokenColor from '@players/components/select-token-color/select-token-color.vue';
+import InputName from '@players/components/input-name/input-name.vue';
+import BotSwitch from '@players/components/bot-switch/bot-switch.vue';
 
 interface PlayerInputProps extends IPlayerOffline {}
 

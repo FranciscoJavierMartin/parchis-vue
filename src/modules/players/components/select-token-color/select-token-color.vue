@@ -18,10 +18,10 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import type { TColors } from '@/modules/board/interfaces/board';
-import TokenPiece from '@/modules/tokens/components/token/components/piece/token-piece.vue';
-import SelectTokenColorTooltip from '@/modules/players/components/select-token-color-tooltip/select-token-color-tooltip.vue';
-import { vClickOutside } from '@/modules/common/directives/click-outside';
+import type { TColors } from '@board/interfaces/board';
+import TokenPiece from '@tokens/components/token/components/piece/token-piece.vue';
+import SelectTokenColorTooltip from '@players/components/select-token-color-tooltip/select-token-color-tooltip.vue';
+import { vClickOutside } from '@common/directives/click-outside';
 
 interface SelectTokenColorProps {
   disabled: boolean;

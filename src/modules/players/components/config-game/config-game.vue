@@ -22,9 +22,9 @@
 <script setup lang="ts">
 // TODO: Rename to config player or something player
 import { ref, watch } from 'vue';
-import SelectNumberPlayers from '@/modules/players/components/select-number-players/select-number-players.vue';
-import PlayerInput from '@/modules/players/components/player-input/player-input.vue';
-import BaseIcon from '@/modules/common/components/icons/base-icon.vue';
+import SelectNumberPlayers from '@players/components/select-number-players/select-number-players.vue';
+import PlayerInput from '@players/components/player-input/player-input.vue';
+import BaseIcon from '@common/components/icons/base-icon.vue';
 import {
   changeColorPlayer,
   changeTotalPlayers,
@@ -32,11 +32,11 @@ import {
   getInitialBoardColors,
   getInitialDataOfflinePlayers,
   getInitialTotalPlayers,
-} from '@/modules/players/helpers/player';
-import { savePlayerDataCache } from '@/modules/common/helpers/storage';
-import type { DataOfflineGame, TTotalPlayers } from '@/modules/game/interfaces/game';
-import type { IPlayerOffline } from '@/modules/players/interfaces/player';
-import type { TBoardColors, TColors } from '@/modules/board/interfaces/board';
+} from '@players/helpers/player';
+import { savePlayerDataCache } from '@common/helpers/storage';
+import type { DataOfflineGame, TTotalPlayers } from '@game/interfaces/game';
+import type { IPlayerOffline } from '@players/interfaces/player';
+import type { TBoardColors, TColors } from '@board/interfaces/board';
 
 const emit = defineEmits<{
   updateData: [data: DataOfflineGame];

@@ -1,24 +1,20 @@
-import { EBoardColors, ESufixColors } from '@/modules/board/constants/board';
-import type { TBoardColors, TColors, TSufixColors } from '@/modules/board/interfaces/board';
-import type { DataOfflineGame, TTotalPlayers } from '@/modules/game/interfaces/game';
-import type { IPlayer, IUser } from '@/modules/players/interfaces/user';
-import { cloneDeep } from '@/modules/common/helpers/clone';
+import { EBoardColors, ESufixColors } from '@board/constants/board';
+import type { TBoardColors, TColors, TSufixColors } from '@board/interfaces/board';
+import type { DataOfflineGame, TTotalPlayers } from '@game/interfaces/game';
+import type { IPlayer, IUser } from '@players/interfaces/user';
+import { cloneDeep } from '@common/helpers/clone';
 import {
   getValueFromCache,
   isNumber,
   savePlayerDataCache,
   saveProperties,
   saveProperty,
-} from '@/modules/common/helpers/storage';
-import { PREFIX_RANKING } from '@/modules/game/constants/game';
-import type { TPlayerRankingPosition } from '@/modules/profiles/interfaces/profile';
-import {
-  BOARD_COLORS,
-  PLAYERS_INFO,
-  TOTAL_PLAYERS_CACHE,
-} from '@/modules/common/constants/storage';
-import type { IPlayerOffline } from '@/modules/players/interfaces/player';
-import { getRandomNumber, guid } from '@/modules/common/helpers/random';
+} from '@common/helpers/storage';
+import { PREFIX_RANKING } from '@game/constants/game';
+import type { TPlayerRankingPosition } from '@profiles/interfaces/profile';
+import { BOARD_COLORS, PLAYERS_INFO, TOTAL_PLAYERS_CACHE } from '@common/constants/storage';
+import type { IPlayerOffline } from '@players/interfaces/player';
+import { getRandomNumber, guid } from '@common/helpers/random';
 import botImage from '@/assets/images/bot.png';
 
 // TODO: Remove

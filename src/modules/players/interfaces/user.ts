@@ -1,6 +1,6 @@
-import type { TColors } from '@/modules/board/interfaces/board';
-import type { ITypeChatMessage } from '@/modules/chat/interfaces/chat';
-import type { TPlayerRankingPosition } from '@/modules/profiles/interfaces/profile';
+import type { TColors } from '@board/interfaces/board';
+import type { ITypeChatMessage } from '@chat/interfaces/chat';
+import type { TPlayerRankingPosition } from '@profiles/interfaces/profile';
 
 export interface IUser {
   id: string;
