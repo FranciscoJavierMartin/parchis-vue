@@ -21,7 +21,7 @@
 import { computed } from 'vue';
 import ProfilePlayer from '@/modules/profiles/components/profile-player/profile-player.vue';
 import { DEFAULT_VALUE_ACTION_TURN } from '@/modules/game/constants/game.constants';
-import type { TPositionProfile, TPositionProfiles } from '@profiles/interfaces/profile';
+import type { TPositionProfile, TPositionProfiles } from '@profiles/interfaces/profile.interface';
 import type { IPlayer } from '@/modules/players/interfaces/user.interface';
 import type { IActionsTurn, TTotalPlayers } from '@/modules/game/interfaces/game.interface';
 import type { TDiceValues } from '@/modules/dice/interfaces/dice.interface';

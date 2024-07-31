@@ -1,4 +1,4 @@
-import type { EPositionProfile, EPositionProfiles } from '@board/constants/board';
+import type { EPositionProfile, EPositionProfiles } from '@board/interfaces/board.enum';
 
 export type TPlayerRankingPosition = 1 | 2 | 3 | 4;
 export type TPositionProfiles = keyof typeof EPositionProfiles;

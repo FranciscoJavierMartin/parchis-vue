@@ -1,8 +1,8 @@
-import type { TYPES_ONLINE_GAMEPLAY } from '@online/constants/online';
-import type { IDiceList, TDiceValues } from '@dice/interfaces/dice';
+import type { IDiceList, TDiceValues } from '@dice/interfaces/dice.interface';
 import type { IUser } from '@/modules/players/interfaces/user.interface';
-import type { TBoardColors } from '@board/interfaces/board';
+import type { TBoardColors } from '@board/interfaces/board.interface';
 import type { EActionsBoardGame, ETypeGame } from '@game/interfaces/game.enum';
+import type { TYPES_ONLINE_GAMEPLAY } from '@online/interfaces/online.interface';
 
 export type TTotalPlayers = 2 | 3 | 4;
 export type TActionsBoardGame = keyof typeof EActionsBoardGame;

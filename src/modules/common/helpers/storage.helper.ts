@@ -1,5 +1,5 @@
-import { CACHE_KEY, PLAYERS_INFO } from '@common/constants/storage';
-import type { IPlayerOffline } from '@players/interfaces/player';
+import { CACHE_KEY, PLAYERS_INFO } from '@common/constants/storage.constants';
+import type { IPlayerOffline } from '@players/interfaces/player.interface';
 import type { TStorageType } from '@/modules/common/interfaces/storage.interface';
 
 export function saveInCache<T>(data: T, storageType: TStorageType = 'localStorage'): void {

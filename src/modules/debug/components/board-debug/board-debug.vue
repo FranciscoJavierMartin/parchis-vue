@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import GameDebugTile from '@/modules/debug/components/game-debug-tile/debug-tile.vue';
+import GameDebugTile from '@/modules/debug/components/debug-tile/debug-tile.vue';
 import {
   POSITION_ELEMENTS_BOARD,
   POSITION_TILES,

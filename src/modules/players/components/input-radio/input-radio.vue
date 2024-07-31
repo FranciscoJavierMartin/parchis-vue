@@ -6,8 +6,7 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Move to players module
-import type { TTotalPlayers } from '@game/interfaces/game';
+import type { TTotalPlayers } from '@game/interfaces/game.interface';
 
 interface InputRadioProps {
   label: string;

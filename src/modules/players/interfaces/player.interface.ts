@@ -1,4 +1,4 @@
-import type { TColors } from '@board/interfaces/board';
+import type { TColors } from '@board/interfaces/board.interface';
 
 export interface IPlayerOffline {
   id: string;

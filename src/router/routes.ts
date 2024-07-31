@@ -1,4 +1,4 @@
-import type { IRoutes } from '@common/interfaces/routes';
+import type { IRoutes } from '@common/interfaces/routes.interface';
 
 export const ROUTES: IRoutes = {
   HOME: {

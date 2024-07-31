@@ -1,5 +1,6 @@
-import { TYPES_CHAT_MESSAGES, type IPredefinedChatMessages } from '@chat/interfaces/chat';
+import { type IPredefinedChatMessages } from '@chat/interfaces/chat.interface';
 import type { ISocketError } from '@/modules/online/interfaces/online.interface';
+import { TYPES_CHAT_MESSAGES } from '@chat/interfaces/chat.enum';
 
 /**
  * Errors in sockets

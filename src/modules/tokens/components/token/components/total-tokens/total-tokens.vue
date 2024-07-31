@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { type CSSProperties, computed } from 'vue';
-import { POSITION_TILES } from '@board/helpers/positions-board';
+import { POSITION_TILES } from '@board/helpers/positions-board.helper';
 
 interface TotalTokensProps {
   indexPosition: number;

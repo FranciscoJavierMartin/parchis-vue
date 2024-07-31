@@ -1,16 +1,17 @@
-import type { EActionsBoardGame, ENextStepGame } from '@game/constants/game';
-import type { EOptionsGame, ESounds } from '@online/constants/online';
 import type { IUser } from '@/modules/players/interfaces/user.interface';
 import type {
   TActionsBoardGame,
   TTotalPlayers,
   TTypeGame,
   TTypesOnlineGameplay,
-} from '@game/interfaces/game';
-import type { TBoardColors, TColors } from '@board/interfaces/board';
-import type { TDiceValues } from '@dice/interfaces/dice';
+} from '@game/interfaces/game.interface';
+import type { TBoardColors, TColors } from '@board/interfaces/board.interface';
+import type { TDiceValues } from '@dice/interfaces/dice.interface';
 import type { ISelectTokenValues } from '@/modules/tokens/interfaces/token.interface';
-import type { ISocketListenChatMessage } from '@chat/interfaces/chat';
+import type { ISocketListenChatMessage } from '@chat/interfaces/chat.interface';
+import type { EOptionsGame } from '@options/interfaces/options.enum';
+import type { ESounds } from '@sounds/interfaces/sounds.enum';
+import type { EActionsBoardGame, ENextStepGame } from '@game/interfaces/game.enum';
 
 export type TSocketErrors = keyof typeof SocketErrors;
 export type ISocketError = Record<TSocketErrors, string>;

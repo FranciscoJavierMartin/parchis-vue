@@ -23,9 +23,9 @@ import {
   SIZE_BOARD,
   SIZE_TILE,
 } from '@/modules/board/constants/sizes.constants';
-import { EColors } from '@/modules/board/constants/board.constants';
 import type { ICoordinate, TColors } from '@/modules/board/interfaces/board.interface';
 import type { IDiceList } from '@/modules/dice/interfaces/dice.interface';
+import { EColors } from '@board/interfaces/board.enum';
 
 interface TokenTooltipProps {
   color: TColors;

@@ -14,8 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import { SIZE_TILE } from '@board/constants/sizes';
-import type { ICoordinate } from '@board/interfaces/board';
+import { SIZE_TILE } from '@board/constants/sizes.constants';
+import type { ICoordinate } from '@board/interfaces/board.interface';
 
 withDefaults(defineProps<{ coordinate: ICoordinate; invertedColor?: boolean }>(), {
   invertedColor: false,

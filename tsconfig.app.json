@@ -10,7 +10,6 @@
     "noImplicitThis": false,
     "types": ["node"],
     "paths": {
-      "@/*": ["./src/*"],
       "@about/*": ["./src/modules/about/*"],
       "@board/*": ["./src/modules/board/*"],
       "@chat/*": ["./src/modules/chat/*"],
@@ -27,7 +26,8 @@
       "@profiles/*": ["./src/modules/profiles/*"],
       "@share/*": ["./src/modules/share/*"],
       "@sounds/*": ["./src/modules/sounds/*"],
-      "@tokens/*": ["./src/modules/tokens/*"]
+      "@tokens/*": ["./src/modules/tokens/*"],
+      "@/*": ["./src/*"]
     }
   }
 }

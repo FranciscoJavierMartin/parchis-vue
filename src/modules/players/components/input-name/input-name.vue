@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import { sanizateTags } from '@players/helpers/player';
+import { sanizateTags } from '@players/helpers/player.helper';
 
 interface InputNameProps {
   disabled: boolean;

@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import { EColors } from '@board/constants/board';
-import type { TColors } from '@board/interfaces/board';
+import { EColors } from '@board/interfaces/board.enum';
+import type { TColors } from '@board/interfaces/board.interface';
 
 const color = defineModel<TColors>();
 

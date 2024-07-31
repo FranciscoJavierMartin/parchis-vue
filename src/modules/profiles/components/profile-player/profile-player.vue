@@ -31,7 +31,7 @@ import ProfileImage from '@/modules/profiles/components/profile-image/profile-im
 import ProfileDice from '@/modules/profiles/components/profile-dice/profile-dice.vue';
 import NameAndDice from '@/modules/profiles/components/name-and-dice/name-and-dice.vue';
 import ProfileRanking from '@/modules/profiles/components/profile-ranking/profile-ranking.vue';
-import type { TPositionProfile, TPositionProfiles } from '@profiles/interfaces/profile';
+import type { TPositionProfile, TPositionProfiles } from '@profiles/interfaces/profile.interface';
 import type { IPlayer } from '@/modules/players/interfaces/user.interface';
 import type { IActionsTurn } from '@/modules/game/interfaces/game.interface';
 import type { TDiceValues } from '@/modules/dice/interfaces/dice.interface';

@@ -1,4 +1,4 @@
-import type { TButtonShare } from '@share/interfaces/share';
+import type { TButtonShare } from '@share/interfaces/share.interface';
 
 export const SHARE_AVAILABLE: boolean = 'share' in navigator;
 

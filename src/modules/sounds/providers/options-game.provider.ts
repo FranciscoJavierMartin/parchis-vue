@@ -1,13 +1,17 @@
 import { defineComponent, onBeforeUnmount, onMounted, provide, reactive, watch } from 'vue';
-import { ESounds, INITIAL_OPTIONS_GAME } from '@online/constants/online';
-import { getValueFromCache, saveProperty } from '@common/helpers/storage';
+import { getValueFromCache, saveProperty } from '@common/helpers/storage.helper';
 import { Sprite } from '@/modules/sounds/helpers/sprite';
-import { OptionsGameStateSymbol, OptionsGamePlaySoundSymbol } from '@game/constants/game';
-import { OPTIONS_GAME } from '@common/constants/storage';
-import type { TOptionsGame } from '@sounds/interfaces/sounds';
+import { OPTIONS_GAME } from '@common/constants/storage.constants';
+import type { TOptionsGame } from '@sounds/interfaces/sounds.interface';
 import type { IESounds } from '@/modules/online/interfaces/online.interface';
 import backgroundMusic from '@/assets/sounds/background.mp3';
 import soundsSource from '@/assets/sounds/soundsSource.mp3';
+import { INITIAL_OPTIONS_GAME } from '@online/constants/online.constants';
+import { ESounds } from '@sounds/interfaces/sounds.enum';
+import {
+  OptionsGamePlaySoundSymbol,
+  OptionsGameStateSymbol,
+} from '@sounds/constants/sounds.constants';
 
 export default defineComponent({
   name: 'OptionsGameProvider',

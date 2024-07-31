@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IOptions } from '@debug/interfaces/debug';
+import type { IOptions } from '@debug/interfaces/debug.interface';
 
 interface GameDebugSelectProps {
   title: string;

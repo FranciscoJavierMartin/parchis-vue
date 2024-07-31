@@ -1,5 +1,9 @@
-import { SIZE_TILE } from '@board/constants/sizes';
-import type { IPoint, TExitTilesValues, TFinalPositionsValues } from '@board/interfaces/board';
+import { SIZE_TILE } from '@board/constants/sizes.constants';
+import type {
+  IPoint,
+  TExitTilesValues,
+  TFinalPositionsValues,
+} from '@board/interfaces/board.interface';
 
 /**
  * Store the walkthrought

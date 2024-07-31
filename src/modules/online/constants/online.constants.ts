@@ -1,7 +1,8 @@
-import { EActionsBoardGame, ENextStepGame } from '@game/constants/game';
-import { TYPES_CHAT_MESSAGES } from '@chat/constants/chat';
 import type { ISocketListenActions } from '@/modules/online/interfaces/online.interface';
-import type { TOptionsGame } from '@sounds/interfaces/sounds';
+import { TYPES_CHAT_MESSAGES } from '@chat/interfaces/chat.enum';
+import { EActionsBoardGame, ENextStepGame } from '@game/interfaces/game.enum';
+import { EOptionsGame } from '@options/interfaces/options.enum';
+import type { TOptionsGame } from '@sounds/interfaces/sounds.interface';
 
 /**
  * Delay before send end movement confirmation to socket

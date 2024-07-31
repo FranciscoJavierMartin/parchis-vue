@@ -1,15 +1,15 @@
-import { cloneDeep } from '@common/helpers/clone';
-import { EtypeTile } from '@board/constants/board';
-import { LIST_TYPE_TILE } from '@debug/constants/debug';
+import { cloneDeep } from '@common/helpers/clone.helper';
+import { EtypeTile } from '@board/interfaces/board.enum';
+import { LIST_TYPE_TILE } from '@debug/constants/debug.constants';
 import {
   POSITION_ELEMENTS_BOARD,
   POSITION_TILES,
   SAFE_AREAS,
-} from '@board/helpers/positions-board';
+} from '@board/helpers/positions-board.helper';
 import type { IListTokens } from '@/modules/tokens/interfaces/token.interface';
-import type { IOptions, TSelects } from '@debug/interfaces/debug';
+import type { IOptions, TSelects } from '@debug/interfaces/debug.interface';
 import type { IPlayer } from '@/modules/players/interfaces/user.interface';
-import type { IPositionsItems, TPositionGame, TtypeTile } from '@board/interfaces/board';
+import type { IPositionsItems, TPositionGame, TtypeTile } from '@board/interfaces/board.interface';
 
 function getDebugPositionsTiles(type: number, position: TPositionGame): IOptions[] {
   const tileType = LIST_TYPE_TILE[type] as TtypeTile;

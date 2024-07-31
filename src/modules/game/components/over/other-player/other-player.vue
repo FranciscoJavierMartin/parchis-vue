@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { IPlayer } from '@/modules/players/interfaces/user.interface';
+import type { IPlayer } from '@players/interfaces/user.interface';
 import PlayerAvatar from '@common/components/player-avatar/player-avatar.vue';
 import { getLabelRanking } from '@/modules/players/helpers/player.helper';
 

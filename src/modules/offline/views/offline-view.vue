@@ -12,7 +12,7 @@
       </div>
       <template v-else>
         <GameLogo />
-        <ConfigGame @update-data="updateDataGame" />
+        <ConfigPlayers @update-data="updateDataGame" />
       </template>
     </template>
   </PageWrapper>
@@ -22,11 +22,11 @@
 import { ref } from 'vue';
 import PageWrapper from '@layouts/components/wrapper/page-wrapper.vue';
 import GameLogo from '@common/components/game-logo/game-logo.vue';
-import ConfigGame from '@players/components/config-game/config-game.vue';
+import ConfigPlayers from '@players/components/config-players/config-players.vue';
 import Game from '@game/components/game/game.vue';
 import MenuOptions from '@layouts/components/menu-options/menu-options.vue';
 import BackButton from '@layouts/components/back-button/back-button.vue';
-import type { DataOfflineGame } from '@/modules/game/interfaces/game.interface';
+import type { DataOfflineGame } from '@game/interfaces/game.interface';
 import { envVars } from '@/config/envVar';
 
 const dataGame = ref<DataOfflineGame | null>(null);

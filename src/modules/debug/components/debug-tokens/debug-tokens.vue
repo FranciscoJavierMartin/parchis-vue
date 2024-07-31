@@ -46,8 +46,8 @@
 
 <script setup lang="ts">
 import { ref, computed, reactive, watch } from 'vue';
-import GameDebugSelect from '@/modules/debug/components/game-debug-select/debug-select.vue';
-import { ETypeGame } from '@/modules/game/constants/game.constants';
+import GameDebugSelect from '@/modules/debug/components/debug-select/debug-select.vue';
+import { ETypeGame } from '@/modules/game/interfaces/game.enum';
 import {
   copyToClipboard,
   getOptionsSelects,

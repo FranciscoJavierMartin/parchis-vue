@@ -15,8 +15,8 @@
 
 <script setup lang="ts">
 import DiceFace from '@dice/components/dice-face/dice-face.vue';
-import TokenPiece from '@tokens/components/token/components/piece/token-piece.vue';
-import { EColors } from '@/modules/board/constants/board.constants';
+import TokenPiece from '@tokens/components/token/components/token-piece/token-piece.vue';
+import { EColors } from '@/modules/board/interfaces/board.enum';
 import type { TColors } from '@/modules/board/interfaces/board.interface';
 
 const DATA_LOGO: { letter: string; color: TColors }[] = [
