@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import DiceFace from '@dice/components/dice-face/dice-face.vue';
-import type { IDiceList } from '@dice/interfaces/dice';
+import type { IDiceList } from '@/modules/dice/interfaces/dice.interface';
 
 interface NameAndDiceProps {
   name: string;

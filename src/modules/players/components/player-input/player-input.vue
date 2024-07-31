@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import type { TColors } from '@board/interfaces/board';
-import type { IPlayerOffline } from '@players/interfaces/player';
+import type { TColors } from '@/modules/board/interfaces/board.interface';
+import type { IPlayerOffline } from '@/modules/players/interfaces/player.interface';
 import SelectTokenColor from '@players/components/select-token-color/select-token-color.vue';
 import InputName from '@players/components/input-name/input-name.vue';
 import BotSwitch from '@players/components/bot-switch/bot-switch.vue';

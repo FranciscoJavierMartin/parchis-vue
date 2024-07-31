@@ -18,8 +18,8 @@ import type {
   IToken,
   TShowTotalTokens,
   TTokenByPositionType,
-} from '@tokens/interfaces/token';
-import type { IPlayer } from '@players/interfaces/user';
+} from '@/modules/tokens/interfaces/token.interface';
+import type { IPlayer } from '@/modules/players/interfaces/user.interface';
 import { getPlayersColors } from '@players/helpers/player';
 import {
   EPositionGame,
@@ -38,7 +38,7 @@ import type { IDiceList, TDiceValues } from '@dice/interfaces/dice';
 import { delay } from '@/modules/common/helpers/debounce.helpers';
 import { cloneDeep } from '@common/helpers/clone';
 import type { TPlayerRankingPosition } from '@profiles/interfaces/profile';
-import type { IENextStepGame } from '@online/interfaces/online';
+import type { IENextStepGame } from '@/modules/online/interfaces/online.interface';
 import { getRandomNumber } from '@/modules/common/helpers/random.helpers';
 import type { TPlaySoundFunction } from '@sounds/interfaces/sounds';
 import { ESounds } from '@online/constants/online';

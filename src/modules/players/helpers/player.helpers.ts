@@ -1,7 +1,7 @@
 import { EBoardColors, ESufixColors } from '@board/constants/board';
 import type { TBoardColors, TColors, TSufixColors } from '@board/interfaces/board';
 import type { DataOfflineGame, TTotalPlayers } from '@game/interfaces/game';
-import type { IPlayer, IUser } from '@players/interfaces/user';
+import type { IPlayer, IUser } from '@/modules/players/interfaces/user.interface';
 import { cloneDeep } from '@common/helpers/clone';
 import {
   getValueFromCache,

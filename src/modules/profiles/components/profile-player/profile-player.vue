@@ -32,9 +32,9 @@ import ProfileDice from '@/modules/profiles/components/profile-dice/profile-dice
 import NameAndDice from '@/modules/profiles/components/name-and-dice/name-and-dice.vue';
 import ProfileRanking from '@/modules/profiles/components/profile-ranking/profile-ranking.vue';
 import type { TPositionProfile, TPositionProfiles } from '@profiles/interfaces/profile';
-import type { IPlayer } from '@players/interfaces/user';
-import type { IActionsTurn } from '@game/interfaces/game';
-import type { TDiceValues } from '@dice/interfaces/dice';
+import type { IPlayer } from '@/modules/players/interfaces/user.interface';
+import type { IActionsTurn } from '@/modules/game/interfaces/game.interface';
+import type { TDiceValues } from '@/modules/dice/interfaces/dice.interface';
 
 interface ProfilePlayerProps {
   basePosition: TPositionProfiles;

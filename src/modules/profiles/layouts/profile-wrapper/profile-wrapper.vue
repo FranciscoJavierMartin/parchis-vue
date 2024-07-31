@@ -22,9 +22,9 @@ import { computed } from 'vue';
 import ProfilePlayer from '@/modules/profiles/components/profile-player/profile-player.vue';
 import { DEFAULT_VALUE_ACTION_TURN } from '@/modules/game/constants/game.constants';
 import type { TPositionProfile, TPositionProfiles } from '@profiles/interfaces/profile';
-import type { IPlayer } from '@players/interfaces/user';
-import type { IActionsTurn, TTotalPlayers } from '@game/interfaces/game';
-import type { TDiceValues } from '@dice/interfaces/dice';
+import type { IPlayer } from '@/modules/players/interfaces/user.interface';
+import type { IActionsTurn, TTotalPlayers } from '@/modules/game/interfaces/game.interface';
+import type { TDiceValues } from '@/modules/dice/interfaces/dice.interface';
 
 // TODO: Extract in common (without position)
 interface ProfileSectionProps {

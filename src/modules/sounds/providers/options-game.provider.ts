@@ -5,7 +5,7 @@ import { Sprite } from '@/modules/sounds/helpers/sprite';
 import { OptionsGameStateSymbol, OptionsGamePlaySoundSymbol } from '@game/constants/game';
 import { OPTIONS_GAME } from '@common/constants/storage';
 import type { TOptionsGame } from '@sounds/interfaces/sounds';
-import type { IESounds } from '@online/interfaces/online';
+import type { IESounds } from '@/modules/online/interfaces/online.interface';
 import backgroundMusic from '@/assets/sounds/background.mp3';
 import soundsSource from '@/assets/sounds/soundsSource.mp3';
 

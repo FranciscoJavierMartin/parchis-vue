@@ -34,9 +34,9 @@ import {
   getInitialTotalPlayers,
 } from '@/modules/players/helpers/player.helpers';
 import { savePlayerDataCache } from '@common/helpers/storage';
-import type { DataOfflineGame, TTotalPlayers } from '@game/interfaces/game';
-import type { IPlayerOffline } from '@players/interfaces/player';
-import type { TBoardColors, TColors } from '@board/interfaces/board';
+import type { DataOfflineGame, TTotalPlayers } from '@/modules/game/interfaces/game.interface';
+import type { IPlayerOffline } from '@/modules/players/interfaces/player.interface';
+import type { TBoardColors, TColors } from '@/modules/board/interfaces/board.interface';
 
 const emit = defineEmits<{
   updateData: [data: DataOfflineGame];

@@ -1,6 +1,6 @@
 import type { TYPES_ONLINE_GAMEPLAY } from '@online/constants/online';
 import type { IDiceList, TDiceValues } from '@dice/interfaces/dice';
-import type { IUser } from '@players/interfaces/user';
+import type { IUser } from '@/modules/players/interfaces/user.interface';
 import type { TBoardColors } from '@board/interfaces/board';
 
 export type TTotalPlayers = 2 | 3 | 4;

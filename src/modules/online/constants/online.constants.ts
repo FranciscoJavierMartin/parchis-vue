@@ -1,6 +1,6 @@
 import { EActionsBoardGame, ENextStepGame } from '@game/constants/game';
 import { TYPES_CHAT_MESSAGES } from '@chat/constants/chat';
-import type { ISocketListenActions } from '@online/interfaces/online';
+import type { ISocketListenActions } from '@/modules/online/interfaces/online.interface';
 import type { TOptionsGame } from '@sounds/interfaces/sounds';
 
 /**

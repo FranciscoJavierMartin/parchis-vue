@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import DiceFace from '@dice/components/dice-face/dice-face.vue';
-import type { TDiceValues } from '@dice/interfaces/dice';
+import type { TDiceValues } from '@/modules/dice/interfaces/dice.interface';
 import { getRandomNumber } from '@/modules/common/helpers/random.helpers';
 import { ROLL_TIME_VALUE } from '@/modules/game/constants/game.constants';
 

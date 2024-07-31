@@ -67,16 +67,16 @@ import {
   TOKEN_MOVEMENT_INTERVAL_VALUE,
   WAIT_SHOW_MODAL_GAME_OVER,
 } from '@/modules/game/constants/game.constants';
-import type { IActionsTurn, IGameOver, TTotalPlayers, TTypeGame } from '@game/interfaces/game';
-import type { IPlayer, IUser } from '@players/interfaces/user';
-import type { TBoardColors } from '@board/interfaces/board';
-import type { TDiceValues } from '@dice/interfaces/dice';
+import type { IActionsTurn, IGameOver, TTotalPlayers, TTypeGame } from '@/modules/game/interfaces/game.interface';
+import type { IPlayer, IUser } from '@/modules/players/interfaces/user.interface';
+import type { TBoardColors } from '@/modules/board/interfaces/board.interface';
+import type { TDiceValues } from '@/modules/dice/interfaces/dice.interface';
 import type {
   IActionsMoveToken,
   IListTokens,
   ISelectTokenValues,
   TShowTotalTokens,
-} from '@tokens/interfaces/token';
+} from '@/modules/tokens/interfaces/token.interface';
 import { getInitialDataPlayers } from '@/modules/players/helpers/player.helpers';
 import {
   getInitialActionsTurnValue,
@@ -90,7 +90,7 @@ import { getRandomValueDice } from '@/modules/common/helpers/random.helpers';
 import TokenList from '@/modules/tokens/components/tokens/token-list/token-list.vue';
 import GameDebugTokens from '@debug/components/debug-tokens/debug-tokens.vue';
 import GameOverModal from '@/modules/game/components/over/game-over-modal/game-over-modal.vue';
-import type { TPlaySoundFunction } from '@sounds/interfaces/sounds';
+import type { TPlaySoundFunction } from '@/modules/sounds/interfaces/sounds.interface';
 import { ESounds } from '@/modules/online/constants/online.constants';
 
 // TODO: Add types for socket

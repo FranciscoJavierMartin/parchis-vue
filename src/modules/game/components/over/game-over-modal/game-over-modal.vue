@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
 import { getOrganizedRanking } from '@/modules/players/helpers/player.helpers';
-import type { IPlayer } from '@players/interfaces/user';
+import type { IPlayer } from '@/modules/players/interfaces/user.interface';
 import GameOverRibbon from '@/modules/game/components/over/game-over-ribbon/game-over-ribbon.vue';
 import FirstPosition from '@/modules/game/components/over/first-position/first-position.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';

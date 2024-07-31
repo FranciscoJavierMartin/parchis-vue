@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import OptionSwitch from '@/modules/options/components/option-switch/option-switch.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
-import type { TypeIcon } from '@common/interfaces/icons';
+import type { TypeIcon } from '@/modules/common/interfaces/icons.interface';
 
 interface MenuOptionProp {
   label: string;

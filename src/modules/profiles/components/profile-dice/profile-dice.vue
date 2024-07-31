@@ -15,7 +15,7 @@
 import { ref, watch } from 'vue';
 import Dice3d from '@dice/components/dice-3d/dice-3d.vue';
 import { ROLL_TIME_VALUE } from '@/modules/game/constants/game.constants';
-import type { TDiceValues } from '@dice/interfaces/dice';
+import type { TDiceValues } from '@/modules/dice/interfaces/dice.interface';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 
 interface ProfileDiceProps {

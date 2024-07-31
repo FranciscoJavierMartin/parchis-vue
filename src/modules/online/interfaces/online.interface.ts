@@ -1,6 +1,6 @@
 import type { EActionsBoardGame, ENextStepGame } from '@game/constants/game';
 import type { EOptionsGame, ESounds } from '@online/constants/online';
-import type { IUser } from '@players/interfaces/user';
+import type { IUser } from '@/modules/players/interfaces/user.interface';
 import type {
   TActionsBoardGame,
   TTotalPlayers,
@@ -9,7 +9,7 @@ import type {
 } from '@game/interfaces/game';
 import type { TBoardColors, TColors } from '@board/interfaces/board';
 import type { TDiceValues } from '@dice/interfaces/dice';
-import type { ISelectTokenValues } from '@tokens/interfaces/token';
+import type { ISelectTokenValues } from '@/modules/tokens/interfaces/token.interface';
 import type { ISocketListenChatMessage } from '@chat/interfaces/chat';
 
 export type TSocketErrors = keyof typeof SocketErrors;

@@ -17,7 +17,7 @@
 import DiceFace from '@dice/components/dice-face/dice-face.vue';
 import TokenPiece from '@tokens/components/token/components/piece/token-piece.vue';
 import { EColors } from '@/modules/board/constants/board.constants';
-import type { TColors } from '@board/interfaces/board';
+import type { TColors } from '@/modules/board/interfaces/board.interface';
 
 const DATA_LOGO: { letter: string; color: TColors }[] = [
   {

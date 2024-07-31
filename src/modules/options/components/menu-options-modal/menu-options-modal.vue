@@ -27,10 +27,10 @@ import BaseIcon from '@common/components/icons/base-icon.vue';
 import BaseModal from '@common/components/base/base-modal/base-modal.vue';
 import MenuOption from '@/modules/options/components/menu-option/menu-option.vue';
 import { OptionsGameStateSymbol } from '@/modules/game/constants/game.constants';
-import type { TOptionsGame } from '@sounds/interfaces/sounds';
+import type { TOptionsGame } from '@/modules/sounds/interfaces/sounds.interface';
 import type { EOptionsGame } from '@/modules/online/constants/online.constants';
 import useFocusTrap from '@/modules/common/composables/use-focus-trap/use-focus-trap';
-import type { TypeIcon } from '@common/interfaces/icons';
+import type { TypeIcon } from '@/modules/common/interfaces/icons.interface';
 
 defineEmits<{ close: [] }>();
 

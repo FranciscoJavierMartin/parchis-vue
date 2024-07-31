@@ -1,6 +1,6 @@
 import type { TDiceValues } from '@dice/interfaces/dice';
 import { EActionsBoardGame, type IActionsTurn } from '@game/interfaces/game';
-import type { IActionsMoveToken } from '@tokens/interfaces/token';
+import type { IActionsMoveToken } from '@/modules/tokens/interfaces/token.interface';
 
 /**
  * Default value for actions

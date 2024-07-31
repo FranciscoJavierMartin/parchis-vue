@@ -6,9 +6,9 @@ import {
   POSITION_TILES,
   SAFE_AREAS,
 } from '@board/helpers/positions-board';
-import type { IListTokens } from '@tokens/interfaces/token';
+import type { IListTokens } from '@/modules/tokens/interfaces/token.interface';
 import type { IOptions, TSelects } from '@debug/interfaces/debug';
-import type { IPlayer } from '@players/interfaces/user';
+import type { IPlayer } from '@/modules/players/interfaces/user.interface';
 import type { IPositionsItems, TPositionGame, TtypeTile } from '@board/interfaces/board';
 
 function getDebugPositionsTiles(type: number, position: TPositionGame): IOptions[] {

@@ -26,7 +26,7 @@ import ConfigGame from '@players/components/config-game/config-game.vue';
 import Game from '@game/components/game/game.vue';
 import MenuOptions from '@layouts/components/menu-options/menu-options.vue';
 import BackButton from '@layouts/components/back-button/back-button.vue';
-import type { DataOfflineGame } from '@game/interfaces/game';
+import type { DataOfflineGame } from '@/modules/game/interfaces/game.interface';
 import { envVars } from '@/config/envVar';
 
 const dataGame = ref<DataOfflineGame | null>(null);
