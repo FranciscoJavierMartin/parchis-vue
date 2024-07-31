@@ -10,6 +10,10 @@
     "noImplicitThis": false,
     "types": ["node"],
     "paths": {
+      // Update path alias to use modules
+      // @common
+      // @game
+      // @etc
       "@/*": ["./src/*"]
     }
   }
