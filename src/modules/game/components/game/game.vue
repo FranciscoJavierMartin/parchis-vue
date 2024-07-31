@@ -55,7 +55,7 @@
 import { inject, ref, watch } from 'vue';
 import GameBoard from '@board/components/game-board.vue';
 import GameDebug from '@debug/components/game-debug/game-debug.vue';
-import ShowTotalTokens from '@tokens/components/token/components/total-tokens/show-total-tokens.vue';
+import ShowTotalTokens from '@/modules/tokens/components/token/components/show-total-tokens/show-total-tokens.vue';
 import BoardWrapper from '@board/components/board-wrapper.vue';
 import ProfileSection from '@/modules/profiles/layouts/profile-section/profile-section.vue';
 import { EBoardColors, EPositionProfiles } from '@board/constants/board';
@@ -87,7 +87,7 @@ import {
   validateSelectTokenRandomly,
 } from '@game/helpers/game';
 import { getRandomValueDice } from '@common/helpers/random';
-import TokenList from '@tokens/components/tokens/token-list.vue';
+import TokenList from '@/modules/tokens/components/tokens/token-list/token-list.vue';
 import GameDebugTokens from '@debug/components/debug-tokens/debug-tokens.vue';
 import GameOverModal from '@/modules/game/components/over/game-over-modal/game-over-modal.vue';
 import type { TPlaySoundFunction } from '@sounds/interfaces/sounds';
