@@ -10,9 +10,9 @@
 <script lang="ts" setup>
 // TODO: Rename component to ShareButton
 import { ref } from 'vue';
-import ShareModal from '@/modules/share/components/share-modal.vue';
-import { shareLink } from '@/modules/share/helpers/share';
-import { SHARE_AVAILABLE } from '@/modules/share/constants/share';
+import ShareModal from '@share/components/share-modal.vue';
+import { shareLink } from '@share/helpers/share';
+import { SHARE_AVAILABLE } from '@share/constants/share';
 
 interface ShareProps {
   data: ShareData;

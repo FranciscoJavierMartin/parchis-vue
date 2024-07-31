@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import { copyToClipboard } from '@/modules/debug/helpers/debug';
-import type { TButtonShare } from '@/modules/share/interfaces/share';
-import { BUTTONS_SHARE_SOCIAL } from '@/modules/share/constants/share';
-import BaseIcon from '@/modules/common/components/icons/base-icon.vue';
+import { copyToClipboard } from '@debug/helpers/debug';
+import type { TButtonShare } from '@share/interfaces/share';
+import { BUTTONS_SHARE_SOCIAL } from '@share/constants/share';
+import BaseIcon from '@common/components/icons/base-icon.vue';
 
 interface ModalShareButtonsProps {
   data: Omit<ShareData, 'files'>;

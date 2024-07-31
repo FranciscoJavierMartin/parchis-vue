@@ -17,11 +17,11 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
-import PlayerAvatar from '@/modules/common/components/player-avatar/player-avatar.vue';
-import BaseIcon from '@/modules/common/components/icons/base-icon.vue';
-import { TIME_INTERVAL_CHRONOMETER } from '@/modules/game/constants/game';
-import type { IPlayer } from '@/modules/players/interfaces/user';
-import type { TPositionProfile } from '@/modules/profiles/interfaces/profile';
+import PlayerAvatar from '@common/components/player-avatar/player-avatar.vue';
+import BaseIcon from '@common/components/icons/base-icon.vue';
+import { TIME_INTERVAL_CHRONOMETER } from '@game/constants/game';
+import type { IPlayer } from '@players/interfaces/user';
+import type { TPositionProfile } from '@profiles/interfaces/profile';
 
 interface ProfileImageProps {
   player: IPlayer;

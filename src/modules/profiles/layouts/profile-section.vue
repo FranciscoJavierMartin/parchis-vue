@@ -21,12 +21,12 @@
 </template>
 
 <script setup lang="ts">
-import ProfileWrapper from '@/modules/profiles/layouts/profile-wrapper.vue';
-import { EPositionProfile } from '@/modules/board/constants/board';
-import type { TDiceValues } from '@/modules/dice/interfaces/dice';
-import type { IActionsTurn, TTotalPlayers } from '@/modules/game/interfaces/game';
-import type { TPositionProfiles } from '@/modules/profiles/interfaces/profile';
-import type { IPlayer } from '@/modules/players/interfaces/user';
+import ProfileWrapper from '@profiles/layouts/profile-wrapper.vue';
+import { EPositionProfile } from '@board/constants/board';
+import type { TDiceValues } from '@dice/interfaces/dice';
+import type { IActionsTurn, TTotalPlayers } from '@game/interfaces/game';
+import type { TPositionProfiles } from '@profiles/interfaces/profile';
+import type { IPlayer } from '@players/interfaces/user';
 
 // TODO: Extract in common
 interface ProfileSectionProps {

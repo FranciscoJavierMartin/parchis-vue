@@ -1,4 +1,4 @@
-import type { EPositionProfile, EPositionProfiles } from '@/modules/board/constants/board';
+import type { EPositionProfile, EPositionProfiles } from '@board/constants/board';
 
 export type TPlayerRankingPosition = 1 | 2 | 3 | 4;
 export type TPositionProfiles = keyof typeof EPositionProfiles;

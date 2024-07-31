@@ -13,10 +13,10 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import Dice3d from '@/modules/dice/components/dice-3d/dice-3d.vue';
-import { ROLL_TIME_VALUE } from '@/modules/game/constants/game';
-import type { TDiceValues } from '@/modules/dice/interfaces/dice';
-import BaseIcon from '@/modules/common/components/icons/base-icon.vue';
+import Dice3d from '@dice/components/dice-3d/dice-3d.vue';
+import { ROLL_TIME_VALUE } from '@game/constants/game';
+import type { TDiceValues } from '@dice/interfaces/dice';
+import BaseIcon from '@common/components/icons/base-icon.vue';
 
 interface ProfileDiceProps {
   disabledDice: boolean;

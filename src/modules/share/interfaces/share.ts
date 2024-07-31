@@ -1,4 +1,4 @@
-import type { TypeIcon } from '@/modules/common/interfaces/icons';
+import type { TypeIcon } from '@common/interfaces/icons';
 
 export type TButtonShare =
   | {

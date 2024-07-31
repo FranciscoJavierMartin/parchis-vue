@@ -19,12 +19,12 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import ProfilePlayer from '@/modules/profiles/components/profile-player.vue';
-import { DEFAULT_VALUE_ACTION_TURN } from '@/modules/game/constants/game';
-import type { TPositionProfile, TPositionProfiles } from '@/modules/profiles/interfaces/profile';
-import type { IPlayer } from '@/modules/players/interfaces/user';
-import type { IActionsTurn, TTotalPlayers } from '@/modules/game/interfaces/game';
-import type { TDiceValues } from '@/modules/dice/interfaces/dice';
+import ProfilePlayer from '@profiles/components/profile-player.vue';
+import { DEFAULT_VALUE_ACTION_TURN } from '@game/constants/game';
+import type { TPositionProfile, TPositionProfiles } from '@profiles/interfaces/profile';
+import type { IPlayer } from '@players/interfaces/user';
+import type { IActionsTurn, TTotalPlayers } from '@game/interfaces/game';
+import type { TDiceValues } from '@dice/interfaces/dice';
 
 // TODO: Extract in common (without position)
 interface ProfileSectionProps {

@@ -6,8 +6,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { getLabelRanking } from '@/modules/players/helpers/player';
-import type { TPlayerRankingPosition } from '@/modules/profiles/interfaces/profile';
+import { getLabelRanking } from '@players/helpers/player';
+import type { TPlayerRankingPosition } from '@profiles/interfaces/profile';
 
 interface ProfileRankingProps {
   value: TPlayerRankingPosition;
