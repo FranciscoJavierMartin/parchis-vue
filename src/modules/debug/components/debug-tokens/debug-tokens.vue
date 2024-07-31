@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import { ref, computed, reactive, watch } from 'vue';
-import GameDebugSelect from '@debug/components/game-debug-select/game-debug-select.vue';
+import GameDebugSelect from '@/modules/debug/components/game-debug-select/debug-select.vue';
 import { ETypeGame } from '@game/constants/game';
 import { copyToClipboard, getOptionsSelects, validateChangeToken } from '@debug/helpers/debug';
 import type { TOptions, TSelects } from '@debug/interfaces/debug';
