@@ -29,7 +29,7 @@ import MenuOption from '@options/components/menu-option.vue';
 import { OptionsGameStateSymbol } from '@game/constants/game';
 import type { TOptionsGame } from '@sounds/interfaces/sounds';
 import type { EOptionsGame } from '@online/constants/online';
-import useFocusTrap from '@common/composables/use-focus-trap';
+import useFocusTrap from '@/modules/common/composables/use-focus-trap/use-focus-trap';
 import type { TypeIcon } from '@common/interfaces/icons';
 
 defineEmits<{ close: [] }>();

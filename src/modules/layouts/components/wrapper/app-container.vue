@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import useWindowResize from '@common/composables/use-window-resize';
+import useWindowResize from '@common/composables/use-window-resize/use-window-resize';
 
 useWindowResize();
 </script>

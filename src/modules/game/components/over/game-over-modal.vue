@@ -32,7 +32,7 @@ import GameOverRibbon from '@game/components/over/game-over-ribbon.vue';
 import FirstPosition from '@game/components/over/first-position.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import OtherPlayer from '@game/components/over/other-player.vue';
-import useFocusTrap from '@common/composables/use-focus-trap';
+import useFocusTrap from '@/modules/common/composables/use-focus-trap/use-focus-trap';
 
 interface GameOverProps {
   players: IPlayer[];
