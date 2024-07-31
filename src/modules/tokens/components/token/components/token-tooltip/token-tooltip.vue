@@ -18,8 +18,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import DiceFace from '@dice/components/dice-face/dice-face.vue';
-import { DICE_SIZE_TOOLTIP, SIZE_BOARD, SIZE_TILE } from '@board/constants/sizes';
-import { EColors } from '@board/constants/board';
+import { DICE_SIZE_TOOLTIP, SIZE_BOARD, SIZE_TILE } from '@/modules/board/constants/sizes.constants';
+import { EColors } from '@/modules/board/constants/board.constants';
 import type { ICoordinate, TColors } from '@board/interfaces/board';
 import type { IDiceList } from '@dice/interfaces/dice';
 

@@ -11,7 +11,7 @@
 import { ref } from 'vue';
 import ShareModal from '@/modules/share/components/share-modal/share-modal.vue';
 import { shareLink } from '@share/helpers/share';
-import { SHARE_AVAILABLE } from '@share/constants/share';
+import { SHARE_AVAILABLE } from '@/modules/share/constants/share.constants';
 
 interface ShareProps {
   data: ShareData;

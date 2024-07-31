@@ -58,7 +58,7 @@ import GameDebug from '@debug/components/game-debug/game-debug.vue';
 import ShowTotalTokens from '@/modules/tokens/components/token/components/show-total-tokens/show-total-tokens.vue';
 import BoardWrapper from '@board/components/board-wrapper.vue';
 import ProfileSection from '@/modules/profiles/layouts/profile-section/profile-section.vue';
-import { EBoardColors, EPositionProfiles } from '@board/constants/board';
+import { EBoardColors, EPositionProfiles } from '@/modules/board/constants/board.constants';
 import {
   EActionsBoardGame,
   ETypeGame,
@@ -66,7 +66,7 @@ import {
   OptionsGamePlaySoundSymbol,
   TOKEN_MOVEMENT_INTERVAL_VALUE,
   WAIT_SHOW_MODAL_GAME_OVER,
-} from '@game/constants/game';
+} from '@/modules/game/constants/game.constants';
 import type { IActionsTurn, IGameOver, TTotalPlayers, TTypeGame } from '@game/interfaces/game';
 import type { IPlayer, IUser } from '@players/interfaces/user';
 import type { TBoardColors } from '@board/interfaces/board';
@@ -91,7 +91,7 @@ import TokenList from '@/modules/tokens/components/tokens/token-list/token-list.
 import GameDebugTokens from '@debug/components/debug-tokens/debug-tokens.vue';
 import GameOverModal from '@/modules/game/components/over/game-over-modal/game-over-modal.vue';
 import type { TPlaySoundFunction } from '@sounds/interfaces/sounds';
-import { ESounds } from '@online/constants/online';
+import { ESounds } from '@/modules/online/constants/online.constants';
 
 // TODO: Add types for socket
 interface GameProps {

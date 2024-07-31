@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import ProfilePlayer from '@/modules/profiles/components/profile-player/profile-player.vue';
-import { DEFAULT_VALUE_ACTION_TURN } from '@game/constants/game';
+import { DEFAULT_VALUE_ACTION_TURN } from '@/modules/game/constants/game.constants';
 import type { TPositionProfile, TPositionProfiles } from '@profiles/interfaces/profile';
 import type { IPlayer } from '@players/interfaces/user';
 import type { IActionsTurn, TTotalPlayers } from '@game/interfaces/game';

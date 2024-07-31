@@ -21,7 +21,7 @@ import { ref } from 'vue';
 import type { TColors } from '@board/interfaces/board';
 import TokenPiece from '@tokens/components/token/components/piece/token-piece.vue';
 import SelectTokenColorTooltip from '@players/components/select-token-color-tooltip/select-token-color-tooltip.vue';
-import { vClickOutside } from '@/modules/common/directives/click-outside/click-outside';
+import { vClickOutside } from '@/modules/common/directives/click-outside/click-outside.directive';
 
 interface SelectTokenColorProps {
   disabled: boolean;

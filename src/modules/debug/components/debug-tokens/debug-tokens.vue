@@ -47,14 +47,14 @@
 <script setup lang="ts">
 import { ref, computed, reactive, watch } from 'vue';
 import GameDebugSelect from '@/modules/debug/components/game-debug-select/debug-select.vue';
-import { ETypeGame } from '@game/constants/game';
+import { ETypeGame } from '@/modules/game/constants/game.constants';
 import { copyToClipboard, getOptionsSelects, validateChangeToken } from '@debug/helpers/debug';
 import type { TOptions, TSelects } from '@debug/interfaces/debug';
 import type { TDiceValues } from '@dice/interfaces/dice';
 import type { IActionsTurn, TTypeGame } from '@game/interfaces/game';
 import type { IListTokens } from '@tokens/interfaces/token';
 import type { IPlayer } from '@players/interfaces/user';
-import { LIST_TYPE_TILE } from '@debug/constants/debug';
+import { LIST_TYPE_TILE } from '@/modules/debug/constants/debug.constants';
 
 interface TokensDebugProps {
   players: IPlayer[];
