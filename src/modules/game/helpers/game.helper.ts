@@ -35,11 +35,11 @@ import {
   TOTAL_TILES,
 } from '@board/helpers/positions-board';
 import type { IDiceList, TDiceValues } from '@dice/interfaces/dice';
-import { delay } from '@/modules/common/helpers/debounce.helpers';
+import { delay } from '@/modules/common/helpers/debounce.helper';
 import { cloneDeep } from '@common/helpers/clone';
 import type { TPlayerRankingPosition } from '@profiles/interfaces/profile';
 import type { IENextStepGame } from '@/modules/online/interfaces/online.interface';
-import { getRandomNumber } from '@/modules/common/helpers/random.helpers';
+import { getRandomNumber } from '@/modules/common/helpers/random.helper';
 import type { TPlaySoundFunction } from '@sounds/interfaces/sounds';
 import { ESounds } from '@online/constants/online';
 

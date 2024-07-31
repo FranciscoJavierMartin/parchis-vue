@@ -37,5 +37,5 @@ import GameDebugTile from '@/modules/debug/components/game-debug-tile/debug-tile
 import {
   POSITION_ELEMENTS_BOARD,
   POSITION_TILES,
-} from '@/modules/board/helpers/positions-board.helpers';
+} from '@/modules/board/helpers/positions-board.helper';
 </script>

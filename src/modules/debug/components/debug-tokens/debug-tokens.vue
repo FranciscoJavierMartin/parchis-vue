@@ -52,7 +52,7 @@ import {
   copyToClipboard,
   getOptionsSelects,
   validateChangeToken,
-} from '@/modules/debug/helpers/debug.helpers';
+} from '@/modules/debug/helpers/debug.helper';
 import type { TOptions, TSelects } from '@/modules/debug/interfaces/debug.interface';
 import type { TDiceValues } from '@/modules/dice/interfaces/dice.interface';
 import type { IActionsTurn, TTypeGame } from '@/modules/game/interfaces/game.interface';

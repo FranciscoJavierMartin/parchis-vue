@@ -15,7 +15,7 @@
 import { computed } from 'vue';
 import type { IPlayer } from '@/modules/players/interfaces/user.interface';
 import PlayerAvatar from '@common/components/player-avatar/player-avatar.vue';
-import { getLabelRanking } from '@/modules/players/helpers/player.helpers';
+import { getLabelRanking } from '@/modules/players/helpers/player.helper';
 
 interface OtherPlayerProps {
   player: IPlayer;

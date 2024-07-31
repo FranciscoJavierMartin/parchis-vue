@@ -67,7 +67,12 @@ import {
   TOKEN_MOVEMENT_INTERVAL_VALUE,
   WAIT_SHOW_MODAL_GAME_OVER,
 } from '@/modules/game/constants/game.constants';
-import type { IActionsTurn, IGameOver, TTotalPlayers, TTypeGame } from '@/modules/game/interfaces/game.interface';
+import type {
+  IActionsTurn,
+  IGameOver,
+  TTotalPlayers,
+  TTypeGame,
+} from '@/modules/game/interfaces/game.interface';
 import type { IPlayer, IUser } from '@/modules/players/interfaces/user.interface';
 import type { TBoardColors } from '@/modules/board/interfaces/board.interface';
 import type { TDiceValues } from '@/modules/dice/interfaces/dice.interface';
@@ -77,7 +82,7 @@ import type {
   ISelectTokenValues,
   TShowTotalTokens,
 } from '@/modules/tokens/interfaces/token.interface';
-import { getInitialDataPlayers } from '@/modules/players/helpers/player.helpers';
+import { getInitialDataPlayers } from '@/modules/players/helpers/player.helper';
 import {
   getInitialActionsTurnValue,
   getInitialPositionTokens,
@@ -85,8 +90,8 @@ import {
   validateMovementToken,
   validateSelectedToken,
   validateSelectTokenRandomly,
-} from '@/modules/game/helpers/game.helpers';
-import { getRandomValueDice } from '@/modules/common/helpers/random.helpers';
+} from '@/modules/game/helpers/game.helper';
+import { getRandomValueDice } from '@/modules/common/helpers/random.helper';
 import TokenList from '@/modules/tokens/components/tokens/token-list/token-list.vue';
 import GameDebugTokens from '@debug/components/debug-tokens/debug-tokens.vue';
 import GameOverModal from '@/modules/game/components/over/game-over-modal/game-over-modal.vue';

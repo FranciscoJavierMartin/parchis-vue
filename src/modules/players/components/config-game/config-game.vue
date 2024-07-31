@@ -32,7 +32,7 @@ import {
   getInitialBoardColors,
   getInitialDataOfflinePlayers,
   getInitialTotalPlayers,
-} from '@/modules/players/helpers/player.helpers';
+} from '@/modules/players/helpers/player.helper';
 import { savePlayerDataCache } from '@common/helpers/storage';
 import type { DataOfflineGame, TTotalPlayers } from '@/modules/game/interfaces/game.interface';
 import type { IPlayerOffline } from '@/modules/players/interfaces/player.interface';
