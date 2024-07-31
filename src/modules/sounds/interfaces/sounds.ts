@@ -1,4 +1,4 @@
-import type { IEOptionsGame, IESounds } from '@/modules/online/interfaces/online';
+import type { IEOptionsGame, IESounds } from '@online/interfaces/online';
 
 /**
  * Game options

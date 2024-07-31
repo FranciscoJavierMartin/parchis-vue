@@ -25,17 +25,13 @@
 
 <script setup lang="ts">
 import { computed, ref, watchEffect, type StyleValue } from 'vue';
-import TokenPiece from '@/modules/tokens/components/token/components/piece/token-piece.vue';
-import TokenTooltip from '@/modules/tokens/components/token/components/tooltip/token-tooltip.vue';
-import { vClickOutside } from '@/modules/common/directives/click-outside';
-import {
-  EColors,
-  EtypeTile,
-  MAXIMUM_VISIBLE_TOKENS_PER_CELL,
-} from '@/modules/board/constants/board';
-import { BASE_ZINDEX_TOKEN, ZINDEX_TOKEN_SELECT } from '@/modules/board/constants/sizes';
-import type { ISelectTokenValues, IToken } from '@/modules/tokens/interfaces/token';
-import type { IDiceList } from '@/modules/dice/interfaces/dice';
+import TokenPiece from '@tokens/components/token/components/piece/token-piece.vue';
+import TokenTooltip from '@tokens/components/token/components/tooltip/token-tooltip.vue';
+import { vClickOutside } from '@common/directives/click-outside';
+import { EColors, EtypeTile, MAXIMUM_VISIBLE_TOKENS_PER_CELL } from '@board/constants/board';
+import { BASE_ZINDEX_TOKEN, ZINDEX_TOKEN_SELECT } from '@board/constants/sizes';
+import type { ISelectTokenValues, IToken } from '@tokens/interfaces/token';
+import type { IDiceList } from '@dice/interfaces/dice';
 
 interface TokenProps extends IToken {
   diceList: IDiceList[];

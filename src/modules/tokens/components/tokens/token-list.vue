@@ -16,9 +16,9 @@
 </template>
 
 <script setup lang="ts">
-import type { IDiceList } from '@/modules/dice/interfaces/dice';
-import type { IListTokens, ISelectTokenValues } from '@/modules/tokens/interfaces/token';
-import GameToken from '@/modules/tokens/components/token/game-token.vue';
+import type { IDiceList } from '@dice/interfaces/dice';
+import type { IListTokens, ISelectTokenValues } from '@tokens/interfaces/token';
+import GameToken from '@tokens/components/token/game-token.vue';
 
 interface TokenListProps {
   diceList: IDiceList[];

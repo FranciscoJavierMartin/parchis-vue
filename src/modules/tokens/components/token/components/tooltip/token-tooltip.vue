@@ -17,11 +17,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import DiceFace from '@/modules/dice/components/dice-face/dice-face.vue';
-import { DICE_SIZE_TOOLTIP, SIZE_BOARD, SIZE_TILE } from '@/modules/board/constants/sizes';
-import { EColors } from '@/modules/board/constants/board';
-import type { ICoordinate, TColors } from '@/modules/board/interfaces/board';
-import type { IDiceList } from '@/modules/dice/interfaces/dice';
+import DiceFace from '@dice/components/dice-face/dice-face.vue';
+import { DICE_SIZE_TOOLTIP, SIZE_BOARD, SIZE_TILE } from '@board/constants/sizes';
+import { EColors } from '@board/constants/board';
+import type { ICoordinate, TColors } from '@board/interfaces/board';
+import type { IDiceList } from '@dice/interfaces/dice';
 
 interface TokenTooltipProps {
   color: TColors;

@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import type { CSSProperties, StyleValue } from 'vue';
-import type { TColors } from '@/modules/board/interfaces/board';
+import type { TColors } from '@board/interfaces/board';
 
 interface PieceProps {
   color: TColors;

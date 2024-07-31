@@ -1,10 +1,5 @@
-import type {
-  ICoordinate,
-  TColors,
-  TPositionGame,
-  TtypeTile,
-} from '@/modules/board/interfaces/board';
-import type { IDiceList } from '@/modules/dice/interfaces/dice';
+import type { ICoordinate, TColors, TPositionGame, TtypeTile } from '@board/interfaces/board';
+import type { IDiceList } from '@dice/interfaces/dice';
 
 /**
  * totalTokens: How many tokens are in the current tile, by default is 1.

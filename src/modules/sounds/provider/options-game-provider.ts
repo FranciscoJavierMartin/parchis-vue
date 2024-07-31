@@ -1,11 +1,11 @@
 import { defineComponent, onBeforeUnmount, onMounted, provide, reactive, watch } from 'vue';
-import { ESounds, INITIAL_OPTIONS_GAME } from '@/modules/online/constants/online';
-import { getValueFromCache, saveProperty } from '@/modules/common/helpers/storage';
-import { Sprite } from '@/modules/sounds/helpers/sounds';
-import { OptionsGameStateSymbol, OptionsGamePlaySoundSymbol } from '@/modules/game/constants/game';
-import { OPTIONS_GAME } from '@/modules/common/constants/storage';
-import type { TOptionsGame } from '@/modules/sounds/interfaces/sounds';
-import type { IESounds } from '@/modules/online/interfaces/online';
+import { ESounds, INITIAL_OPTIONS_GAME } from '@online/constants/online';
+import { getValueFromCache, saveProperty } from '@common/helpers/storage';
+import { Sprite } from '@sounds/helpers/sounds';
+import { OptionsGameStateSymbol, OptionsGamePlaySoundSymbol } from '@game/constants/game';
+import { OPTIONS_GAME } from '@common/constants/storage';
+import type { TOptionsGame } from '@sounds/interfaces/sounds';
+import type { IESounds } from '@online/interfaces/online';
 import backgroundMusic from '@/assets/sounds/background.mp3';
 import soundsSource from '@/assets/sounds/soundsSource.mp3';
 
