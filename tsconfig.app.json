@@ -10,11 +10,24 @@
     "noImplicitThis": false,
     "types": ["node"],
     "paths": {
-      // Update path alias to use modules
-      // @common
-      // @game
-      // @etc
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@about/*": ["./src/modules/about/*"],
+      "@board/*": ["./src/modules/board/*"],
+      "@chat/*": ["./src/modules/chat/*"],
+      "@common/*": ["./src/modules/common/*"],
+      "@debug/*": ["./src/modules/debug/*"],
+      "@dice/*": ["./src/modules/dice/*"],
+      "@game/*": ["./src/modules/game/*"],
+      "@home/*": ["./src/modules/home/*"],
+      "@layouts/*": ["./src/modules/layouts/*"],
+      "@offline/*": ["./src/modules/offline/*"],
+      "@online/*": ["./src/modules/online/*"],
+      "@options/*": ["./src/modules/options/*"],
+      "@players/*": ["./src/modules/players/*"],
+      "@profiles/*": ["./src/modules/profiles/*"],
+      "@share/*": ["./src/modules/share/*"],
+      "@sounds/*": ["./src/modules/sounds/*"],
+      "@tokens/*": ["./src/modules/tokens/*"]
     }
   }
 }
