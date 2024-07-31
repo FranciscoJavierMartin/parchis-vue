@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import DiceFace from '@/modules/dice/components/dice-face/dice-face.vue';
-import TokenPiece from '@/modules/tokens/components/token/components/piece/token-piece.vue';
-import { EColors } from '@/modules/board/constants/board';
-import type { TColors } from '@/modules/board/interfaces/board';
+import DiceFace from '@dice/components/dice-face/dice-face.vue';
+import TokenPiece from '@tokens/components/token/components/piece/token-piece.vue';
+import { EColors } from '@board/constants/board';
+import type { TColors } from '@board/interfaces/board';
 
 const DATA_LOGO: { letter: string; color: TColors }[] = [
   {

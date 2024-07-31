@@ -9,8 +9,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { ICONS_DATA } from '@/modules/common/constants/icons';
-import type { TypeIcon } from '@/modules/common/interfaces/icons';
+import { ICONS_DATA } from '@common/constants/icons';
+import type { TypeIcon } from '@common/interfaces/icons';
 
 interface GameIconProps {
   type: TypeIcon;

@@ -1,6 +1,6 @@
-import { cloneDeep } from '@/modules/common/helpers/clone';
-import type { IActionsTurn } from '@/modules/game/interfaces/game';
-import type { TDiceValues } from '@/modules/dice/interfaces/dice';
+import { cloneDeep } from '@common/helpers/clone';
+import type { IActionsTurn } from '@game/interfaces/game';
+import type { TDiceValues } from '@dice/interfaces/dice';
 
 /**
  * Return a random integer between min and max

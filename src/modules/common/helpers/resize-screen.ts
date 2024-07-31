@@ -1,7 +1,7 @@
-import { BASE_HEIGHT, BASE_WIDTH } from '@/modules/board/constants/sizes';
-import { isMobile } from '@/modules/common/helpers/responsive';
-import debounce from '@/modules/common/helpers/debounce';
-import { $ } from '@/modules/common/helpers/selectors';
+import { BASE_HEIGHT, BASE_WIDTH } from '@board/constants/sizes';
+import { isMobile } from '@common/helpers/responsive';
+import debounce from '@common/helpers/debounce';
+import { $ } from '@common/helpers/selectors';
 
 export default debounce(() => {
   const bodyElement = $('#app') as HTMLBodyElement;

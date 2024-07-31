@@ -46,19 +46,15 @@
 
 <script setup lang="ts">
 import { ref, computed, reactive, watch } from 'vue';
-import GameDebugSelect from '@/modules/debug/components/game-debug-select/game-debug-select.vue';
-import { ETypeGame } from '@/modules/game/constants/game';
-import {
-  copyToClipboard,
-  getOptionsSelects,
-  validateChangeToken,
-} from '@/modules/debug/helpers/debug';
-import type { TOptions, TSelects } from '@/modules/debug/interfaces/debug';
-import type { TDiceValues } from '@/modules/dice/interfaces/dice';
-import type { IActionsTurn, TTypeGame } from '@/modules/game/interfaces/game';
-import type { IListTokens } from '@/modules/tokens/interfaces/token';
-import type { IPlayer } from '@/modules/players/interfaces/user';
-import { LIST_TYPE_TILE } from '@/modules/debug/constants/debug';
+import GameDebugSelect from '@debug/components/game-debug-select/game-debug-select.vue';
+import { ETypeGame } from '@game/constants/game';
+import { copyToClipboard, getOptionsSelects, validateChangeToken } from '@debug/helpers/debug';
+import type { TOptions, TSelects } from '@debug/interfaces/debug';
+import type { TDiceValues } from '@dice/interfaces/dice';
+import type { IActionsTurn, TTypeGame } from '@game/interfaces/game';
+import type { IListTokens } from '@tokens/interfaces/token';
+import type { IPlayer } from '@players/interfaces/user';
+import { LIST_TYPE_TILE } from '@debug/constants/debug';
 
 interface TokensDebugProps {
   players: IPlayer[];
