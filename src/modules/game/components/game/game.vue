@@ -77,7 +77,7 @@ import type {
   ISelectTokenValues,
   TShowTotalTokens,
 } from '@tokens/interfaces/token';
-import { getInitialDataPlayers } from '@players/helpers/player';
+import { getInitialDataPlayers } from '@/modules/players/helpers/player.helpers';
 import {
   getInitialActionsTurnValue,
   getInitialPositionTokens,
@@ -85,8 +85,8 @@ import {
   validateMovementToken,
   validateSelectedToken,
   validateSelectTokenRandomly,
-} from '@game/helpers/game';
-import { getRandomValueDice } from '@common/helpers/random';
+} from '@/modules/game/helpers/game.helpers';
+import { getRandomValueDice } from '@/modules/common/helpers/random.helpers';
 import TokenList from '@/modules/tokens/components/tokens/token-list/token-list.vue';
 import GameDebugTokens from '@debug/components/debug-tokens/debug-tokens.vue';
 import GameOverModal from '@/modules/game/components/over/game-over-modal/game-over-modal.vue';

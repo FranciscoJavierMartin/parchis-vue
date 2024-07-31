@@ -8,5 +8,5 @@
 
 <script setup lang="ts">
 import AppContainer from '@layouts/components/wrapper/app-container.vue';
-import OptionsGameProvider from '@sounds/provider/options-game-provider';
+import OptionsGameProvider from '@/modules/sounds/providers/options-game.provider';
 </script>

@@ -14,7 +14,7 @@ import { PREFIX_RANKING } from '@game/constants/game';
 import type { TPlayerRankingPosition } from '@profiles/interfaces/profile';
 import { BOARD_COLORS, PLAYERS_INFO, TOTAL_PLAYERS_CACHE } from '@common/constants/storage';
 import type { IPlayerOffline } from '@players/interfaces/player';
-import { getRandomNumber, guid } from '@common/helpers/random';
+import { getRandomNumber, guid } from '@/modules/common/helpers/random.helpers';
 import botImage from '@/assets/images/bot.png';
 
 // TODO: Remove

@@ -48,7 +48,7 @@
 import { ref, computed, reactive, watch } from 'vue';
 import GameDebugSelect from '@/modules/debug/components/game-debug-select/debug-select.vue';
 import { ETypeGame } from '@/modules/game/constants/game.constants';
-import { copyToClipboard, getOptionsSelects, validateChangeToken } from '@debug/helpers/debug';
+import { copyToClipboard, getOptionsSelects, validateChangeToken } from '@/modules/debug/helpers/debug.helpers';
 import type { TOptions, TSelects } from '@debug/interfaces/debug';
 import type { TDiceValues } from '@dice/interfaces/dice';
 import type { IActionsTurn, TTypeGame } from '@game/interfaces/game';

@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { copyToClipboard } from '@debug/helpers/debug';
+import { copyToClipboard } from '@/modules/debug/helpers/debug.helpers';
 import type { TButtonShare } from '@share/interfaces/share';
 import { BUTTONS_SHARE_SOCIAL } from '@/modules/share/constants/share.constants';
 import BaseIcon from '@common/components/icons/base-icon.vue';

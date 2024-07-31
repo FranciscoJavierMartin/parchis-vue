@@ -18,7 +18,7 @@
 import { computed } from 'vue';
 import PlayerAvatar from '@common/components/player-avatar/player-avatar.vue';
 import WinnerCrown from '@common/components/icons/winner-crown.vue';
-import { getLabelRanking } from '@players/helpers/player';
+import { getLabelRanking } from '@/modules/players/helpers/player.helpers';
 import type { IPlayer } from '@players/interfaces/user';
 
 interface FirstPositionProps {
