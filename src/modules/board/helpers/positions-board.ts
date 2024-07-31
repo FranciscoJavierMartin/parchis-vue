@@ -2,13 +2,9 @@ import {
   EXIT_TILES_VALUES,
   FINAL_POSITIONS_VALUES,
   POINTS,
-} from '@/modules/board/constants/positions-board';
-import { SIZE_TILE } from '@/modules/board/constants/sizes';
-import type {
-  IPoint,
-  IPositionsItems,
-  TLocationBoardElements,
-} from '@/modules/board/interfaces/board';
+} from '@board/constants/positions-board';
+import { SIZE_TILE } from '@board/constants/sizes';
+import type { IPoint, IPositionsItems, TLocationBoardElements } from '@board/interfaces/board';
 
 function calculatePosition(point: IPoint): IPositionsItems[] {
   const position: IPositionsItems[] = [];

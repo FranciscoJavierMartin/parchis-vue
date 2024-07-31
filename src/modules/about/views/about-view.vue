@@ -47,9 +47,9 @@
 
 <script setup lang="ts">
 import GameLogo from '@/modules/common/components/game-logo/game-logo.vue';
-import MenuOptions from '@/modules/layout/components/menu-options/menu-options.vue';
-import BackButton from '@/modules/layout/components/back-button/back-button.vue';
-import PageWrapper from '@/modules/layout/components/wrapper/page-wrapper.vue';
+import MenuOptions from '@layouts/components/menu-options/menu-options.vue';
+import BackButton from '@layouts/components/back-button/back-button.vue';
+import PageWrapper from '@layouts/components/wrapper/page-wrapper.vue';
 </script>
 
 <style scoped>

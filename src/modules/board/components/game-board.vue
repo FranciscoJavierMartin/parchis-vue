@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { EBoardColors } from '@/modules/board/constants/board';
+import { EBoardColors } from '@board/constants/board';
 
 interface BoardProps {
   boardColor?: EBoardColors;

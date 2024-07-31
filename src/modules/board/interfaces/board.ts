@@ -4,7 +4,7 @@ import type {
   EPositionGame,
   ESufixColors,
   EtypeTile,
-} from '@/modules/board/constants/board';
+} from '@board/constants/board';
 
 export type TBoardColors = keyof typeof EBoardColors;
 export type TColors = keyof typeof EColors;
