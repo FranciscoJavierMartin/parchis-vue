@@ -1,4 +1,4 @@
-import type { IPredefinedChatMessages } from '@chat/interfaces/chat';
+import { TYPES_CHAT_MESSAGES, type IPredefinedChatMessages } from '@chat/interfaces/chat';
 import type { ISocketError } from '@online/interfaces/online';
 
 /**
@@ -11,14 +11,6 @@ export const SOCKET_ERROR_MESSAGES: ISocketError = {
   UNAUTHENTICATED: 'User is not authenticated',
   AUTHENTICATED: 'User already authenticated',
 };
-
-/**
- * Types messages in chat
- */
-export enum TYPES_CHAT_MESSAGES {
-  EMOJI = 'EMOJI',
-  TEXT = 'TEXT',
-}
 
 /**
  * Chat predefined messages
