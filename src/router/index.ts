@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '@/modules/home/views/home-view.vue';
+import HomeView from '@home/views/home-view.vue';
 import { ROUTES } from '@/router/routes';
 
 const router = createRouter({
