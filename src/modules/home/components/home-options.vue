@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import BaseIcon from '@/modules/common/components/icons/base-icon.vue';
+import BaseIcon from '@common/components/icons/base-icon.vue';
 import { ROUTES } from '@/router/routes';
 
 interface HomeOptionsProps {
