@@ -1,27 +1,6 @@
 import type { TDiceValues } from '@dice/interfaces/dice';
-import type { IActionsTurn } from '@game/interfaces/game';
+import { EActionsBoardGame, type IActionsTurn } from '@game/interfaces/game';
 import type { IActionsMoveToken } from '@tokens/interfaces/token';
-
-export enum EActionsBoardGame {
-  'ROLL_DICE' = 'ROLL_DICE',
-  'SELECT_TOKEN' = 'SELECT_TOKEN',
-  'OPPONENT_LEAVE' = 'OPPONENT_LEAVE',
-  'CHAT_MESSAGE' = 'CHAT_MESSAGE',
-  'START_GAME' = 'START_GAME',
-  'DONE_DICE' = 'DONE_DICE',
-  'DONE_TOKEN_MOVEMENT' = 'DONE_TOKEN_MOVEMENT',
-}
-
-export enum ENextStepGame {
-  'ROLL_DICE_AGAIN' = 'ROLL_DICE_AGAIN',
-  'MOVE_TOKENS_AGAIN' = 'MOVE_TOKENS_AGAIN',
-  'NEXT_TURN' = 'NEXT_TURN',
-}
-
-export enum ETypeGame {
-  'OFFLINE' = 'OFFLINE',
-  'ONLINE' = 'ONLINE',
-}
 
 /**
  * Default value for actions
@@ -86,6 +65,3 @@ export const PREFIX_RANKING = ['st', 'nd', 'rd', 'th'];
  * Room range
  */
 export const ROOM_RANGE = 5;
-
-export const OptionsGameStateSymbol = Symbol('OptionsGameState');
-export const OptionsGamePlaySoundSymbol = Symbol('OptionsGamePlaySound');

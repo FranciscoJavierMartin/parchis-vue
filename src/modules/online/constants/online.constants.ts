@@ -24,27 +24,6 @@ export const API_URL = '/api/me';
 export const API_LOGOUT = '/api/logout';
 
 /**
- * Online mode
- */
-export enum TYPES_ONLINE_GAMEPLAY {
-  NONE = 'NONE',
-  JOIN_EXISTING_ROOM = 'JOIN_EXISTING_ROOM',
-  JOIN_ROOM = 'JOIN_ROOM',
-  CREATE_ROOM = 'CREATE_ROOM',
-}
-
-/**
- * Errors in room
- */
-export enum SocketErrors {
-  INVALID_ROOM = 'INVALID_ROOM',
-  INVALID_COLOR = 'INVALID_COLOR',
-  INVALID_USER = 'INVALID_USER',
-  UNAUTHENTICATED = 'UNAUTHENTICATED',
-  AUTHENTICATED = 'AUTHENTICATED',
-}
-
-/**
  * Initial state for socket events
  */
 export const INITIAL_SOCKET_LISTEN_ACTIONS: ISocketListenActions = {
@@ -66,28 +45,6 @@ export const INITIAL_SOCKET_LISTEN_ACTIONS: ISocketListenActions = {
     [EActionsBoardGame.DONE_TOKEN_MOVEMENT]: ENextStepGame.NEXT_TURN,
   },
 };
-
-/**
- * Game options
- */
-export enum EOptionsGame {
-  SOUND = 'SOUND',
-  MUSIC = 'MUSIC',
-  CHAT = 'CHAT',
-}
-
-export enum ESounds {
-  ROLL_DICE = 'ROLL_DICE',
-  TOKEN_MOVE = 'TOKEN_MOVE',
-  GET_SIX = 'GET_SIX',
-  SAFE_ZONE = 'SAFE_ZONE',
-  TOKEN_JAIL = 'TOKEN_JAIL',
-  CHAT = 'CHAT',
-  USER_OFFLINE = 'USER_OFFLINE',
-  USER_ONLINE = 'USER_ONLINE',
-  GAMER_OVER = 'GAMER_OVER',
-  CLICK = 'CLICK',
-}
 
 export const INITIAL_OPTIONS_GAME: TOptionsGame = {
   [EOptionsGame.SOUND]: true,

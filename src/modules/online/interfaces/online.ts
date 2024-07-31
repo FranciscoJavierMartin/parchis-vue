@@ -1,5 +1,5 @@
 import type { EActionsBoardGame, ENextStepGame } from '@game/constants/game';
-import type { EOptionsGame, ESounds, SocketErrors } from '@online/constants/online';
+import type { EOptionsGame, ESounds } from '@online/constants/online';
 import type { IUser } from '@players/interfaces/user';
 import type {
   TActionsBoardGame,
@@ -140,4 +140,25 @@ export interface IServiceWorker {
   serviceWorkerInitialized?: boolean;
   serviceWorkerUpdated?: boolean;
   serviceWorkerRegistration?: ServiceWorkerRegistration;
+}
+
+/**
+ * Online mode
+ */
+export enum TYPES_ONLINE_GAMEPLAY {
+  NONE = 'NONE',
+  JOIN_EXISTING_ROOM = 'JOIN_EXISTING_ROOM',
+  JOIN_ROOM = 'JOIN_ROOM',
+  CREATE_ROOM = 'CREATE_ROOM',
+}
+
+/**
+ * Errors in room
+ */
+export enum SocketErrors {
+  INVALID_ROOM = 'INVALID_ROOM',
+  INVALID_COLOR = 'INVALID_COLOR',
+  INVALID_USER = 'INVALID_USER',
+  UNAUTHENTICATED = 'UNAUTHENTICATED',
+  AUTHENTICATED = 'AUTHENTICATED',
 }

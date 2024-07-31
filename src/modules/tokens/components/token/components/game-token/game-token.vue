@@ -28,7 +28,11 @@ import { computed, ref, watchEffect, type StyleValue } from 'vue';
 import TokenPiece from '@tokens/components/token/components/piece/token-piece.vue';
 import TokenTooltip from '@tokens/components/token/components/tooltip/token-tooltip.vue';
 import { vClickOutside } from '@/modules/common/directives/click-outside/click-outside.directive';
-import { EColors, EtypeTile, MAXIMUM_VISIBLE_TOKENS_PER_CELL } from '@/modules/board/constants/board.constants';
+import {
+  EColors,
+  EtypeTile,
+  MAXIMUM_VISIBLE_TOKENS_PER_CELL,
+} from '@/modules/board/constants/board.constants';
 import { BASE_ZINDEX_TOKEN, ZINDEX_TOKEN_SELECT } from '@/modules/board/constants/sizes.constants';
 import type { ISelectTokenValues, IToken } from '@tokens/interfaces/token';
 import type { IDiceList } from '@dice/interfaces/dice';
