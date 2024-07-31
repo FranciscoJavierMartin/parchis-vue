@@ -1,4 +1,4 @@
-import type { TYPES_CHAT_MESSAGES } from '@/modules/chat/constants/chat';
+import type { TYPES_CHAT_MESSAGES } from '@chat/constants/chat';
 
 export type ITypeChatMessage = keyof typeof TYPES_CHAT_MESSAGES;
 export type IPredefinedChatMessages = Record<ITypeChatMessage, { index: number; value: string }[]>;
