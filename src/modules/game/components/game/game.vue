@@ -38,7 +38,7 @@
       @handle-mute-chat="handleMuteChat"
     />
   </BoardWrapper>
-  <GameDebugTokens
+  <DebugTokens
     v-if="debug"
     v-bind="{
       typeGame,
@@ -90,8 +90,7 @@ import {
 } from '@/modules/game/helpers/game.helper';
 import { getRandomValueDice } from '@/modules/common/helpers/random.helper';
 import TokenList from '@/modules/tokens/components/tokens/token-list/token-list.vue';
-// TODO: Rename GameDebutTokens to DebugTokens
-import GameDebugTokens from '@debug/components/debug-tokens/debug-tokens.vue';
+import DebugTokens from '@debug/components/debug-tokens/debug-tokens.vue';
 import GameOverModal from '@/modules/game/components/over/game-over-modal/game-over-modal.vue';
 import type { TPlaySoundFunction } from '@/modules/sounds/interfaces/sounds.interface';
 import { EActionsBoardGame, ETypeGame } from '@game/interfaces/game.enum';

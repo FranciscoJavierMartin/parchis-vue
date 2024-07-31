@@ -13,25 +13,25 @@
       </button>
     </div>
     <div v-if="typeGame === ETypeGame.OFFLINE" class="game-debug-selects">
-      <GameDebugSelect
+      <DebugSelect
         v-model="playerSelected"
         :options="options['player']"
         title="Player"
         :disabled="!options['player']?.length"
       />
-      <GameDebugSelect
+      <DebugSelect
         v-model="tokenSelected"
         :options="options['token']"
         title="Token"
         :disabled="!options['token']?.length"
       />
-      <GameDebugSelect
+      <DebugSelect
         v-model="typeSelected"
         :options="options['type']"
         title="Type"
         :disabled="!options['type']?.length"
       />
-      <GameDebugSelect
+      <DebugSelect
         v-model="positionSelected"
         :options="options['position']"
         title="Position"
@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import { ref, computed, reactive, watch } from 'vue';
-import GameDebugSelect from '@/modules/debug/components/debug-select/debug-select.vue';
+import DebugSelect from '@/modules/debug/components/debug-select/debug-select.vue';
 import { ETypeGame } from '@/modules/game/interfaces/game.enum';
 import {
   copyToClipboard,

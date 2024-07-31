@@ -10,13 +10,13 @@
 <script setup lang="ts">
 import type { IOptions } from '@debug/interfaces/debug.interface';
 
-interface GameDebugSelectProps {
+interface DebugSelectProps {
   title: string;
   options?: IOptions[];
   disabled?: boolean;
 }
 
-withDefaults(defineProps<GameDebugSelectProps>(), {
+withDefaults(defineProps<DebugSelectProps>(), {
   options: [] as unknown as () => IOptions[],
 });
 
