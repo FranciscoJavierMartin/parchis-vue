@@ -53,12 +53,12 @@
 
 <script setup lang="ts">
 import { inject, ref, watch } from 'vue';
-import GameBoard from '@/modules/board/components/game-board.vue';
-import GameDebug from '@/modules/debug/components/game-debug/game-debug.vue';
-import ShowTotalTokens from '@/modules/tokens/components/token/components/total-tokens/show-total-tokens.vue';
-import BoardWrapper from '@/modules/board/components/board-wrapper.vue';
-import ProfileSection from '@/modules/profiles/layouts/profile-section.vue';
-import { EBoardColors, EPositionProfiles } from '@/modules/board/constants/board';
+import GameBoard from '@board/components/game-board.vue';
+import GameDebug from '@debug/components/game-debug/game-debug.vue';
+import ShowTotalTokens from '@tokens/components/token/components/total-tokens/show-total-tokens.vue';
+import BoardWrapper from '@board/components/board-wrapper.vue';
+import ProfileSection from '@profiles/layouts/profile-section.vue';
+import { EBoardColors, EPositionProfiles } from '@board/constants/board';
 import {
   EActionsBoardGame,
   ETypeGame,
@@ -66,23 +66,18 @@ import {
   OptionsGamePlaySoundSymbol,
   TOKEN_MOVEMENT_INTERVAL_VALUE,
   WAIT_SHOW_MODAL_GAME_OVER,
-} from '@/modules/game/constants/game';
-import type {
-  IActionsTurn,
-  IGameOver,
-  TTotalPlayers,
-  TTypeGame,
-} from '@/modules/game/interfaces/game';
-import type { IPlayer, IUser } from '@/modules/players/interfaces/user';
-import type { TBoardColors } from '@/modules/board/interfaces/board';
-import type { TDiceValues } from '@/modules/dice/interfaces/dice';
+} from '@game/constants/game';
+import type { IActionsTurn, IGameOver, TTotalPlayers, TTypeGame } from '@game/interfaces/game';
+import type { IPlayer, IUser } from '@players/interfaces/user';
+import type { TBoardColors } from '@board/interfaces/board';
+import type { TDiceValues } from '@dice/interfaces/dice';
 import type {
   IActionsMoveToken,
   IListTokens,
   ISelectTokenValues,
   TShowTotalTokens,
-} from '@/modules/tokens/interfaces/token';
-import { getInitialDataPlayers } from '@/modules/players/helpers/player';
+} from '@tokens/interfaces/token';
+import { getInitialDataPlayers } from '@players/helpers/player';
 import {
   getInitialActionsTurnValue,
   getInitialPositionTokens,
@@ -90,13 +85,13 @@ import {
   validateMovementToken,
   validateSelectedToken,
   validateSelectTokenRandomly,
-} from '@/modules/game/helpers/game';
-import { getRandomValueDice } from '@/modules/common/helpers/random';
-import TokenList from '@/modules/tokens/components/tokens/token-list.vue';
-import GameDebugTokens from '@/modules/debug/components/game-debug-tokens/game-debug-tokens.vue';
-import GameOverModal from '@/modules/game/components/over/game-over-modal.vue';
-import type { TPlaySoundFunction } from '@/modules/sounds/interfaces/sounds';
-import { ESounds } from '@/modules/online/constants/online';
+} from '@game/helpers/game';
+import { getRandomValueDice } from '@common/helpers/random';
+import TokenList from '@tokens/components/tokens/token-list.vue';
+import GameDebugTokens from '@debug/components/game-debug-tokens/game-debug-tokens.vue';
+import GameOverModal from '@game/components/over/game-over-modal.vue';
+import type { TPlaySoundFunction } from '@sounds/interfaces/sounds';
+import { ESounds } from '@online/constants/online';
 
 // TODO: Add types for socket
 interface GameProps {

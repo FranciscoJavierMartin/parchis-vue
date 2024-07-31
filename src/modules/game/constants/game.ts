@@ -1,6 +1,6 @@
-import type { TDiceValues } from '@/modules/dice/interfaces/dice';
-import type { IActionsTurn } from '@/modules/game/interfaces/game';
-import type { IActionsMoveToken } from '@/modules/tokens/interfaces/token';
+import type { TDiceValues } from '@dice/interfaces/dice';
+import type { IActionsTurn } from '@game/interfaces/game';
+import type { IActionsMoveToken } from '@tokens/interfaces/token';
 
 export enum EActionsBoardGame {
   'ROLL_DICE' = 'ROLL_DICE',

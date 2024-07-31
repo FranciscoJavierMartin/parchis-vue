@@ -13,9 +13,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { IPlayer } from '@/modules/players/interfaces/user';
-import PlayerAvatar from '@/modules/common/components/player-avatar/player-avatar.vue';
-import { getLabelRanking } from '@/modules/players/helpers/player';
+import type { IPlayer } from '@players/interfaces/user';
+import PlayerAvatar from '@common/components/player-avatar/player-avatar.vue';
+import { getLabelRanking } from '@players/helpers/player';
 
 interface OtherPlayerProps {
   player: IPlayer;

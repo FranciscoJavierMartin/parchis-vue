@@ -3,45 +3,45 @@ import {
   EActionsBoardGame,
   ENextStepGame,
   MAXIMUM_DICE_PER_TURN,
-} from '@/modules/game/constants/game';
+} from '@game/constants/game';
 import type {
   ICoordinate,
   TBoardColors,
   TColors,
   TPositionGame,
   TtypeTile,
-} from '@/modules/board/interfaces/board';
-import type { IActionsTurn, IGameOver, TTotalPlayers } from '@/modules/game/interfaces/game';
+} from '@board/interfaces/board';
+import type { IActionsTurn, IGameOver, TTotalPlayers } from '@game/interfaces/game';
 import type {
   IActionsMoveToken,
   IListTokens,
   IToken,
   TShowTotalTokens,
   TTokenByPositionType,
-} from '@/modules/tokens/interfaces/token';
-import type { IPlayer } from '@/modules/players/interfaces/user';
-import { getPlayersColors } from '@/modules/players/helpers/player';
+} from '@tokens/interfaces/token';
+import type { IPlayer } from '@players/interfaces/user';
+import { getPlayersColors } from '@players/helpers/player';
 import {
   EPositionGame,
   EtypeTile,
   MAXIMUM_VISIBLE_TOKENS_PER_CELL,
   type ESufixColors,
-} from '@/modules/board/constants/board';
+} from '@board/constants/board';
 import {
   POSITION_ELEMENTS_BOARD,
   POSITION_TILES,
   SAFE_AREAS,
   TOTAL_EXIT_TILES,
   TOTAL_TILES,
-} from '@/modules/board/helpers/positions-board';
-import type { IDiceList, TDiceValues } from '@/modules/dice/interfaces/dice';
-import { delay } from '@/modules/common/helpers/debounce';
-import { cloneDeep } from '@/modules/common/helpers/clone';
-import type { TPlayerRankingPosition } from '@/modules/profiles/interfaces/profile';
-import type { IENextStepGame } from '@/modules/online/interfaces/online';
-import { getRandomNumber } from '@/modules/common/helpers/random';
-import type { TPlaySoundFunction } from '@/modules/sounds/interfaces/sounds';
-import { ESounds } from '@/modules/online/constants/online';
+} from '@board/helpers/positions-board';
+import type { IDiceList, TDiceValues } from '@dice/interfaces/dice';
+import { delay } from '@common/helpers/debounce';
+import { cloneDeep } from '@common/helpers/clone';
+import type { TPlayerRankingPosition } from '@profiles/interfaces/profile';
+import type { IENextStepGame } from '@online/interfaces/online';
+import { getRandomNumber } from '@common/helpers/random';
+import type { TPlaySoundFunction } from '@sounds/interfaces/sounds';
+import { ESounds } from '@online/constants/online';
 
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
   const { isOnline, isBot } = players[indexTurn];

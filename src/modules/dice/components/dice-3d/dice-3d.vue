@@ -15,10 +15,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import DiceFace from '@/modules/dice/components/dice-face/dice-face.vue';
-import type { TDiceValues } from '@/modules/dice/interfaces/dice';
-import { getRandomNumber } from '@/modules/common/helpers/random';
-import { ROLL_TIME_VALUE } from '@/modules/game/constants/game';
+import DiceFace from '@dice/components/dice-face/dice-face.vue';
+import type { TDiceValues } from '@dice/interfaces/dice';
+import { getRandomNumber } from '@common/helpers/random';
+import { ROLL_TIME_VALUE } from '@game/constants/game';
 
 interface Dice3dProps {
   size: number;
