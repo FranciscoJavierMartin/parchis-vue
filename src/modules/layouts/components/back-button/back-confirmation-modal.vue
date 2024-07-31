@@ -20,8 +20,8 @@
 </template>
 
 <script setup lang="ts">
-import BaseModal from '@/modules/common/components/base/base-modal/base-modal.vue';
-import BaseIcon from '@/modules/common/components/icons/base-icon.vue';
+import BaseModal from '@common/components/base/base-modal/base-modal.vue';
+import BaseIcon from '@common/components/icons/base-icon.vue';
 
 defineEmits(['cancel', 'confirmation']);
 </script>

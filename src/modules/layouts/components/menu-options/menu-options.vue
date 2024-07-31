@@ -7,8 +7,8 @@
 
 <script setup lang="ts">
 import { ref, type Ref } from 'vue';
-import MenuOptionsModal from '@/modules/options/components/menu-options-modal.vue';
-import BaseIcon from '@/modules/common/components/icons/base-icon.vue';
+import MenuOptionsModal from '@options/components/menu-options-modal.vue';
+import BaseIcon from '@common/components/icons/base-icon.vue';
 
 const isOpen: Ref<boolean> = ref<boolean>(false);
 

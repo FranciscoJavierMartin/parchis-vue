@@ -15,9 +15,9 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue';
 import { useRouter } from 'vue-router';
-import BaseIcon from '@/modules/common/components/icons/base-icon.vue';
-import BackConfirmationModal from '@/modules/layout/components/back-button/back-confirmation-modal.vue';
-import type { TRoutesName } from '@/modules/common/interfaces/routes';
+import BaseIcon from '@common/components/icons/base-icon.vue';
+import BackConfirmationModal from '@layouts/components/back-button/back-confirmation-modal.vue';
+import type { TRoutesName } from '@common/interfaces/routes';
 import { ROUTES } from '@/router/routes';
 
 const isOpen: Ref<boolean> = ref<boolean>(false);
