@@ -1,6 +1,6 @@
 import type { TDiceValues } from '@dice/interfaces/dice.interface';
 import { EActionsBoardGame } from '@game/interfaces/game.enum';
-import type { IActionsMoveToken } from '@/modules/tokens/interfaces/token.interface';
+import type { IActionsMoveToken } from '@tokens/interfaces/token.interface';
 import type { IActionsTurn } from '@game/interfaces/game.interface';
 
 /**

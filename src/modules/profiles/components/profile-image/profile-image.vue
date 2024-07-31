@@ -19,8 +19,8 @@
 import { computed, ref, watch } from 'vue';
 import PlayerAvatar from '@common/components/player-avatar/player-avatar.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
-import { TIME_INTERVAL_CHRONOMETER } from '@/modules/game/constants/game.constants';
-import type { IPlayer } from '@/modules/players/interfaces/user.interface';
+import { TIME_INTERVAL_CHRONOMETER } from '@game/constants/game.constants';
+import type { IPlayer } from '@players/interfaces/user.interface';
 import type { TPositionProfile } from '@profiles/interfaces/profile.interface';
 
 interface ProfileImageProps {

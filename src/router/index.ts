@@ -12,15 +12,15 @@ const router = createRouter({
     },
     {
       ...ROUTES.OFFLINE,
-      component: async () => import('@/modules/offline/views/offline-view.vue'),
+      component: async () => import('@offline/views/offline-view.vue'),
     },
     {
       ...ROUTES.ONLINE,
-      component: async () => import('@/modules/online/views/online-view.vue'),
+      component: async () => import('@online/views/online-view.vue'),
     },
     {
       ...ROUTES.ABOUT,
-      component: async () => import('@/modules/about/views/about-view.vue'),
+      component: async () => import('@about/views/about-view.vue'),
     },
     {
       path: '/:pathMatch(.*)*',

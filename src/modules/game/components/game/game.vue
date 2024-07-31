@@ -55,31 +55,31 @@
 import { inject, ref, watch } from 'vue';
 import GameBoard from '@board/components/game-board.vue';
 import BoardDebug from '@debug/components/board-debug/board-debug.vue';
-import ShowTotalTokens from '@/modules/tokens/components/token/components/show-total-tokens/show-total-tokens.vue';
+import ShowTotalTokens from '@tokens/components/token/components/show-total-tokens/show-total-tokens.vue';
 import BoardWrapper from '@board/components/board-wrapper.vue';
-import ProfileSection from '@/modules/profiles/layouts/profile-section/profile-section.vue';
-import { EBoardColors, EPositionProfiles } from '@/modules/board/interfaces/board.enum';
+import ProfileSection from '@profiles/layouts/profile-section/profile-section.vue';
+import { EBoardColors, EPositionProfiles } from '@board/interfaces/board.enum';
 import {
   INITIAL_ACTIONS_MOVE_TOKEN,
   TOKEN_MOVEMENT_INTERVAL_VALUE,
   WAIT_SHOW_MODAL_GAME_OVER,
-} from '@/modules/game/constants/game.constants';
+} from '@game/constants/game.constants';
 import type {
   IActionsTurn,
   IGameOver,
   TTotalPlayers,
   TTypeGame,
-} from '@/modules/game/interfaces/game.interface';
-import type { IPlayer, IUser } from '@/modules/players/interfaces/user.interface';
-import type { TBoardColors } from '@/modules/board/interfaces/board.interface';
-import type { TDiceValues } from '@/modules/dice/interfaces/dice.interface';
+} from '@game/interfaces/game.interface';
+import type { IPlayer, IUser } from '@players/interfaces/user.interface';
+import type { TBoardColors } from '@board/interfaces/board.interface';
+import type { TDiceValues } from '@dice/interfaces/dice.interface';
 import type {
   IActionsMoveToken,
   IListTokens,
   ISelectTokenValues,
   TShowTotalTokens,
-} from '@/modules/tokens/interfaces/token.interface';
-import { getInitialDataPlayers } from '@/modules/players/helpers/player.helper';
+} from '@tokens/interfaces/token.interface';
+import { getInitialDataPlayers } from '@players/helpers/player.helper';
 import {
   getInitialActionsTurnValue,
   getInitialPositionTokens,
@@ -87,12 +87,12 @@ import {
   validateMovementToken,
   validateSelectedToken,
   validateSelectTokenRandomly,
-} from '@/modules/game/helpers/game.helper';
-import { getRandomValueDice } from '@/modules/common/helpers/random.helper';
-import TokenList from '@/modules/tokens/components/tokens/token-list/token-list.vue';
+} from '@game/helpers/game.helper';
+import { getRandomValueDice } from '@common/helpers/random.helper';
+import TokenList from '@tokens/components/tokens/token-list/token-list.vue';
 import DebugTokens from '@debug/components/debug-tokens/debug-tokens.vue';
-import GameOverModal from '@/modules/game/components/over/game-over-modal/game-over-modal.vue';
-import type { TPlaySoundFunction } from '@/modules/sounds/interfaces/sounds.interface';
+import GameOverModal from '@game/components/over/game-over-modal/game-over-modal.vue';
+import type { TPlaySoundFunction } from '@sounds/interfaces/sounds.interface';
 import { EActionsBoardGame, ETypeGame } from '@game/interfaces/game.enum';
 import { OptionsGamePlaySoundSymbol } from '@sounds/constants/sounds.constants';
 import { ESounds } from '@sounds/interfaces/sounds.enum';

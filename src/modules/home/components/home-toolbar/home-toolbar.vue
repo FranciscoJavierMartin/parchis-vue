@@ -17,10 +17,10 @@
 </template>
 
 <script setup lang="ts">
-import MenuShare from '@/modules/share/components/share-button/share-button.vue';
+import MenuShare from '@share/components/share-button/share-button.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import { ROUTES } from '@/router/routes';
-import { API_LOGOUT } from '@/modules/online/constants/online.constants';
+import { API_LOGOUT } from '@online/constants/online.constants';
 
 interface HomeToolbarProps {
   isAuth: boolean;

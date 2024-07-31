@@ -1,6 +1,6 @@
 import type { TBoardColors, TColors, TSufixColors } from '@board/interfaces/board.interface';
 import type { DataOfflineGame, TTotalPlayers } from '@game/interfaces/game.interface';
-import type { IPlayer, IUser } from '@/modules/players/interfaces/user.interface';
+import type { IPlayer, IUser } from '@players/interfaces/user.interface';
 import { cloneDeep } from '@common/helpers/clone.helper';
 import {
   getValueFromCache,
@@ -17,7 +17,7 @@ import {
   TOTAL_PLAYERS_CACHE,
 } from '@common/constants/storage.constants';
 import type { IPlayerOffline } from '@players/interfaces/player.interface';
-import { getRandomNumber, guid } from '@/modules/common/helpers/random.helper';
+import { getRandomNumber, guid } from '@common/helpers/random.helper';
 import botImage from '@/assets/images/bot.png';
 import { EBoardColors, ESufixColors } from '@board/interfaces/board.enum';
 

@@ -1,5 +1,5 @@
 import type { IDiceList, TDiceValues } from '@dice/interfaces/dice.interface';
-import type { IUser } from '@/modules/players/interfaces/user.interface';
+import type { IUser } from '@players/interfaces/user.interface';
 import type { TBoardColors } from '@board/interfaces/board.interface';
 import type { EActionsBoardGame, ETypeGame } from '@game/interfaces/game.enum';
 import type { TYPES_ONLINE_GAMEPLAY } from '@online/interfaces/online.interface';

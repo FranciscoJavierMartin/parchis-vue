@@ -14,8 +14,8 @@ import type {
   IToken,
   TShowTotalTokens,
   TTokenByPositionType,
-} from '@/modules/tokens/interfaces/token.interface';
-import type { IPlayer } from '@/modules/players/interfaces/user.interface';
+} from '@tokens/interfaces/token.interface';
+import type { IPlayer } from '@players/interfaces/user.interface';
 import { getPlayersColors } from '@players/helpers/player.helper';
 import {
   POSITION_ELEMENTS_BOARD,
@@ -25,11 +25,11 @@ import {
   TOTAL_TILES,
 } from '@board/helpers/positions-board.helper';
 import type { IDiceList, TDiceValues } from '@dice/interfaces/dice.interface';
-import { delay } from '@/modules/common/helpers/debounce.helper';
+import { delay } from '@common/helpers/debounce.helper';
 import { cloneDeep } from '@common/helpers/clone.helper';
 import type { TPlayerRankingPosition } from '@profiles/interfaces/profile.interface';
-import type { IENextStepGame } from '@/modules/online/interfaces/online.interface';
-import { getRandomNumber } from '@/modules/common/helpers/random.helper';
+import type { IENextStepGame } from '@online/interfaces/online.interface';
+import { getRandomNumber } from '@common/helpers/random.helper';
 import type { TPlaySoundFunction } from '@sounds/interfaces/sounds.interface';
 import { EPositionGame, EtypeTile, type ESufixColors } from '@board/interfaces/board.enum';
 import { ESounds } from '@sounds/interfaces/sounds.enum';

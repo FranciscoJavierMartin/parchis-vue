@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import TotalTokens from '@tokens/components/token/components/total-tokens/total-tokens.vue';
-import type { TShowTotalTokens } from '@/modules/tokens/interfaces/token.interface';
+import type { TShowTotalTokens } from '@tokens/interfaces/token.interface';
 
 interface ShowTotalTokensProps {
   totalTokens: TShowTotalTokens;

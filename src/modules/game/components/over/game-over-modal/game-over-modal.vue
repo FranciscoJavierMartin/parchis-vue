@@ -26,13 +26,13 @@
 
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
-import { getOrganizedRanking } from '@/modules/players/helpers/player.helper';
-import type { IPlayer } from '@/modules/players/interfaces/user.interface';
-import GameOverRibbon from '@/modules/game/components/over/game-over-ribbon/game-over-ribbon.vue';
-import FirstPosition from '@/modules/game/components/over/first-position/first-position.vue';
+import { getOrganizedRanking } from '@players/helpers/player.helper';
+import type { IPlayer } from '@players/interfaces/user.interface';
+import GameOverRibbon from '@game/components/over/game-over-ribbon/game-over-ribbon.vue';
+import FirstPosition from '@game/components/over/first-position/first-position.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
-import OtherPlayer from '@/modules/game/components/over/other-player/other-player.vue';
-import useFocusTrap from '@/modules/common/composables/use-focus-trap/use-focus-trap';
+import OtherPlayer from '@game/components/over/other-player/other-player.vue';
+import useFocusTrap from '@common/composables/use-focus-trap/use-focus-trap';
 
 interface GameOverProps {
   players: IPlayer[];

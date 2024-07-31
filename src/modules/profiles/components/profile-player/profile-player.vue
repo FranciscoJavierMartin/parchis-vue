@@ -27,14 +27,14 @@
 </template>
 
 <script lang="ts" setup>
-import ProfileImage from '@/modules/profiles/components/profile-image/profile-image.vue';
-import ProfileDice from '@/modules/profiles/components/profile-dice/profile-dice.vue';
-import NameAndDice from '@/modules/profiles/components/name-and-dice/name-and-dice.vue';
-import ProfileRanking from '@/modules/profiles/components/profile-ranking/profile-ranking.vue';
+import ProfileImage from '@profiles/components/profile-image/profile-image.vue';
+import ProfileDice from '@profiles/components/profile-dice/profile-dice.vue';
+import NameAndDice from '@profiles/components/name-and-dice/name-and-dice.vue';
+import ProfileRanking from '@profiles/components/profile-ranking/profile-ranking.vue';
 import type { TPositionProfile, TPositionProfiles } from '@profiles/interfaces/profile.interface';
-import type { IPlayer } from '@/modules/players/interfaces/user.interface';
-import type { IActionsTurn } from '@/modules/game/interfaces/game.interface';
-import type { TDiceValues } from '@/modules/dice/interfaces/dice.interface';
+import type { IPlayer } from '@players/interfaces/user.interface';
+import type { IActionsTurn } from '@game/interfaces/game.interface';
+import type { TDiceValues } from '@dice/interfaces/dice.interface';
 
 interface ProfilePlayerProps {
   basePosition: TPositionProfiles;

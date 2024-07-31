@@ -9,9 +9,9 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import ShareModal from '@/modules/share/components/share-modal/share-modal.vue';
-import { shareLink } from '@/modules/share/helpers/share.helper';
-import { SHARE_AVAILABLE } from '@/modules/share/constants/share.constants';
+import ShareModal from '@share/components/share-modal/share-modal.vue';
+import { shareLink } from '@share/helpers/share.helper';
+import { SHARE_AVAILABLE } from '@share/constants/share.constants';
 
 interface ShareProps {
   data: ShareData;

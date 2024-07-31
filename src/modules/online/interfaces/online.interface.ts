@@ -1,4 +1,4 @@
-import type { IUser } from '@/modules/players/interfaces/user.interface';
+import type { IUser } from '@players/interfaces/user.interface';
 import type {
   TActionsBoardGame,
   TTotalPlayers,
@@ -7,7 +7,7 @@ import type {
 } from '@game/interfaces/game.interface';
 import type { TBoardColors, TColors } from '@board/interfaces/board.interface';
 import type { TDiceValues } from '@dice/interfaces/dice.interface';
-import type { ISelectTokenValues } from '@/modules/tokens/interfaces/token.interface';
+import type { ISelectTokenValues } from '@tokens/interfaces/token.interface';
 import type { ISocketListenChatMessage } from '@chat/interfaces/chat.interface';
 import type { EOptionsGame } from '@options/interfaces/options.enum';
 import type { ESounds } from '@sounds/interfaces/sounds.enum';

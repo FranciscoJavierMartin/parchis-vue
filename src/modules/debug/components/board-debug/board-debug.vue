@@ -33,9 +33,9 @@
 </template>
 
 <script setup lang="ts">
-import DebugTile from '@/modules/debug/components/debug-tile/debug-tile.vue';
+import DebugTile from '@debug/components/debug-tile/debug-tile.vue';
 import {
   POSITION_ELEMENTS_BOARD,
   POSITION_TILES,
-} from '@/modules/board/helpers/positions-board.helper';
+} from '@board/helpers/positions-board.helper';
 </script>

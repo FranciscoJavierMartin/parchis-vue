@@ -1,4 +1,4 @@
-import type { IListTokens } from '@/modules/tokens/interfaces/token.interface';
+import type { IListTokens } from '@tokens/interfaces/token.interface';
 
 export const TOKENS_JAIL_AND_OUTSITE: IListTokens[] = [
   {

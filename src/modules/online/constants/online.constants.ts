@@ -1,4 +1,4 @@
-import type { ISocketListenActions } from '@/modules/online/interfaces/online.interface';
+import type { ISocketListenActions } from '@online/interfaces/online.interface';
 import { TYPES_CHAT_MESSAGES } from '@chat/interfaces/chat.enum';
 import { EActionsBoardGame, ENextStepGame } from '@game/interfaces/game.enum';
 import { EOptionsGame } from '@options/interfaces/options.enum';
