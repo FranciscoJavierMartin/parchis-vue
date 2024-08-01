@@ -12,7 +12,7 @@
       </div>
       <template v-else>
         <GameLogo />
-        <ConfigPlayers @update-data="updateDataGame" />
+        <SetupPlayers @update-data="updateDataGame" />
       </template>
     </template>
   </PageWrapper>
@@ -22,7 +22,7 @@
 import { ref } from 'vue';
 import PageWrapper from '@layouts/components/wrapper/page-wrapper.vue';
 import GameLogo from '@common/components/game-logo/game-logo.vue';
-import ConfigPlayers from '@players/components/config-players/config-players.vue';
+import SetupPlayers from '@players/components/setup-players/setup-players.vue';
 import Game from '@game/components/game/game.vue';
 import MenuOptions from '@layouts/components/menu-options/menu-options.vue';
 import BackButton from '@layouts/components/back-button/back-button.vue';

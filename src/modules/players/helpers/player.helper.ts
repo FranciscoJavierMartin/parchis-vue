@@ -226,7 +226,7 @@ export function changeTotalPlayers(
 
   return {
     players: copyPlayers,
-    boardColors: boardColors as TBoardColors,
+    boardColors: boardColors!,
   };
 }
 
