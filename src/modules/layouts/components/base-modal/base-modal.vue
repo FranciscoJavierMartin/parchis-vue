@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO: Move to layout -->
   <Teleport to="#screen">
     <dialog open class="modal-wrapper">
       <div class="modal-container">

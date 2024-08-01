@@ -20,7 +20,6 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Rename to config player or something player
 import { ref, watch } from 'vue';
 import SelectNumberPlayers from '@players/components/select-number-players/select-number-players.vue';
 import PlayerInput from '@players/components/player-input/player-input.vue';

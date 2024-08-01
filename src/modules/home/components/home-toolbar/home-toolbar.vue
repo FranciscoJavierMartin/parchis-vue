@@ -3,13 +3,13 @@
     <RouterLink :to="{ name: ROUTES.ABOUT.name }" class="button blue" title="About">
       <BaseIcon type="info" />
     </RouterLink>
-    <MenuShare :data="dataShare">
+    <ShareButton :data="dataShare">
       <template #default="{ onClick }">
         <button title="Share" class="button blue" @click="onClick">
           <BaseIcon type="share" />
         </button>
       </template>
-    </MenuShare>
+    </ShareButton>
     <a v-if="isAuth" :href="API_LOGOUT" class="button blue" title="Logout">
       <BaseIcon type="logout" />
     </a>
@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import MenuShare from '@share/components/share-button/share-button.vue';
+import ShareButton from '@share/components/share-button/share-button.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import { ROUTES } from '@/router/routes';
 import { API_LOGOUT } from '@online/constants/online.constants';

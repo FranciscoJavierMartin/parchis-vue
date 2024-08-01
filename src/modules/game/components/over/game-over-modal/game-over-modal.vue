@@ -9,13 +9,13 @@
         </div>
       </div>
       <div class="game-over-buttons">
-        <MenuShare :data="dataShare">
+        <ShareButton :data="dataShare">
           <template #default="{ onClick }">
             <button class="button blue" @click="onClick">
               <BaseIcon type="share" />
             </button>
           </template>
-        </MenuShare>
+        </ShareButton>
         <button class="button yellow">
           <BaseIcon type="home" />
         </button>
@@ -33,6 +33,7 @@ import FirstPosition from '@game/components/over/first-position/first-position.v
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import OtherPlayer from '@game/components/over/other-player/other-player.vue';
 import useFocusTrap from '@common/composables/use-focus-trap/use-focus-trap';
+import ShareButton from '@share/components/share-button/share-button.vue';
 
 interface GameOverProps {
   players: IPlayer[];

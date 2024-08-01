@@ -24,6 +24,7 @@
 <script setup lang="ts">
 import { inject } from 'vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
+import MenuOption from '@options/components/menu-option/menu-option.vue';
 import BaseModal from '@layouts/components/base-modal/base-modal.vue';
 import useFocusTrap from '@common/composables/use-focus-trap/use-focus-trap';
 import type { TOptionsGame } from '@sounds/interfaces/sounds.interface';
