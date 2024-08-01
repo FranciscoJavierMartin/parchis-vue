@@ -113,8 +113,3 @@ export function validateChangeToken(selects: TSelects, listTokens: IListTokens[]
 
   return copyListTokens;
 }
-
-// TODO: Move to common
-export function copyToClipboard(text: string = ''): void {
-  navigator.clipboard.writeText(text);
-}

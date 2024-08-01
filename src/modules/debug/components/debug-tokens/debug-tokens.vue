@@ -48,17 +48,14 @@
 import { ref, computed, reactive, watch } from 'vue';
 import DebugSelect from '@debug/components/debug-select/debug-select.vue';
 import { ETypeGame } from '@game/interfaces/game.enum';
-import {
-  copyToClipboard,
-  getOptionsSelects,
-  validateChangeToken,
-} from '@debug/helpers/debug.helper';
+import { getOptionsSelects, validateChangeToken } from '@debug/helpers/debug.helper';
 import type { TOptions, TSelects } from '@debug/interfaces/debug.interface';
 import type { TDiceValues } from '@dice/interfaces/dice.interface';
 import type { IActionsTurn, TTypeGame } from '@game/interfaces/game.interface';
 import type { IListTokens } from '@tokens/interfaces/token.interface';
 import type { IPlayer } from '@players/interfaces/user.interface';
 import { LIST_TYPE_TILE } from '@debug/constants/debug.constants';
+import { copyToClipboard } from '@common/helpers/copy-to-clipboard.helper';
 
 interface TokensDebugProps {
   players: IPlayer[];
