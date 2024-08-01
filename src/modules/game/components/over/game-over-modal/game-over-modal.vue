@@ -33,7 +33,7 @@ import FirstPosition from '@game/components/over/first-position/first-position.v
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import OtherPlayer from '@game/components/over/other-player/other-player.vue';
 import ShareButton from '@share/components/share-button/share-button.vue';
-import BaseModal from '@/modules/layouts/components/base-modal/base-modal.vue';
+import BaseModal from '@layouts/components/base-modal/base-modal.vue';
 
 interface GameOverProps {
   players: IPlayer[];
