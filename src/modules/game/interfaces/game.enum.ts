@@ -1,0 +1,20 @@
+export enum EActionsBoardGame {
+  'ROLL_DICE' = 'ROLL_DICE',
+  'SELECT_TOKEN' = 'SELECT_TOKEN',
+  'OPPONENT_LEAVE' = 'OPPONENT_LEAVE',
+  'CHAT_MESSAGE' = 'CHAT_MESSAGE',
+  'START_GAME' = 'START_GAME',
+  'DONE_DICE' = 'DONE_DICE',
+  'DONE_TOKEN_MOVEMENT' = 'DONE_TOKEN_MOVEMENT',
+}
+
+export enum ENextStepGame {
+  'ROLL_DICE_AGAIN' = 'ROLL_DICE_AGAIN',
+  'MOVE_TOKENS_AGAIN' = 'MOVE_TOKENS_AGAIN',
+  'NEXT_TURN' = 'NEXT_TURN',
+}
+
+export enum ETypeGame {
+  'OFFLINE' = 'OFFLINE',
+  'ONLINE' = 'ONLINE',
+}
