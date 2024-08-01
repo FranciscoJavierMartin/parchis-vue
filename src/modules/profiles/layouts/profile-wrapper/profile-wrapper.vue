@@ -21,18 +21,15 @@
 import { computed } from 'vue';
 import ProfilePlayer from '@profiles/components/profile-player/profile-player.vue';
 import { DEFAULT_VALUE_ACTION_TURN } from '@game/constants/game.constants';
-import type { TPositionProfile, TPositionProfiles } from '@profiles/interfaces/profile.interface';
-import type { IPlayer } from '@players/interfaces/user.interface';
-import type { IActionsTurn, TTotalPlayers } from '@game/interfaces/game.interface';
+import type {
+  IProfilesData,
+  TPositionProfile,
+  TPositionProfiles,
+} from '@profiles/interfaces/profile.interface';
+import type { TTotalPlayers } from '@game/interfaces/game.interface';
 import type { TDiceValues } from '@dice/interfaces/dice.interface';
 
-// TODO: Extract in common (without position)
-interface ProfileSectionProps {
-  basePosition: TPositionProfiles;
-  currentTurn: number;
-  players: IPlayer[];
-  totalPlayers: TTotalPlayers;
-  actionsTurn: IActionsTurn;
+interface ProfileSectionProps extends IProfilesData {
   position: TPositionProfile;
 }
 

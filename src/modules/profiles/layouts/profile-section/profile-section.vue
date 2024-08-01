@@ -24,18 +24,9 @@
 import ProfileWrapper from '@profiles/layouts/profile-wrapper/profile-wrapper.vue';
 import { EPositionProfile } from '@board/interfaces/board.enum';
 import type { TDiceValues } from '@dice/interfaces/dice.interface';
-import type { IActionsTurn, TTotalPlayers } from '@game/interfaces/game.interface';
-import type { TPositionProfiles } from '@profiles/interfaces/profile.interface';
-import type { IPlayer } from '@players/interfaces/user.interface';
+import type { IProfilesData } from '@profiles/interfaces/profile.interface';
 
-// TODO: Extract in common
-interface ProfileSectionProps {
-  basePosition: TPositionProfiles;
-  currentTurn: number;
-  players: IPlayer[];
-  totalPlayers: TTotalPlayers;
-  actionsTurn: IActionsTurn;
-}
+interface ProfileSectionProps extends IProfilesData {}
 
 defineProps<ProfileSectionProps>();
 defineEmits<{
