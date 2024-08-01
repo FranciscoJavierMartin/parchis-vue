@@ -1,12 +1,18 @@
 <template>
   <Teleport to="#screen">
-    <dialog open class="modal-wrapper">
+    <dialog ref="trapRef" open class="modal-wrapper">
       <div class="modal-container">
         <slot />
       </div>
     </dialog>
   </Teleport>
 </template>
+
+<script setup lang="ts">
+import useTrapFocus from '@common/composables/use-focus-trap/use-focus-trap';
+
+const { trapRef } = useTrapFocus();
+</script>
 
 <style scoped>
 .modal-wrapper {

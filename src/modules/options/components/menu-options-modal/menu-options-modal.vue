@@ -1,6 +1,6 @@
 <template>
   <BaseModal>
-    <div ref="trapRef" class="menu-options-modal">
+    <div class="menu-options-modal">
       <div class="modal-options-header">
         Options
         <button title="Close" class="button menu-options-close" @click="$emit('close')">
@@ -26,15 +26,12 @@ import { inject } from 'vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import MenuOption from '@options/components/menu-option/menu-option.vue';
 import BaseModal from '@layouts/components/base-modal/base-modal.vue';
-import useFocusTrap from '@common/composables/use-focus-trap/use-focus-trap';
 import type { TOptionsGame } from '@sounds/interfaces/sounds.interface';
 import { OptionsGameStateSymbol } from '@sounds/constants/sounds.constants';
 import type { TypeIcon } from '@common/interfaces/icons.interface';
 import type { EOptionsGame } from '@options/interfaces/options.enum';
 
 defineEmits<{ close: [] }>();
-
-const { trapRef } = useFocusTrap();
 
 const optionsGame: TOptionsGame = inject<TOptionsGame>(OptionsGameStateSymbol)!;
 </script>

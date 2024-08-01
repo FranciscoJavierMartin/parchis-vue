@@ -5,8 +5,6 @@ const focusableElementsSelector: string =
 
 export default function useFocusTrap(): {
   trapRef: Ref<HTMLElement>;
-  initFocusTrap: () => void;
-  clearFocusTrap: () => void;
 } {
   let focusableElements: NodeListOf<HTMLElement>;
   let $firstFocusable: HTMLElement;
@@ -69,7 +67,5 @@ export default function useFocusTrap(): {
 
   return {
     trapRef,
-    initFocusTrap,
-    clearFocusTrap,
   };
 }
