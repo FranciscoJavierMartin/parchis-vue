@@ -147,22 +147,21 @@ export function getInitialBoardColors(): EBoardColors {
   return boardColors;
 }
 
-// TODO: Return boardColors (with 's' at the end)
 function getColorsByTotalPlayers(
   color: TColors,
   totalPlayers: TTotalPlayers,
   index: number,
-): { boardColor: string | undefined; colors: TColors[] } {
-  const colors: { boardColor: string | undefined; colors: TColors[] } = {
-    boardColor: '',
+): { boardColors: TBoardColors | undefined; colors: TColors[] } {
+  const colors: { boardColors: TBoardColors | undefined; colors: TColors[] } = {
+    boardColors: undefined,
     colors: [],
   };
   const colorSuffix = color.substring(0, 1);
 
   if (totalPlayers === 2) {
     const indexSearch: number = index === 0 ? 0 : 2;
-    colors.boardColor = getBoardColorType(indexSearch, colorSuffix);
-    const splitColor: string[] = colors.boardColor?.split('') || [];
+    colors.boardColors = getBoardColorType(indexSearch, colorSuffix);
+    const splitColor: string[] = colors.boardColors?.split('') || [];
     const sufixFirstColor: TSufixColors = (
       index === 0 ? splitColor[0] : splitColor[2]
     ) as TSufixColors;
@@ -177,8 +176,8 @@ function getColorsByTotalPlayers(
     colors.colors[index] = color === firstColor ? firstColor : secondColor;
     colors.colors[oppositeIndex] = color === secondColor ? secondColor : firstColor;
   } else {
-    colors.boardColor = getBoardColorType(index, colorSuffix);
-    const splitColor: string[] = colors.boardColor?.split('') || [];
+    colors.boardColors = getBoardColorType(index, colorSuffix);
+    const splitColor: string[] = colors.boardColors?.split('') || [];
 
     colors.colors = splitColor
       .filter((_value: string, index: number) => index < totalPlayers)
@@ -188,8 +187,10 @@ function getColorsByTotalPlayers(
   return colors;
 }
 
-function getBoardColorType(index: number, colorSuffix: string): string | undefined {
-  return Object.keys(EBoardColors).find((color) => color.split('')[index] === colorSuffix);
+function getBoardColorType(index: number, colorSuffix: string): TBoardColors | undefined {
+  return Object.keys(EBoardColors).find((color) => color.split('')[index] === colorSuffix) as
+    | TBoardColors
+    | undefined;
 }
 
 export function sanizateTags(input: string): string {
@@ -206,7 +207,11 @@ export function changeTotalPlayers(
   const copyPlayers = cloneDeep(players);
   const copyTotalPlayers = totalPlayers;
 
-  const { colors, boardColor } = getColorsByTotalPlayers(copyPlayers[0].color, copyTotalPlayers, 0);
+  const { colors, boardColors } = getColorsByTotalPlayers(
+    copyPlayers[0].color,
+    copyTotalPlayers,
+    0,
+  );
 
   copyPlayers.forEach((_player: IPlayerOffline, index: number) => {
     copyPlayers[index].disabled = !(index + 1 <= totalPlayers);
@@ -216,12 +221,12 @@ export function changeTotalPlayers(
     }
   });
 
-  saveProperties({ totalPlayers, boardColor });
+  saveProperties({ totalPlayers, boardColors });
   savePlayerDataCache(players);
 
   return {
     players: copyPlayers,
-    boardColors: boardColor as TBoardColors,
+    boardColors: boardColors as TBoardColors,
   };
 }
 
@@ -231,18 +236,18 @@ export function changeColorPlayer(
   index: number,
   totalPlayers: TTotalPlayers,
 ): { players: IPlayerOffline[]; boardColors: TBoardColors } {
-  const { colors, boardColor } = getColorsByTotalPlayers(color, totalPlayers, index);
+  const { colors, boardColors } = getColorsByTotalPlayers(color, totalPlayers, index);
 
   const copyPlayers = players.map((player: IPlayerOffline, index: number) => ({
     ...player,
     color: colors[index],
   }));
 
-  saveProperty(BOARD_COLORS, boardColor);
+  saveProperty(BOARD_COLORS, boardColors);
 
   return {
     players: copyPlayers,
-    boardColors: boardColor as TBoardColors,
+    boardColors: boardColors!,
   };
 }
 
