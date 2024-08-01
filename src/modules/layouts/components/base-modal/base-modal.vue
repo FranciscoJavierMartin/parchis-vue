@@ -19,7 +19,7 @@ const { trapRef } = useTrapFocus();
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 20;
+  z-index: var(--modal-z-index);
   display: flex;
   align-items: center;
   justify-content: center;

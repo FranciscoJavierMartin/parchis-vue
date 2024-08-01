@@ -1,5 +1,5 @@
 <template>
-  <dialog ref="trapRef" class="game-over-wrapper">
+  <BaseModal>
     <div class="game-over-options">
       <div class="game-over-container">
         <GameOverRibbon title="Well played" />
@@ -21,7 +21,7 @@
         </button>
       </div>
     </div>
-  </dialog>
+  </BaseModal>
 </template>
 
 <script setup lang="ts">
@@ -32,8 +32,8 @@ import GameOverRibbon from '@game/components/over/game-over-ribbon/game-over-rib
 import FirstPosition from '@game/components/over/first-position/first-position.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import OtherPlayer from '@game/components/over/other-player/other-player.vue';
-import useFocusTrap from '@common/composables/use-focus-trap/use-focus-trap';
 import ShareButton from '@share/components/share-button/share-button.vue';
+import BaseModal from '@/modules/layouts/components/base-modal/base-modal.vue';
 
 interface GameOverProps {
   players: IPlayer[];
@@ -48,7 +48,6 @@ const dataShare: ShareData = {
 const props = defineProps<GameOverProps>();
 const first = ref<IPlayer>();
 const others = ref<IPlayer[]>();
-const { trapRef } = useFocusTrap();
 
 onBeforeMount(() => {
   const rankingPlayers = getOrganizedRanking(props.players);
@@ -58,72 +57,55 @@ onBeforeMount(() => {
 </script>
 
 <style scoped>
-.game-over-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.game-over-options {
   width: 100%;
-  height: 100%;
-  background: rgb(0 0 0 / 80%);
+  animation: fadeInLeft 500ms ease both;
 
-  .game-over-options {
+  .game-over-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 75%;
-    animation: fadeInLeft 500ms ease both;
+    width: 100%;
+    padding: 35px 0 15px 0;
+    background: radial-gradient(circle, rgba(160, 34, 107, 1) 16%, rgba(95, 8, 98, 1) 100%);
+    border-radius: 5px;
+    box-shadow:
+      black 0px 0px 0px 3px,
+      #be835d 0px 0px 0px 6px,
+      rgb(255, 217, 19) 0px 0px 0px 9px;
 
-    .game-over-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding: 35px 0 15px 0;
-      background: radial-gradient(circle, rgba(160, 34, 107, 1) 16%, rgba(95, 8, 98, 1) 100%);
-      border-radius: 5px;
-      box-shadow:
-        black 0px 0px 0px 3px,
-        #be835d 0px 0px 0px 6px,
-        rgb(255, 217, 19) 0px 0px 0px 9px;
-
-      &:deep(.game-over-ribbon) {
-        position: absolute;
-        top: -50px;
-      }
-
-      .game-over-container-others {
-        display: flex;
-        gap: 15px;
-        justify-content: center;
-        width: 85%;
-      }
+    &:deep(.game-over-ribbon) {
+      position: absolute;
+      top: -50px;
     }
 
-    .game-over-buttons {
+    .game-over-container-others {
       display: flex;
       gap: 15px;
       justify-content: center;
-      width: 100%;
-      margin-top: 20px;
+      width: 85%;
+    }
+  }
 
-      .button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 50px;
-        border: none;
-        border-radius: 10px;
+  .game-over-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
 
-        .icon-wrapper {
-          width: 60%;
-        }
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border: none;
+      border-radius: 10px;
+
+      .icon-wrapper {
+        width: 60%;
       }
     }
   }
