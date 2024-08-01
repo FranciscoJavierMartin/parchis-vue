@@ -1,6 +1,6 @@
 <template>
   <Teleport to="#screen">
-    <dialog open class="modal-wrapper">
+    <dialog ref="trapRef" open class="modal-wrapper">
       <div class="modal-container">
         <slot />
       </div>
@@ -8,12 +8,18 @@
   </Teleport>
 </template>
 
+<script setup lang="ts">
+import useTrapFocus from '@common/composables/use-focus-trap/use-focus-trap';
+
+const { trapRef } = useTrapFocus();
+</script>
+
 <style scoped>
 .modal-wrapper {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 20;
+  z-index: var(--modal-z-index);
   display: flex;
   align-items: center;
   justify-content: center;
