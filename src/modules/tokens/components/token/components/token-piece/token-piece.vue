@@ -22,9 +22,13 @@ import type { CSSProperties, StyleValue } from 'vue';
 import type { TColors } from '@board/interfaces/board.interface';
 
 interface PieceProps {
+  /** Token color */
   color: TColors;
+  /** Additional styles */
   style?: StyleValue;
+  /** Token index (for debug) */
   index?: number;
+  /** Enable debug */
   debug?: boolean;
 }
 
