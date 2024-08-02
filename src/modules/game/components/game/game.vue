@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { inject, ref, watch } from 'vue';
-import GameBoard from '@board/components/game-board.vue';
+import GameBoard from '@board/components/game-board/game-board.vue';
 import BoardDebug from '@debug/components/board-debug/board-debug.vue';
 import ShowTotalTokens from '@tokens/components/token/components/show-total-tokens/show-total-tokens.vue';
 import ProfileSection from '@profiles/layouts/profile-section/profile-section.vue';

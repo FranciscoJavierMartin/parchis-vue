@@ -8,6 +8,7 @@
 import { EBoardColors } from '@board/interfaces/board.enum';
 
 interface BoardProps {
+  /** Board orientation */
   boardColor?: EBoardColors;
 }
 

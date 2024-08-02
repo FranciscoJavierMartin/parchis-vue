@@ -8,6 +8,9 @@ const config: StorybookConfig = {
     '@chromatic-com/storybook',
     '@storybook/addon-interactions',
   ],
+  core: {
+    disableTelemetry: true, // 👈 Disables telemetry
+  },
   framework: {
     name: '@storybook/vue3-vite',
     options: {
