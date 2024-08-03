@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3';
 import LoadingIndicator from '@common/components/loading-indicator/loading-indicator.vue';
 
 const meta: Meta<typeof LoadingIndicator> = {
-  title: 'Common/Loading Indicator',
+  title: 'Common/LoadingIndicator',
   component: LoadingIndicator,
   tags: ['autodocs'],
   parameters: {
