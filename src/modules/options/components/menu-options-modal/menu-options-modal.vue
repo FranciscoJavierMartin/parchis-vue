@@ -31,7 +31,10 @@ import { OptionsGameStateSymbol } from '@sounds/constants/sounds.constants';
 import type { TypeIcon } from '@common/interfaces/icons.interface';
 import type { EOptionsGame } from '@options/interfaces/options.enum';
 
-defineEmits<{ close: [] }>();
+defineEmits<{
+  /** Close modal */
+  close: [];
+}>();
 
 const optionsGame: TOptionsGame = inject<TOptionsGame>(OptionsGameStateSymbol)!;
 </script>
