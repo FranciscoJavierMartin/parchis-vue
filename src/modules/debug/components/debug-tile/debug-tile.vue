@@ -17,7 +17,14 @@
 import { SIZE_TILE } from '@board/constants/sizes.constants';
 import type { ICoordinate } from '@board/interfaces/board.interface';
 
-withDefaults(defineProps<{ coordinate: ICoordinate; invertedColor?: boolean }>(), {
+interface DebugTileProps {
+  /** Coordinate to place tile */
+  coordinate: ICoordinate;
+  /** Inverted color */
+  invertedColor?: boolean;
+}
+
+withDefaults(defineProps<DebugTileProps>(), {
   invertedColor: false,
 });
 </script>
