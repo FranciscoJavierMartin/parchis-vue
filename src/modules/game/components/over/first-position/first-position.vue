@@ -22,6 +22,7 @@ import { getLabelRanking } from '@players/helpers/player.helper';
 import type { IPlayer } from '@players/interfaces/user.interface';
 
 interface FirstPositionProps {
+  /** Winner info */
   first: IPlayer;
 }
 
