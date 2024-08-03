@@ -25,7 +25,9 @@ const isOpen: Ref<boolean> = ref<boolean>(false);
 const router = useRouter();
 
 interface BackButtonProps {
+  /** Where to go (name) */
   to?: TRoutesName;
+  /** Display modal before navigate */
   withConfirmation?: boolean;
 }
 
