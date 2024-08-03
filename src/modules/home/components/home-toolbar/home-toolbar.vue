@@ -23,6 +23,7 @@ import { ROUTES } from '@/router/routes';
 import { API_LOGOUT } from '@online/constants/online.constants';
 
 interface HomeToolbarProps {
+  /** Is user authenticated */
   isAuth: boolean;
 }
 
