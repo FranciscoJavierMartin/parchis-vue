@@ -7,6 +7,7 @@
 
 <script setup lang="ts">
 interface OptionSwitchProps {
+  /** Input id */
   id: string;
 }
 
