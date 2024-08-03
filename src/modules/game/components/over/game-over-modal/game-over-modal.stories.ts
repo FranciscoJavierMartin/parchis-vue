@@ -25,7 +25,6 @@ const meta: Meta<typeof GameOverModal> = {
         counterMessage: 0,
         ranking: 4,
       },
-
       {
         id: '7e37-4ff7-fcd8-1dfe-0ad9',
         name: 'Bob',
@@ -40,7 +39,6 @@ const meta: Meta<typeof GameOverModal> = {
         counterMessage: 0,
         ranking: 1,
       },
-
       {
         id: '1d75-1fc3-979c-a64b-6e6d',
         name: 'Carol',
