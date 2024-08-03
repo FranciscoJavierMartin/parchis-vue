@@ -98,11 +98,17 @@ import { ESounds } from '@sounds/interfaces/sounds.enum';
 
 // TODO: Add types for socket
 interface GameProps {
+  /** Number of players */
   totalPlayers: TTotalPlayers;
+  /** Who starts the game */
   initialTurn: number;
+  /** players data */
   users: IUser[];
+  /** Game mode */
   typeGame?: TTypeGame;
+  /** Board orientation */
   boardColor?: TBoardColors;
+  /** Enable debug */
   debug?: boolean;
 }
 
