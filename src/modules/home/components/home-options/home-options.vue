@@ -16,6 +16,7 @@ import BaseIcon from '@common/components/icons/base-icon.vue';
 import { ROUTES } from '@/router/routes';
 
 interface HomeOptionsProps {
+  /** Is there service error */
   serviceError?: boolean;
 }
 
