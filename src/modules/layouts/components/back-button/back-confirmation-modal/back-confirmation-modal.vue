@@ -23,7 +23,12 @@
 import BaseModal from '@layouts/components/base-modal/base-modal.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 
-defineEmits(['cancel', 'confirmation']);
+defineEmits<{
+  /** Press 'No' button */
+  cancel: [];
+  /** Press 'Yes' button */
+  confirmation: [];
+}>();
 </script>
 
 <style scoped>
