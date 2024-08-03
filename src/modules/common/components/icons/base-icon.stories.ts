@@ -12,6 +12,7 @@ const meta: Meta<typeof BaseIcon> = {
   args: {
     type: 'info',
     fill: 'blue',
+    isMuted: false,
   },
   argTypes: {
     type: { control: 'select', options: Object.keys(ICONS_DATA) },
