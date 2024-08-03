@@ -14,7 +14,9 @@ import BaseIcon from '@common/components/icons/base-icon.vue';
 import type { TypeIcon } from '@common/interfaces/icons.interface';
 
 interface MenuOptionProp {
+  /** Text to show */
   label: string;
+  /** Icon to show */
   icon: TypeIcon;
 }
 
