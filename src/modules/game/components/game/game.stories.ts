@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import Game from '@game/components/game/game.vue';
 import { EBoardColors } from '@board/interfaces/board.enum';
-import AppWrapper from '@layouts/components/wrapper/app-wrapper.vue';
+import AppWrapper from '@layouts/components/wrapper/app-wrapper/app-wrapper.vue';
 
 const meta: Meta<typeof Game> = {
   title: 'Game/Game',

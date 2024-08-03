@@ -1,7 +1,7 @@
 import { nextTick, onMounted, ref } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3';
 import MenuOptions from '@layouts/components/menu-options/menu-options.vue';
-import AppWrapper from '@layouts/components/wrapper/app-wrapper.vue';
+import AppWrapper from '@layouts/components/wrapper/app-wrapper/app-wrapper.vue';
 
 const meta: Meta<typeof MenuOptions> = {
   title: 'Layouts/MenuOptions',

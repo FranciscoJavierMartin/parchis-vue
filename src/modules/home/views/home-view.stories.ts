@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import HomeView from '@home/views/home-view.vue';
-import AppWrapper from '@layouts/components/wrapper/app-wrapper.vue';
+import AppWrapper from '@layouts/components/wrapper/app-wrapper/app-wrapper.vue';
 
 const meta: Meta<typeof HomeView> = {
   title: 'Pages/Home',
