@@ -11,8 +11,11 @@
 import type { IOptions } from '@debug/interfaces/debug.interface';
 
 interface DebugSelectProps {
+  /** Title for the options */
   title: string;
+  /** Options to select */
   options?: IOptions[];
+  /** Disable select */
   disabled?: boolean;
 }
 
