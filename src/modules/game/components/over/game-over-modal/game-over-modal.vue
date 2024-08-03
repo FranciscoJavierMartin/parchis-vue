@@ -36,6 +36,7 @@ import ShareButton from '@share/components/share-button/share-button.vue';
 import BaseModal from '@layouts/components/base-modal/base-modal.vue';
 
 interface GameOverProps {
+  /** Players info (unordered) */
   players: IPlayer[];
 }
 
