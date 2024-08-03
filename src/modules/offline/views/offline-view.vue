@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import PageWrapper from '@layouts/components/wrapper/page-wrapper.vue';
+import PageWrapper from '@layouts/components/wrapper/page-wrapper/page-wrapper.vue';
 import GameLogo from '@common/components/game-logo/game-logo.vue';
 import SetupPlayers from '@players/components/setup-players/setup-players.vue';
 import Game from '@game/components/game/game.vue';

@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import GameLogo from '@common/components/game-logo/game-logo.vue';
-import PageWrapper from '@layouts/components/wrapper/page-wrapper.vue';
+import PageWrapper from '@layouts/components/wrapper/page-wrapper/page-wrapper.vue';
 import MenuOptions from '@layouts/components/menu-options/menu-options.vue';
 import HomeOptions from '@home/components/home-options/home-options.vue';
 import HomeAlert from '@home/components/home-alert/home-alert.vue';

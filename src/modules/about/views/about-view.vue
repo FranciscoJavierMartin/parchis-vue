@@ -49,7 +49,7 @@
 import GameLogo from '@common/components/game-logo/game-logo.vue';
 import MenuOptions from '@layouts/components/menu-options/menu-options.vue';
 import BackButton from '@/modules/layouts/components/back-button/back-button/back-button.vue';
-import PageWrapper from '@layouts/components/wrapper/page-wrapper.vue';
+import PageWrapper from '@layouts/components/wrapper/page-wrapper/page-wrapper.vue';
 </script>
 
 <style scoped>
