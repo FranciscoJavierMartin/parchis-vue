@@ -21,8 +21,11 @@ import DiceFace from '@dice/components/dice-face/dice-face.vue';
 import type { IDiceList } from '@dice/interfaces/dice.interface';
 
 interface NameAndDiceProps {
+  /** Player name */
   name: string;
+  /** Dices available */
   diceAvailable: IDiceList[];
+  /** Has player current turn */
   hasTurn: boolean;
 }
 
