@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3';
 import SelectNumberPlayers from '@players/components/select-number-players/select-number-players.vue';
-import type { TTotalPlayers } from '@/modules/game/interfaces/game.interface';
+import type { TTotalPlayers } from '@game/interfaces/game.interface';
 
 const meta: Meta<typeof SelectNumberPlayers> = {
   title: 'Players/SelectNumberPlayers',
