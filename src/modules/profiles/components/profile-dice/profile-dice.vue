@@ -19,9 +19,13 @@ import type { TDiceValues } from '@dice/interfaces/dice.interface';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 
 interface ProfileDiceProps {
+  /** Is roll dice disabled */
   disabledDice: boolean;
+  /** Show dice */
   showDice: boolean;
+  /** Current dice value */
   value: 0 | TDiceValues;
+  /** Number of rollings */
   diceRollNumber: number;
 }
 
@@ -32,7 +36,9 @@ const props = withDefaults(defineProps<ProfileDiceProps>(), {
   diceRollNumber: 0,
 });
 const emit = defineEmits<{
+  /** When roll dice is done */
   handleDoneDice: [isActionSocket?: boolean];
+  /** When press dice */
   handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
 }>();
 
