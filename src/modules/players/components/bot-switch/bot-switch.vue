@@ -7,6 +7,7 @@
 
 <script setup lang="ts">
 interface BotSwitchProps {
+  /** Input id */
   id: string;
 }
 
