@@ -27,13 +27,7 @@ const meta: Meta<typeof PlayerInput> = {
         const name = ref<string>('');
         const isBot = ref<boolean>(false);
 
-        function handleColorDistribution(newColor: TColors, index: number): void {
-          console.log(newColor);
-          color.value = newColor;
-          (args as any).color = newColor;
-        }
-
-        return { args, color, name, isBot, handleColorDistribution };
+        return { args, color, name, isBot };
       },
       template: `
         <div style="margin: 3rem">
@@ -42,7 +36,6 @@ const meta: Meta<typeof PlayerInput> = {
             v-model:name="name" 
             v-model:is-bot="isBot" 
             v-bind="args" 
-            @update:color="(color) => handleColorDistribution(color, args.index)"
             />
         </div>
     `,
