@@ -24,6 +24,7 @@ import SelectTokenColorTooltip from '@players/components/select-token-color-tool
 import { vClickOutside } from '@common/directives/click-outside/click-outside.directive';
 
 interface SelectTokenColorProps {
+  /** Disable input */
   disabled: boolean;
 }
 
