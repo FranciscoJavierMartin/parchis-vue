@@ -1,7 +1,7 @@
+import { ref } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3';
 import ProfileDice from '@profiles/components/profile-dice/profile-dice.vue';
-import type { TDiceValues } from '@/modules/dice/interfaces/dice.interface';
-import { ref } from 'vue';
+import type { TDiceValues } from '@dice/interfaces/dice.interface';
 
 const meta: Meta<typeof ProfileDice> = {
   title: 'Profiles/ProfileDice',

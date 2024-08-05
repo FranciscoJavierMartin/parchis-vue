@@ -24,14 +24,19 @@ import type { IPlayer } from '@players/interfaces/user.interface';
 import type { TPositionProfile } from '@profiles/interfaces/profile.interface';
 
 interface ProfileImageProps {
+  /** Player info */
   player: IPlayer;
+  /** Start timer */
   startTimer: boolean;
+  /** Position on screen (left or right) */
   position: TPositionProfile;
 }
 
 const props = defineProps<ProfileImageProps>();
 const emit = defineEmits<{
+  /** Mute chat */
   handleMuteChat: [playerIndex: number];
+  /** When interval is finished */
   handleInterval: [ends: boolean];
 }>();
 
