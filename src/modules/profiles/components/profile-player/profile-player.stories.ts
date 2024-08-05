@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import ProfilePlayer from '@profiles/components/profile-player/profile-player.vue';
-import { EPositionProfile } from '@board/interfaces/board.enum';
+import { EPositionProfile, EPositionProfiles } from '@board/interfaces/board.enum';
 import { getInitialActionsTurnValue } from '@game/helpers/game.helper';
 
 const meta: Meta<typeof ProfilePlayer> = {
@@ -12,6 +12,7 @@ const meta: Meta<typeof ProfilePlayer> = {
   },
   argTypes: {
     position: { control: 'select', options: Object.values(EPositionProfile) },
+    basePosition: { control: 'select', options: Object.values(EPositionProfiles) },
   },
   args: {
     player: {

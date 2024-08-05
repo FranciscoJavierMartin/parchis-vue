@@ -10,6 +10,7 @@ import { getLabelRanking } from '@players/helpers/player.helper';
 import type { TPlayerRankingPosition } from '@profiles/interfaces/profile.interface';
 
 interface ProfileRankingProps {
+  /** Position in ranking */
   value: TPlayerRankingPosition;
 }
 
