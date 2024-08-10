@@ -25,16 +25,6 @@ const value = defineModel<boolean>();
   width: 50px;
   height: 27px;
 
-  .slider-icon {
-    &::before {
-      background-image: url('/images/bot.png');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 20px;
-      opacity: 0;
-    }
-  }
-
   .slider,
   .slider-icon {
     position: absolute;
@@ -45,8 +35,8 @@ const value = defineModel<boolean>();
     cursor: pointer;
     background-color: #ccc;
     border-radius: 28px;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
+    transition-duration: 0.5s;
+    transition-property: background-color;
 
     &::before {
       position: absolute;
@@ -58,8 +48,18 @@ const value = defineModel<boolean>();
       content: '';
       background-color: white;
       border-radius: 50%;
-      transition-duration: 5s;
-      transition-property: all;
+      transition-duration: 0.5s;
+      transition-property: opacity, transform;
+    }
+  }
+
+  .slider-icon {
+    &::before {
+      background-image: url('/images/bot.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 20px;
+      opacity: 0;
     }
   }
 
