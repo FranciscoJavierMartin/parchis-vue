@@ -47,6 +47,8 @@ const value = defineModel<boolean>();
       border-radius: 50%;
       -webkit-transition: 0.4s;
       transition: 0.4s;
+      transition-duration: 1s;
+      transition-property: all;
     }
 
     &.slider-icon {
@@ -76,6 +78,12 @@ const value = defineModel<boolean>();
 
     &:focus + .slider {
       box-shadow: 0 0 1px #2196f3;
+    }
+
+    &:not(:checked) + .slider-icon {
+      &::before {
+        opacity: 0;
+      }
     }
   }
 }
