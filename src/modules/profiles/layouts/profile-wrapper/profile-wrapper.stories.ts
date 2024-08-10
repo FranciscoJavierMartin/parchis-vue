@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import ProfileSection from '@profiles/layouts/profile-section/profile-section.vue';
+import ProfileWrapper from '@profiles/layouts/profile-wrapper/profile-wrapper.vue';
 
-const meta: Meta<typeof ProfileSection> = {
-  title: 'Profiles/ProfileSection',
-  component: ProfileSection,
+const meta: Meta<typeof ProfileWrapper> = {
+  title: 'Profiles/ProfileWrapper',
+  component: ProfileWrapper,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
@@ -97,14 +97,30 @@ const meta: Meta<typeof ProfileSection> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const TopPosition: Story = {
+export const TopRightPosition: Story = {
   args: {
     basePosition: 'TOP',
+    position: 'RIGHT',
   },
 };
 
-export const BottomPosition: Story = {
+export const TopLeftPosition: Story = {
+  args: {
+    basePosition: 'TOP',
+    position: 'LEFT',
+  },
+};
+
+export const BottomRightPosition: Story = {
   args: {
     basePosition: 'BOTTOM',
+    position: 'RIGHT',
+  },
+};
+
+export const BottomLeftPosition: Story = {
+  args: {
+    basePosition: 'BOTTOM',
+    position: 'LEFT',
   },
 };
