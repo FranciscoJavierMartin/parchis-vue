@@ -41,6 +41,7 @@ const value = defineModel<boolean>();
       position: absolute;
       bottom: 2px;
       left: 2px;
+      z-index: 2;
       width: 23px;
       height: 23px;
       content: '';
@@ -69,6 +70,7 @@ const value = defineModel<boolean>();
       position: absolute;
       bottom: 2px;
       left: 2px;
+      z-index: 2;
       width: 23px;
       height: 23px;
       content: '';
@@ -78,6 +80,7 @@ const value = defineModel<boolean>();
       background-position: center;
       background-size: 20px;
       border-radius: 50%;
+      opacity: 0;
       -webkit-transition: 0.4s;
       transition: 0.4s;
       transition-duration: 1s;
@@ -104,6 +107,7 @@ const value = defineModel<boolean>();
       background-color: #2196f3;
 
       &::before {
+        opacity: 1;
         -webkit-transform: translateX(23px);
         -ms-transform: translateX(23px);
         transform: translateX(23px);
@@ -117,12 +121,6 @@ const value = defineModel<boolean>();
     &:focus ~ .slider-icon {
       box-shadow: 0 0 1px #2196f3;
     }
-
-    /* &:not(:checked) + .slider-icon {
-      &::before {
-        background-image: none;
-      }
-    } */
   }
 }
 </style>

@@ -11,7 +11,6 @@ const meta: Meta<typeof InputSwitch> = {
   },
   args: {
     id: '1234abcd',
-    backgroundImage: '/images/bot.png',
   },
   decorators: [
     (args: object): object => ({
@@ -34,3 +33,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const WithImage: Story = {
+  args: {
+    backgroundImage: '/images/bot.png',
+  },
+};
