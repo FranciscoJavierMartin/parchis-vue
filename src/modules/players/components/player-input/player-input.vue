@@ -2,7 +2,7 @@
   <div class="game-offline-player">
     <SelectTokenColor :disabled="disabled" v-model="tokenColor" />
     <InputName :disabled="disabled" v-model="playerName" />
-    <BotSwitch :id="`${id}_bot_switch`" v-model="isBot" />
+    <InputSwitch :id="`${id}_bot_switch`" :icon="botImage" v-model="isBot" />
   </div>
 </template>
 
@@ -11,7 +11,8 @@ import type { TColors } from '@board/interfaces/board.interface';
 import type { IPlayerOffline } from '@players/interfaces/player.interface';
 import SelectTokenColor from '@players/components/select-token-color/select-token-color.vue';
 import InputName from '@players/components/input-name/input-name.vue';
-import BotSwitch from '@players/components/bot-switch/bot-switch.vue';
+import InputSwitch from '@common/components/input-switch/input-switch.vue';
+import botImage from '@/assets/images/bot.png';
 
 interface PlayerInputProps extends IPlayerOffline {}
 
