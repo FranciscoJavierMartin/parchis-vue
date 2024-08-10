@@ -21,12 +21,19 @@ import type { IListTokens, ISelectTokenValues } from '@tokens/interfaces/token.i
 import GameToken from '@tokens/components/token/components/game-token/game-token.vue';
 
 interface TokenListProps {
+  /** Dice list */
   diceList: IDiceList[];
+  /** Token list */
   listToken: IListTokens[];
+  /** Disable UI interaction */
   isDisabledUI?: boolean;
+  /** Enable debug */
   debug?: boolean;
 }
 
 withDefaults(defineProps<TokenListProps>(), { isDisabledUI: false, debug: false });
-defineEmits<{ handleSelectedToken: [selectTokenValues: ISelectTokenValues] }>();
+defineEmits<{
+  /** Emitted when select dice */
+  handleSelectedToken: [selectTokenValues: ISelectTokenValues];
+}>();
 </script>
