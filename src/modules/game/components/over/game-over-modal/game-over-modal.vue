@@ -16,9 +16,9 @@
             </button>
           </template>
         </ShareButton>
-        <button class="button yellow">
+        <RouterLink :to="{ name: ROUTES.HOME.name }" class="button yellow">
           <BaseIcon type="home" />
-        </button>
+        </RouterLink>
       </div>
     </div>
   </BaseModal>
@@ -26,14 +26,15 @@
 
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
-import { getOrganizedRanking } from '@players/helpers/player.helper';
-import type { IPlayer } from '@players/interfaces/user.interface';
 import GameOverRibbon from '@game/components/over/game-over-ribbon/game-over-ribbon.vue';
 import FirstPosition from '@game/components/over/first-position/first-position.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import OtherPlayer from '@game/components/over/other-player/other-player.vue';
 import ShareButton from '@share/components/share-button/share-button.vue';
 import BaseModal from '@layouts/components/base-modal/base-modal.vue';
+import type { IPlayer } from '@players/interfaces/user.interface';
+import { getOrganizedRanking } from '@players/helpers/player.helper';
+import { ROUTES } from '@/router/routes';
 
 interface GameOverProps {
   /** Players info (unordered) */
