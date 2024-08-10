@@ -1,10 +1,10 @@
-import { nextTick, onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3';
-import OptionSwitch from '@options/components/option-switch/option-switch.vue';
+import InputSwitch from '@common/components/input-switch/input-switch.vue';
 
-const meta: Meta<typeof OptionSwitch> = {
-  title: 'Options/OptionSwitch',
-  component: OptionSwitch,
+const meta: Meta<typeof InputSwitch> = {
+  title: 'Common/InputSwitch',
+  component: InputSwitch,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
@@ -15,19 +15,13 @@ const meta: Meta<typeof OptionSwitch> = {
   decorators: [
     (args: object): object => ({
       setup(): object {
-        const isOpen = ref<boolean>(false);
         const value = ref<boolean>(false);
 
-        onMounted(() => {
-          nextTick();
-          isOpen.value = true;
-        });
-
-        return { args, isOpen, value };
+        return { args, value };
       },
       template: `
         <div style="margin: 1rem; display: flex; flex-direction: column; gap: 10px;">
-          <story v-if="isOpen" v-model="value" />
+          <story v-model="value" />
           <span style="color: blue; font-size: 20px;">{{ value.valueOf() }}</span>
         </div>
     `,
@@ -39,3 +33,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const WithImage: Story = {
+  args: {
+    icon: '/images/bot.png',
+  },
+};
