@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import GameToken from '@tokens/components/token/components/game-token/game-token.vue';
+import { EColors } from '@board/interfaces/board.enum';
 
 const meta: Meta<typeof GameToken> = {
   title: 'Tokens/GameToken',
@@ -24,6 +25,9 @@ const meta: Meta<typeof GameToken> = {
     positionTile: 0,
     totalTokens: 1,
     typeTile: 'JAIL',
+  },
+  argTypes: {
+    color: { control: 'select', options: Object.values(EColors) },
   },
   decorators: [
     (args: object): object => ({

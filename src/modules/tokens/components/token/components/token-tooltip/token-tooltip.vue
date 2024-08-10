@@ -24,8 +24,11 @@ import type { IDiceList } from '@dice/interfaces/dice.interface';
 import { EColors } from '@board/interfaces/board.enum';
 
 interface TokenTooltipProps {
+  /** Token color */
   color: TColors;
+  /** Token coordinate */
   coordinate: ICoordinate;
+  /** Dice available */
   diceAvailable?: IDiceList[];
 }
 
@@ -35,6 +38,7 @@ const props = withDefaults(defineProps<TokenTooltipProps>(), {
   diceAvailable: [] as unknown as () => IDiceList[],
 });
 defineEmits<{
+  /** Select dice in tooltip */
   handleTooltipDice: [dice: IDiceList];
 }>();
 
