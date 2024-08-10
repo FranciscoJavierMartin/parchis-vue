@@ -82,7 +82,7 @@ const value = defineModel<boolean>();
 
     &:not(:checked) + .slider-icon {
       &::before {
-        opacity: 0;
+        background-image: none;
       }
     }
   }
