@@ -9,7 +9,9 @@ import { type CSSProperties, computed } from 'vue';
 import { POSITION_TILES } from '@board/helpers/positions-board.helper';
 
 interface TotalTokensProps {
+  /** Tile index */
   indexPosition: number;
+  /** Value to display */
   value: number;
 }
 const props = withDefaults(defineProps<TotalTokensProps>(), {
