@@ -18,6 +18,7 @@ import { copyToClipboard } from '@common/helpers/copy-to-clipboard.helper';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import type { TButtonShare } from '@share/interfaces/share.interface';
 import { BUTTONS_SHARE_SOCIAL } from '@share/constants/share.constants';
+import { shareWithSocialNetwork } from '@share/helpers/share.helper';
 
 interface ModalShareButtonsProps {
   /** Data to share */
@@ -35,12 +36,7 @@ function handleClick(buttonData: TButtonShare): void {
   if (buttonData.action === 'copy') {
     copyToClipboard(`${props.data.text} ${props.data.url}`);
   } else {
-    const url: string = Object.keys(props.data).reduce<string>(
-      (acc, key) =>
-        acc.replace(`DATA_${key.toUpperCase}`, encodeURIComponent(props.data[key as never])),
-      (buttonData as { url: string }).url,
-    );
-    window.open(url, '_blank');
+    shareWithSocialNetwork(props.data, (buttonData as { url: string }).url);
   }
 
   emit('close', true);
