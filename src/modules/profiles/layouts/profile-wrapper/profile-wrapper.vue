@@ -29,15 +29,19 @@ import type {
 import type { TTotalPlayers } from '@game/interfaces/game.interface';
 import type { TDiceValues } from '@dice/interfaces/dice.interface';
 
-interface ProfileSectionProps extends IProfilesData {
+interface ProfileWrapperProps extends IProfilesData {
   position: TPositionProfile;
 }
 
-const props = defineProps<ProfileSectionProps>();
+const props = defineProps<ProfileWrapperProps>();
 defineEmits<{
+  /** When interval is finished */
   handleTimer: [ends: boolean, playerIndex?: number];
+  /** When press dice */
   handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
+  /** When roll dice is done */
   handleDoneDice: [isActionSocket?: boolean];
+  /** Mute chat */
   handleMuteChat: [playerIndex: number];
 }>();
 

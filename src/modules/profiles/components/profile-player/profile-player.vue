@@ -37,18 +37,27 @@ import type { IActionsTurn } from '@game/interfaces/game.interface';
 import type { TDiceValues } from '@dice/interfaces/dice.interface';
 
 interface ProfilePlayerProps {
+  /** Position on screen (top or bottom) */
   basePosition: TPositionProfiles;
+  /** Has player current turn */
   hasTurn: boolean;
+  /** Player info */
   player: IPlayer;
+  /** Position on screen (left or right) */
   position: TPositionProfile;
+  /** Actions in turn data */
   actionsTurn: IActionsTurn;
 }
 
 defineProps<ProfilePlayerProps>();
 defineEmits<{
+  /** When interval is finished */
   handleTimer: [ends: boolean, playerIndex?: number];
+  /** When press dice */
   handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
+  /** When roll dice is done */
   handleDoneDice: [isActionSocket?: boolean];
+  /** Mute chat */
   handleMuteChat: [playerIndex: number];
 }>();
 </script>

@@ -18,6 +18,7 @@ import PlayerAvatar from '@common/components/player-avatar/player-avatar.vue';
 import { getLabelRanking } from '@players/helpers/player.helper';
 
 interface OtherPlayerProps {
+  /** Player info */
   player: IPlayer;
 }
 

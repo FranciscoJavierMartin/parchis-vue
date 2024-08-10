@@ -13,8 +13,11 @@ import { ICONS_DATA } from '@common/constants/icons.constants';
 import type { TypeIcon } from '@common/interfaces/icons.interface';
 
 interface GameIconProps {
+  /** Icon type */
   type: TypeIcon;
+  /** Fill for the icon */
   fill?: string;
+  /** Add muted line */
   isMuted?: boolean;
 }
 

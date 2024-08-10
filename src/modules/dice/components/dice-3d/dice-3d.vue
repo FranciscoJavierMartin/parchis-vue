@@ -21,14 +21,19 @@ import { getRandomNumber } from '@common/helpers/random.helper';
 import { ROLL_TIME_VALUE } from '@game/constants/game.constants';
 
 interface Dice3dProps {
+  /** Side dice size */
   size: number;
+  /** Roll time */
   rollTime?: number;
 }
 
 const props = withDefaults(defineProps<Dice3dProps>(), {
   rollTime: ROLL_TIME_VALUE,
 });
-const emit = defineEmits<{ rollDone: [] }>();
+const emit = defineEmits<{
+  /** When roll is done */
+  rollDone: [];
+}>();
 
 const isRolling = ref<boolean>(false);
 const diceValue = ref<TDiceValues>(1);
@@ -46,6 +51,7 @@ function rollDice(value: TDiceValues): void {
 }
 
 defineExpose({
+  /** Function to roll dice */
   rollDice,
 });
 </script>

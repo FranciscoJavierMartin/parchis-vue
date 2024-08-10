@@ -1,6 +1,13 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": [".eslintrc.cjs", "./commitlint.config.js", "env.d.ts", "src/**/*", "src/**/*.vue"],
+  "include": [
+    ".eslintrc.cjs",
+    "./commitlint.config.js",
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    ".storybook/*"
+  ],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "composite": true,

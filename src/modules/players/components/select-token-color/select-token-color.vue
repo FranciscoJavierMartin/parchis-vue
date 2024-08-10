@@ -19,11 +19,12 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import type { TColors } from '@board/interfaces/board.interface';
-import TokenPiece from '@tokens/components/token/components/token-piece/token-piece.vue';
+import TokenPiece from '@tokens/components/token/token-piece/token-piece.vue';
 import SelectTokenColorTooltip from '@players/components/select-token-color-tooltip/select-token-color-tooltip.vue';
 import { vClickOutside } from '@common/directives/click-outside/click-outside.directive';
 
 interface SelectTokenColorProps {
+  /** Disable input */
   disabled: boolean;
 }
 

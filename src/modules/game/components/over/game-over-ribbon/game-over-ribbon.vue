@@ -10,6 +10,7 @@
 
 <script setup lang="ts">
 interface GameOverRibbonProps {
+  /** Title to be shown */
   title?: string;
 }
 

@@ -9,7 +9,9 @@
 import type { TTotalPlayers } from '@game/interfaces/game.interface';
 
 interface InputRadioProps {
+  /** Text to show */
   label: string;
+  /** Value to select */
   value: TTotalPlayers;
 }
 

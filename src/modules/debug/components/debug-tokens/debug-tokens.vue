@@ -58,15 +58,21 @@ import { LIST_TYPE_TILE } from '@debug/constants/debug.constants';
 import { copyToClipboard } from '@common/helpers/copy-to-clipboard.helper';
 
 interface TokensDebugProps {
+  /** players info */
   players: IPlayer[];
+  /** Token list */
   listTokens: IListTokens[];
+  /** Turn info */
   actionsTurn: IActionsTurn;
+  /** Game mode */
   typeGame: TTypeGame;
 }
 
 const props = withDefaults(defineProps<TokensDebugProps>(), { typeGame: ETypeGame.OFFLINE });
 const emit = defineEmits<{
+  /** Update tokens */
   updateTokens: [listTokens: IListTokens[]];
+  /** Handle selected dice */
   handleSelectDice: [data: { diceValue?: TDiceValues; isActionSocket?: boolean }];
 }>();
 

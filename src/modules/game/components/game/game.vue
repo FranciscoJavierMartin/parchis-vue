@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <GameOverModal v-if="isGameOver.showModal" :players="players" />
-  <BoardWrapper>
+  <div class="game-board-wrapper">
     <!-- prettier-ignore-attribute -->
     <ProfileSection
       :base-position="EPositionProfiles.TOP"
@@ -37,7 +37,7 @@
       @handle-done-dice="handleDoneDice"
       @handle-mute-chat="handleMuteChat"
     />
-  </BoardWrapper>
+  </div>
   <DebugTokens
     v-if="debug"
     v-bind="{
@@ -53,10 +53,9 @@
 
 <script setup lang="ts">
 import { inject, ref, watch } from 'vue';
-import GameBoard from '@board/components/game-board.vue';
+import GameBoard from '@board/components/game-board/game-board.vue';
 import BoardDebug from '@debug/components/board-debug/board-debug.vue';
-import ShowTotalTokens from '@tokens/components/token/components/show-total-tokens/show-total-tokens.vue';
-import BoardWrapper from '@board/components/board-wrapper.vue';
+import ShowTotalTokens from '@tokens/components/token/show-total-tokens/show-total-tokens.vue';
 import ProfileSection from '@profiles/layouts/profile-section/profile-section.vue';
 import { EBoardColors, EPositionProfiles } from '@board/interfaces/board.enum';
 import {
@@ -99,11 +98,17 @@ import { ESounds } from '@sounds/interfaces/sounds.enum';
 
 // TODO: Add types for socket
 interface GameProps {
+  /** Number of players */
   totalPlayers: TTotalPlayers;
+  /** Who starts the game */
   initialTurn: number;
+  /** players data */
   users: IUser[];
+  /** Game mode */
   typeGame?: TTypeGame;
+  /** Board orientation */
   boardColor?: TBoardColors;
+  /** Enable debug */
   debug?: boolean;
 }
 
@@ -236,3 +241,13 @@ watch(
   },
 );
 </script>
+
+<style scoped>
+.game-board-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+</style>

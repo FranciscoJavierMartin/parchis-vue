@@ -15,7 +15,9 @@
 import defaultAvatar from '@/assets/images/default.png';
 
 interface GameAvatarProps {
+  /** Photo url */
   photo?: string;
+  /** Player name */
   name?: string;
 }
 

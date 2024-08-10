@@ -10,6 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import PageWrapper from '@layouts/components/wrapper/page-wrapper.vue';
-import BackButton from '@layouts/components/back-button/back-button.vue';
+import PageWrapper from '@layouts/components/wrapper/page-wrapper/page-wrapper.vue';
+import BackButton from '@layouts/components/back-button/back-button/back-button.vue';
 </script>

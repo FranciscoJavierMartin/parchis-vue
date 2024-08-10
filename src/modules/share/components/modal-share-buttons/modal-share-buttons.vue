@@ -15,17 +15,21 @@
 
 <script setup lang="ts">
 import { copyToClipboard } from '@common/helpers/copy-to-clipboard.helper';
+import BaseIcon from '@common/components/icons/base-icon.vue';
 import type { TButtonShare } from '@share/interfaces/share.interface';
 import { BUTTONS_SHARE_SOCIAL } from '@share/constants/share.constants';
-import BaseIcon from '@common/components/icons/base-icon.vue';
 
 interface ModalShareButtonsProps {
+  /** Data to share */
   data: Omit<ShareData, 'files'>;
 }
 
 const props = defineProps<ModalShareButtonsProps>();
 
-const emit = defineEmits<{ close: [isShare?: boolean] }>();
+const emit = defineEmits<{
+  /** When press close button */
+  close: [isShare?: boolean];
+}>();
 
 function handleClick(buttonData: TButtonShare): void {
   if (buttonData.action === 'copy') {

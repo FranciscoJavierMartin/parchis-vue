@@ -9,7 +9,7 @@
       :class="[position.toLowerCase(), { mute: player.isMuted }]"
       @click="$emit('handleMuteChat', player.index)"
     >
-      <BaseIcon type="chat" />
+      <BaseIcon type="chat" :is-muted="player.isMuted" />
     </button>
     <div v-if="startTimer && isRunning" class="game-profile-image-progress" />
   </div>
@@ -24,14 +24,19 @@ import type { IPlayer } from '@players/interfaces/user.interface';
 import type { TPositionProfile } from '@profiles/interfaces/profile.interface';
 
 interface ProfileImageProps {
+  /** Player info */
   player: IPlayer;
+  /** Start timer */
   startTimer: boolean;
+  /** Position on screen (left or right) */
   position: TPositionProfile;
 }
 
 const props = defineProps<ProfileImageProps>();
 const emit = defineEmits<{
+  /** Mute chat */
   handleMuteChat: [playerIndex: number];
+  /** When interval is finished */
   handleInterval: [ends: boolean];
 }>();
 
@@ -138,6 +143,10 @@ watch(
       rgba(0, 0, 0, 0.12) 0px 1px 3px,
       rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
+    &.mute {
+      background-color: #e91e63;
+    }
+
     .icon-wrapper {
       position: absolute;
       top: 1px;
@@ -151,10 +160,6 @@ watch(
       .icon-wrapper {
         transform: scaleX(-1);
       }
-    }
-
-    &.mute .icon-wrapper {
-      background-color: #e91e63;
     }
   }
 

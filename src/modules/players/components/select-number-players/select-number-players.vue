@@ -15,6 +15,7 @@ import InputRadio from '@players/components/input-radio/input-radio.vue';
 import type { TTotalPlayers } from '@game/interfaces/game.interface';
 
 interface SelectNumberPlayersProps {
+  /** Options to select */
   numberPlayers?: TTotalPlayers[];
 }
 

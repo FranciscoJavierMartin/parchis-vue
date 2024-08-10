@@ -13,12 +13,16 @@ import ModalShareHeader from '@share/components/modal-share-header/modal-share-h
 import ModalShareButtons from '@share/components/modal-share-buttons/modal-share-buttons.vue';
 
 interface ShareModalProps {
+  /** Data to share */
   data: ShareData;
 }
 
 defineProps<ShareModalProps>();
 
-defineEmits<{ close: [isShare?: boolean] }>();
+defineEmits<{
+  /** When press close button */
+  close: [isShare?: boolean];
+}>();
 </script>
 
 <style scoped>

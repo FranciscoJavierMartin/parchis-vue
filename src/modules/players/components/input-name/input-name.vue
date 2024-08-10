@@ -12,6 +12,7 @@
 import { sanizateTags } from '@players/helpers/player.helper';
 
 interface InputNameProps {
+  /** Disable input */
   disabled: boolean;
 }
 

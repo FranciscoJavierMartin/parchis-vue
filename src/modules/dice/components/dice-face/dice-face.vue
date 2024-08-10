@@ -11,9 +11,13 @@ import { DICE_SIZE_TOOLTIP } from '@board/constants/sizes.constants';
 import type { TDiceValues } from '@dice/interfaces/dice.interface';
 
 interface DiceProps {
+  /** Dice value */
   value: TDiceValues;
+  /** Side dice size */
   size?: number;
+  /** Animate face */
   animate?: boolean;
+  /** Add shadow */
   shadow?: boolean;
 }
 
