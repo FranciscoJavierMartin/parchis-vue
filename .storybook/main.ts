@@ -8,6 +8,7 @@ const config: StorybookConfig = {
     '@chromatic-com/storybook',
     '@storybook/addon-interactions',
   ],
+  staticDirs: ['../public', '../src/assets'],
   core: {
     disableTelemetry: true, // 👈 Disables telemetry
   },

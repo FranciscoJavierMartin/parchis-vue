@@ -11,6 +11,7 @@ const meta: Meta<typeof InputSwitch> = {
   },
   args: {
     id: '1234abcd',
+    backgroundImage: '/images/bot.png',
   },
   decorators: [
     (args: object): object => ({

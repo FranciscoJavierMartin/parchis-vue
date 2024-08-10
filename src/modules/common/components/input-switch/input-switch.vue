@@ -1,7 +1,7 @@
 <template>
   <label :for="id" class="bot-switch">
     <input :id="id" type="checkbox" v-model="value" />
-    <span class="slider" />
+    <span class="slider slider-icon" />
   </label>
 </template>
 
@@ -9,6 +9,7 @@
 interface InputSwitchProps {
   /** Input id */
   id: string;
+  backgroundImage?: string;
 }
 
 defineProps<InputSwitchProps>();
@@ -47,9 +48,17 @@ const value = defineModel<boolean>();
       -webkit-transition: 0.4s;
       transition: 0.4s;
     }
+
+    &.slider-icon {
+      &::before {
+        /* background-color: unset; */
+        background-image: url('/images/bot.png');
+        background-size: 23px;
+      }
+    }
   }
 
-  input {
+  input[type='checkbox'] {
     width: 0;
     height: 0;
     opacity: 0;
