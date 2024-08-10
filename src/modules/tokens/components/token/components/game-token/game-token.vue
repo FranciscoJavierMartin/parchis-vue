@@ -35,8 +35,11 @@ import type { IDiceList } from '@dice/interfaces/dice.interface';
 import { EColors, EtypeTile } from '@board/interfaces/board.enum';
 
 interface TokenProps extends IToken {
+  /** Dice list */
   diceList: IDiceList[];
+  /** Disable UI interaction */
   isDisabledUI?: boolean;
+  /** Enable debug */
   debug?: boolean;
 }
 
@@ -55,6 +58,7 @@ const props = withDefaults(defineProps<TokenProps>(), {
   debug: false,
 });
 const emit = defineEmits<{
+  /** Emitted when select dice */
   handleSelectedToken: [selectedTokenValues: ISelectTokenValues];
 }>();
 
