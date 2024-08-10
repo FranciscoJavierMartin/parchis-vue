@@ -137,10 +137,14 @@ watch(
   }
 }
 
-.game-profile.right .game-profile-dice::after {
-  right: -30%;
-  left: auto;
-  transform: rotate(-90deg);
+.game-profile.right .game-profile-dice {
+  left: 54px;
+
+  &::after {
+    right: -30%;
+    left: auto;
+    transform: rotate(-90deg);
+  }
 }
 
 @keyframes move-arrow {
