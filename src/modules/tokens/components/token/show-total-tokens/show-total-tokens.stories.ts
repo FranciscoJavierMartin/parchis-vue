@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import ShowTotalTokens from '@tokens/components/token/components/show-total-tokens/show-total-tokens.vue';
+import ShowTotalTokens from '@tokens/components/token/show-total-tokens/show-total-tokens.vue';
 
 const meta: Meta<typeof ShowTotalTokens> = {
   title: 'Tokens/ShowTotalTokens',

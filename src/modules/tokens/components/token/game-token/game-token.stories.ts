@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import GameToken from '@tokens/components/token/components/game-token/game-token.vue';
+import GameToken from '@tokens/components/token/game-token/game-token.vue';
 import { EColors } from '@board/interfaces/board.enum';
 
 const meta: Meta<typeof GameToken> = {

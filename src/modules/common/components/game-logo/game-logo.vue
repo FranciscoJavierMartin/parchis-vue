@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import DiceFace from '@dice/components/dice-face/dice-face.vue';
-import TokenPiece from '@tokens/components/token/components/token-piece/token-piece.vue';
+import TokenPiece from '@tokens/components/token/token-piece/token-piece.vue';
 import { EColors } from '@board/interfaces/board.enum';
 import type { TColors } from '@board/interfaces/board.interface';
 

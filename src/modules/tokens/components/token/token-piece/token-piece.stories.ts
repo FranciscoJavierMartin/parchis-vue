@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import TokenPiece from '@tokens/components/token/components/token-piece/token-piece.vue';
+import TokenPiece from '@tokens/components/token/token-piece/token-piece.vue';
 import { EColors } from '@board/interfaces/board.enum';
 
 const meta: Meta<typeof TokenPiece> = {

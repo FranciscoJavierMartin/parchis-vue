@@ -25,8 +25,8 @@
 
 <script setup lang="ts">
 import { computed, ref, watchEffect, type StyleValue } from 'vue';
-import TokenPiece from '@tokens/components/token/components/token-piece/token-piece.vue';
-import TokenTooltip from '@tokens/components/token/components/token-tooltip/token-tooltip.vue';
+import TokenPiece from '@tokens/components/token/token-piece/token-piece.vue';
+import TokenTooltip from '@tokens/components/token/token-tooltip/token-tooltip.vue';
 import { vClickOutside } from '@common/directives/click-outside/click-outside.directive';
 import { MAXIMUM_VISIBLE_TOKENS_PER_CELL } from '@board/constants/board.constants';
 import { BASE_ZINDEX_TOKEN, ZINDEX_TOKEN_SELECT } from '@board/constants/sizes.constants';

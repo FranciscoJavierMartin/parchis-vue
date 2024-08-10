@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import TokenTooltip from '@tokens/components/token/components/token-tooltip/token-tooltip.vue';
+import TokenTooltip from '@tokens/components/token/token-tooltip/token-tooltip.vue';
 import { EColors } from '@board/interfaces/board.enum';
 
 const meta: Meta<typeof TokenTooltip> = {
