@@ -85,7 +85,6 @@ const positionSelected = ref<number>(-1);
 
 const options = computed(() => getOptionsSelects(selects, props.players, props.listTokens));
 
-// TODO: Move to helper
 function handleSelect(value: number, type: TOptions): void {
   const copySelects = { ...selects };
   copySelects[type] = value;
