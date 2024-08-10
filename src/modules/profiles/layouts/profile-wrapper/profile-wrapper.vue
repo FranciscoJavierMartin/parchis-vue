@@ -35,9 +35,13 @@ interface ProfileWrapperProps extends IProfilesData {
 
 const props = defineProps<ProfileWrapperProps>();
 defineEmits<{
+  /** When interval is finished */
   handleTimer: [ends: boolean, playerIndex?: number];
+  /** When press dice */
   handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
+  /** When roll dice is done */
   handleDoneDice: [isActionSocket?: boolean];
+  /** Mute chat */
   handleMuteChat: [playerIndex: number];
 }>();
 
