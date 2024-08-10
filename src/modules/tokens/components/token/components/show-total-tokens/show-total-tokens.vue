@@ -14,6 +14,7 @@ import TotalTokens from '@tokens/components/token/components/total-tokens/total-
 import type { TShowTotalTokens } from '@tokens/interfaces/token.interface';
 
 interface ShowTotalTokensProps {
+  /** Record to contain tokens info */
   totalTokens: TShowTotalTokens;
 }
 
