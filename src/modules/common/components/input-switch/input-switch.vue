@@ -1,7 +1,7 @@
 <template>
   <label :for="id" class="bot-switch">
     <input :id="id" type="checkbox" v-model="value" />
-    <span class="slider slider-icon" />
+    <span class="slider" :class="{ 'slider-icon': backgroundImage }" />
   </label>
 </template>
 
@@ -51,9 +51,10 @@ const value = defineModel<boolean>();
 
     &.slider-icon {
       &::before {
-        /* background-color: unset; */
         background-image: url('/images/bot.png');
-        background-size: 23px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 20px;
       }
     }
   }
