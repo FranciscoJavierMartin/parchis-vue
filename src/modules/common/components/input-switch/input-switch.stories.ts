@@ -39,3 +39,9 @@ export const WithImage: Story = {
     icon: '/images/bot.png',
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+};

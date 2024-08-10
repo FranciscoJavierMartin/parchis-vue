@@ -2,7 +2,7 @@
   <div class="game-offline-player">
     <SelectTokenColor :disabled="disabled" v-model="tokenColor" />
     <InputName :disabled="disabled" v-model="playerName" />
-    <InputSwitch :id="`${id}_bot_switch`" :icon="botImage" v-model="isBot" />
+    <InputSwitch :id="`${id}_bot_switch`" :icon="botImage" v-model="isBot" :disabled="disabled" />
   </div>
 </template>
 

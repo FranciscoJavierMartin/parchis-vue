@@ -1,6 +1,6 @@
 <template>
   <label :for="id" class="input-switch">
-    <input :id="id" type="checkbox" v-model="value" />
+    <input :id="id" type="checkbox" v-model="value" :disabled="disabled" />
     <span class="slider" />
     <span
       v-if="icon"
@@ -18,6 +18,8 @@ interface InputSwitchProps {
   id: string;
   /** Icon to use */
   icon?: string;
+  /** Disable input */
+  disabled?: boolean;
 }
 
 defineProps<InputSwitchProps>();
