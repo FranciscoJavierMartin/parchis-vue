@@ -4,12 +4,12 @@
     <label class="menu-option-label">
       {{ label }}
     </label>
-    <OptionSwitch :id="`menu-option-${label}`" v-model="model" />
+    <InputSwitch :id="`menu-option-${label}`" v-model="model" />
   </div>
 </template>
 
 <script setup lang="ts">
-import OptionSwitch from '@options/components/option-switch/option-switch.vue';
+import InputSwitch from '@common/components/input-switch/input-switch.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import type { TypeIcon } from '@common/interfaces/icons.interface';
 
