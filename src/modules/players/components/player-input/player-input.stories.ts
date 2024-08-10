@@ -1,8 +1,8 @@
 import { ref } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3';
 import PlayerInput from '@players/components/player-input/player-input.vue';
-import { EColors } from '@/modules/board/interfaces/board.enum';
-import type { TColors } from '@/modules/board/interfaces/board.interface';
+import { EColors } from '@board/interfaces/board.enum';
+import type { TColors } from '@board/interfaces/board.interface';
 
 const meta: Meta<typeof PlayerInput> = {
   title: 'Players/PlayerInput',

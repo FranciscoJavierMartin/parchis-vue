@@ -11,5 +11,5 @@
 
 <script setup lang="ts">
 import PageWrapper from '@layouts/components/wrapper/page-wrapper/page-wrapper.vue';
-import BackButton from '@/modules/layouts/components/back-button/back-button/back-button.vue';
+import BackButton from '@layouts/components/back-button/back-button/back-button.vue';
 </script>

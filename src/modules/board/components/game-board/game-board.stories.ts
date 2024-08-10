@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import { EBoardColors } from '@/modules/board/interfaces/board.enum';
+import { EBoardColors } from '@board/interfaces/board.enum';
 import GameBoard from '@board/components/game-board/game-board.vue';
 
 const meta: Meta<typeof GameBoard> = {

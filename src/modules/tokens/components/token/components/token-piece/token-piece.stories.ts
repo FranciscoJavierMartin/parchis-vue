@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import TokenPiece from '@tokens/components/token/components/token-piece/token-piece.vue';
-import { EColors } from '@/modules/board/interfaces/board.enum';
+import { EColors } from '@board/interfaces/board.enum';
 
 const meta: Meta<typeof TokenPiece> = {
   title: 'Tokens/TokenPiece',

@@ -1,6 +1,6 @@
+import { ref } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3';
 import Dice3d from '@dice/components/dice-3d/dice-3d.vue';
-import { ref } from 'vue';
 
 const meta: Meta<typeof Dice3d> = {
   title: 'Dice/Dice3d',

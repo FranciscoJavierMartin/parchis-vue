@@ -1,6 +1,6 @@
+import { nextTick, onMounted, ref } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3';
 import GameOverModal from '@game/components/over/game-over-modal/game-over-modal.vue';
-import { nextTick, onMounted, ref } from 'vue';
 
 const meta: Meta<typeof GameOverModal> = {
   title: 'Game/GameOverModal',
