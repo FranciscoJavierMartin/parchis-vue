@@ -2,7 +2,13 @@
   <label :for="id" class="input-switch">
     <input :id="id" type="checkbox" v-model="value" />
     <span class="slider" />
-    <span v-if="backgroundImage" class="slider-icon" />
+    <span
+      v-if="backgroundImage"
+      class="slider-icon"
+      :style="{
+        '--background-icon': `url(${backgroundImage})`,
+      }"
+    />
   </label>
 </template>
 
@@ -55,7 +61,7 @@ const value = defineModel<boolean>();
 
   .slider-icon {
     &::before {
-      background-image: url('/images/bot.png');
+      background-image: var(--background-icon);
       background-repeat: no-repeat;
       background-position: center;
       background-size: 20px;
