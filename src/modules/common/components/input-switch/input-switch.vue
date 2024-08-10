@@ -1,5 +1,5 @@
 <template>
-  <label :for="id" class="bot-switch">
+  <label :for="id" class="input-switch">
     <input :id="id" type="checkbox" v-model="value" />
     <span class="slider" :class="{ 'slider-icon': backgroundImage }" />
   </label>
@@ -18,7 +18,7 @@ const value = defineModel<boolean>();
 </script>
 
 <style scoped>
-.bot-switch {
+.input-switch {
   position: relative;
   display: inline-block;
   width: 50px;
