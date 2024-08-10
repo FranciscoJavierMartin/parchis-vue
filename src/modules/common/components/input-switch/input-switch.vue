@@ -58,7 +58,7 @@ const value = defineModel<boolean>();
       content: '';
       background-color: white;
       border-radius: 50%;
-      transition-duration: 1s;
+      transition-duration: 5s;
       transition-property: all;
     }
   }
@@ -68,31 +68,22 @@ const value = defineModel<boolean>();
     height: 0;
     opacity: 0;
 
-    &:checked + .slider {
-      background-color: #2196f3;
-
-      &::before {
-        -webkit-transform: translateX(23px);
-        -ms-transform: translateX(23px);
-        transform: translateX(23px);
-      }
-    }
-
+    &:checked + .slider,
     &:checked ~ .slider-icon {
       background-color: #2196f3;
 
       &::before {
-        opacity: 1;
         -webkit-transform: translateX(23px);
         -ms-transform: translateX(23px);
         transform: translateX(23px);
       }
     }
 
-    &:focus + .slider {
-      box-shadow: 0 0 1px #2196f3;
+    &:checked ~ .slider-icon::before {
+      opacity: 1;
     }
 
+    &:focus + .slider,
     &:focus ~ .slider-icon {
       box-shadow: 0 0 1px #2196f3;
     }
