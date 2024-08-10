@@ -16,7 +16,7 @@
 interface InputSwitchProps {
   /** Input id */
   id: string;
-  /**  */
+  /** Icon to use */
   icon?: string;
 }
 
