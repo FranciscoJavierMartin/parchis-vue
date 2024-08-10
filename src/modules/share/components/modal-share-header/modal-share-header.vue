@@ -11,12 +11,16 @@
 import BaseIcon from '@common/components/icons/base-icon.vue';
 
 interface ModalShareHeaderProps {
+  /** Title */
   label?: string;
 }
 
 withDefaults(defineProps<ModalShareHeaderProps>(), { label: 'Share...' });
 
-defineEmits<{ close: [isShare?: boolean] }>();
+defineEmits<{
+  /** When press close button */
+  close: [isShare?: boolean];
+}>();
 </script>
 
 <style scoped>
