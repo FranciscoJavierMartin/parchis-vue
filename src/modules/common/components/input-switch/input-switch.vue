@@ -25,35 +25,17 @@ const value = defineModel<boolean>();
   width: 50px;
   height: 27px;
 
-  .slider {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    cursor: pointer;
-    background-color: #ccc;
-    border-radius: 28px;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-
+  .slider-icon {
     &::before {
-      position: absolute;
-      bottom: 2px;
-      left: 2px;
-      z-index: 2;
-      width: 23px;
-      height: 23px;
-      content: '';
-      background-color: white;
-      border-radius: 50%;
-      -webkit-transition: 0.4s;
-      transition: 0.4s;
-      transition-duration: 1s;
-      transition-property: all;
+      background-image: url('/images/bot.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 20px;
+      opacity: 0;
     }
   }
 
+  .slider,
   .slider-icon {
     position: absolute;
     top: 0;
@@ -75,14 +57,7 @@ const value = defineModel<boolean>();
       height: 23px;
       content: '';
       background-color: white;
-      background-image: url('/images/bot.png');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 20px;
       border-radius: 50%;
-      opacity: 0;
-      -webkit-transition: 0.4s;
-      transition: 0.4s;
       transition-duration: 1s;
       transition-property: all;
     }
