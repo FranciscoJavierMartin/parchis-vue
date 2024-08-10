@@ -14,7 +14,9 @@ import { shareLink } from '@share/helpers/share.helper';
 import { SHARE_AVAILABLE } from '@share/constants/share.constants';
 
 interface ShareProps {
+  /** Data to share */
   data: ShareData;
+  /** Disable native share option */
   useNativeOption?: boolean;
 }
 
