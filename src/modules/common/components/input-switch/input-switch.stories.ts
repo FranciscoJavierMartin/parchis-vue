@@ -36,6 +36,6 @@ export const Default: Story = {};
 
 export const WithImage: Story = {
   args: {
-    backgroundImage: '/images/bot.png',
+    icon: '/images/bot.png',
   },
 };

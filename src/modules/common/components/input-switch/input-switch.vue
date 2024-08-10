@@ -3,10 +3,10 @@
     <input :id="id" type="checkbox" v-model="value" />
     <span class="slider" />
     <span
-      v-if="backgroundImage"
+      v-if="icon"
       class="slider-icon"
       :style="{
-        '--background-icon': `url(${backgroundImage})`,
+        '--background-icon': `url(${icon})`,
       }"
     />
   </label>
@@ -16,7 +16,8 @@
 interface InputSwitchProps {
   /** Input id */
   id: string;
-  backgroundImage?: string;
+  /**  */
+  icon?: string;
 }
 
 defineProps<InputSwitchProps>();
