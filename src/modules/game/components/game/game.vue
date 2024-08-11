@@ -138,6 +138,10 @@ const isGameOver = ref<IGameOver>({ gameOver: false, showModal: false });
 const playSound: TPlaySoundFunction = inject<TPlaySoundFunction>(OptionsGamePlaySoundSymbol)!;
 
 //#region FUNCTIONS
+/**
+ * Update data when select token
+ * @param selectedTokenValues Token selected
+ */
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
   const validatedSelectedToken = validateSelectedToken(
     actionsTurn.value,
@@ -154,6 +158,10 @@ function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
   totalTokens.value = validatedSelectedToken.totalTokens;
 }
 
+/**
+ * Update data after timer
+ * @param ends Has finished timer
+ */
 function handleTimer(ends: boolean = false): void {
   const { isBot } = players.value[currentTurn.value];
 
@@ -173,6 +181,11 @@ function handleTimer(ends: boolean = false): void {
   }
 }
 
+/**
+ * Update data when select dice
+ * @param diceValue New dice value
+ * @param isActionSocket Is online action
+ */
 function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = false): void {
   actionsTurn.value = getRandomValueDice(
     actionsTurn.value,
@@ -182,6 +195,10 @@ function handleSelectDice(diceValue?: TDiceValues, isActionSocket: boolean = fal
   playSound(ESounds.ROLL_DICE);
 }
 
+/**
+ * Update data when roll dice is done
+ * @param isActionSocket Is online action
+ */
 function handleDoneDice(isActionSocket: boolean = false): void {
   validateDicesForTokens(
     actionsTurn.value,
@@ -202,8 +219,16 @@ function handleDoneDice(isActionSocket: boolean = false): void {
   });
 }
 
+/**
+ * Mute that player
+ * @param playerIndex Player to be muted
+ */
 function handleMuteChat(playerIndex: number): void {}
 
+/**
+ * Update tokens with new data
+ * @param newListTokens new data
+ */
 function updateTokens(newListTokens: IListTokens[]): void {
   listTokens.value = newListTokens;
 }

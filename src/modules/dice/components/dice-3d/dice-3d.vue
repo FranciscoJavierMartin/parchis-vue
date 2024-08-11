@@ -42,6 +42,10 @@ const randomRotationDegrees = ref<number>(0);
 //#endregion
 
 //#region FUNCTIONS
+/**
+ * Roll dice animation
+ * @param value dice value to be setted
+ */
 function rollDice(value: TDiceValues): void {
   randomRotationDegrees.value = getRandomNumber(100, 500);
   isRolling.value = true;

@@ -11,6 +11,12 @@ import type { IOptions, TSelects } from '@debug/interfaces/debug.interface';
 import type { IPlayer } from '@players/interfaces/user.interface';
 import type { IPositionsItems, TPositionGame, TtypeTile } from '@board/interfaces/board.interface';
 
+/**
+ * Get debug position tiles
+ * @param type Tile type
+ * @param position Position
+ * @returns Debug position tiles
+ */
 function getDebugPositionsTiles(type: number, position: TPositionGame): IOptions[] {
   const tileType = LIST_TYPE_TILE[type] as TtypeTile;
   let positionTilesOptions: IOptions[];
@@ -45,6 +51,13 @@ function getDebugPositionsTiles(type: number, position: TPositionGame): IOptions
   return positionTilesOptions;
 }
 
+/**
+ * Populate select data
+ * @param selects Selected options
+ * @param players Players info
+ * @param listTokens Tokens
+ * @returns Select data
+ */
 export function getOptionsSelects(
   selects: TSelects,
   players: IPlayer[],
@@ -78,6 +91,12 @@ export function getOptionsSelects(
   };
 }
 
+/**
+ * Get debug coordinates
+ * @param tileType Tile type
+ * @param positionGame Position in board
+ * @returns Debug coordinate
+ */
 function getDebugCoordinates(tileType: TtypeTile, positionGame: TPositionGame): IPositionsItems[] {
   let coordinates: IPositionsItems[] = [];
 
@@ -99,6 +118,12 @@ function getDebugCoordinates(tileType: TtypeTile, positionGame: TPositionGame): 
   return coordinates;
 }
 
+/**
+ * Change token
+ * @param selects Options selected
+ * @param listTokens Tokens
+ * @returns Update tokens
+ */
 export function validateChangeToken(selects: TSelects, listTokens: IListTokens[]): IListTokens[] {
   const tileType = LIST_TYPE_TILE[selects.type] as TtypeTile;
   const copyListTokens: IListTokens[] = cloneDeep(listTokens);

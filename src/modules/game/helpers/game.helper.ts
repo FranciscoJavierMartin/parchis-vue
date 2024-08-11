@@ -35,11 +35,23 @@ import { EPositionGame, EtypeTile, type ESufixColors } from '@board/interfaces/b
 import { ESounds } from '@sounds/interfaces/sounds.enum';
 import { MAXIMUM_VISIBLE_TOKENS_PER_CELL } from '@board/constants/board.constants';
 
+/**
+ * Check if player can roll dice
+ * @param indexTurn Current player
+ * @param players Players info
+ * @returns true if player can roll dice, otherwise false
+ */
 function validateDisabledDice(indexTurn: number, players: IPlayer[]): boolean {
   const { isOnline, isBot } = players[indexTurn];
   return !!((isBot || isOnline) && !(isOnline && indexTurn === 0));
 }
 
+/**
+ * Get initial action turn info
+ * @param indexTurn Player to get data
+ * @param players Players info
+ * @returns Action turn info
+ */
 export function getInitialActionsTurnValue(indexTurn: number, players: IPlayer[]): IActionsTurn {
   return {
     timerActivated: true,
@@ -53,7 +65,14 @@ export function getInitialActionsTurnValue(indexTurn: number, players: IPlayer[]
   };
 }
 
-// If you replace the normal returned value, you can use a value to start from a state.
+/**
+ * Get initial position tokens.
+ * If you replace the normal returned value, you can use a value to start from a state.
+ * @param boardColor Board orientation
+ * @param totalPlayers Number of players
+ * @param players Players info
+ * @returns Tokens at game start
+ */
 export function getInitialPositionTokens(
   boardColor: TBoardColors,
   totalPlayers: TTotalPlayers,
@@ -104,6 +123,13 @@ function getTokensPositionsOnBoard(totalPlayers: TTotalPlayers): EPositionGame[]
   return tokenPositions;
 }
 
+/**
+ * Get tokens in jail
+ * @param positionGame Position in board
+ * @param color Player color
+ * @param canSelectToken Is automatic movement
+ * @returns Tokens in jail
+ */
 function getTokensInJail(
   positionGame: TPositionGame,
   color: TColors,
@@ -133,6 +159,13 @@ function getTokensInJail(
   return tokens;
 }
 
+/**
+ * Get coordinates by tile type
+ * @param tileType Tile type
+ * @param positionGame Player position in board
+ * @param index Token index
+ * @returns Coordinate
+ */
 function getCoordinatesByTileType(
   tileType: TtypeTile,
   positionGame: TPositionGame,
@@ -158,6 +191,11 @@ function getCoordinatesByTileType(
   return coordinate;
 }
 
+/**
+ * Check if three consecutives dices rolled
+ * @param diceList Dice list
+ * @returns true if there is three rolls, false otherwise
+ */
 function validateThreeConsecutiveRolls(diceList: IDiceList[]): boolean {
   let isConsecutiveDice: boolean = false;
 
@@ -169,6 +207,15 @@ function validateThreeConsecutiveRolls(diceList: IDiceList[]): boolean {
   return isConsecutiveDice;
 }
 
+/**
+ * Finish turn actions
+ * @param currentTurn Who has the current turn
+ * @param players Players info
+ * @param actionsTurn Action turn info
+ * @param addLastDice Add last dice
+ * @param addDelayNextTurn Delay next turn
+ * @returns new action turn info and next player turn
+ */
 async function validateNextTurn(
   currentTurn: number,
   players: IPlayer[],
@@ -206,6 +253,11 @@ async function validateNextTurn(
   return { actionsTurn: newActionTurn, nextTurn };
 }
 
+/**
+ * Get tokens value by cell type
+ * @param listTokens Tokens
+ * @returns Tokens by position type
+ */
 function getTokensValueByCellType(listTokens: IListTokens): TTokenByPositionType {
   return Object.keys(EtypeTile)
     .map((type) => ({
@@ -218,6 +270,11 @@ function getTokensValueByCellType(listTokens: IListTokens): TTokenByPositionType
     );
 }
 
+/**
+ * Get unique position token cell
+ * @param tokens Tokens
+ * @returns position and token
+ */
 function getUniquePositionTokenCell(tokens: IToken[]): Record<number, number> {
   return tokens.reduce<Record<number, number>>((positionAndToken, { positionTile, index }) => {
     if (!((positionAndToken[positionTile] ?? -1) >= 0)) {
