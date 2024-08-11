@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<TotalTokensProps>(), {
   value: 0,
 });
 
+//#region COMPUTED
 const styles = computed<CSSProperties>(() => {
   // Index position given its index
   const { x, y } = POSITION_TILES[props.indexPosition].coordinate;
@@ -27,6 +28,7 @@ const styles = computed<CSSProperties>(() => {
     top: `${y}px`,
   };
 });
+//#endregion
 </script>
 
 <style scoped>

@@ -41,10 +41,13 @@ const emit = defineEmits<{
   updateData: [data: DataOfflineGame];
 }>();
 
+//#region REFS
 const totalPlayers = ref<TTotalPlayers>(getInitialTotalPlayers());
 const players = ref<IPlayerOffline[]>(getInitialDataOfflinePlayers(totalPlayers.value));
 const boardColors = ref<TBoardColors>(getInitialBoardColors());
+//#endregion
 
+//#region FUNCTIONS
 function handleSubmit(event: Event): void {
   event.preventDefault();
   emit('updateData', getGameData(totalPlayers.value, players.value, boardColors.value));
@@ -55,7 +58,9 @@ function handleColorDistribution(color: TColors, index: number): void {
   players.value = colorPlayers.players;
   boardColors.value = colorPlayers.boardColors;
 }
+//#endregion
 
+//#region WATCHERS
 watch(totalPlayers, (newValue: TTotalPlayers) => {
   const newValues = changeTotalPlayers(newValue, players.value);
 
@@ -70,6 +75,7 @@ watch(
   },
   { deep: true },
 );
+//#endregion
 </script>
 
 <style scoped>

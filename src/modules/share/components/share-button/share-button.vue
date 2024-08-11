@@ -23,8 +23,12 @@ interface ShareProps {
 const props = withDefaults(defineProps<ShareProps>(), { useNativeOption: true });
 
 const useNativeVersionBrowser: boolean = SHARE_AVAILABLE && props.useNativeOption;
-const isModalVisible = ref<boolean>(false);
 
+//#region REFS
+const isModalVisible = ref<boolean>(false);
+//#endregion
+
+//#region FUNCTIONS
 function onClick(): void {
   if (useNativeVersionBrowser) {
     shareLink(props.data);
@@ -40,4 +44,5 @@ function onCloseModal(isShare: boolean = false): void {
 
   isModalVisible.value = false;
 }
+//#endregion
 </script>

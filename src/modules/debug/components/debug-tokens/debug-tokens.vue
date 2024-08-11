@@ -76,15 +76,20 @@ const emit = defineEmits<{
   handleSelectDice: [data: { diceValue?: TDiceValues; isActionSocket?: boolean }];
 }>();
 
+//#region REFS
 const selects = reactive<TSelects>({ player: -1, token: -1, type: -1, position: -1 });
 
 const playerSelected = ref<number>(-1);
 const tokenSelected = ref<number>(-1);
 const typeSelected = ref<number>(-1);
 const positionSelected = ref<number>(-1);
+//#endregion
 
+//#region COMPUTED
 const options = computed(() => getOptionsSelects(selects, props.players, props.listTokens));
+//#endregion
 
+//#region FUNCTIONS
 function handleSelect(value: number, type: TOptions): void {
   const copySelects = { ...selects };
   copySelects[type] = value;
@@ -118,7 +123,9 @@ function handleSelect(value: number, type: TOptions): void {
 function handleCopyState(): void {
   copyToClipboard(JSON.stringify(props.listTokens));
 }
+//#endregion
 
+//#region WATCHERS
 watch(playerSelected, (newValue) => {
   handleSelect(newValue, 'player');
 });
@@ -134,6 +141,7 @@ watch(typeSelected, (newValue) => {
 watch(positionSelected, (newValue) => {
   handleSelect(newValue, 'position');
 });
+//#endregion
 </script>
 
 <style scoped>

@@ -10,8 +10,11 @@ import { ref, type Ref } from 'vue';
 import MenuOptionsModal from '@options/components/menu-options-modal/menu-options-modal.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 
+//#region REFS
 const isOpen: Ref<boolean> = ref<boolean>(false);
+//#endregion
 
+//#region FUNCTIONS
 function handleShowOptions(): void {
   isOpen.value = true;
 }
@@ -19,6 +22,7 @@ function handleShowOptions(): void {
 function closeModal(): void {
   isOpen.value = false;
 }
+//#endregion
 </script>
 
 <style scoped>

@@ -24,7 +24,9 @@ interface OtherPlayerProps {
 
 const props = defineProps<OtherPlayerProps>();
 
+//#region COMPUTED
 const rankingPosition = computed<string>(() => getLabelRanking(props.player.ranking));
+//#endregion
 </script>
 
 <style scoped>

@@ -30,10 +30,13 @@ interface SelectTokenColorProps {
 
 defineProps<SelectTokenColorProps>();
 
+//#region REFS
 const showTooltip = ref<boolean>(false);
+//#endregion
 
 const color = defineModel<TColors>({ required: true });
 
+//#region FUNCTIONS
 function handleShowTooltip(): void {
   showTooltip.value = !showTooltip.value;
 }
@@ -41,6 +44,7 @@ function handleShowTooltip(): void {
 function handleClickOutside(): void {
   showTooltip.value = false;
 }
+//#endregion
 </script>
 
 <style scoped>

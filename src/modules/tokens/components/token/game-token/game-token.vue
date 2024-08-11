@@ -62,8 +62,11 @@ const emit = defineEmits<{
   handleSelectedToken: [selectedTokenValues: ISelectTokenValues];
 }>();
 
+//#region REFS
 const showTooltip = ref<boolean>(props.enableTooltip);
+//#endregion
 
+//#region FUNCTIONS
 function handleClickOutside(): void {
   showTooltip.value = false;
 }
@@ -82,7 +85,9 @@ function handleTooltipDice(dice: IDiceList): void {
   const diceIndex = props.diceList.findIndex((d) => d.key === dice.key);
   emit('handleSelectedToken', { diceIndex, tokenIndex: props.index });
 }
+//#endregion
 
+//#region COMPUTED
 const zIndex = computed<number>(() => {
   /*
    * If it has available dices, sets the z-index of selection, in this way the token will remain on top of the others that are in the same cell (if there are any...).
@@ -169,13 +174,16 @@ const showButton = computed<boolean>(
     !props.isMoving &&
     !props.isDisabledUI,
 );
+//#endregion
 
+//#region WATCHERS
 // If there are not available dices, then dismiss tooltip
 watchEffect(() => {
   if (showTooltip.value && props.diceAvailable.length === 0) {
     showTooltip.value = false;
   }
 });
+//#endregion
 </script>
 
 <style scoped>

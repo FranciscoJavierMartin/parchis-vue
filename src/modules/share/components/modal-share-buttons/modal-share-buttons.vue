@@ -32,6 +32,7 @@ const emit = defineEmits<{
   close: [isShare?: boolean];
 }>();
 
+//#region FUNCTIONS
 function handleClick(buttonData: TButtonShare): void {
   if (buttonData.action === 'copy') {
     copyToClipboard(`${props.data.text} ${props.data.url}`);
@@ -41,6 +42,7 @@ function handleClick(buttonData: TButtonShare): void {
 
   emit('close', true);
 }
+//#endregion
 </script>
 
 <style scoped>

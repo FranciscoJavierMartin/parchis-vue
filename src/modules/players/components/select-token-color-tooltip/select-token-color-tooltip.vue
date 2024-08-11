@@ -16,9 +16,11 @@ import type { TColors } from '@board/interfaces/board.interface';
 
 const color = defineModel<TColors>();
 
+//#region FUNCTIONS
 function updateColor(buttonColor: EColors): void {
   color.value = buttonColor;
 }
+//#endregion
 </script>
 
 <style scoped>

@@ -21,7 +21,7 @@ interface SelectNumberPlayersProps {
 
 withDefaults(defineProps<SelectNumberPlayersProps>(), { numberPlayers: () => [2, 3, 4] });
 
-const totalPlayers = defineModel();
+const totalPlayers = defineModel<TTotalPlayers>();
 </script>
 
 <style scoped>
