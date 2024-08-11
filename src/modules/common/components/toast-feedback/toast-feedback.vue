@@ -1,11 +1,7 @@
 <template>
   <div class="toast-container">
     <ul class="toast-list">
-      <li
-        v-for="(message, index) of toast.messages.value"
-        :key="`${message}-${index}`"
-        class="toast-message"
-      >
+      <li v-for="{ id, message } of toast.messages.value" :key="id" class="toast-message">
         {{ message }}
       </li>
     </ul>
@@ -16,6 +12,10 @@
 import useToastFeedback from '@common/composables/use-toast-feedback/use-toast-feedback';
 
 const toast = useToastFeedback();
+
+setInterval(() => {
+  toast.addToast('Hello world');
+}, 1000);
 </script>
 
 <style scoped>
