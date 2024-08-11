@@ -2,11 +2,7 @@
   <Teleport to="#toast-container">
     <div class="toast-container">
       <div class="toast-wrapper">
-        <span>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, nemo repudiandae
-          beatae recusandae non repellendus, sapiente vitae facilis aliquid nesciunt aperiam
-          consequuntur consectetur? Repellat mollitia dolor natus illum magni dolores?</span
-        >
+        <span>Hello</span>
       </div>
     </div>
   </Teleport>
@@ -18,14 +14,15 @@
 .toast-container {
   position: absolute;
   bottom: 50px;
+  z-index: 20;
   width: 100%;
 
   .toast-wrapper {
-    width: max-content;
+    max-width: max-content;
     padding: 10px 15px;
     margin: auto;
     color: white;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.95);
     border-radius: 16px;
   }
 }
