@@ -9,12 +9,10 @@ import { EBoardColors } from '@board/interfaces/board.enum';
 
 interface BoardProps {
   /** Board orientation */
-  boardColor?: EBoardColors;
+  boardColor: EBoardColors;
 }
 
-withDefaults(defineProps<BoardProps>(), {
-  boardColor: EBoardColors.RGYB,
-});
+defineProps<BoardProps>();
 </script>
 
 <style scoped>
