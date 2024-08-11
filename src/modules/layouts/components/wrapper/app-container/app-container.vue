@@ -3,6 +3,7 @@
     <div class="screen" id="screen">
       <slot />
     </div>
+    <div id="toast-container" />
   </div>
 </template>
 
