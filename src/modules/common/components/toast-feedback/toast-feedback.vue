@@ -23,14 +23,13 @@ interface ToastFeedbackProps {
 .toast-container {
   position: absolute;
   bottom: 50px;
-  z-index: 20;
-  display: flex;
-  justify-content: center;
+  z-index: var(--toast-z-index);
   width: 100%;
 
   .toast-list {
     display: flex;
     flex-direction: column;
+    gap: 5px;
     align-items: center;
     width: 100%;
     max-width: 100%;
