@@ -10,6 +10,11 @@ import type {
   TLocationBoardElements,
 } from '@board/interfaces/board.interface';
 
+/**
+ * Calculate all tokens in a position
+ * @param point Position info
+ * @returns Coordinates and indexes
+ */
 function calculatePosition(point: IPoint): IPositionsItems[] {
   const position: IPositionsItems[] = [];
 

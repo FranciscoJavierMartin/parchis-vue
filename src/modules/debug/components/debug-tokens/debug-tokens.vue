@@ -90,6 +90,11 @@ const options = computed(() => getOptionsSelects(selects, props.players, props.l
 //#endregion
 
 //#region FUNCTIONS
+/**
+ * Update debug data
+ * @param value Value selected
+ * @param type Select updated
+ */
 function handleSelect(value: number, type: TOptions): void {
   const copySelects = { ...selects };
   copySelects[type] = value;
@@ -120,6 +125,9 @@ function handleSelect(value: number, type: TOptions): void {
   selects.position = copySelects.position;
 }
 
+/**
+ * Copy state to clipboard
+ */
 function handleCopyState(): void {
   copyToClipboard(JSON.stringify(props.listTokens));
 }

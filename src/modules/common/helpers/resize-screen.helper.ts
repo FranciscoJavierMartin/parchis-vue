@@ -3,6 +3,9 @@ import { isMobile } from '@common/helpers/responsive.helper';
 import debounce from '@common/helpers/debounce.helper';
 import { $ } from '@common/helpers/selectors.helper';
 
+/**
+ * Apply zoom to body when user resize window
+ */
 export default debounce(() => {
   const bodyElement = $('#app') as HTMLBodyElement;
   let scale = Math.min(window.innerWidth / BASE_WIDTH, window.innerHeight / BASE_HEIGHT);

@@ -33,6 +33,11 @@ export default function useFocusTrap(): {
     };
   });
 
+  /**
+   * If last element is focused, then move to first.
+   * If first element is focused, then move to last.
+   * @param event Key pressed
+   */
   function keyHandler(event: KeyboardEvent): void {
     if (event.key === 'Tab') {
       if (event.shiftKey) {
@@ -49,6 +54,9 @@ export default function useFocusTrap(): {
     }
   }
 
+  /**
+   * Set values for trap focus and event handler
+   */
   function initFocusTrap(): void {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (trapRef.value) {
@@ -61,6 +69,9 @@ export default function useFocusTrap(): {
     }
   }
 
+  /**
+   * Remove event handler
+   */
   function clearFocusTrap(): void {
     document.removeEventListener('keydown', keyHandler);
   }
