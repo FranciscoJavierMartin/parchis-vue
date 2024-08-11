@@ -14,15 +14,11 @@
 
 <script setup lang="ts">
 import { ref, type Ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, type Router } from 'vue-router';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import BackConfirmationModal from '@layouts/components/back-button/back-confirmation-modal/back-confirmation-modal.vue';
 import type { TRoutesName } from '@common/interfaces/routes.interface';
 import { ROUTES } from '@/router/routes';
-
-const isOpen: Ref<boolean> = ref<boolean>(false);
-
-const router = useRouter();
 
 interface BackButtonProps {
   /** Where to go (name) */
@@ -33,6 +29,13 @@ interface BackButtonProps {
 
 withDefaults(defineProps<BackButtonProps>(), { to: 'home', withConfirmation: true });
 
+//#region REFS
+const isOpen: Ref<boolean> = ref<boolean>(false);
+//#endregion
+
+const router: Router = useRouter();
+
+//#region FUNCTIONS
 function handleBackButton(): void {
   isOpen.value = true;
 }
@@ -44,6 +47,7 @@ function handleConfirmationButton(): void {
 function handleCancelButton(): void {
   isOpen.value = false;
 }
+//#endregion
 </script>
 
 <style scoped>

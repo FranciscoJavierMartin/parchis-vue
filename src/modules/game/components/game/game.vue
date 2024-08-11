@@ -121,6 +121,7 @@ const props = withDefaults(defineProps<GameProps>(), {
   debug: false,
 });
 
+//#region REFS
 const players = ref<IPlayer[]>(
   getInitialDataPlayers(props.users, props.boardColor, props.totalPlayers),
 );
@@ -132,9 +133,11 @@ const listTokens = ref<IListTokens[]>(
 );
 const totalTokens = ref<TShowTotalTokens>({});
 const isGameOver = ref<IGameOver>({ gameOver: false, showModal: false });
+//#endregion
 
 const playSound: TPlaySoundFunction = inject<TPlaySoundFunction>(OptionsGamePlaySoundSymbol)!;
 
+//#region FUNCTIONS
 function handleSelectedToken(selectedTokenValues: ISelectTokenValues): void {
   const validatedSelectedToken = validateSelectedToken(
     actionsTurn.value,
@@ -204,7 +207,9 @@ function handleMuteChat(playerIndex: number): void {}
 function updateTokens(newListTokens: IListTokens[]): void {
   listTokens.value = newListTokens;
 }
+//#endregion
 
+//#region WATCHERS
 watch(
   () => actionsMoveToken.value.isRunning,
   (newValue: boolean) => {
@@ -240,6 +245,7 @@ watch(
     }
   },
 );
+//#endregion
 </script>
 
 <style scoped>

@@ -29,9 +29,13 @@ import BackButton from '@layouts/components/back-button/back-button/back-button.
 import type { DataOfflineGame } from '@game/interfaces/game.interface';
 import { envVars } from '@/config/envVar';
 
+//#region REFS
 const dataGame = ref<DataOfflineGame | null>(null);
+//#endregion
 
+//#region FUNCTIONS
 function updateDataGame(data: DataOfflineGame): void {
   dataGame.value = data;
 }
+//#endregion
 </script>

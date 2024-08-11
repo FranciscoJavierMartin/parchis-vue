@@ -35,10 +35,13 @@ const emit = defineEmits<{
   rollDone: [];
 }>();
 
+//#region REFS
 const isRolling = ref<boolean>(false);
 const diceValue = ref<TDiceValues>(1);
 const randomRotationDegrees = ref<number>(0);
+//#endregion
 
+//#region FUNCTIONS
 function rollDice(value: TDiceValues): void {
   randomRotationDegrees.value = getRandomNumber(100, 500);
   isRolling.value = true;
@@ -49,6 +52,7 @@ function rollDice(value: TDiceValues): void {
     emit('rollDone');
   }, props.rollTime * 1000);
 }
+//#endregion
 
 defineExpose({
   /** Function to roll dice */

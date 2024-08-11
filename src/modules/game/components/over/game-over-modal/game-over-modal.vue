@@ -48,8 +48,11 @@ const dataShare: ShareData = {
 };
 
 const props = defineProps<GameOverProps>();
+
+//#region REFS
 const first = ref<IPlayer>();
 const others = ref<IPlayer[]>();
+//#endregion
 
 onBeforeMount(() => {
   const rankingPlayers = getOrganizedRanking(props.players);

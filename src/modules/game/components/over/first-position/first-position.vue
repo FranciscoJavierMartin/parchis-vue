@@ -28,7 +28,9 @@ interface FirstPositionProps {
 
 const props = defineProps<FirstPositionProps>();
 
+//#region COMPUTED
 const rankingPosition = computed<string>(() => getLabelRanking(props.first.ranking));
+//#endregion
 </script>
 
 <style scoped>

@@ -16,7 +16,9 @@ interface ProfileRankingProps {
 
 const props = defineProps<ProfileRankingProps>();
 
+//#region COMPUTED
 const rankingPosition = computed<string>(() => getLabelRanking(props.value));
+//#endregion
 </script>
 
 <style scoped>

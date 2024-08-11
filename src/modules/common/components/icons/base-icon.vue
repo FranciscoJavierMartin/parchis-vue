@@ -26,7 +26,9 @@ const props = withDefaults(defineProps<GameIconProps>(), {
   isMuted: false,
 });
 
+//#region COMPUTED
 const showIcon = computed(() => ICONS_DATA[props.type]);
+//#endregion
 </script>
 
 <style scoped>

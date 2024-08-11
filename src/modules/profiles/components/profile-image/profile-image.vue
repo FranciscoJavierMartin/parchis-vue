@@ -40,9 +40,12 @@ const emit = defineEmits<{
   handleInterval: [ends: boolean];
 }>();
 
+//#region REFS
 const progress = ref<number>(1);
 const isRunning = ref<boolean>(false);
+//#endregion
 
+//#region COMPUTED
 const progressDegrees = computed<string>(() => `${Math.round(360 * (progress.value / 100))}deg`);
 const titleMuteChat = computed<string>(() =>
   props.player.isMuted ? 'Enable chat messages' : 'Mute chat messages',
@@ -50,7 +53,9 @@ const titleMuteChat = computed<string>(() =>
 const showMuteChat = computed<boolean>(
   () => !!(props.player.isOnline && props.player.index !== 0 && !props.player.isOffline),
 );
+//#endregion
 
+//#region WATCHERS
 watch(
   () => props.startTimer,
   (startTimer) => {
@@ -83,6 +88,7 @@ watch(
   },
   { immediate: true },
 );
+//#endregion
 </script>
 
 <style scoped>

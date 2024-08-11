@@ -42,6 +42,7 @@ defineEmits<{
   handleTooltipDice: [dice: IDiceList];
 }>();
 
+//#region FUNCTIONS
 function isCoordinateInRange(coordinate: ICoordinate): boolean {
   return (
     coordinate.x >= 0 &&
@@ -50,7 +51,9 @@ function isCoordinateInRange(coordinate: ICoordinate): boolean {
     coordinate.y <= SIZE_BOARD
   );
 }
+//#endregion
 
+//#region COMPUTED
 const tooltipPosition = computed(() => {
   const tooltipSize = {
     width: Math.round(props.diceAvailable.length * DICE_SIZE_TOOLTIP),
@@ -105,6 +108,7 @@ const tooltipPosition = computed(() => {
 
   return finalPosition;
 });
+//#endregion
 </script>
 
 <style scoped>

@@ -18,9 +18,11 @@ interface PlayerInputProps extends IPlayerOffline {}
 
 withDefaults(defineProps<PlayerInputProps>(), { name: '', disabled: false });
 
+//#region V-MODELS
 const tokenColor = defineModel<TColors>('color', { required: true });
 const playerName = defineModel<string>('name', { required: true });
 const isBot = defineModel<boolean>('isBot');
+//#endregion
 </script>
 
 <style scoped>

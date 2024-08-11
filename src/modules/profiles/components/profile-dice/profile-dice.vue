@@ -42,14 +42,19 @@ const emit = defineEmits<{
   handleSelectDice: [diceValue?: TDiceValues, isActionSocket?: boolean];
 }>();
 
+//#region REFS
 const diceRef = ref<typeof Dice3d | null>(null);
+//#endregion
 
+//#region FUNCTIONS
 function rollDone(): void {
   if (props.value) {
     emit('handleDoneDice');
   }
 }
+//#endregion
 
+//#region WATCHERS
 watch(
   () => [props.value, props.diceRollNumber],
   () => {
@@ -58,6 +63,7 @@ watch(
     }
   },
 );
+//#endregion
 </script>
 
 <style scoped>

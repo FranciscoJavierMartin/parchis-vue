@@ -27,13 +27,13 @@ interface HomeToolbarProps {
   isAuth: boolean;
 }
 
+defineProps<HomeToolbarProps>();
+
 const dataShare: ShareData = {
   title: 'Parchis',
   text: "Let's play Parchis",
   url: window.location.href,
 };
-
-defineProps<HomeToolbarProps>();
 </script>
 
 <style scoped>
