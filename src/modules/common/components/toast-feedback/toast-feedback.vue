@@ -1,22 +1,21 @@
 <template>
   <div class="toast-container">
     <ul class="toast-list">
-      <li class="toast-message">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed asperiores culpa eos autem
-        delectus vitae ratione odio maiores esse eum, incidunt praesentium quo eius architecto
-        deserunt. Sit velit rerum officiis!
+      <li
+        v-for="(message, index) of toast.messages.value"
+        :key="`${message}-${index}`"
+        class="toast-message"
+      >
+        {{ message }}
       </li>
-      <li class="toast-message">Hello world</li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-interface ToastFeedbackProps {
-  // message: string;
-}
+import useToastFeedback from '@common/composables/use-toast-feedback/use-toast-feedback';
 
-// defineProps<ToastFeedbackProps>();
+const toast = useToastFeedback();
 </script>
 
 <style scoped>
