@@ -2,18 +2,25 @@
   <Teleport to="#toast-container">
     <div class="toast-container">
       <div class="toast-wrapper">
-        <span>Hello</span>
+        <span>{{ text }}</span>
       </div>
     </div>
   </Teleport>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+interface ToastFeedbackProps {
+  text: string;
+}
+
+defineProps<ToastFeedbackProps>();
+</script>
 
 <style scoped>
 .toast-container {
   position: absolute;
   bottom: 50px;
+  left: 0;
   z-index: 20;
   width: 100%;
 

@@ -24,7 +24,7 @@ const meta: Meta<typeof ToastFeedback> = {
       },
       template: `
         <div>
-          <div style="margin: 1rem; border: 1px solid red; height: 600px; width: 400px;">
+          <div style="margin: 1rem; height: 100%; width: 100%;">
             <story v-if="isOpen" />
           </div>
           <div id="toast-container" />
@@ -37,4 +37,8 @@ const meta: Meta<typeof ToastFeedback> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    text: 'Hello world',
+  },
+};
