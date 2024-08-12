@@ -52,7 +52,6 @@ function onClick(): void {
 
 function onCloseModal(isShare: boolean = false): void {
   if (isShare) {
-    // TODO: Show toast with successful message
     addToast('Shared');
   }
 
