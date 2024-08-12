@@ -1,7 +1,7 @@
 <template>
   <div class="toast-container">
-    <ul v-if="toast.messages.value.length" class="toast-list">
-      <li v-for="{ id, message } of toast.messages.value" :key="id" class="toast-message">
+    <ul v-if="toasts.length" class="toast-list">
+      <li v-for="(message, index) of toasts" :key="index" class="toast-message">
         {{ message }}
       </li>
     </ul>
@@ -9,13 +9,11 @@
 </template>
 
 <script setup lang="ts">
-import useToastFeedback from '@common/composables/use-toast-feedback/use-toast-feedback';
+import { inject } from 'vue';
+import { ToastMessagesSymbol } from '@toast/constants/toast.constants';
+import type { TToastMessage } from '@toast/interfaces/toast.interface';
 
-const toast = useToastFeedback();
-
-setInterval(() => {
-  toast.addToast('Hello world');
-}, 1000);
+const toasts = inject<TToastMessage>(ToastMessagesSymbol)!;
 </script>
 
 <style scoped>
