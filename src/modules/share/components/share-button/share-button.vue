@@ -9,11 +9,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { inject, ref } from 'vue';
 import ShareModal from '@share/components/share-modal/share-modal.vue';
 import { shareLink } from '@share/helpers/share.helper';
 import { SHARE_AVAILABLE } from '@share/constants/share.constants';
-import ToastFeedback from '@/modules/common/components/toast-feedback/toast-feedback.vue';
+import ToastFeedback from '@common/components/toast-feedback/toast-feedback.vue';
+import { ToastAddToastSymbol } from '@toast/constants/toast.constants';
+import type { TAddToastFunction } from '@toast/interfaces/toast.interface';
 
 interface ShareProps {
   /** Data to share */
@@ -26,6 +28,8 @@ const props = withDefaults(defineProps<ShareProps>(), { useNativeOption: true })
 
 const useNativeVersionBrowser: boolean = SHARE_AVAILABLE && props.useNativeOption;
 
+const addToast: TAddToastFunction = inject<TAddToastFunction>(ToastAddToastSymbol)!;
+
 //#region REFS
 const isModalVisible = ref<boolean>(false);
 const feedbackText = ref<string>('');
@@ -34,7 +38,13 @@ const feedbackText = ref<string>('');
 //#region FUNCTIONS
 function onClick(): void {
   if (useNativeVersionBrowser) {
-    shareLink(props.data);
+    shareLink(props.data)
+      .then(() => {
+        addToast('Shared');
+      })
+      .catch(() => {
+        addToast('Error on shared');
+      });
   } else {
     isModalVisible.value = true;
   }
@@ -43,6 +53,7 @@ function onClick(): void {
 function onCloseModal(isShare: boolean = false): void {
   if (isShare) {
     // TODO: Show toast with successful message
+    addToast('Shared');
   }
 
   isModalVisible.value = false;
