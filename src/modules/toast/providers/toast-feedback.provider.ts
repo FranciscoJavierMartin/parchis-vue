@@ -20,6 +20,10 @@ export default defineComponent({
     function addToast(message: string): void {
       const toast: TToastMessage = { message, id: guid() };
       messages.value = [...messages.value, toast];
+
+      setTimeout(() => {
+        removeToast(toast.id);
+      }, 5000);
     }
 
     function removeToast(id: string): void {
