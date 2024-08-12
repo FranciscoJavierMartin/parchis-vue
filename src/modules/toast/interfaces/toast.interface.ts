@@ -6,4 +6,4 @@ export type TToastMessage = {
 };
 export type TToastMessages = Ref<TToastMessage[]>;
 export type TAddToastFunction = (message: string) => void;
-export type TDismissToastFunction = (id: string) => void;
+export type TRemoveToastFunction = (id: string) => void;
