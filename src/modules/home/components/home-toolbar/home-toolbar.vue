@@ -10,9 +10,9 @@
         </button>
       </template>
     </ShareButton>
-    <a v-if="isAuth" :href="API_LOGOUT" class="button blue" title="Logout">
+    <button v-if="isAuth" class="button blue" title="Logout">
       <BaseIcon type="logout" />
-    </a>
+    </button>
   </div>
 </template>
 
@@ -20,7 +20,6 @@
 import ShareButton from '@share/components/share-button/share-button.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import { ROUTES } from '@/router/routes';
-import { API_LOGOUT } from '@online/constants/online.constants';
 
 interface HomeToolbarProps {
   /** Is user authenticated */

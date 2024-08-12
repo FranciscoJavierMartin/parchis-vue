@@ -1,14 +1,5 @@
-export function shareLink(data: ShareData): void {
-  navigator
-    .share(data)
-    .then(() => {
-      // TODO: Display toast
-      console.log('Suceess');
-    })
-    .catch(() => {
-      // TODO: Display toast
-      console.log('Error');
-    });
+export async function shareLink(data: ShareData): Promise<void> {
+  navigator.share(data);
 }
 
 export function shareWithSocialNetwork(data: Omit<ShareData, 'files'>, originalUrl: string): void {

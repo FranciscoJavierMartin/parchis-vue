@@ -21,30 +21,6 @@ import { getRandomNumber, guid } from '@common/helpers/random.helper';
 import botImage from '@/assets/images/bot.png';
 import { EBoardColors, ESufixColors } from '@board/interfaces/board.enum';
 
-// TODO: Remove
-export const TEMP_USERS: IUser[] = [
-  {
-    id: '1',
-    name: 'Player 01',
-    isBot: false,
-  },
-  {
-    id: '2',
-    name: 'Player 02',
-    isBot: true,
-  },
-  {
-    id: '3',
-    name: 'Player 03',
-    isBot: true,
-  },
-  {
-    id: '4',
-    name: 'Player 04',
-    isBot: true,
-  },
-];
-
 export function getPlayersColors(
   boardColor: TBoardColors,
   totalPlayers: TTotalPlayers,
