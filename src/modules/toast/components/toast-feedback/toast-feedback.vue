@@ -1,7 +1,7 @@
 <template>
   <div class="toast-container">
     <ul v-if="toasts.length" class="toast-list">
-      <li v-for="{ message, id } of toasts" :key="id" class="toast-message">
+      <li v-for="{ message, id } of toasts" :key="id" class="toast-message" @click="dismiss(id)">
         {{ message }}
       </li>
     </ul>
@@ -10,10 +10,11 @@
 
 <script setup lang="ts">
 import { inject } from 'vue';
-import { ToastMessagesSymbol } from '@toast/constants/toast.constants';
-import type { TToastMessages } from '@toast/interfaces/toast.interface';
+import { ToastDismissToastSymbol, ToastMessagesSymbol } from '@toast/constants/toast.constants';
+import type { TDismissToastFunction, TToastMessages } from '@toast/interfaces/toast.interface';
 
 const toasts = inject<TToastMessages>(ToastMessagesSymbol)!;
+const dismiss = inject<TDismissToastFunction>(ToastDismissToastSymbol)!;
 </script>
 
 <style scoped>
