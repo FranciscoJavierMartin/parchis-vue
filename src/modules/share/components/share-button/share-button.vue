@@ -5,7 +5,6 @@
     :data="data"
     @close="onCloseModal"
   />
-  <ToastFeedback v-if="feedbackText" :text="feedbackText" />
 </template>
 
 <script lang="ts" setup>
@@ -13,7 +12,6 @@ import { inject, ref } from 'vue';
 import ShareModal from '@share/components/share-modal/share-modal.vue';
 import { shareLink } from '@share/helpers/share.helper';
 import { SHARE_AVAILABLE } from '@share/constants/share.constants';
-import ToastFeedback from '@common/components/toast-feedback/toast-feedback.vue';
 import { ToastAddToastSymbol } from '@toast/constants/toast.constants';
 import type { TAddToastFunction } from '@toast/interfaces/toast.interface';
 
@@ -32,7 +30,6 @@ const addToast: TAddToastFunction = inject<TAddToastFunction>(ToastAddToastSymbo
 
 //#region REFS
 const isModalVisible = ref<boolean>(false);
-const feedbackText = ref<string>('');
 //#endregion
 
 //#region FUNCTIONS
