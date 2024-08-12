@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts" setup>
-import ToastFeedback from '@/modules/common/components/toast-feedback/toast-feedback.vue';
+import ToastFeedback from '@toast/components/toast-feedback/toast-feedback.vue';
 import useWindowResize from '@common/composables/use-window-resize/use-window-resize';
 
 useWindowResize();
