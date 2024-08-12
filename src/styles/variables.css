@@ -5,6 +5,7 @@
   --size-tile: calc(var(--size-board) / 15);
   --dice-size-tooltip: calc(var(--size-tile) * 0.3);
   --modal-z-index: 20;
+  --toast-z-index: calc(var(--modal-z-index) + 1);
 
   /* Board colors */
   --game-red: #e02a29;

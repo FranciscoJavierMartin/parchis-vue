@@ -2,12 +2,13 @@
   <div class="container">
     <div class="screen" id="screen">
       <slot />
-      <div id="toast-container" />
+      <ToastFeedback />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import ToastFeedback from '@toast/components/toast-feedback/toast-feedback.vue';
 import useWindowResize from '@common/composables/use-window-resize/use-window-resize';
 
 useWindowResize();
