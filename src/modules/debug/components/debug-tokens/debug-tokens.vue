@@ -156,6 +156,7 @@ watch(positionSelected, (newValue) => {
 .game-debug-tokens {
   position: absolute;
   bottom: 15px;
+  width: 100%;
 
   .game-debug-dice {
     display: flex;
@@ -174,6 +175,7 @@ watch(positionSelected, (newValue) => {
   .game-debug-selects {
     display: flex;
     gap: 10px;
+    justify-content: center;
     width: 100%;
   }
 
