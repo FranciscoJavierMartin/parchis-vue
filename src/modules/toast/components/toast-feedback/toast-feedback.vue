@@ -20,19 +20,16 @@ const toasts = inject<TToastMessage>(ToastMessagesSymbol)!;
 .toast-container {
   position: absolute;
   bottom: 50px;
-  z-index: var(--toast-z-index);
-  width: 100%;
 
   .toast-list {
     display: flex;
     flex-direction: column;
     gap: 5px;
     align-items: center;
-    width: 100%;
-    max-width: 100%;
     list-style: none;
 
     .toast-message {
+      z-index: var(--toast-z-index);
       width: 80%;
       max-width: max-content;
       padding: 10px 20px;

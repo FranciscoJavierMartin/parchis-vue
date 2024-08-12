@@ -15,7 +15,7 @@
       :href="API_LOGOUT"
       class="button blue"
       title="Logout"
-      @click="() => addToast('Hello world')"
+      @click="() => addToast('Hello')"
     >
       <BaseIcon type="logout" />
     </button>
