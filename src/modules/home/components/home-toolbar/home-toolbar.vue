@@ -10,13 +10,7 @@
         </button>
       </template>
     </ShareButton>
-    <button
-      v-if="isAuth"
-      :href="API_LOGOUT"
-      class="button blue"
-      title="Logout"
-      @click="() => addToast('Hello')"
-    >
+    <button v-if="isAuth" class="button blue" title="Logout">
       <BaseIcon type="logout" />
     </button>
   </div>
@@ -26,10 +20,6 @@
 import ShareButton from '@share/components/share-button/share-button.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import { ROUTES } from '@/router/routes';
-import { API_LOGOUT } from '@online/constants/online.constants';
-import { inject } from 'vue';
-import type { TAddToastFunction } from '@toast/interfaces/toast.interface';
-import { ToastAddToastSymbol } from '@toast/constants/toast.constants';
 
 interface HomeToolbarProps {
   /** Is user authenticated */
@@ -43,7 +33,6 @@ const dataShare: ShareData = {
   text: "Let's play Parchis",
   url: window.location.href,
 };
-const addToast = inject<TAddToastFunction>(ToastAddToastSymbol)!;
 </script>
 
 <style scoped>
