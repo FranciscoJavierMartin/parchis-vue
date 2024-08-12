@@ -5,6 +5,7 @@
     :data="data"
     @close="onCloseModal"
   />
+  <ToastFeedback v-if="feedbackText" :text="feedbackText" />
 </template>
 
 <script lang="ts" setup>
@@ -12,6 +13,7 @@ import { ref } from 'vue';
 import ShareModal from '@share/components/share-modal/share-modal.vue';
 import { shareLink } from '@share/helpers/share.helper';
 import { SHARE_AVAILABLE } from '@share/constants/share.constants';
+import ToastFeedback from '@/modules/common/components/toast-feedback/toast-feedback.vue';
 
 interface ShareProps {
   /** Data to share */
@@ -26,6 +28,7 @@ const useNativeVersionBrowser: boolean = SHARE_AVAILABLE && props.useNativeOptio
 
 //#region REFS
 const isModalVisible = ref<boolean>(false);
+const feedbackText = ref<string>('');
 //#endregion
 
 //#region FUNCTIONS
