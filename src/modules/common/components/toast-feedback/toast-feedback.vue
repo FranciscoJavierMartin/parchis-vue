@@ -1,6 +1,6 @@
 <template>
   <div class="toast-container">
-    <ul class="toast-list">
+    <ul v-if="toast.messages.value.length" class="toast-list">
       <li v-for="{ id, message } of toast.messages.value" :key="id" class="toast-message">
         {{ message }}
       </li>
