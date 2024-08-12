@@ -1,7 +1,7 @@
 <template>
   <div class="toast-container">
     <ul v-if="toasts.length" class="toast-list">
-      <li v-for="(message, index) of toasts" :key="index" class="toast-message">
+      <li v-for="{ message, id } of toasts" :key="id" class="toast-message">
         {{ message }}
       </li>
     </ul>
@@ -11,9 +11,9 @@
 <script setup lang="ts">
 import { inject } from 'vue';
 import { ToastMessagesSymbol } from '@toast/constants/toast.constants';
-import type { TToastMessage } from '@toast/interfaces/toast.interface';
+import type { TToastMessages } from '@toast/interfaces/toast.interface';
 
-const toasts = inject<TToastMessage>(ToastMessagesSymbol)!;
+const toasts = inject<TToastMessages>(ToastMessagesSymbol)!;
 </script>
 
 <style scoped>
