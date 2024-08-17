@@ -60,7 +60,7 @@ defineEmits(['close']);
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 2.4s linear;
+  transition: opacity 0.4s linear;
 }
 
 .fade-enter-from,
@@ -68,11 +68,12 @@ defineEmits(['close']);
   opacity: 0;
 }
 
-.pop-enter-active,
+.pop-enter-active {
+  animation: scaleUp 0.5s;
+}
+
 .pop-leave-active {
-  transition:
-    transform 2.4s cubic-bezier(0.5, 0, 0.5, 1),
-    opacity 2.4s linear;
+  animation: scaleUp 0.5s reverse;
 }
 
 .pop-enter-from,
