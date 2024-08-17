@@ -1,5 +1,5 @@
 <template>
-  <BaseModal>
+  <BaseModal :show-modal="showModal">
     <div class="modal-share-wrapper">
       <ModalShareHeader @close="$emit('close')" />
       <ModalShareButtons :data="data" @close="$emit('close')" />
@@ -8,13 +8,15 @@
 </template>
 
 <script setup lang="ts">
-import BaseModal from '@layouts/components/base-modal/base-modal.vue';
+import BaseModal from '@layouts/components/common-modal/common-modal.vue';
 import ModalShareHeader from '@share/components/modal-share-header/modal-share-header.vue';
 import ModalShareButtons from '@share/components/modal-share-buttons/modal-share-buttons.vue';
 
 interface ShareModalProps {
   /** Data to share */
   data: ShareData;
+  /** Show modal */
+  showModal: boolean;
 }
 
 defineProps<ShareModalProps>();

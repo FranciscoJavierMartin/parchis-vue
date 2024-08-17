@@ -1,7 +1,7 @@
 <template>
   <slot :onClick="onClick" />
   <ShareModal
-    v-if="!useNativeVersionBrowser && isModalVisible"
+    :showModal="!useNativeVersionBrowser && isModalVisible"
     :data="data"
     @close="onCloseModal"
   />

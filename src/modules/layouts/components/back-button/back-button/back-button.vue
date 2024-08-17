@@ -6,7 +6,7 @@
     <BaseIcon type="back" />
   </RouterLink>
   <BackConfirmationModal
-    v-if="isOpen"
+    :show-modal="isOpen"
     @cancel="handleCancelButton"
     @confirmation="handleConfirmationButton"
   />
