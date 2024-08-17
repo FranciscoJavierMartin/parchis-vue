@@ -63,7 +63,7 @@ defineEmits(['close']);
   transition: opacity 2.4s linear;
 }
 
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
