@@ -11,7 +11,7 @@ import MenuOptionsModal from '@options/components/menu-options-modal/menu-option
 import BaseIcon from '@common/components/icons/base-icon.vue';
 
 //#region REFS
-const isOpen: Ref<boolean> = ref<boolean>(false);
+const isOpen: Ref<boolean> = ref<boolean>(true);
 //#endregion
 
 //#region FUNCTIONS

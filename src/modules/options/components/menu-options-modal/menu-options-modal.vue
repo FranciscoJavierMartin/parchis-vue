@@ -16,6 +16,7 @@
           :label="key"
           :icon="(key.toLowerCase() as TypeIcon)"
         />
+        <LanguageSelector />
       </div>
     </div>
   </BaseModal>
@@ -25,6 +26,7 @@
 import { inject } from 'vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import MenuOption from '@options/components/menu-option/menu-option.vue';
+import LanguageSelector from '@options/components/language-selector/language-selector.vue';
 import BaseModal from '@layouts/components/base-modal/base-modal.vue';
 import type { TOptionsGame } from '@sounds/interfaces/sounds.interface';
 import { OptionsGameStateSymbol } from '@sounds/constants/sounds.constants';
@@ -50,7 +52,7 @@ const optionsGame: TOptionsGame = inject<TOptionsGame>(OptionsGameStateSymbol)!;
 .menu-options-modal {
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
   justify-content: center;
   width: 100%;
   background-color: #312938;
