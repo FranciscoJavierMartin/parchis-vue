@@ -20,9 +20,15 @@
 <script setup lang="ts">
 import useTrapFocus from '@common/composables/use-focus-trap/use-focus-trap';
 
-defineProps(['showModal']);
+interface BaseModalProps {
+  showModal: boolean;
+}
 
-defineEmits(['close']);
+defineProps<BaseModalProps>();
+
+defineEmits<{
+  close: [];
+}>();
 
 const { trapRef } = useTrapFocus();
 </script>
@@ -37,7 +43,7 @@ const { trapRef } = useTrapFocus();
   z-index: var(--modal-z-index);
   display: grid;
   place-items: center;
-  width: calc(var(--base-width) * 0.75);
+  width: 75%;
   margin: auto;
   border: none;
 }
