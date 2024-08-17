@@ -41,7 +41,7 @@ const { trapRef } = useTrapFocus();
   z-index: calc(var(--modal-z-index) - 1);
   width: 100vw;
   height: 100vh;
-  background-color: rgb(0, 0, 0);
+  background-color: black;
   opacity: 0.8;
 }
 
