@@ -6,13 +6,15 @@ import router from '@/router';
 
 import '@/styles/main.css';
 
-import en from './i18n/locales/en.json';
+import en from '@/i18n/locales/en.json';
+import es from '@/i18n/locales/es.json';
 
 // configure i18n
 const i18n = createI18n({
+  legacy: false,
   locale: 'en',
   fallbackLocale: 'en',
-  messages: { en },
+  messages: { en, es },
 });
 
 const app = createApp(App);
