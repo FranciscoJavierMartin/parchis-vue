@@ -113,3 +113,12 @@
     scale: 1;
   }
 }
+
+@keyframes emerge {
+  from {
+    transform: translateY(var(--base-height));
+  }
+  to {
+    transform: translateY(calc(var(--base-height) / 2));
+  }
+}

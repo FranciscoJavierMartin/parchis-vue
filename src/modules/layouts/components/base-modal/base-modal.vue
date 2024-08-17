@@ -3,7 +3,7 @@
     <Transition name="fade">
       <div class="modal-overlay" v-if="showModal" @click="$emit('close')" />
     </Transition>
-    <Transition name="pop">
+    <Transition name="pop" :css="false">
       <dialog v-if="showModal" ref="trapRef" open class="modal">
         <slot />
       </dialog>

@@ -31,7 +31,7 @@ defineEmits<{
 .modal-share-wrapper {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: var(--base-width);
   padding: 20px;
   background-color: white;
   border-radius: 15px 15px 0 0;
@@ -39,6 +39,9 @@ defineEmits<{
     rgba(17, 17, 26, 0.1) 0px 4px 16px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px,
     rgba(17, 17, 26, 0.1) 0px 16px 56px;
-  animation: bounceIn 500ms ease both;
+  animation: emerge 100ms ease;
+  animation-composition: add;
+  /* animation-delay: 0ms; */
+  transform: translateY(calc(var(--base-height) / 2));
 }
 </style>
