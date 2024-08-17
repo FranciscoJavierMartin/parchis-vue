@@ -1,7 +1,10 @@
 <template>
-  <AppWrapper>
+  <!-- <AppWrapper>
     <RouterView />
-  </AppWrapper>
+  </AppWrapper> -->
+  <div>
+    <h1 style="color: white">{{ $t('main.hello') }}</h1>
+  </div>
 </template>
 
 <script setup lang="ts">
