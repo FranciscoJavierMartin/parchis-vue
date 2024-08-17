@@ -1,5 +1,5 @@
 <template>
-  <BaseModal>
+  <BaseModal :show-modal="showModal">
     <div class="game-over-options">
       <div class="game-over-container">
         <GameOverRibbon title="Well played" />
@@ -39,6 +39,8 @@ import { ROUTES } from '@/router/routes';
 interface GameOverProps {
   /** Players info (unordered) */
   players: IPlayer[];
+  /** Show modal */
+  showModal: boolean;
 }
 
 const dataShare: ShareData = {

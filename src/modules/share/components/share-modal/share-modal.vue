@@ -1,5 +1,5 @@
 <template>
-  <BaseModal>
+  <BaseModal :show-modal="showModal" :enable-modal-animation="false" @close="$emit('close')">
     <div class="modal-share-wrapper">
       <ModalShareHeader @close="$emit('close')" />
       <ModalShareButtons :data="data" @close="$emit('close')" />
@@ -15,6 +15,8 @@ import ModalShareButtons from '@share/components/modal-share-buttons/modal-share
 interface ShareModalProps {
   /** Data to share */
   data: ShareData;
+  /** Show modal */
+  showModal: boolean;
 }
 
 defineProps<ShareModalProps>();
@@ -29,7 +31,7 @@ defineEmits<{
 .modal-share-wrapper {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: var(--base-width);
   padding: 20px;
   background-color: white;
   border-radius: 15px 15px 0 0;
@@ -37,6 +39,8 @@ defineEmits<{
     rgba(17, 17, 26, 0.1) 0px 4px 16px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px,
     rgba(17, 17, 26, 0.1) 0px 16px 56px;
-  animation: bounceIn 500ms ease both;
+  opacity: 0;
+  animation: emerge 0.5s ease 1ms forwards;
+  animation-composition: add;
 }
 </style>

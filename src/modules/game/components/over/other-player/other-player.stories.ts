@@ -38,4 +38,59 @@ const meta: Meta<typeof OtherPlayer> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const SecondPosition: Story = {
+  args: {
+    player: {
+      id: '7e37-4ff7-fcd8-1dfe-0ad9',
+      name: 'Bob',
+      isBot: true,
+      photo: '/parchis-vue/src/assets/images/bot.png',
+      index: 2,
+      color: 'GREEN',
+      finished: true,
+      isOffline: false,
+      isMuted: false,
+      chatMessage: '',
+      counterMessage: 0,
+      ranking: 2,
+    },
+  },
+};
+
+export const ThirdPosition: Story = {
+  args: {
+    player: {
+      id: '7e37-4ff7-fcd8-1dfe-0ad9',
+      name: 'Bob',
+      isBot: true,
+      photo: '/parchis-vue/src/assets/images/bot.png',
+      index: 2,
+      color: 'GREEN',
+      finished: true,
+      isOffline: false,
+      isMuted: false,
+      chatMessage: '',
+      counterMessage: 0,
+      ranking: 3,
+    },
+  },
+};
+
+export const FourthPosition: Story = {
+  args: {
+    player: {
+      id: '7e37-4ff7-fcd8-1dfe-0ad9',
+      name: 'Bob',
+      isBot: true,
+      photo: '/parchis-vue/src/assets/images/bot.png',
+      index: 2,
+      color: 'GREEN',
+      finished: true,
+      isOffline: false,
+      isMuted: false,
+      chatMessage: '',
+      counterMessage: 0,
+      ranking: 4,
+    },
+  },
+};

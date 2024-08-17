@@ -1,38 +1,79 @@
 <template>
   <Teleport to="#screen">
-    <dialog ref="trapRef" open class="modal-wrapper">
-      <div class="modal-container">
+    <Transition name="fade">
+      <div class="modal-overlay" v-if="showModal" @click="$emit('close')" />
+    </Transition>
+    <Transition name="pop" :css="enableModalAnimation">
+      <dialog v-if="showModal" ref="trapRef" open class="modal">
         <slot />
-      </div>
-    </dialog>
+      </dialog>
+    </Transition>
   </Teleport>
 </template>
 
 <script setup lang="ts">
 import useTrapFocus from '@common/composables/use-focus-trap/use-focus-trap';
 
+interface BaseModalProps {
+  /** Show modal */
+  showModal: boolean;
+  /** Enable modal animation */
+  enableModalAnimation?: boolean;
+}
+
+withDefaults(defineProps<BaseModalProps>(), { enableModalAnimation: true });
+
+defineEmits<{
+  /** Close modal */
+  close: [];
+}>();
+
 const { trapRef } = useTrapFocus();
 </script>
 
 <style scoped>
-.modal-wrapper {
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: calc(var(--modal-z-index) - 1);
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.8;
+}
+
+.modal {
   position: absolute;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
   z-index: var(--modal-z-index);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background: rgb(0 0 0 / 80%);
+  display: grid;
+  place-items: center;
+  margin: auto;
+  background-color: transparent;
+  border: none;
+}
 
-  .modal-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 75%;
-  }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s linear;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.pop-enter-active {
+  animation: scaleUp 0.5s;
+}
+
+.pop-leave-active {
+  animation: scaleUp 0.5s reverse;
 }
 </style>

@@ -2,7 +2,7 @@
   <button class="button blue menu-options-button" @click="handleShowOptions">
     <BaseIcon type="gear" />
   </button>
-  <MenuOptionsModal v-if="isOpen" @close="closeModal" />
+  <MenuOptionsModal :show-modal="isOpen" @close="closeModal" />
 </template>
 
 <script setup lang="ts">

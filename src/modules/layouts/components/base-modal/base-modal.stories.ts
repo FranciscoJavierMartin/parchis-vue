@@ -9,7 +9,9 @@ const meta: Meta<typeof BaseModal> = {
   parameters: {
     layout: 'fullscreen',
   },
-  args: {},
+  args: {
+    showModal: true,
+  },
   decorators: [
     (args: object): object => ({
       setup(): object {
@@ -26,7 +28,7 @@ const meta: Meta<typeof BaseModal> = {
         <div>
           <div id="screen" />
           <div style="margin: 1rem">
-            <story v-if="isOpen">
+            <story>
               <h1 style="color: red;">Base modal</h1>
             </story>
           </div>

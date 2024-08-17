@@ -1,5 +1,5 @@
 <template>
-  <BaseModal>
+  <BaseModal :show-modal="showModal">
     <div class="confirm-modal">
       <BaseIcon type="info" />
       <h2 class="title">Exit</h2>
@@ -22,6 +22,13 @@
 <script setup lang="ts">
 import BaseModal from '@layouts/components/base-modal/base-modal.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
+
+interface BackConfirmationModalProps {
+  /** Show modal */
+  showModal: boolean;
+}
+
+defineProps<BackConfirmationModalProps>();
 
 defineEmits<{
   /** Press 'No' button */

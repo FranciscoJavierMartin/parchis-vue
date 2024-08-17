@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <GameOverModal v-if="isGameOver.showModal" :players="players" />
+  <GameOverModal :show-modal="isGameOver.showModal" :players="players" />
   <div class="game-board-wrapper">
     <!-- prettier-ignore-attribute -->
     <ProfileSection

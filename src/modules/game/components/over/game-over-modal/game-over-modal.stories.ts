@@ -10,6 +10,7 @@ const meta: Meta<typeof GameOverModal> = {
     layout: 'fullscreen',
   },
   args: {
+    showModal: true,
     players: [
       {
         id: 'f181-1a48-0224-2f26-3c79',
@@ -85,7 +86,7 @@ const meta: Meta<typeof GameOverModal> = {
       template: `
         <div>
           <div id="screen" />
-          <GameOverModal v-if="isOpen" :players="args.players" />
+          <GameOverModal :show-modal="isOpen" :players="args.players" />
         </div>
       `,
     };
