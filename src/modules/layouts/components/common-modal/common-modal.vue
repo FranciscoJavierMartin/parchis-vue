@@ -68,23 +68,16 @@ defineEmits(['close']);
   opacity: 0;
 }
 
-.pop-enter-active {
-  animation: modal 3s ease-out;
-}
-
+.pop-enter-active,
 .pop-leave-active {
-  animation: modal 3s ease-in reverse;
+  transition:
+    transform 2.4s cubic-bezier(0.5, 0, 0.5, 1),
+    opacity 2.4s linear;
 }
 
-@keyframes modal {
-  0% {
-    opacity: 0;
-    transform: scale(0.3) translateY(-50%);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+.pop-enter-from,
+.pop-leave-to {
+  opacity: 0;
+  transform: scale(0.3) translateY(-50%);
 }
 </style>
