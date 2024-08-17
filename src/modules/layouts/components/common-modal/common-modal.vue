@@ -26,36 +26,29 @@ defineEmits(['close']);
 <style scoped>
 .modal {
   position: fixed;
-  /* position: absolute; */
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
+  z-index: 20;
+  width: calc(var(--base-width) * 0.75);
   margin: auto;
   text-align: center;
-  /* max-width: calc(var(--base-width) * 0.75); */
-  width: calc(var(--base-width) * 0.75);
-  /* height: fit-content; */
-  /* padding: 2rem; */
-  border-radius: 1rem;
   background-color: white;
-  z-index: 20;
-  /* transform: none; */
+  border-radius: 1rem;
 }
 
 .modal-overlay {
-  content: '';
   position: fixed;
-  /* position: absolute; */
   top: 0;
   right: 0;
-  left: 0;
   bottom: 0;
+  left: 0;
   z-index: 19;
-  background-color: rgb(0, 0, 0);
-  opacity: 0.8;
   width: 100vw;
   height: 100vh;
+  background-color: rgb(0, 0, 0);
+  opacity: 0.8;
 }
 
 .fade-enter-active,
@@ -74,11 +67,5 @@ defineEmits(['close']);
 
 .pop-leave-active {
   animation: scaleUp 0.5s reverse;
-}
-
-.pop-enter-from,
-.pop-leave-to {
-  opacity: 0;
-  transform: scale(0.3) translateY(-50%);
 }
 </style>
