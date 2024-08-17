@@ -30,6 +30,19 @@ const { trapRef } = useTrapFocus();
 </script>
 
 <style scoped>
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: calc(var(--modal-z-index) - 1);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+  opacity: 0.8;
+}
+
 .modal {
   position: absolute;
   top: 0;
@@ -43,19 +56,6 @@ const { trapRef } = useTrapFocus();
   margin: auto;
   background-color: transparent;
   border: none;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: calc(var(--modal-z-index) - 1);
-  width: 100vw;
-  height: 100vh;
-  background-color: rgb(0, 0, 0);
-  opacity: 0.8;
 }
 
 .fade-enter-active,
