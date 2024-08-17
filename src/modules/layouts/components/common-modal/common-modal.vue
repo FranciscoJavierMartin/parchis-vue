@@ -4,7 +4,7 @@
       <div class="modal-overlay" v-if="showModal" @click="$emit('close')" />
     </Transition>
     <Transition name="pop">
-      <dialog open class="modal" v-if="showModal">
+      <dialog v-if="showModal" ref="trapRef" open class="modal">
         <h1>Vue Transitions</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam distinctio vitae
@@ -18,14 +18,18 @@
 </template>
 
 <script setup lang="ts">
+import useTrapFocus from '@common/composables/use-focus-trap/use-focus-trap';
+
 defineProps(['showModal']);
 
 defineEmits(['close']);
+
+const { trapRef } = useTrapFocus();
 </script>
 
 <style scoped>
 .modal {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
