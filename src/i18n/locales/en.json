@@ -1,5 +1,6 @@
 {
   "main": {
-    "hello": "Hello World!"
+    "hello": "Hello World!",
+    "bye": "Good bye"
   }
 }
