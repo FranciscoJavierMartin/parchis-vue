@@ -32,6 +32,7 @@ import type { TypeIcon } from '@common/interfaces/icons.interface';
 import type { EOptionsGame } from '@options/interfaces/options.enum';
 
 interface MenuOptionsModalProps {
+  /** Show modal */
   showModal: boolean;
 }
 
@@ -58,7 +59,6 @@ const optionsGame: TOptionsGame = inject<TOptionsGame>(OptionsGameStateSymbol)!;
     rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
     rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-  /* animation: scaleUp 0.5s; */
 
   .modal-options-header {
     position: relative;

@@ -15,12 +15,14 @@
 import useTrapFocus from '@common/composables/use-focus-trap/use-focus-trap';
 
 interface BaseModalProps {
+  /** Show modal */
   showModal: boolean;
 }
 
 defineProps<BaseModalProps>();
 
 defineEmits<{
+  /** Close modal */
   close: [];
 }>();
 
