@@ -42,6 +42,7 @@ defineEmits<{
   animation: emerge 1000ms ease forwards;
   animation-composition: add;
   animation-delay: 1ms;
+  opacity: 0;
   /* transform: translateY(calc(var(--base-height) / 2)); */
 }
 </style>
