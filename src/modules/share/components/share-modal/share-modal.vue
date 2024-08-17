@@ -1,5 +1,5 @@
 <template>
-  <BaseModal :show-modal="showModal" :enable-modal-animation="false">
+  <BaseModal :show-modal="showModal" :enable-modal-animation="false" @close="$emit('close')">
     <div class="modal-share-wrapper">
       <ModalShareHeader @close="$emit('close')" />
       <ModalShareButtons :data="data" @close="$emit('close')" />
