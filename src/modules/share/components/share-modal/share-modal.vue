@@ -39,10 +39,9 @@ defineEmits<{
     rgba(17, 17, 26, 0.1) 0px 4px 16px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px,
     rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  opacity: 0;
   animation: emerge 1000ms ease forwards;
   animation-composition: add;
   animation-delay: 1ms;
-  opacity: 0;
-  /* transform: translateY(calc(var(--base-height) / 2)); */
 }
 </style>
