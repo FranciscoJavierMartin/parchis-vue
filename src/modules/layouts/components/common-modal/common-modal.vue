@@ -5,13 +5,7 @@
     </Transition>
     <Transition name="pop">
       <dialog v-if="showModal" ref="trapRef" open class="modal">
-        <h1>Vue Transitions</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam distinctio vitae
-          provident, officia, nisi veritatis maiores officiis similique molestiae adipisci quaerat
-          nulla molestias ut sapiente dignissimos dolorum alias, nam optio.
-        </p>
-        <button @click="$emit('close')">Hide modal</button>
+        <slot />
       </dialog>
     </Transition>
   </Teleport>
@@ -45,6 +39,7 @@ const { trapRef } = useTrapFocus();
   place-items: center;
   width: 75%;
   margin: auto;
+  background-color: transparent;
   border: none;
 }
 
