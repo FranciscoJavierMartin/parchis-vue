@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import BaseModal from '@layouts/components/common-modal/common-modal.vue';
+import BaseModal from '@layouts/components/base-modal/base-modal.vue';
 import ModalShareHeader from '@share/components/modal-share-header/modal-share-header.vue';
 import ModalShareButtons from '@share/components/modal-share-buttons/modal-share-buttons.vue';
 

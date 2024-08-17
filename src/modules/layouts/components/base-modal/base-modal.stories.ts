@@ -1,9 +1,9 @@
 import { nextTick, onMounted, ref } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3';
-import BaseModal from '@layouts/components/common-modal/common-modal.vue';
+import BaseModal from '@layouts/components/base-modal/base-modal.vue';
 
 const meta: Meta<typeof BaseModal> = {
-  title: 'Layouts/CommonModal',
+  title: 'Layouts/BaseModal',
   component: BaseModal,
   tags: ['autodocs'],
   parameters: {

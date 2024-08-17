@@ -1,5 +1,5 @@
 <template>
-  <CommonModal :show-modal="showModal" @close="$emit('close')">
+  <BaseModal :show-modal="showModal" @close="$emit('close')">
     <div class="menu-options-modal">
       <div class="modal-options-header">
         Options
@@ -18,14 +18,14 @@
         />
       </div>
     </div>
-  </CommonModal>
+  </BaseModal>
 </template>
 
 <script setup lang="ts">
 import { inject } from 'vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import MenuOption from '@options/components/menu-option/menu-option.vue';
-import CommonModal from '@layouts/components/common-modal/common-modal.vue';
+import BaseModal from '@layouts/components/base-modal/base-modal.vue';
 import type { TOptionsGame } from '@sounds/interfaces/sounds.interface';
 import { OptionsGameStateSymbol } from '@sounds/constants/sounds.constants';
 import type { TypeIcon } from '@common/interfaces/icons.interface';
