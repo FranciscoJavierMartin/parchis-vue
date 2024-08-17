@@ -33,9 +33,10 @@ defineEmits(['close']);
   bottom: 0;
   margin: auto;
   text-align: center;
-  width: 75%;
-  height: fit-content;
-  padding: 2rem;
+  /* max-width: calc(var(--base-width) * 0.75); */
+  width: calc(var(--base-width) * 0.75);
+  /* height: fit-content; */
+  /* padding: 2rem; */
   border-radius: 1rem;
   background-color: white;
   z-index: 20;
