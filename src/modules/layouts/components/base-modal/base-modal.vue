@@ -3,8 +3,7 @@
     <Transition name="fade">
       <div class="modal-overlay" v-if="showModal" @click="$emit('close')" />
     </Transition>
-    <!-- TODO: Pass value 'css' as props -->
-    <Transition name="pop" :css="false">
+    <Transition name="pop" :css="enableModalAnimation">
       <dialog v-if="showModal" ref="trapRef" open class="modal">
         <slot />
       </dialog>
@@ -18,9 +17,11 @@ import useTrapFocus from '@common/composables/use-focus-trap/use-focus-trap';
 interface BaseModalProps {
   /** Show modal */
   showModal: boolean;
+  /** Enable modal animation */
+  enableModalAnimation?: boolean;
 }
 
-defineProps<BaseModalProps>();
+withDefaults(defineProps<BaseModalProps>(), { enableModalAnimation: true });
 
 defineEmits<{
   /** Close modal */

@@ -1,5 +1,5 @@
 <template>
-  <BaseModal :show-modal="showModal">
+  <BaseModal :show-modal="showModal" :enable-modal-animation="false">
     <div class="modal-share-wrapper">
       <ModalShareHeader @close="$emit('close')" />
       <ModalShareButtons :data="data" @close="$emit('close')" />
@@ -40,8 +40,7 @@ defineEmits<{
     rgba(17, 17, 26, 0.1) 0px 8px 24px,
     rgba(17, 17, 26, 0.1) 0px 16px 56px;
   opacity: 0;
-  animation: emerge 1000ms ease forwards;
+  animation: emerge 0.5s ease 1ms forwards;
   animation-composition: add;
-  animation-delay: 1ms;
 }
 </style>
