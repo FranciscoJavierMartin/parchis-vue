@@ -1,9 +1,9 @@
 <template>
   <Teleport to="#screen">
-    <Transition name="fade" appear>
+    <Transition name="fade">
       <div class="modal-overlay" v-if="showModal" @click="$emit('close')" />
     </Transition>
-    <Transition name="pop" appear>
+    <Transition name="pop">
       <dialog open class="modal" v-if="showModal">
         <h1>Vue Transitions</h1>
         <p>
@@ -40,7 +40,7 @@ defineEmits(['close']);
   border-radius: 1rem;
   background-color: white;
   z-index: 20;
-  transform: none;
+  /* transform: none; */
 }
 
 .modal-overlay {
@@ -68,16 +68,23 @@ defineEmits(['close']);
   opacity: 0;
 }
 
-.pop-enter-active,
-.pop-leave-active {
-  transition:
-    transform 2.4s cubic-bezier(0.5, 0, 0.5, 1),
-    opacity 2.4s linear;
+.pop-enter-active {
+  animation: modal 3s ease-out;
 }
 
-.pop-enter,
-.pop-leave-to {
-  opacity: 0;
-  transform: scale(0.3) translateY(-50%);
+.pop-leave-active {
+  animation: modal 3s ease-in reverse;
+}
+
+@keyframes modal {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 </style>
