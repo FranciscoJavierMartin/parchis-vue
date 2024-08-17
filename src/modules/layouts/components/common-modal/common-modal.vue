@@ -31,11 +31,11 @@ defineEmits(['close']);
   bottom: 0;
   left: 0;
   z-index: var(--modal-z-index);
+  display: grid;
+  place-items: center;
   width: calc(var(--base-width) * 0.75);
   margin: auto;
-  text-align: center;
-  background-color: white;
-  border-radius: 1rem;
+  border: none;
 }
 
 .modal-overlay {
