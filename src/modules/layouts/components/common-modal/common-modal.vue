@@ -1,18 +1,20 @@
 <template>
-  <Transition name="fade" appear>
-    <div class="modal-overlay" v-if="showModal" @click="$emit('close')" />
-  </Transition>
-  <Transition name="pop" appear>
-    <dialog :open="showModal" class="modal" v-if="showModal">
-      <h1>Vue Transitions</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam distinctio vitae provident,
-        officia, nisi veritatis maiores officiis similique molestiae adipisci quaerat nulla
-        molestias ut sapiente dignissimos dolorum alias, nam optio.
-      </p>
-      <button @click="$emit('close')">Hide modal</button>
-    </dialog>
-  </Transition>
+  <Teleport to="#screen">
+    <Transition name="fade" appear>
+      <div class="modal-overlay" v-if="showModal" @click="$emit('close')" />
+    </Transition>
+    <Transition name="pop" appear>
+      <dialog open class="modal" v-if="showModal">
+        <h1>Vue Transitions</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam distinctio vitae
+          provident, officia, nisi veritatis maiores officiis similique molestiae adipisci quaerat
+          nulla molestias ut sapiente dignissimos dolorum alias, nam optio.
+        </p>
+        <button @click="$emit('close')">Hide modal</button>
+      </dialog>
+    </Transition>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
@@ -31,9 +33,8 @@ defineEmits(['close']);
   bottom: 0;
   margin: auto;
   text-align: center;
-  width: fit-content;
+  width: 75%;
   height: fit-content;
-  max-width: 75%;
   padding: 2rem;
   border-radius: 1rem;
   background-color: white;
@@ -44,7 +45,7 @@ defineEmits(['close']);
 .modal-overlay {
   content: '';
   position: fixed;
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   right: 0;
   left: 0;
@@ -52,6 +53,8 @@ defineEmits(['close']);
   z-index: 19;
   background-color: rgb(0, 0, 0);
   opacity: 0.8;
+  width: 100vw;
+  height: 100vh;
 }
 
 .fade-enter-active,
