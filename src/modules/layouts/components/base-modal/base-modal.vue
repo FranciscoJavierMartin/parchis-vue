@@ -54,7 +54,6 @@ const { trapRef } = useTrapFocus();
   z-index: var(--modal-z-index);
   display: grid;
   place-items: center;
-  width: 75%;
   margin: auto;
   background-color: transparent;
   border: none;
