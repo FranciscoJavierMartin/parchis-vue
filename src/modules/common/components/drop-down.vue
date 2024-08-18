@@ -80,6 +80,10 @@ onMounted(() => {
 
     &.open {
       border-radius: 6px 6px 0 0;
+
+      &:after {
+        transform: rotateZ(180deg) translateY(10px) translateX(5px);
+      }
     }
 
     &:after {
@@ -91,6 +95,8 @@ onMounted(() => {
       content: '';
       border: 7px solid transparent;
       border-color: v-bind(color) transparent transparent transparent;
+      transition: transform 0.5s;
+      transform: translateY(0px) translateX(-5px);
     }
   }
 
