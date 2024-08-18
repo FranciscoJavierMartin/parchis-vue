@@ -44,19 +44,19 @@ onMounted(() => {
 .drop-down {
   position: relative;
   width: 100%;
-  text-align: left;
-  outline: none;
   height: 47px;
   line-height: 47px;
+  text-align: left;
+  outline: none;
 
   .selected {
-    background-color: #080d0e;
-    border-radius: 6px;
-    border: 1px solid #858586;
-    color: white;
     padding-left: 8px;
+    color: white;
     cursor: pointer;
     user-select: none;
+    background-color: #080d0e;
+    border: 1px solid #858586;
+    border-radius: 6px;
 
     &.open {
       border: 1px solid #ce9b2c;
@@ -65,35 +65,35 @@ onMounted(() => {
 
     &:after {
       position: absolute;
-      content: '';
       top: 22px;
       right: 10px;
       width: 0;
       height: 0;
+      content: '';
       border: 4px solid transparent;
       border-color: white transparent transparent transparent;
     }
   }
 
   .items {
-    color: white;
-    border-radius: 0 0 6px 6px;
-    overflow: hidden;
-    border-right: 1px solid #ce9b2c;
-    border-left: 1px solid #ce9b2c;
-    border-bottom: 1px solid #ce9b2c;
     position: absolute;
-    background-color: #080d0e;
-    left: 0;
     right: 0;
+    left: 0;
+    overflow: hidden;
+    color: white;
+    background-color: #080d0e;
+    border-right: 1px solid #ce9b2c;
+    border-bottom: 1px solid #ce9b2c;
+    border-left: 1px solid #ce9b2c;
+    border-radius: 0 0 6px 6px;
 
     &.selectHide {
       display: none;
     }
 
     .item {
-      color: white;
       padding-left: 8px;
+      color: white;
       cursor: pointer;
       user-select: none;
 
