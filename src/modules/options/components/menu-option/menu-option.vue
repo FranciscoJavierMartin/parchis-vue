@@ -32,7 +32,7 @@ const model = defineModel<boolean>();
   width: 100%;
   padding-bottom: 15px;
   color: white;
-  border-bottom: 1px solid #8c8792;
+  border-bottom: 1px solid var(--light-gray);
 
   &:not(:first-child) {
     margin-top: 20px;

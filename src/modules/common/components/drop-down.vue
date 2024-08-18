@@ -24,13 +24,14 @@ interface DropDownProps {
   tabindex?: number;
   backgroundColor?: string;
   activeColor?: string;
-  // TODO: Add borderColor
+  borderColor?: string;
 }
 
 const props = withDefaults(defineProps<DropDownProps>(), {
   tabindex: 0,
   backgroundColor: 'var(--dark-gray)',
   activeColor: 'var(--gray)',
+  borderColor: 'var(--light-gray)',
 });
 
 //#region REFS
@@ -70,11 +71,10 @@ onMounted(() => {
     cursor: pointer;
     user-select: none;
     background-color: v-bind(backgroundColor);
-    border: 1px solid #858586;
+    border: 1px solid v-bind(borderColor);
     border-radius: 6px;
 
     &.open {
-      border: 1px solid #ce9b2c;
       border-radius: 6px 6px 0 0;
     }
 
@@ -97,9 +97,9 @@ onMounted(() => {
     overflow: hidden;
     color: white;
     background-color: v-bind(backgroundColor);
-    border-right: 1px solid #ce9b2c;
-    border-bottom: 1px solid #ce9b2c;
-    border-left: 1px solid #ce9b2c;
+    border-right: 1px solid v-bind(borderColor);
+    border-bottom: 1px solid v-bind(borderColor);
+    border-left: 1px solid v-bind(borderColor);
     border-radius: 0 0 6px 6px;
 
     .item {
