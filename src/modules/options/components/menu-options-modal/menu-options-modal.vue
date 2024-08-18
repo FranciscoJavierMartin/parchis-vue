@@ -55,7 +55,7 @@ const optionsGame: TOptionsGame = inject<TOptionsGame>(OptionsGameStateSymbol)!;
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-color: #312938;
+  background-color: var(--dark-gray);
   border-radius: 5px;
   box-shadow:
     rgba(0, 0, 0, 0.4) 0px 2px 4px,

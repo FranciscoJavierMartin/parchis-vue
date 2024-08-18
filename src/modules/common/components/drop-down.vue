@@ -22,10 +22,14 @@ import { computed, onMounted, ref } from 'vue';
 interface DropDownProps {
   options: { value: string | number; data: T }[];
   tabindex?: number;
-  // TODO: Add backgroundColor, activeColor, borderColor, className (for top element)
+  backgroundColor?: string;
+  // TODO: Add activeColor, borderColor, className (for top element)
 }
 
-const props = withDefaults(defineProps<DropDownProps>(), { tabindex: 0 });
+const props = withDefaults(defineProps<DropDownProps>(), {
+  tabindex: 0,
+  backgroundColor: 'var(--dark-gray)',
+});
 
 //#region REFS
 const isOpen = ref<boolean>(false);
@@ -56,15 +60,14 @@ onMounted(() => {
   width: 100%;
   height: 47px;
   line-height: 47px;
-  text-align: left;
   outline: none;
 
   .selected {
-    padding-left: 8px;
+    padding-left: 10px;
     color: white;
     cursor: pointer;
     user-select: none;
-    background-color: #080d0e;
+    background-color: v-bind(backgroundColor);
     border: 1px solid #858586;
     border-radius: 6px;
 
@@ -91,7 +94,7 @@ onMounted(() => {
     left: 0;
     overflow: hidden;
     color: white;
-    background-color: #080d0e;
+    background-color: v-bind(backgroundColor);
     border-right: 1px solid #ce9b2c;
     border-bottom: 1px solid #ce9b2c;
     border-left: 1px solid #ce9b2c;
