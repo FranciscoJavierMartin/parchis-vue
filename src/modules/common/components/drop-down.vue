@@ -74,14 +74,13 @@ onMounted(() => {
     }
 
     &:after {
-      /* TODO: Increase size */
       position: absolute;
       top: 22px;
       right: 10px;
       width: 0;
       height: 0;
       content: '';
-      border: 4px solid transparent;
+      border: 7px solid transparent;
       border-color: white transparent transparent transparent;
     }
   }
