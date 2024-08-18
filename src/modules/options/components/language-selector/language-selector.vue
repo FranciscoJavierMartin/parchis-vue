@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import DropDown from '@common/components/drop-down.vue';
+import DropDown from '@common/components/drop-down/drop-down.vue';
 import GbFlag from '@common/components/icons/flags/gb.vue';
 import EsFlag from '@common/components/icons/flags/es.vue';
 
