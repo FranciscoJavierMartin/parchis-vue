@@ -3,16 +3,18 @@
     <div class="selected" :class="{ open: isOpen }" @click="isOpen = !isOpen">
       <slot name="selectedItem" :item="selectedItem" />
     </div>
-    <ul class="items" v-if="isOpen">
-      <li
-        v-for="(option, index) of options"
-        :key="index"
-        class="item"
-        @click="selectItem(option.value)"
-      >
-        <slot name="option" :item="option" />
-      </li>
-    </ul>
+    <Transition name="fold">
+      <ul class="items" v-if="isOpen">
+        <li
+          v-for="(option, index) of options"
+          :key="index"
+          class="item"
+          @click="selectItem(option.value)"
+        >
+          <slot name="option" :item="option" />
+        </li>
+      </ul>
+    </Transition>
   </div>
 </template>
 
@@ -92,6 +94,14 @@ onMounted(() => {
     }
   }
 
+  .fold-enter-active {
+    animation: fold 0.5s reverse;
+  }
+
+  .fold-leave-active {
+    animation: fold 0.5s;
+  }
+
   .items {
     position: absolute;
     right: 0;
@@ -115,6 +125,15 @@ onMounted(() => {
         background-color: v-bind(activeColor);
       }
     }
+  }
+}
+
+@keyframes fold {
+  0% {
+    max-height: 500px;
+  }
+  100% {
+    max-height: 0;
   }
 }
 </style>
