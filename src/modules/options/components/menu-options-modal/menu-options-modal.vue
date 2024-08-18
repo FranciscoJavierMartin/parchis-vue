@@ -72,7 +72,7 @@ const optionsGame: TOptionsGame = inject<TOptionsGame>(OptionsGameStateSymbol)!;
     font-size: 25px;
     font-weight: bold;
     color: white;
-    background-color: #4d4658;
+    background-color: var(--gray);
     border-radius: 5px;
     box-shadow:
       rgba(0, 0, 0, 0.4) 0px 2px 4px,
