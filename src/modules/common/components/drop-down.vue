@@ -3,8 +3,8 @@
     <div class="selected" :class="{ open }" @click="open = !open">
       <slot name="selectedItem" :item="selectedItem" />
     </div>
-    <div class="items" :class="{ selectHide: !open }">
-      <div
+    <ul class="items" :class="{ selectHide: !open }">
+      <li
         v-for="(option, index) of options"
         :key="index"
         @click="
@@ -15,8 +15,8 @@
         class="item"
       >
         <slot name="option" :item="option" />
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
