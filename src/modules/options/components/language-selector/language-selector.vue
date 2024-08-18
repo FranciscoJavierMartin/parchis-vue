@@ -6,6 +6,11 @@
       </option>
     </select> -->
     <DropDown :options="langs">
+      <template #selectedItem="{ item }">
+        <div>
+          <h1>{{ item?.data.text }}</h1>
+        </div>
+      </template>
       <template #option="{ item }">
         <div>
           <h1>{{ item.data.text }}</h1>

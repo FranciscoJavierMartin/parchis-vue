@@ -2,7 +2,7 @@
   <div class="drop-down" :tabindex="tabindex" @blue="open = false">
     <!-- TODO: Move to slot -->
     <div class="selected" :class="{ open }" @click="open = !open">
-      {{ selectedItem?.data }}
+      <slot name="selectedItem" :item="selectedItem" />
     </div>
     <div class="items" :class="{ selectHide: !open }">
       <div
