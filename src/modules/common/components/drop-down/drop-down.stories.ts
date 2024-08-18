@@ -4,7 +4,7 @@ import DropDown from '@common/components/drop-down/drop-down.vue';
 
 const meta: Meta<typeof DropDown> = {
   title: 'Common/DropDown',
-  component: DropDown,
+  // component: DropDown,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
@@ -25,17 +25,21 @@ const meta: Meta<typeof DropDown> = {
       },
       template: `
         <div style="margin: 1rem; display: flex; flex-direction: column; gap: 10px;">
-          <story v-model="value" >
-            <template #selectedItem="{ item }">
-              <span>{{ item?.data.text }}</span>
-            </template>
-            <template #option="{ item }">
-              <span>{{ item.data.text }}</span>
-            </template>
-          </story>
-          <span style="color: blue; font-size: 20px;">{{ value.valueOf() }}</span>
+          <h1>Not available yet</h1>
         </div>
     `,
+
+      //   <div style="margin: 1rem; display: flex; flex-direction: column; gap: 10px;">
+      //   <story v-model="value" >
+      //     <template #selectedItem="{ item }">
+      //       <span>{{ item?.data.text }}</span>
+      //     </template>
+      //     <template #option="{ item }">
+      //       <span>{{ item.data.text }}</span>
+      //     </template>
+      //   </story>
+      //   <span style="color: blue; font-size: 20px;">{{ value.valueOf() }}</span>
+      // </div>
     }),
   ],
 };
