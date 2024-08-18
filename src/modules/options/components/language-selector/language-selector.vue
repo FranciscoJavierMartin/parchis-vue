@@ -1,14 +1,16 @@
 <template>
   <div class="menu-option">
-    <select v-model="locale">
+    <!-- <select v-model="locale">
       <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang.code">
         {{ lang.text }}
       </option>
-    </select>
+    </select> -->
+    <DropDown :options="[]" />
   </div>
 </template>
 
 <script setup lang="ts">
+import DropDown from '@common/components/drop-down.vue';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
