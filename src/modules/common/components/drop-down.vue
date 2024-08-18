@@ -23,12 +23,14 @@ interface DropDownProps {
   options: { value: string | number; data: T }[];
   tabindex?: number;
   backgroundColor?: string;
-  // TODO: Add activeColor, borderColor, className (for top element)
+  activeColor?: string;
+  // TODO: Add borderColor
 }
 
 const props = withDefaults(defineProps<DropDownProps>(), {
   tabindex: 0,
   backgroundColor: 'var(--dark-gray)',
+  activeColor: 'var(--gray)',
 });
 
 //#region REFS
@@ -107,7 +109,7 @@ onMounted(() => {
       user-select: none;
 
       &:hover {
-        background-color: #b68a28;
+        background-color: v-bind(activeColor);
       }
     }
   }
