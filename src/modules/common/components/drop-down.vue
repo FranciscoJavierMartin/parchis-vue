@@ -1,43 +1,49 @@
 <template>
   <div class="drop-down" :tabindex="tabindex" @blue="open = false">
+    <!-- TODO: Move to slot -->
     <div class="selected" :class="{ open }" @click="open = !open">
-      {{ selected }}
+      {{ selectedItem?.data }}
     </div>
     <div class="items" :class="{ selectHide: !open }">
       <div
         v-for="(option, index) of options"
         :key="index"
         @click="
-          selected = option;
+          selected = option.value;
           open = false;
-          $emit('input', option);
+          $emit('input', option.value);
         "
         class="item"
       >
-        <!-- {{ option }} -->
         <slot name="option" :item="option" />
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { onMounted, ref } from 'vue';
+<script setup lang="ts" generic="T">
+import { computed, onMounted, ref } from 'vue';
 
 interface DropDownProps {
-  options: any[];
+  options: { value: string | number; data: T }[];
   tabindex?: number;
 }
 
 const props = withDefaults(defineProps<DropDownProps>(), { tabindex: 0 });
 
 const open = ref<boolean>(false);
-const selected = ref<any>(props.options.length > 0 ? props.options[0] : null);
+const selected = ref<string | number | null>(
+  props.options.length > 0 ? props.options[0].value : null,
+);
 
-const emit = defineEmits<{ input: [selected: any] }>();
+const emit = defineEmits<{ input: [selected: string | number] }>();
+
+const selectedItem = computed(() =>
+  props.options.find((option) => option.value === selected.value),
+);
 
 onMounted(() => {
-  emit('input', selected.value);
+  emit('input', selected.value!);
 });
 </script>
 

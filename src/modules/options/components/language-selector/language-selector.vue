@@ -5,10 +5,10 @@
         {{ lang.text }}
       </option>
     </select> -->
-    <DropDown :options="['Hello', 'Bye']">
+    <DropDown :options="langs">
       <template #option="{ item }">
         <div>
-          <h1>{{ item }}</h1>
+          <h1>{{ item.data.text }}</h1>
         </div>
       </template>
     </DropDown>
@@ -23,8 +23,8 @@ import { useI18n } from 'vue-i18n';
 const { t, locale } = useI18n();
 
 const langs = ref([
-  { code: 'en', text: 'English' },
-  { code: 'es', text: 'Spanish' },
+  { value: 'en', data: { text: 'English' } },
+  { value: 'es', data: { text: 'Spanish' } },
 ]);
 </script>
 
