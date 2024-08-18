@@ -45,7 +45,6 @@ function selectItem(value: string | number): void {
 }
 //#endregion
 
-
 onMounted(() => {
   selected.value = props.options.length ? props.options[0].value : '';
 });

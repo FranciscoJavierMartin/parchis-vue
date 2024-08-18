@@ -1,6 +1,6 @@
 <template>
   <div class="menu-option">
-    <DropDown :options="langs" v-model="locale">
+    <DropDown :options="langs" v-model="locale" class="mine">
       <template #selectedItem="{ item }">
         <div class="option">
           <component :is="item?.data.flag" />
@@ -34,16 +34,9 @@ const langs = [
 <style scoped>
 .menu-option {
   display: flex;
-  align-items: center;
   width: 100%;
-  padding-bottom: 15px;
+  padding-top: 10px;
   color: white;
-  border-bottom: 1px solid #8c8792;
-
-  select {
-    width: 100%;
-    height: 100%;
-  }
 
   .option {
     display: flex;
