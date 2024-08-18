@@ -12,8 +12,9 @@
         </div>
       </template>
       <template #option="{ item }">
-        <div>
-          <h1>{{ item.data.text }}</h1>
+        <div class="option">
+          <GbFlag />
+          <span>{{ item.data.text }}</span>
         </div>
       </template>
     </DropDown>
@@ -21,9 +22,10 @@
 </template>
 
 <script setup lang="ts">
-import DropDown from '@common/components/drop-down.vue';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import DropDown from '@common/components/drop-down.vue';
+import GbFlag from '@common/components/icons/flags/gb.vue';
 
 const { t, locale } = useI18n();
 
@@ -45,6 +47,19 @@ const langs = ref([
   select {
     width: 100%;
     height: 100%;
+  }
+
+  .option {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: capitalize;
+
+    svg {
+      height: 25px;
+    }
   }
 }
 </style>

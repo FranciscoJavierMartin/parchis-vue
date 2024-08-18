@@ -22,12 +22,12 @@ import { computed, onMounted, ref } from 'vue';
 interface DropDownProps {
   options: { value: string | number; data: T }[];
   tabindex?: number;
-  // TODO: Add backgroundColor, activeColor, borderColor
+  // TODO: Add backgroundColor, activeColor, borderColor, className (for top element)
 }
 
 const props = withDefaults(defineProps<DropDownProps>(), { tabindex: 0 });
 
-const open = ref<boolean>(false);
+const open = ref<boolean>(true);
 const selected = ref<string | number | null>(
   props.options.length > 0 ? props.options[0].value : null,
 );
@@ -47,6 +47,8 @@ function selectItem(value: string | number): void {
 onMounted(() => {
   emit('input', selected.value!);
 });
+
+// TODO: Use defineModel
 </script>
 
 <style scoped>
