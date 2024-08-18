@@ -14,7 +14,8 @@
         "
         class="item"
       >
-        {{ option }}
+        <!-- {{ option }} -->
+        <slot name="option" :item="option" />
       </div>
     </div>
   </div>
