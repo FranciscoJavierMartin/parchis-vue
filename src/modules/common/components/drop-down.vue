@@ -107,6 +107,7 @@ onMounted(() => {
       color: white;
       cursor: pointer;
       user-select: none;
+      transition: background-color 0.2s ease;
 
       &:hover {
         background-color: v-bind(activeColor);
