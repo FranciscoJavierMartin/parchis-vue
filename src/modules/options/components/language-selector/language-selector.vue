@@ -5,7 +5,7 @@
         {{ lang.text }}
       </option>
     </select> -->
-    <DropDown :options="langs">
+    <DropDown :options="langs" v-model="selected">
       <template #selectedItem="{ item }">
         <div class="option">
           <component :is="item?.data.flag" />
@@ -19,6 +19,7 @@
         </div>
       </template>
     </DropDown>
+    <h1>{{ selected }}</h1>
   </div>
 </template>
 
@@ -27,8 +28,11 @@ import { useI18n } from 'vue-i18n';
 import DropDown from '@common/components/drop-down.vue';
 import GbFlag from '@common/components/icons/flags/gb.vue';
 import EsFlag from '@common/components/icons/flags/es.vue';
+import { ref } from 'vue';
 
 const { t, locale } = useI18n();
+
+const selected = ref<string>('');
 
 const langs = [
   { value: 'en', data: { text: 'English', flag: GbFlag } },

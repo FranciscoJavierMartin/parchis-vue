@@ -27,12 +27,12 @@ interface DropDownProps {
 
 const props = withDefaults(defineProps<DropDownProps>(), { tabindex: 0 });
 
-const open = ref<boolean>(true);
+const open = ref<boolean>(false);
 const selected = ref<string | number | null>(
   props.options.length > 0 ? props.options[0].value : null,
 );
 
-const emit = defineEmits<{ input: [selected: string | number] }>();
+// const emit = defineEmits<{ 'update:modelValue': [selected: string | number] }>();
 
 const selectedItem = computed(() =>
   props.options.find((option) => option.value === selected.value),
@@ -41,14 +41,18 @@ const selectedItem = computed(() =>
 function selectItem(value: string | number): void {
   selected.value = value;
   open.value = false;
-  emit('input', value);
+  model.value = value as string;
+  // emit('', value);
 }
 
 onMounted(() => {
-  emit('input', selected.value!);
+  // emit('input', selected.value!);
+  // model.value = props.options.length ? props.options[0].value : '';
+  model.value = '';
 });
 
 // TODO: Use defineModel
+const model = defineModel<string | null>();
 </script>
 
 <style scoped>
