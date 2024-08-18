@@ -1,6 +1,5 @@
 <template>
-  <div class="drop-down" :tabindex="tabindex" @blue="open = false">
-    <!-- TODO: Move to slot -->
+  <div class="drop-down" :tabindex="tabindex" @blur="open = false">
     <div class="selected" :class="{ open }" @click="open = !open">
       <slot name="selectedItem" :item="selectedItem" />
     </div>
@@ -27,6 +26,7 @@ import { computed, onMounted, ref } from 'vue';
 interface DropDownProps {
   options: { value: string | number; data: T }[];
   tabindex?: number;
+  // TODO: Add backgroundColor, activeColor, borderColor
 }
 
 const props = withDefaults(defineProps<DropDownProps>(), { tabindex: 0 });
@@ -71,6 +71,7 @@ onMounted(() => {
     }
 
     &:after {
+      /* TODO: Increase size */
       position: absolute;
       top: 22px;
       right: 10px;
