@@ -1,9 +1,9 @@
 <template>
-  <div class="drop-down" :tabindex="tabindex" @blur="open = false">
-    <div class="selected" :class="{ open }" @click="open = !open">
+  <div class="drop-down" :tabindex="tabindex" @blur="isOpen = false">
+    <div class="selected" :class="{ open: isOpen }" @click="isOpen = !isOpen">
       <slot name="selectedItem" :item="selectedItem" />
     </div>
-    <ul class="items" v-if="open">
+    <ul class="items" v-if="isOpen">
       <li
         v-for="(option, index) of options"
         :key="index"
@@ -28,7 +28,7 @@ interface DropDownProps {
 const props = withDefaults(defineProps<DropDownProps>(), { tabindex: 0 });
 
 //#region REFS
-const open = ref<boolean>(false);
+const isOpen = ref<boolean>(false);
 const selected = defineModel<string | number | null>({ default: null });
 //#endregion
 
@@ -41,7 +41,7 @@ const selectedItem = computed(() =>
 //#region FUNCTIONS
 function selectItem(value: string | number): void {
   selected.value = value as string;
-  open.value = false;
+  isOpen.value = false;
 }
 //#endregion
 
@@ -98,7 +98,7 @@ onMounted(() => {
     border-radius: 0 0 6px 6px;
 
     .item {
-      padding-left: 8px;
+      padding-left: 15px;
       color: white;
       cursor: pointer;
       user-select: none;
