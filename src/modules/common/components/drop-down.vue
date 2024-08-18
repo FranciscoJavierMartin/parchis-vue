@@ -22,6 +22,7 @@ import { computed, onMounted, ref } from 'vue';
 interface DropDownProps {
   options: { value: string | number; data: T }[];
   tabindex?: number;
+  color?: string;
   backgroundColor?: string;
   activeColor?: string;
   borderColor?: string;
@@ -29,6 +30,7 @@ interface DropDownProps {
 
 const props = withDefaults(defineProps<DropDownProps>(), {
   tabindex: 0,
+  color: 'white',
   backgroundColor: 'var(--dark-gray)',
   activeColor: 'var(--gray)',
   borderColor: 'var(--light-gray)',
@@ -67,7 +69,7 @@ onMounted(() => {
 
   .selected {
     padding-left: 10px;
-    color: white;
+    color: v-bind(color);
     cursor: pointer;
     user-select: none;
     background-color: v-bind(backgroundColor);
@@ -86,7 +88,7 @@ onMounted(() => {
       height: 0;
       content: '';
       border: 7px solid transparent;
-      border-color: white transparent transparent transparent;
+      border-color: v-bind(color) transparent transparent transparent;
     }
   }
 
@@ -95,7 +97,7 @@ onMounted(() => {
     right: 0;
     left: 0;
     overflow: hidden;
-    color: white;
+    color: v-bind(color);
     background-color: v-bind(backgroundColor);
     border-right: 1px solid v-bind(borderColor);
     border-bottom: 1px solid v-bind(borderColor);
@@ -104,7 +106,7 @@ onMounted(() => {
 
     .item {
       padding-left: 15px;
-      color: white;
+      color: v-bind(color);
       cursor: pointer;
       user-select: none;
       transition: background-color 0.2s ease;
