@@ -3,16 +3,12 @@
     <div class="selected" :class="{ open }" @click="open = !open">
       <slot name="selectedItem" :item="selectedItem" />
     </div>
-    <ul class="items" :class="{ selectHide: !open }">
+    <ul class="items" v-if="open">
       <li
         v-for="(option, index) of options"
         :key="index"
-        @click="
-          selected = option.value;
-          open = false;
-          $emit('input', option.value);
-        "
         class="item"
+        @click="selectItem(option.value)"
       >
         <slot name="option" :item="option" />
       </li>
@@ -41,6 +37,12 @@ const emit = defineEmits<{ input: [selected: string | number] }>();
 const selectedItem = computed(() =>
   props.options.find((option) => option.value === selected.value),
 );
+
+function selectItem(value: string | number): void {
+  selected.value = value;
+  open.value = false;
+  emit('input', value);
+}
 
 onMounted(() => {
   emit('input', selected.value!);
@@ -94,10 +96,6 @@ onMounted(() => {
     border-bottom: 1px solid #ce9b2c;
     border-left: 1px solid #ce9b2c;
     border-radius: 0 0 6px 6px;
-
-    &.selectHide {
-      display: none;
-    }
 
     .item {
       padding-left: 8px;
