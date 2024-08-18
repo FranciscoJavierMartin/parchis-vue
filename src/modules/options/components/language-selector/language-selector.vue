@@ -5,7 +5,7 @@
         {{ lang.text }}
       </option>
     </select> -->
-    <DropDown :options="[]" />
+    <DropDown :options="['Hello', 'Bye']" />
   </div>
 </template>
 
