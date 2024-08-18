@@ -13,7 +13,7 @@
       </template>
       <template #option="{ item }">
         <div class="option">
-          <GbFlag />
+          <component :is="item.data.flag" />
           <span>{{ item.data.text }}</span>
         </div>
       </template>
@@ -26,12 +26,13 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import DropDown from '@common/components/drop-down.vue';
 import GbFlag from '@common/components/icons/flags/gb.vue';
+import EsFlag from '@common/components/icons/flags/es.vue';
 
 const { t, locale } = useI18n();
 
 const langs = ref([
-  { value: 'en', data: { text: 'English' } },
-  { value: 'es', data: { text: 'Spanish' } },
+  { value: 'en', data: { text: 'English', flag: GbFlag } },
+  { value: 'es', data: { text: 'Spanish', flag: EsFlag } },
 ]);
 </script>
 
