@@ -51,6 +51,7 @@
   },
   "share": {
     "text": "Jugemos al Parchis",
+    "header": "Compartir...",
     "buttons": {
       "copy": "Copiar",
       "facebook": "Facebook",

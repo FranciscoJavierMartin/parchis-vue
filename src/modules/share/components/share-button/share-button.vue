@@ -9,12 +9,12 @@
 
 <script lang="ts" setup>
 import { inject, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import ShareModal from '@share/components/share-modal/share-modal.vue';
 import { shareLink } from '@share/helpers/share.helper';
 import { SHARE_AVAILABLE } from '@share/constants/share.constants';
 import { ToastAddToastSymbol } from '@toast/constants/toast.constants';
 import type { TAddToastFunction } from '@toast/interfaces/toast.interface';
-import { useI18n } from 'vue-i18n';
 
 interface ShareProps {
   /** Data to share */

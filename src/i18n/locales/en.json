@@ -51,6 +51,7 @@
   },
   "share": {
     "text": "Let's play Parchis",
+    "header": "Share...",
     "buttons": {
       "copy": "Copy",
       "facebook": "Facebook",
