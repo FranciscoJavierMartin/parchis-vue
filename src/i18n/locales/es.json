@@ -46,6 +46,9 @@
     "amount": "{amount}J",
     "play": "Jugar"
   },
+  "profile": {
+    "left": "Fuera"
+  },
   "share": {
     "text": "Jugemos al Parchis"
   }

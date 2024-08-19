@@ -46,6 +46,9 @@
     "amount": "{amount}P",
     "play": "Play"
   },
+  "profile": {
+    "left": "Left"
+  },
   "share": {
     "text": "Let's play Parchis"
   }

@@ -1,6 +1,6 @@
 <template>
   <div class="game-profile-image">
-    <div v-if="player.isOffline" class="game-profile-image-offline">Left</div>
+    <div v-if="player.isOffline" class="game-profile-image-offline">{{ t('profile.left') }}</div>
     <PlayerAvatar :photo="player.photo" :name="player.name" class="game-profile-image-avatar" />
     <button
       v-if="showMuteChat"
@@ -17,6 +17,7 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import PlayerAvatar from '@common/components/player-avatar/player-avatar.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import { TIME_INTERVAL_CHRONOMETER } from '@game/constants/game.constants';
@@ -39,6 +40,7 @@ const emit = defineEmits<{
   /** When interval is finished */
   handleInterval: [ends: boolean];
 }>();
+const { t } = useI18n();
 
 //#region REFS
 const progress = ref<number>(1);
