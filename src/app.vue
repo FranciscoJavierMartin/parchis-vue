@@ -21,5 +21,6 @@ onBeforeMount(() => {
 
 watch(locale, (newValue) => {
   saveProperty(OPTIONS_GAME_LANGUAGE, newValue);
+  document.querySelector('html')?.setAttribute('lang', newValue);
 });
 </script>
