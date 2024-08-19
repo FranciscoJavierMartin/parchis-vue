@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { IPlayer } from '@players/interfaces/user.interface';
 import PlayerAvatar from '@common/components/player-avatar/player-avatar.vue';
 import { getLabelRanking } from '@players/helpers/player.helper';
@@ -24,8 +25,12 @@ interface OtherPlayerProps {
 
 const props = defineProps<OtherPlayerProps>();
 
+const { t } = useI18n();
+
 //#region COMPUTED
-const rankingPosition = computed<string>(() => getLabelRanking(props.player.ranking));
+const rankingPosition = computed<string>(() =>
+  t(`game.position.${getLabelRanking(props.player.ranking)}`),
+);
 //#endregion
 </script>
 
