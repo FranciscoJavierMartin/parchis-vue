@@ -39,6 +39,9 @@
     },
     "title": "Options"
   },
+  "players": {
+    "amount": "{amount}P"
+  },
   "share": {
     "text": "Let's play Parchis"
   }

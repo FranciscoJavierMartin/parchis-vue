@@ -4,13 +4,14 @@
       v-for="total of numberPlayers"
       :key="total"
       :value="total"
-      :label="`${total}P`"
+      :label="t('players.amount', { amount: total })"
       v-model="totalPlayers"
     />
   </div>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 import InputRadio from '@players/components/input-radio/input-radio.vue';
 import type { TTotalPlayers } from '@game/interfaces/game.interface';
 
@@ -20,6 +21,8 @@ interface SelectNumberPlayersProps {
 }
 
 withDefaults(defineProps<SelectNumberPlayersProps>(), { numberPlayers: () => [2, 3, 4] });
+
+const { t } = useI18n();
 
 const totalPlayers = defineModel<TTotalPlayers>();
 </script>
