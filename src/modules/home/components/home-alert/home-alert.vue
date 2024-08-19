@@ -1,12 +1,15 @@
 <template>
   <div class="home-alert">
     <BaseIcon type="info" fill="#856404" />
-    <span> Something went wrong connecting to the server, please <a href="#">try again</a>. </span>
+    <span v-html="t('home.alert')" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 import BaseIcon from '@common/components/icons/base-icon.vue';
+
+const { t } = useI18n();
 </script>
 
 <style scoped>

@@ -10,5 +10,8 @@
       "4th": "4th"
     },
     "ribbon": "Well played"
+  },
+  "home": {
+    "alert": "Something went wrong connecting to the server, please <a href='#'>try again</a>."
   }
 }

@@ -10,5 +10,8 @@
       "4th": "4º"
     },
     "ribbon": "Bien jugado"
+  },
+  "home": {
+    "alert": "Error al conectar con el servidor. Por favor <a href='#'>intentelo de nuevo</a>."
   }
 }
