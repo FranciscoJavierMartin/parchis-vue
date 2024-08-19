@@ -2,7 +2,7 @@
   <BaseModal :show-modal="showModal" @close="$emit('close')">
     <div class="menu-options-modal">
       <div class="modal-options-header">
-        Options
+        {{ t('options.title') }}
         <button title="Close" class="button menu-options-close" @click="$emit('close')">
           <BaseIcon type="close" />
         </button>
@@ -13,7 +13,7 @@
           v-for="key of Object.keys(optionsGame)"
           v-model="optionsGame[key as EOptionsGame]"
           :key="key"
-          :label="key"
+          :label="t(`options.menu.${key}`)"
           :icon="(key.toLowerCase() as TypeIcon)"
         />
         <LanguageSelector />
@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import { inject } from 'vue';
+import { useI18n } from 'vue-i18n';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import MenuOption from '@options/components/menu-option/menu-option.vue';
 import LanguageSelector from '@options/components/language-selector/language-selector.vue';
@@ -46,6 +47,8 @@ defineEmits<{
 }>();
 
 const optionsGame: TOptionsGame = inject<TOptionsGame>(OptionsGameStateSymbol)!;
+
+const { t } = useI18n();
 </script>
 
 <style scoped>
@@ -54,7 +57,7 @@ const optionsGame: TOptionsGame = inject<TOptionsGame>(OptionsGameStateSymbol)!;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: calc(var(--base-width) * 0.75);
   background-color: var(--dark-gray);
   border-radius: 5px;
   box-shadow:

@@ -31,7 +31,13 @@
     "languages": {
       "en": "English",
       "es": "Spanish"
-    }
+    },
+    "menu": {
+      "SOUND": "Sound",
+      "MUSIC": "Music",
+      "CHAT": "Chat"
+    },
+    "title": "Options"
   },
   "share": {
     "text": "Let's play Parchis"
