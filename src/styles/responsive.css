@@ -1,0 +1,6 @@
+@media only screen and (width <= 420px) {
+  body {
+    background-color: #00a6df;
+    background-image: var(--bg-image);
+  }
+}
