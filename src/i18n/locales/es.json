@@ -2,6 +2,12 @@
   "about": {
     "text": "<p>El origin del <a title='Ludo' href='https://en.wikipedia.org/wiki/Parch%C3%ADs' target='_blank' rel='noopener noreferrer'>Parchis</a> se remonta a la antigua India, donde era conocido como ''Pachisi''. Inicialmente jugado por la realeza, pronto se volvio popular de entre todas las clases sociales. Se expandio a otras regiones, incluyendo Inglaterra y Estados Unidos, experimentando varias transformaciones y adaptaciones, convirtiendose en lo que hoy conocemos como Parchis.</p><p>Parchis Vue es un juego desarrollado usando <a title='Vue.JS' href='https://vuejs.org/' target='_blank' rel='noopener noreferrer'>Vue.js</a> y <a title='TypeScript' href='https://www.typescriptlang.org/' target='_blank' rel='noopener noreferrer'>TypeScript</a>, esta adaptación digital permanece fiel a la esencia del juego original al mismo tiempo que ofrece una experiencia absorvente para jugadores de hoy.</p>"
   },
+  "backModal": {
+    "exit": "Salir",
+    "areYouSure": "¿Estas seguro?",
+    "yes": "Si",
+    "no": "No"
+  },
   "game": {
     "position": {
       "1st": "1º",

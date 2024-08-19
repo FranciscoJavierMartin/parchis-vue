@@ -2,17 +2,17 @@
   <BaseModal :show-modal="showModal">
     <div class="confirm-modal">
       <BaseIcon type="info" />
-      <h2 class="title">Exit</h2>
-      <span class="text">Are you sure you want to quit the game?</span>
+      <h2 class="title">{{ t('backModal.exit') }}</h2>
+      <span class="text">{{ t('backModal.areYouSure') }}</span>
       <div class="buttons-container">
         <button class="button blue button-yes" @click="$emit('confirmation')">
           <!-- TODO: Increase stroke width -->
           <BaseIcon type="check" />
-          <span>Yes</span>
+          <span>{{ t('backModal.yes') }}</span>
         </button>
         <button class="button red button-no" @click="$emit('cancel')">
           <BaseIcon type="close" />
-          <span>No</span>
+          <span>{{ t('backModal.no') }}</span>
         </button>
       </div>
     </div>
@@ -22,6 +22,7 @@
 <script setup lang="ts">
 import BaseModal from '@layouts/components/base-modal/base-modal.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
+import { useI18n } from 'vue-i18n';
 
 interface BackConfirmationModalProps {
   /** Show modal */
@@ -36,6 +37,8 @@ defineEmits<{
   /** Press 'Yes' button */
   confirmation: [];
 }>();
+
+const { t } = useI18n();
 </script>
 
 <style scoped>
