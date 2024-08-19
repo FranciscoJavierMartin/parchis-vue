@@ -16,6 +16,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import PlayerAvatar from '@common/components/player-avatar/player-avatar.vue';
 import WinnerCrown from '@common/components/icons/winner-crown.vue';
 import { getLabelRanking } from '@players/helpers/player.helper';
@@ -28,8 +29,12 @@ interface FirstPositionProps {
 
 const props = defineProps<FirstPositionProps>();
 
+const { t } = useI18n();
+
 //#region COMPUTED
-const rankingPosition = computed<string>(() => getLabelRanking(props.first.ranking));
+const rankingPosition = computed<string>(() =>
+  t(`game.position.${getLabelRanking(props.first.ranking)}`),
+);
 //#endregion
 </script>
 
