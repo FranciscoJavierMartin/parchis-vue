@@ -40,7 +40,7 @@ const props = withDefaults(defineProps<DropDownProps>(), {
 
 //#region REFS
 const isOpen = ref<boolean>(false);
-const selected = defineModel<string | number | null>({ default: null });
+const selected = defineModel<string | number | null>();
 //#endregion
 
 //#region COMPUTED
@@ -57,7 +57,7 @@ function selectItem(value: string | number): void {
 //#endregion
 
 onMounted(() => {
-  selected.value = props.options.length ? props.options[0].value : '';
+  // selected.value = props.options.length ? props.options[0].value : '';
 });
 </script>
 
