@@ -40,7 +40,8 @@
       "MUSIC": "Música",
       "CHAT": "Chat"
     },
-    "title": "Opciones"
+    "title": "Opciones",
+    "open": "Abrir menu de opciones"
   },
   "players": {
     "amount": "{amount}J",
