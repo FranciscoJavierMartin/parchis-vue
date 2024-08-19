@@ -56,6 +56,7 @@
       "facebook": "Facebook",
       "linkedin": "Linkedin",
       "twitter": "X (Twitter)"
-    }
+    },
+    "buttonTitle": "Compartir a traves de {label}"
   }
 }

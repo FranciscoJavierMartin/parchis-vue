@@ -5,7 +5,10 @@
       :key="buttonData.label"
       class="modal-share-button"
     >
-      <button :title="`Share in ${buttonData.label}`" @click="handleClick(buttonData)">
+      <button
+        :title="t('share.buttonTitle', { label: buttonData.label })"
+        @click="handleClick(buttonData)"
+      >
         <BaseIcon :type="buttonData.icon" fill="black" />
       </button>
       <span>{{ t(`share.buttons.${buttonData.label}`) }}</span>
