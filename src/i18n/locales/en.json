@@ -40,7 +40,8 @@
     "title": "Options"
   },
   "players": {
-    "amount": "{amount}P"
+    "amount": "{amount}P",
+    "play": "Play"
   },
   "share": {
     "text": "Let's play Parchis"

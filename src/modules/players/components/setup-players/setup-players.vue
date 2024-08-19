@@ -14,13 +14,14 @@
     </div>
     <button type="submit" class="button yellow game-offline-play">
       <BaseIcon type="play" fill="#8b5f00" />
-      Play
+      {{ t('players.play') }}
     </button>
   </form>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import SelectNumberPlayers from '@players/components/select-number-players/select-number-players.vue';
 import PlayerInput from '@players/components/player-input/player-input.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
@@ -40,6 +41,8 @@ import type { TBoardColors, TColors } from '@board/interfaces/board.interface';
 const emit = defineEmits<{
   updateData: [data: DataOfflineGame];
 }>();
+
+const { t } = useI18n();
 
 //#region REFS
 const totalPlayers = ref<TTotalPlayers>(getInitialTotalPlayers());

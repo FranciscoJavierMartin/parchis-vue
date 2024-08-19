@@ -40,7 +40,8 @@
     "title": "Opciones"
   },
   "players": {
-    "amount": "{amount}J"
+    "amount": "{amount}J",
+    "play": "Jugar"
   },
   "share": {
     "text": "Jugemos al Parchis"
