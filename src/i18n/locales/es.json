@@ -17,5 +17,8 @@
       "offline": "Jugar offline",
       "online": "Jugar online"
     }
+  },
+  "share": {
+    "text": "Jugemos al Parchis"
   }
 }

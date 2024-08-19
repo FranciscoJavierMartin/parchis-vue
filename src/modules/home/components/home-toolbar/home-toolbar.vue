@@ -20,6 +20,7 @@
 import ShareButton from '@share/components/share-button/share-button.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import { ROUTES } from '@/router/routes';
+import { useI18n } from 'vue-i18n';
 
 interface HomeToolbarProps {
   /** Is user authenticated */
@@ -28,9 +29,11 @@ interface HomeToolbarProps {
 
 defineProps<HomeToolbarProps>();
 
+const { t } = useI18n();
+
 const dataShare: ShareData = {
   title: 'Parchis',
-  text: "Let's play Parchis",
+  text: t('share.text'),
   url: window.location.href,
 };
 </script>

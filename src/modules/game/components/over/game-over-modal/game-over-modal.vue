@@ -44,15 +44,15 @@ interface GameOverProps {
   showModal: boolean;
 }
 
-const dataShare: ShareData = {
-  title: 'Parchis',
-  text: "Let's play Parchis",
-  url: window.location.href,
-};
-
 const props = defineProps<GameOverProps>();
 
 const { t } = useI18n();
+
+const dataShare: ShareData = {
+  title: 'Parchis',
+  text: t('share.text'),
+  url: window.location.href,
+};
 
 //#region REFS
 const first = ref<IPlayer>();
