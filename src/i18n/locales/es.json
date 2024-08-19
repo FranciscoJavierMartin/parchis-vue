@@ -46,7 +46,10 @@
   },
   "players": {
     "amount": "{amount}J",
-    "play": "Jugar"
+    "play": "Jugar",
+    "input": {
+      "selectColor": "Select token color"
+    }
   },
   "profile": {
     "left": "Fuera"

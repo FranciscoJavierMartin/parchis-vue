@@ -46,7 +46,10 @@
   },
   "players": {
     "amount": "{amount}P",
-    "play": "Play"
+    "play": "Play",
+    "input": {
+      "selectColor": "Seleccionar el color del token"
+    }
   },
   "profile": {
     "left": "Left"
