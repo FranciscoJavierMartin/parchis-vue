@@ -7,7 +7,7 @@ import es from '@/i18n/locales/es.json';
 // configure i18n
 const i18n = createI18n({
   legacy: false,
-  locale: 'es',
+  locale: 'en',
   fallbackLocale: 'en',
   messages: { en, es },
 });
