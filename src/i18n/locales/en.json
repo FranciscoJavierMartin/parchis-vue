@@ -6,7 +6,8 @@
     "exit": "Exit",
     "areYouSure": "Are you sure you want to quit the game?",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "open": "Open back menu"
   },
   "debug": {
     "copyState": "Copy state"
@@ -40,11 +41,17 @@
       "MUSIC": "Music",
       "CHAT": "Chat"
     },
-    "title": "Options"
+    "title": "Options",
+    "open": "Open options menu"
   },
   "players": {
     "amount": "{amount}P",
-    "play": "Play"
+    "play": "Play",
+    "input": {
+      "selectColor": "Seleccionar el color del token",
+      "placeholderName": "Nombre del jugador",
+      "selectBot": "Player is bot"
+    }
   },
   "profile": {
     "left": "Left"

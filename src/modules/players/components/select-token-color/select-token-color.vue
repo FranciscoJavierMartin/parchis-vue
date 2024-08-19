@@ -4,6 +4,7 @@
       type="button"
       :disabled="disabled"
       class="game-offline-token-color"
+      :aria-label="t('players.input.selectColor')"
       @click="handleShowTooltip"
     >
       <TokenPiece :color="color" />
@@ -18,6 +19,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { TColors } from '@board/interfaces/board.interface';
 import TokenPiece from '@tokens/components/token/token-piece/token-piece.vue';
 import SelectTokenColorTooltip from '@players/components/select-token-color-tooltip/select-token-color-tooltip.vue';
@@ -29,6 +31,7 @@ interface SelectTokenColorProps {
 }
 
 defineProps<SelectTokenColorProps>();
+const { t } = useI18n();
 
 //#region REFS
 const showTooltip = ref<boolean>(false);
