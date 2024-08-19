@@ -9,6 +9,7 @@
 
 <script lang="ts" setup>
 import { inject, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import ShareModal from '@share/components/share-modal/share-modal.vue';
 import { shareLink } from '@share/helpers/share.helper';
 import { SHARE_AVAILABLE } from '@share/constants/share.constants';
@@ -28,6 +29,8 @@ const useNativeVersionBrowser: boolean = SHARE_AVAILABLE && props.useNativeOptio
 
 const addToast: TAddToastFunction = inject<TAddToastFunction>(ToastAddToastSymbol)!;
 
+const { t } = useI18n();
+
 //#region REFS
 const isModalVisible = ref<boolean>(false);
 //#endregion
@@ -37,10 +40,10 @@ function onClick(): void {
   if (useNativeVersionBrowser) {
     shareLink(props.data)
       .then(() => {
-        addToast('Shared');
+        addToast(t('share.message.success'));
       })
       .catch(() => {
-        addToast('Error on shared');
+        addToast(t('share.message.error'));
       });
   } else {
     isModalVisible.value = true;
@@ -49,7 +52,7 @@ function onClick(): void {
 
 function onCloseModal(isShare: boolean = false): void {
   if (isShare) {
-    addToast('Shared');
+    addToast(t('share.message.success'));
   }
 
   isModalVisible.value = false;

@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { getLabelRanking } from '@players/helpers/player.helper';
 import type { TPlayerRankingPosition } from '@profiles/interfaces/profile.interface';
 
@@ -15,9 +16,10 @@ interface ProfileRankingProps {
 }
 
 const props = defineProps<ProfileRankingProps>();
+const { t } = useI18n();
 
 //#region COMPUTED
-const rankingPosition = computed<string>(() => getLabelRanking(props.value));
+const rankingPosition = computed<string>(() => t(`game.position.${getLabelRanking(props.value)}`));
 //#endregion
 </script>
 

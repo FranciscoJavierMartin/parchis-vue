@@ -1,0 +1,67 @@
+{
+  "about": {
+    "text": "<p>El origin del <a title='Ludo' href='https://en.wikipedia.org/wiki/Parch%C3%ADs' target='_blank' rel='noopener noreferrer'>Parchis</a> se remonta a la antigua India, donde era conocido como ''Pachisi''. Inicialmente jugado por la realeza, pronto se volvio popular de entre todas las clases sociales. Se expandio a otras regiones, incluyendo Inglaterra y Estados Unidos, experimentando varias transformaciones y adaptaciones, convirtiendose en lo que hoy conocemos como Parchis.</p><p>Parchis Vue es un juego desarrollado usando <a title='Vue.JS' href='https://vuejs.org/' target='_blank' rel='noopener noreferrer'>Vue.js</a> y <a title='TypeScript' href='https://www.typescriptlang.org/' target='_blank' rel='noopener noreferrer'>TypeScript</a>, esta adaptación digital permanece fiel a la esencia del juego original al mismo tiempo que ofrece una experiencia absorvente para jugadores de hoy.</p>"
+  },
+  "backModal": {
+    "exit": "Salir",
+    "areYouSure": "¿Estas seguro?",
+    "yes": "Si",
+    "no": "No"
+  },
+  "debug": {
+    "copyState": "Copiar estado"
+  },
+  "game": {
+    "position": {
+      "1st": "1º",
+      "2nd": "2º",
+      "3rd": "3º",
+      "4th": "4º"
+    },
+    "ribbon": "Bien jugado"
+  },
+  "home": {
+    "alert": "Error al conectar con el servidor. Por favor <a href='#'>intentelo de nuevo</a>.",
+    "options": {
+      "offline": "Jugar offline",
+      "online": "Jugar online"
+    }
+  },
+  "online": {
+    "disclaimer": "El juego online todavía no esta disponible."
+  },
+  "options": {
+    "languages": {
+      "en": "Inglés",
+      "es": "Español"
+    },
+    "menu": {
+      "SOUND": "Sonido",
+      "MUSIC": "Música",
+      "CHAT": "Chat"
+    },
+    "title": "Opciones"
+  },
+  "players": {
+    "amount": "{amount}J",
+    "play": "Jugar"
+  },
+  "profile": {
+    "left": "Fuera"
+  },
+  "share": {
+    "text": "Jugemos al Parchis",
+    "header": "Compartir...",
+    "buttons": {
+      "copy": "Copiar",
+      "facebook": "Facebook",
+      "linkedin": "Linkedin",
+      "twitter": "X (Twitter)"
+    },
+    "buttonTitle": "Compartir a traves de {label}",
+    "message": {
+      "success": "Compartido",
+      "error": "Error al compartir"
+    }
+  }
+}

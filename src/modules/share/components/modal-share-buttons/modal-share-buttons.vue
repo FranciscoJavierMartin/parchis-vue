@@ -5,10 +5,13 @@
       :key="buttonData.label"
       class="modal-share-button"
     >
-      <button :title="`Share in ${buttonData.label}`" @click="handleClick(buttonData)">
+      <button
+        :title="t('share.buttonTitle', { label: t(`share.buttons.${buttonData.label}`) })"
+        @click="handleClick(buttonData)"
+      >
         <BaseIcon :type="buttonData.icon" fill="black" />
       </button>
-      <span>{{ buttonData.label }}</span>
+      <span>{{ t(`share.buttons.${buttonData.label}`) }}</span>
     </div>
   </div>
 </template>
@@ -19,6 +22,7 @@ import BaseIcon from '@common/components/icons/base-icon.vue';
 import type { TButtonShare } from '@share/interfaces/share.interface';
 import { BUTTONS_SHARE_SOCIAL } from '@share/constants/share.constants';
 import { shareWithSocialNetwork } from '@share/helpers/share.helper';
+import { useI18n } from 'vue-i18n';
 
 interface ModalShareButtonsProps {
   /** Data to share */
@@ -31,6 +35,8 @@ const emit = defineEmits<{
   /** When press close button */
   close: [isShare?: boolean];
 }>();
+
+const { t } = useI18n();
 
 //#region FUNCTIONS
 function handleClick(buttonData: TButtonShare): void {

@@ -5,24 +5,24 @@ export const SHARE_AVAILABLE: boolean = 'share' in navigator;
 export const BUTTONS_SHARE_SOCIAL: TButtonShare[] = [
   {
     icon: 'copy',
-    label: 'Copy',
+    label: 'copy',
     action: 'copy',
   },
   {
     icon: 'twitter',
-    label: 'X (Twitter)',
+    label: 'twitter',
     action: 'twitter',
     url: 'https://twitter.com/intent/tweet?text=DATA_TEXT&url=DATA_URL',
   },
   {
     icon: 'facebook',
-    label: 'Facebook',
+    label: 'facebook',
     action: 'facebook',
     url: 'https://www.facebook.com/sharer/sharer.php?u=DATA_URL&quote=DATA_TEXT',
   },
   {
     icon: 'linkedin',
-    label: 'Linkedin',
+    label: 'linkedin',
     action: 'linkedin',
     url: 'https://www.linkedin.com/shareArticle?mini=true&url=DATA_URL&title=DATA_TITLE&summary=DATA_TEXT&source=LinkedIn',
   },

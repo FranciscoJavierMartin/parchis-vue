@@ -2,7 +2,7 @@
   <BaseModal :show-modal="showModal">
     <div class="game-over-options">
       <div class="game-over-container">
-        <GameOverRibbon title="Well played" />
+        <GameOverRibbon :title="t('game.ribbon')" />
         <FirstPosition :first="first!" />
         <div class="game-over-container-others">
           <OtherPlayer v-for="player of others" :key="player.id" :player="player" />
@@ -26,6 +26,7 @@
 
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import GameOverRibbon from '@game/components/over/game-over-ribbon/game-over-ribbon.vue';
 import FirstPosition from '@game/components/over/first-position/first-position.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
@@ -43,13 +44,15 @@ interface GameOverProps {
   showModal: boolean;
 }
 
+const props = defineProps<GameOverProps>();
+
+const { t } = useI18n();
+
 const dataShare: ShareData = {
   title: 'Parchis',
-  text: "Let's play Parchis",
+  text: t('share.text'),
   url: window.location.href,
 };
-
-const props = defineProps<GameOverProps>();
 
 //#region REFS
 const first = ref<IPlayer>();

@@ -15,6 +15,7 @@
     "target": "ES2022",
     "baseUrl": ".",
     "noImplicitThis": false,
+    "resolveJsonModule": true,
     "types": ["node"],
     "paths": {
       "@/*": ["src/*"],
@@ -35,7 +36,7 @@
       "@share/*": ["src/modules/share/*"],
       "@sounds/*": ["src/modules/sounds/*"],
       "@tokens/*": ["src/modules/tokens/*"],
-      "@toast/*": ["src/modules/toast/*"],
+      "@toast/*": ["src/modules/toast/*"]
     }
   }
 }
