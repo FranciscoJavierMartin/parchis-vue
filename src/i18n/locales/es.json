@@ -50,6 +50,12 @@
     "left": "Fuera"
   },
   "share": {
-    "text": "Jugemos al Parchis"
+    "text": "Jugemos al Parchis",
+    "buttons": {
+      "copy": "Copiar",
+      "facebook": "Facebook",
+      "linkedin": "Linkedin",
+      "twitter": "X (Twitter)"
+    }
   }
 }

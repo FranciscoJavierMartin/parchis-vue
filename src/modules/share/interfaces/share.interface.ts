@@ -3,7 +3,7 @@ import type { TypeIcon } from '@common/interfaces/icons.interface';
 export type TButtonShare =
   | {
       icon: 'copy';
-      label: 'Copy';
+      label: 'copy';
       action: 'copy';
     }
   | {

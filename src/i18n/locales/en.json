@@ -50,6 +50,12 @@
     "left": "Left"
   },
   "share": {
-    "text": "Let's play Parchis"
+    "text": "Let's play Parchis",
+    "buttons": {
+      "copy": "Copy",
+      "facebook": "Facebook",
+      "linkedin": "Linkedin",
+      "twitter": "X (Twitter)"
+    }
   }
 }
