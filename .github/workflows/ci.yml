@@ -43,3 +43,5 @@ jobs:
         run: pnpm format:check
       - name: build
         run: pnpm build
+      - name: unit tests
+        run: pnpm test:unit
