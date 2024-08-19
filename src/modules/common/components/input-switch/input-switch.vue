@@ -1,5 +1,5 @@
 <template>
-  <label :for="id" class="input-switch">
+  <label :aria-label="t('players.input.selectBot')" :for="id" class="input-switch">
     <input :id="id" type="checkbox" v-model="value" :disabled="disabled" />
     <span class="slider" />
     <span
@@ -13,6 +13,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
 interface InputSwitchProps {
   /** Input id */
   id: string;
@@ -23,6 +25,8 @@ interface InputSwitchProps {
 }
 
 defineProps<InputSwitchProps>();
+
+const { t } = useI18n();
 
 const value = defineModel<boolean>();
 </script>
