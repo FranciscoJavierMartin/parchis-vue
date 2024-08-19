@@ -6,15 +6,18 @@
     <template #default>
       <div class="online-page">
         <h1>Online</h1>
-        <p>Online game is not available yet.</p>
+        <p>{{ t('online.disclaimer') }}</p>
       </div>
     </template>
   </PageWrapper>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 import PageWrapper from '@layouts/components/wrapper/page-wrapper/page-wrapper.vue';
 import BackButton from '@layouts/components/back-button/back-button/back-button.vue';
+
+const { t } = useI18n();
 </script>
 
 <style scoped>

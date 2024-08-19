@@ -24,6 +24,9 @@
       "online": "Jugar online"
     }
   },
+  "online": {
+    "disclaimer": "El juego online todavía no esta disponible."
+  },
   "share": {
     "text": "Jugemos al Parchis"
   }
