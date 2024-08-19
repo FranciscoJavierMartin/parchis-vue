@@ -1,7 +1,14 @@
 <template>
   <div class="toast-container">
     <ul v-if="toasts.length" class="toast-list">
-      <li v-for="{ message, id } of toasts" :key="id" class="toast-message" @click="remove(id)">
+      <!-- eslint-disable vuejs-accessibility/no-static-element-interactions -->
+      <li
+        v-for="{ message, id } of toasts"
+        :key="id"
+        class="toast-message"
+        @click="remove(id)"
+        @keyup.enter="remove(id)"
+      >
         {{ message }}
       </li>
     </ul>

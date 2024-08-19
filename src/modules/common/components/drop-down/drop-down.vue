@@ -1,4 +1,7 @@
+<!-- eslint-disable vuejs-accessibility/no-static-element-interactions -->
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
+  <!-- TODO: Make component accesible -->
   <div class="drop-down" :tabindex="tabindex" @blur="isOpen = false">
     <div class="selected" :class="{ open: isOpen }" @click="isOpen = !isOpen">
       <slot name="selectedItem" :item="selectedItem" />

@@ -11,6 +11,7 @@ module.exports = {
     'prettier',
     'plugin:prettier/recommended',
     'plugin:storybook/recommended',
+    'plugin:vuejs-accessibility/recommended',
   ],
   parserOptions: {
     ecmaVersion: 'latest',
