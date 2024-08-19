@@ -1,9 +1,9 @@
 <template>
   <div class="menu-option">
     <BaseIcon :type="icon" :is-muted="!model" />
-    <label class="menu-option-label">
+    <span class="menu-option-label">
       {{ label }}
-    </label>
+    </span>
     <InputSwitch :id="`menu-option-${label}`" v-model="model" />
   </div>
 </template>
