@@ -48,6 +48,7 @@ const { t } = useI18n();
   gap: 15px;
   align-items: center;
   width: 100%;
+  width: calc(var(--base-width) * 0.75);
   padding: 20px;
   color: white;
   background: radial-gradient(circle, rgba(160, 34, 107, 1) 16%, rgba(95, 8, 98, 1) 100%);
