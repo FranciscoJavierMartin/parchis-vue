@@ -8,6 +8,9 @@
     "yes": "Si",
     "no": "No"
   },
+  "debug": {
+    "copyState": "Copiar estado"
+  },
   "game": {
     "position": {
       "1st": "1º",

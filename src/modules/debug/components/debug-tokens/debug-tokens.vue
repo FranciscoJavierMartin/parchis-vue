@@ -39,13 +39,16 @@
       />
     </div>
     <div v-if="typeGame === ETypeGame.OFFLINE" class="game-debug-copy">
-      <button :disabled="selects.position < 0" @click="handleCopyState">Copy state</button>
+      <button :disabled="selects.position < 0" @click="handleCopyState">
+        {{ t('debug.copyState') }}
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, reactive, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import DebugSelect from '@debug/components/debug-select/debug-select.vue';
 import { ETypeGame } from '@game/interfaces/game.enum';
 import { getOptionsSelects, validateChangeToken } from '@debug/helpers/debug.helper';
@@ -75,6 +78,7 @@ const emit = defineEmits<{
   /** Handle selected dice */
   handleSelectDice: [data: { diceValue?: TDiceValues; isActionSocket?: boolean }];
 }>();
+const { t } = useI18n();
 
 //#region REFS
 const selects = reactive<TSelects>({ player: -1, token: -1, type: -1, position: -1 });
