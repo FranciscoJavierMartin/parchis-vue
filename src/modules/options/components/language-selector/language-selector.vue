@@ -1,6 +1,6 @@
 <template>
   <div class="menu-option">
-    <DropDown :options="langs" v-model="locale" class="mine">
+    <DropDown :options="langs" v-model="locale">
       <template #selectedItem="{ item }">
         <div class="option">
           <component :is="item?.data.flag" />

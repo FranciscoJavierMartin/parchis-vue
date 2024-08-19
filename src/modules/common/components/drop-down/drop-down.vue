@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts" generic="T">
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 
 interface DropDownProps {
   options: { value: string | number; data: T }[];
@@ -40,7 +40,7 @@ const props = withDefaults(defineProps<DropDownProps>(), {
 
 //#region REFS
 const isOpen = ref<boolean>(false);
-const selected = defineModel<string | number | null>({ default: null });
+const selected = defineModel<string | number | null>();
 //#endregion
 
 //#region COMPUTED
@@ -55,10 +55,6 @@ function selectItem(value: string | number): void {
   isOpen.value = false;
 }
 //#endregion
-
-onMounted(() => {
-  selected.value = props.options.length ? props.options[0].value : '';
-});
 </script>
 
 <style scoped>

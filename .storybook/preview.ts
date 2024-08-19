@@ -3,6 +3,7 @@ import { createI18n } from 'vue-i18n';
 import router from '@/router';
 import en from '@/i18n/locales/en.json';
 import es from '@/i18n/locales/es.json';
+import '@/styles/main.css';
 
 // configure i18n
 const i18n = createI18n({
@@ -11,8 +12,6 @@ const i18n = createI18n({
   fallbackLocale: 'en',
   messages: { en, es },
 });
-
-import '../src/styles/main.css';
 
 setup((app) => {
   app.use(i18n);
