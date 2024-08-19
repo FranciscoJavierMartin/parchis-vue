@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
   <select v-model="optionSelected">
     <option :value="-1" disabled>{{ title }}</option>
     <option v-for="{ id, label } in options" :key="id" :value="id">
