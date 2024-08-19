@@ -57,6 +57,10 @@
       "linkedin": "Linkedin",
       "twitter": "X (Twitter)"
     },
-    "buttonTitle": "Share in {label}"
+    "buttonTitle": "Share in {label}",
+    "message": {
+      "success": "Shared",
+      "error": "Error on shared"
+    }
   }
 }

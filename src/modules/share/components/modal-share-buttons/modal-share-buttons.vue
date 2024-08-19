@@ -6,7 +6,7 @@
       class="modal-share-button"
     >
       <button
-        :title="t('share.buttonTitle', { label: buttonData.label })"
+        :title="t('share.buttonTitle', { label: t(`share.buttons.${buttonData.label}`) })"
         @click="handleClick(buttonData)"
       >
         <BaseIcon :type="buttonData.icon" fill="black" />

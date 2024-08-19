@@ -57,6 +57,10 @@
       "linkedin": "Linkedin",
       "twitter": "X (Twitter)"
     },
-    "buttonTitle": "Compartir a traves de {label}"
+    "buttonTitle": "Compartir a traves de {label}",
+    "message": {
+      "success": "Compartido",
+      "error": "Error al compartir"
+    }
   }
 }
