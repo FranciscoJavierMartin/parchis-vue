@@ -23,11 +23,11 @@ import DropDown from '@common/components/drop-down/drop-down.vue';
 import GbFlag from '@common/components/icons/flags/gb.vue';
 import EsFlag from '@common/components/icons/flags/es.vue';
 
-const { locale } = useI18n();
+const { t, locale } = useI18n();
 
 const langs = [
-  { value: 'en', data: { text: 'English', flag: GbFlag } },
-  { value: 'es', data: { text: 'Spanish', flag: EsFlag } },
+  { value: 'en', data: { text: t('options.languages.en'), flag: GbFlag } },
+  { value: 'es', data: { text: t('options.languages.es'), flag: EsFlag } },
 ];
 </script>
 

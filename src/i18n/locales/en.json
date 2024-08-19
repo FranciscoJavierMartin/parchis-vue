@@ -27,6 +27,12 @@
   "online": {
     "disclaimer": "Online game is not available yet."
   },
+  "options": {
+    "languages": {
+      "en": "English",
+      "es": "Spanish"
+    }
+  },
   "share": {
     "text": "Let's play Parchis"
   }
