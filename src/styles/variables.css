@@ -1,6 +1,8 @@
 :root {
   --base-height: 732px;
   --base-width: 412px;
+  --max-width-mobile: 420px;
+  --max-width-tablet: 960px;
   --size-board: calc(var(--base-width) - 22px);
   --size-tile: calc(var(--size-board) / 15);
   --dice-size-tooltip: calc(var(--size-tile) * 0.3);

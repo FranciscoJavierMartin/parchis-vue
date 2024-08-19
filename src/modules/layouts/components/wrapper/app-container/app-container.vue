@@ -37,6 +37,9 @@ useWindowResize();
   @media only screen and (width <= 420px) {
     width: 100%;
     height: 100%;
+  }
+
+  @media only screen and (width <= 960px) {
     background-color: unset;
     background-image: unset;
   }
