@@ -1,7 +1,9 @@
 <template>
   <Teleport to="#screen">
     <Transition name="fade">
-      <div class="modal-overlay" v-if="showModal" @click="$emit('close')" />
+      <!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
+      <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
+      <div v-if="showModal" class="modal-overlay" @click="$emit('close')" tabindex="-1" />
     </Transition>
     <Transition name="pop" :css="enableModalAnimation">
       <dialog v-if="showModal" ref="trapRef" open class="modal">
