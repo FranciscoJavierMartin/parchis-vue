@@ -45,6 +45,7 @@ const { t } = useI18n();
     padding: 15px;
     font-size: 23px;
     font-weight: bold;
+    text-align: center;
     text-decoration: none;
     text-transform: uppercase;
     border-radius: 10px;
