@@ -29,6 +29,6 @@ describe('about-view.vue', () => {
       },
     });
 
-    expect(wrapper.text()).contains('he origins of');
+    expect(wrapper.text()).toMatch(/The origins of/i);
   });
 });
