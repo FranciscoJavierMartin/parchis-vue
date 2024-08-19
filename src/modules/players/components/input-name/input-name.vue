@@ -1,14 +1,17 @@
 <template>
   <input
+    v-model="playerName"
+    :aria-label="t('players.input.placeholderName')"
     :disabled="disabled"
+    :placeholder="t('players.input.placeholderName')"
     maxlength="20"
     required
-    v-model="playerName"
     class="game-offline-input-name"
   />
 </template>
 
 <script lang="ts" setup>
+import { useI18n } from 'vue-i18n';
 import { sanizateTags } from '@players/helpers/player.helper';
 
 interface InputNameProps {
@@ -17,6 +20,8 @@ interface InputNameProps {
 }
 
 defineProps<InputNameProps>();
+
+const { t } = useI18n();
 
 const playerName = defineModel<string>({
   set(value: string): string {

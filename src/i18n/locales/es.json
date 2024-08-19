@@ -48,7 +48,8 @@
     "amount": "{amount}J",
     "play": "Jugar",
     "input": {
-      "selectColor": "Select token color"
+      "selectColor": "Select token color",
+      "placeholderName": "Player name"
     }
   },
   "profile": {
