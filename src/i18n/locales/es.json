@@ -12,6 +12,10 @@
     "ribbon": "Bien jugado"
   },
   "home": {
-    "alert": "Error al conectar con el servidor. Por favor <a href='#'>intentelo de nuevo</a>."
+    "alert": "Error al conectar con el servidor. Por favor <a href='#'>intentelo de nuevo</a>.",
+    "options": {
+      "offline": "Jugar offline",
+      "online": "Jugar online"
+    }
   }
 }

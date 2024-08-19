@@ -12,6 +12,10 @@
     "ribbon": "Well played"
   },
   "home": {
-    "alert": "Something went wrong connecting to the server, please <a href='#'>try again</a>."
+    "alert": "Something went wrong connecting to the server, please <a href='#'>try again</a>.",
+    "options": {
+      "offline": "Play offline",
+      "online": "Play online"
+    }
   }
 }
