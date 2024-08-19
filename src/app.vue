@@ -16,13 +16,10 @@ const { locale } = useI18n();
 
 onBeforeMount(() => {
   const localeFromCache = getValueFromCache(OPTIONS_GAME_LANGUAGE, DEFAULT_LANGUAGE_CODE);
-  console.log({ localeFromCache });
   locale.value = localeFromCache;
-  console.log('Locale onBeforeMount', locale.value);
 });
 
 watch(locale, (newValue) => {
-  console.log('Watch', newValue);
   saveProperty(OPTIONS_GAME_LANGUAGE, newValue);
 });
 </script>

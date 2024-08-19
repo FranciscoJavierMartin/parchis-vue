@@ -22,7 +22,6 @@ import { useI18n } from 'vue-i18n';
 import DropDown from '@common/components/drop-down/drop-down.vue';
 import GbFlag from '@common/components/icons/flags/gb.vue';
 import EsFlag from '@common/components/icons/flags/es.vue';
-import { watch } from 'vue';
 
 const { t, locale } = useI18n();
 
@@ -30,14 +29,6 @@ const langs = [
   { value: 'en', data: { text: t('options.languages.en'), flag: GbFlag } },
   { value: 'es', data: { text: t('options.languages.es'), flag: EsFlag } },
 ];
-
-watch(
-  locale,
-  (newValue) => {
-    console.log('LanguageSelector', newValue);
-  },
-  { immediate: true },
-);
 </script>
 
 <style scoped>
