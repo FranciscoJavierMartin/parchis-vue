@@ -6,7 +6,8 @@
     "exit": "Salir",
     "areYouSure": "¿Estas seguro?",
     "yes": "Si",
-    "no": "No"
+    "no": "No",
+    "open": "Volver atras"
   },
   "debug": {
     "copyState": "Copiar estado"

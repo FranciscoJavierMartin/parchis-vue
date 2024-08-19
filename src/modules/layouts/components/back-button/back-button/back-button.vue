@@ -1,5 +1,10 @@
 <template>
-  <button v-if="withConfirmation" class="button blue game-back-button" @click="handleBackButton">
+  <button
+    :aria-label="t('backModal.open')"
+    v-if="withConfirmation"
+    class="button blue game-back-button"
+    @click="handleBackButton"
+  >
     <BaseIcon type="back" />
   </button>
   <RouterLink v-else :to="{ name: to }" class="button blue game-back-button">
@@ -15,6 +20,7 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue';
 import { useRouter, type Router } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import BackConfirmationModal from '@layouts/components/back-button/back-confirmation-modal/back-confirmation-modal.vue';
 import type { TRoutesName } from '@common/interfaces/routes.interface';
@@ -34,6 +40,7 @@ const isOpen: Ref<boolean> = ref<boolean>(false);
 //#endregion
 
 const router: Router = useRouter();
+const { t } = useI18n();
 
 //#region FUNCTIONS
 function handleBackButton(): void {

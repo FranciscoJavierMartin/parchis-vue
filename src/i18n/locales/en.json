@@ -6,7 +6,8 @@
     "exit": "Exit",
     "areYouSure": "Are you sure you want to quit the game?",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "open": "Open back menu"
   },
   "debug": {
     "copyState": "Copy state"
