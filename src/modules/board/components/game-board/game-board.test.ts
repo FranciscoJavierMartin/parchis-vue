@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
+import { EBoardColors } from '@board/interfaces/board.enum';
 import GameBoard from './game-board.vue';
-import { EBoardColors } from '../../interfaces/board.enum';
 
 describe('game-board.vue', () => {
   test('renders blue corner', () => {
@@ -11,7 +11,7 @@ describe('game-board.vue', () => {
       },
     });
 
-    expect(wrapper.find('.game-board.BRGY')).toBeDefined();
+    expect(wrapper.find('.game-board.BRGY').exists()).toBe(true);
   });
 
   test('renders green corner', () => {
@@ -21,7 +21,7 @@ describe('game-board.vue', () => {
       },
     });
 
-    expect(wrapper.find('.game-board.GYBR')).toBeDefined();
+    expect(wrapper.find('.game-board.GYBR').exists()).toBe(true);
   });
 
   test('renders red corner', () => {
@@ -31,7 +31,7 @@ describe('game-board.vue', () => {
       },
     });
 
-    expect(wrapper.find('.game-board.RGYB')).toBeDefined();
+    expect(wrapper.find('.game-board.RGYB').exists()).toBe(true);
   });
 
   test('renders yellow corner', () => {
@@ -41,6 +41,6 @@ describe('game-board.vue', () => {
       },
     });
 
-    expect(wrapper.find('.game-board.YBRG')).toBeDefined();
+    expect(wrapper.find('.game-board.YBRG').exists()).toBe(true);
   });
 });
