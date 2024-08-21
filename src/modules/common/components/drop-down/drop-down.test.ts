@@ -100,4 +100,37 @@ describe('drop-down.vue', () => {
     expect(selectedElement.classes()).not.contains('open');
     expect(wrapper.find('.items').exists()).toBe(false);
   });
+
+  test('close on blur', async () => {
+    const wrapper = mount(DropDown, {
+      props: {
+        options: [
+          {
+            value: 'option1',
+            data: {
+              text: 'Option 1',
+            },
+          },
+          {
+            value: 'option2',
+            data: {
+              text: 'Option 2',
+            },
+          },
+        ],
+      },
+    });
+
+    const selectedElement = wrapper.find('.selected');
+    expect(selectedElement.classes()).not.contains('open');
+
+    await selectedElement.trigger('click');
+
+    expect(selectedElement.classes()).contains('open');
+
+    await wrapper.find('.drop-down').trigger('blur');
+
+    expect(selectedElement.classes()).not.contains('open');
+    expect(wrapper.find('.items').exists()).toBe(false);
+  });
 });
