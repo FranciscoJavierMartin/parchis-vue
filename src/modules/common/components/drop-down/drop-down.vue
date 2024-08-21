@@ -3,9 +3,10 @@
 <template>
   <!-- TODO: Make component accesible -->
   <div class="drop-down" :tabindex="tabindex" @blur="isOpen = false">
-    <button class="selected" :class="{ open: isOpen }" @click="isOpen = !isOpen">
+    <!-- TODO: Convert to button -->
+    <div class="selected" :class="{ open: isOpen }" @click="isOpen = !isOpen">
       <slot name="selectedItem" :item="selectedItem" />
-    </button>
+    </div>
     <Transition name="fold">
       <ul class="items" v-if="isOpen">
         <li
