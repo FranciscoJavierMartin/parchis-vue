@@ -1,5 +1,5 @@
-import { describe, expect, test } from 'vitest';
-import { delay } from './debounce.helper';
+import { afterEach, beforeEach, describe, expect, Mock, test, vi, vitest } from 'vitest';
+import debounce, { delay } from './debounce.helper';
 
 describe('delay', () => {
   test('check if time has passed', async () => {
@@ -9,5 +9,33 @@ describe('delay', () => {
 
     expect(currentTime - previousTime).toBeLessThanOrEqual(210);
     expect(currentTime - previousTime).toBeGreaterThanOrEqual(200);
+  });
+});
+
+describe('debounce', () => {
+  let func = vi.fn();
+  let debouncedFunc: Function;
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+    func = vi.fn();
+    debouncedFunc = debounce(func, 1000);
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+    vi.clearAllTimers();
+  });
+
+  test('check fi function has been called', async () => {
+    for (let i = 0; i < 100; i++) {
+      debouncedFunc();
+    }
+
+    expect(func).not.toHaveBeenCalled();
+
+    vi.runAllTimers();
+
+    expect(func).toHaveBeenCalledOnce();
   });
 });
