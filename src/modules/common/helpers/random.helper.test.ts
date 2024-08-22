@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { getRandomNumber } from './random.helper';
+import { getRandomNumber, randomValueDice } from './random.helper';
 
 describe('getRandomNumber', () => {
   test('Check number is between range', () => {
@@ -15,6 +15,17 @@ describe('getRandomNumber', () => {
     ranges.forEach(([min, max], index: number) => {
       expect(results[index]).toBeGreaterThanOrEqual(min);
       expect(results[index]).toBeLessThanOrEqual(max);
+    });
+  });
+});
+
+describe('randomValueDice', () => {
+  test('Check dice number is between range', () => {
+    const results = new Array(100).map(() => randomValueDice());
+
+    results.forEach((result) => {
+      expect(result).toBeGreaterThanOrEqual(1);
+      expect(result).toBeLessThanOrEqual(6);
     });
   });
 });
