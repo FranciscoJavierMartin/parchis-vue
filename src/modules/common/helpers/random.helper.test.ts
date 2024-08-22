@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
-import { getRandomNumber, randomValueDice } from './random.helper';
+import { getRandomNumber, randomValueDice, getRandomValueDice } from './random.helper';
+import type { IActionsTurn } from '@game/interfaces/game.interface';
 
 describe('getRandomNumber', () => {
   test('Check number is between range', () => {
@@ -27,5 +28,28 @@ describe('randomValueDice', () => {
       expect(result).toBeGreaterThanOrEqual(1);
       expect(result).toBeLessThanOrEqual(6);
     });
+  });
+});
+
+describe('getRandomValueDice', () => {
+  test('Random dice value', () => {
+    const originalActionTurn: IActionsTurn = {
+      diceList: [],
+      diceRollNumber: 0,
+      diceValue: 0,
+      disabledDice: false,
+      isDisabledUI: false,
+      showDice: false,
+      timerActivated: true,
+      actionsBoardGame: 'ROLL_DICE',
+    };
+
+    const newActionsTurn = getRandomValueDice(originalActionTurn);
+
+    expect(newActionsTurn !== originalActionTurn).toBe(true);
+    expect(newActionsTurn.timerActivated).toBe(false);
+    expect(newActionsTurn.disabledDice).toBe(true);
+    expect(newActionsTurn.diceRollNumber).toBeGreaterThan(0);
+    expect(newActionsTurn.diceValue).toBeGreaterThan(0);
   });
 });
