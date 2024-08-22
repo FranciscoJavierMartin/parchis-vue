@@ -52,4 +52,25 @@ describe('getRandomValueDice', () => {
     expect(newActionsTurn.diceRollNumber).toBeGreaterThan(0);
     expect(newActionsTurn.diceValue).toBeGreaterThan(0);
   });
+
+  test('Fixed dice value', () => {
+    const originalActionTurn: IActionsTurn = {
+      diceList: [],
+      diceRollNumber: 0,
+      diceValue: 0,
+      disabledDice: false,
+      isDisabledUI: false,
+      showDice: false,
+      timerActivated: true,
+      actionsBoardGame: 'ROLL_DICE',
+    };
+
+    const newActionsTurn = getRandomValueDice(originalActionTurn, 3);
+
+    expect(newActionsTurn !== originalActionTurn).toBe(true);
+    expect(newActionsTurn.timerActivated).toBe(false);
+    expect(newActionsTurn.disabledDice).toBe(true);
+    expect(newActionsTurn.diceRollNumber).toBeGreaterThan(0);
+    expect(newActionsTurn.diceValue).toBe(3);
+  });
 });
