@@ -14,6 +14,15 @@ describe('cloneDeep', () => {
 
     expect(copy).not.toBe(original);
     expect(copy === original).toBe(false);
+    expect(copy.b === original.b).toBe(false);
     expect(copy).toStrictEqual(original);
+  });
+
+  test('clone boolean', () => {
+    const original = true;
+
+    const copy = cloneDeep(original);
+
+    expect(copy).toBe(original);
   });
 });
