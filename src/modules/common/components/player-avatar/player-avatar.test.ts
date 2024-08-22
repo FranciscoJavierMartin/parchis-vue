@@ -8,9 +8,27 @@ describe('player-avatar.vue', () => {
     const wrapper = mount(PlayerAvatar);
 
     const img = wrapper.find('img');
+    // Trigger manually in test
     img.trigger('error');
+
     expect(img.exists()).toBe(true);
     expect(img.attributes()['src']).contains('assets/images/default.png');
     expect(img.attributes()['alt']).toBe('');
+  });
+
+  test('renders with alt', () => {
+    const wrapper = mount(PlayerAvatar, {
+      props: {
+        name: 'John',
+      },
+    });
+
+    const img = wrapper.find('img');
+    // Trigger manually in test
+    img.trigger('error');
+
+    expect(img.exists()).toBe(true);
+    expect(img.attributes()['src']).contains('assets/images/default.png');
+    expect(img.attributes()['alt']).toBe('John');
   });
 });
