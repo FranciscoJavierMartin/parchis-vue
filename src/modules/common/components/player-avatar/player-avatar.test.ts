@@ -31,4 +31,17 @@ describe('player-avatar.vue', () => {
     expect(img.attributes()['src']).contains('assets/images/default.png');
     expect(img.attributes()['alt']).toBe('John');
   });
+
+  test('renders with photo', () => {
+    const wrapper = mount(PlayerAvatar, {
+      props: {
+        photo: botImage,
+      },
+    });
+
+    const img = wrapper.find('img');
+
+    expect(img.exists()).toBe(true);
+    expect(img.attributes()['src']).contains('assets/images/bot.png');
+  });
 });
