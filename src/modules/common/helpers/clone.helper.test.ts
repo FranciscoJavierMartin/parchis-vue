@@ -25,4 +25,12 @@ describe('cloneDeep', () => {
 
     expect(copy).toBe(original);
   });
+
+  test('clone numer', () => {
+    const original = 1;
+
+    const copy = cloneDeep(original);
+
+    expect(copy).toBe(original);
+  });
 });
