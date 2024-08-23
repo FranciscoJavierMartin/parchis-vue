@@ -1,17 +1,14 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { mount, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import router from '@/router';
 import i18n from '@/i18n';
+import {
+  OptionsGamePlaySoundSymbol,
+  OptionsGameStateSymbol,
+} from '@sounds/constants/sounds.constants';
 import Game from './game.vue';
 
 describe('game.vue', () => {
-  // const mockRoute = {
-  //   params: {},
-  // };
-  // const mockRouter = {
-  //   push: vi.fn(),
-  // };
-
   beforeEach(() => {
     // create teleport target
     const el = document.createElement('div');
@@ -26,6 +23,7 @@ describe('game.vue', () => {
 
   test('renders properly', () => {
     const wrapper = shallowMount(Game, {
+      shallow: true,
       props: {
         totalPlayers: 2,
         initialTurn: 1,
@@ -45,18 +43,14 @@ describe('game.vue', () => {
         ],
       },
       global: {
-        // mocks: {
-        //   $route: mockRoute,
-        //   $router: mockRouter,
-        // },
         plugins: [i18n, router],
         provide: {
-          OptionsGameState: {
+          [OptionsGameStateSymbol]: {
             SOUND: false,
             MUSIC: false,
             CHAT: false,
           },
-          OptionsGamePlaySound: vi.fn(),
+          [OptionsGamePlaySoundSymbol]: vi.fn(),
         },
       },
     });
