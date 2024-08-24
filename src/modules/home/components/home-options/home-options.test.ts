@@ -21,8 +21,25 @@ describe('home-options.vue', () => {
     expect(wrapper.find('.home-options .button.yellow .icon-offline').exists()).toBe(true);
     expect(
       wrapper.find('.home-options .button.yellow .icon-offline svg path').attributes()['fill'],
-    ).toBe('#856404');
+    ).toBe('#8b5f00');
 
+    expect(wrapper.find('.home-options .button.yellow').text()).toBe('Play offline');
+  });
+
+  test('skip play online', () => {
+    const wrapper = mount(HomeOptions, {
+      props: {
+        serviceError: true,
+      },
+      global: {
+        plugins: [i18n, router],
+      },
+    });
+
+    expect(wrapper.find('.home-options').exists()).toBe(true);
+    expect(wrapper.find('.home-options .button.blue').exists()).toBe(false);
+
+    expect(wrapper.find('.home-options .button.yellow').exists()).toBe(true);
     expect(wrapper.find('.home-options .button.yellow').text()).toBe('Play offline');
   });
 });
