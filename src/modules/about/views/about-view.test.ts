@@ -7,6 +7,7 @@ import MenuOptions from '@layouts/components/menu-options/menu-options.vue';
 import BackButton from '@layouts/components/back-button/back-button/back-button.vue';
 import PageWrapper from '@layouts/components/wrapper/page-wrapper/page-wrapper.vue';
 import AboutView from './about-view.vue';
+import { OptionsGameStateSymbol } from '@/modules/sounds/constants/sounds.constants';
 
 describe('about-view.vue', () => {
   beforeEach(() => {
@@ -26,6 +27,13 @@ describe('about-view.vue', () => {
       global: {
         plugins: [i18n, router],
         components: { GameLogo, MenuOptions, BackButton, PageWrapper },
+        provide: {
+          [OptionsGameStateSymbol]: {
+            SOUND: true,
+            MUSIC: true,
+            CHAT: true,
+          },
+        },
       },
     });
 
