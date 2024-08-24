@@ -43,4 +43,29 @@ describe('home-toolbar.vue', () => {
     expect(wrapper.find('.button.blue[title="Logout"]').exists()).toBe(true);
     expect(wrapper.find('.button.blue[title="Logout"] .icon-logout').exists()).toBe(true);
   });
+
+  test('renders without logout', () => {
+    const wrapper = mount(HomeToolbar, {
+      props: {
+        isAuth: false,
+      },
+      global: {
+        plugins: [router, i18n],
+        provide: {
+          [ToastAddToastSymbol]: vi.fn(),
+        },
+      },
+    });
+
+    expect(wrapper.find('.home-toolbar').exists()).toBe(true);
+
+    const link = wrapper.findComponent('.button.blue') as any;
+    expect(link.props().to).toEqual({ name: ROUTES.ABOUT.name });
+    expect(link.find('.icon-info').exists()).toBe(true);
+
+    expect(wrapper.find('.button.blue[title="Share"]').exists()).toBe(true);
+    expect(wrapper.find('.button.blue[title="Share"] .icon-share').exists()).toBe(true);
+
+    expect(wrapper.find('.button.blue[title="Logout"]').exists()).toBe(false);
+  });
 });
