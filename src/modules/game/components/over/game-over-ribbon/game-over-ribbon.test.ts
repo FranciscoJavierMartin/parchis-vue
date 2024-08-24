@@ -14,4 +14,12 @@ describe('game-over-ribbon.vue', () => {
     expect(wrapper.find('.game-over-ribbon .ribbon-content').exists()).toBe(true);
     expect(wrapper.find('.game-over-ribbon .ribbon-content b').text()).toBe('My title');
   });
+
+  test('renders without text', () => {
+    const wrapper = mount(GameOverRibbon);
+
+    expect(wrapper.find('.game-over-ribbon').exists()).toBe(true);
+    expect(wrapper.find('.game-over-ribbon .ribbon-content').exists()).toBe(true);
+    expect(wrapper.find('.game-over-ribbon .ribbon-content b').text()).toBe('');
+  });
 });
