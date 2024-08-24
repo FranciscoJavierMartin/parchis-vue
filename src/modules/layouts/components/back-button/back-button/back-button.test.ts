@@ -42,4 +42,20 @@ describe('back-button.vue', () => {
     expect(link.props().to).toEqual({ name: ROUTES.HOME.name });
     expect(link.find('.icon-back').exists()).toBe(true);
   });
+
+  test('renders with link and custom redirect', () => {
+    const wrapper = mount(BackButton, {
+      props: {
+        withConfirmation: false,
+        to: ROUTES.ABOUT.name,
+      },
+      global: {
+        plugins: [i18n, router],
+      },
+    });
+
+    const link = wrapper.findComponent('.game-back-button') as any;
+    expect(link.props().to).toEqual({ name: ROUTES.ABOUT.name });
+    expect(link.find('.icon-back').exists()).toBe(true);
+  });
 });
