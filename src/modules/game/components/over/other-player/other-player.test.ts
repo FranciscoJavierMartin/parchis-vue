@@ -27,4 +27,26 @@ describe('other-player.vue', () => {
     expect(wrapper.find('.ranking-player-name.red').exists()).toBe(true);
     expect(wrapper.find('.ranking-player-name').text()).toBe('Alice');
   });
+
+  test('3rd position', () => {
+    const wrapper = mount(OtherPlayer, {
+      props: {
+        player: {
+          ranking: 3,
+          name: 'Alice',
+          photo: botImage,
+          color: 'YELLOW',
+        } as IPlayer,
+      },
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    expect(wrapper.find('.other-player-container').exists()).toBe(true);
+
+    expect(wrapper.find('.position').text()).toBe('3rd');
+    expect(wrapper.find('.ranking-player-name.yellow').exists()).toBe(true);
+    expect(wrapper.find('.ranking-player-name').text()).toBe('Alice');
+  });
 });
