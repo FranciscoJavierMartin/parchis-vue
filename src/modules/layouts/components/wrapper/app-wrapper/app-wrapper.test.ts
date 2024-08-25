@@ -1,5 +1,5 @@
-import { shallowMount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
+import { shallowMount } from '@vue/test-utils';
 import AppWrapper from './app-wrapper.vue';
 
 describe('app-wrapper.vue', () => {
