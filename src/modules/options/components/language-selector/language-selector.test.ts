@@ -37,4 +37,19 @@ describe('language-selector.vue', () => {
     expect(wrapper.findComponent(EsFlag as any).exists()).toBe(true);
     expect(wrapper.findAll('.option span')[2].text()).toBe('Spanish');
   });
+
+  test('click on new language', async () => {
+    const wrapper = mount(LanguageSelector, {
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    await wrapper.find('.option').trigger('click');
+    await wrapper.findAll('.option')[2].trigger('click');
+
+    expect(wrapper.findAll('.option')).toHaveLength(1);
+    expect(wrapper.findComponent(EsFlag as any).exists()).toBe(true);
+    expect(wrapper.find('.option span').text()).toBe('Spanish');
+  });
 });
