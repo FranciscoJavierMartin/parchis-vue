@@ -49,7 +49,7 @@
     "play": "Play",
     "input": {
       "selectColor": "Seleccionar el color del token",
-      "placeholderName": "Nombre del jugador",
+      "placeholderName": "Player name",
       "selectBot": "Player is bot"
     }
   },
