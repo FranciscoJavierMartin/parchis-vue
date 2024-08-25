@@ -5,7 +5,7 @@ import InputRadio from '@players/components/input-radio/input-radio.vue';
 import SelectNumberPlayers from './select-number-players.vue';
 
 describe('select-number-players.vue', () => {
-  test('renders properly', () => {
+  test('renders properly', async () => {
     const wrapper = mount(SelectNumberPlayers, {
       props: {
         numberPlayers: [2, 3, 4],
