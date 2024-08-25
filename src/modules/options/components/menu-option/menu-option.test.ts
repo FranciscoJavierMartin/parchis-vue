@@ -21,4 +21,24 @@ describe('menu-option.vue', () => {
     expect(wrapper.find('.menu-option-label').text()).toBe('sound');
     expect(wrapper.find('#menu-option-sound').exists()).toBe(true);
   });
+
+  test.skip('toggle switch', async () => {
+    const wrapper = mount(MenuOption, {
+      props: {
+        label: 'sound',
+        icon: 'sound',
+        modelValue: true,
+        'onUpdate:modelValue': (value) => {
+          // this.modelValue = value;
+        },
+      },
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    expect(wrapper.find('.icon-wrapper svg line').exists()).toBe(true);
+    await wrapper.find('#menu-option-sound').trigger('click');
+    expect(wrapper.find('.icon-wrapper svg line').exists()).toBe(false);
+  });
 });
