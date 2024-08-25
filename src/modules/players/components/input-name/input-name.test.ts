@@ -20,4 +20,23 @@ describe('input-name.vue', () => {
     expect(input.attributes()['placeholder']).toBe('Player name');
     expect(input.attributes()['disabled']).toBeUndefined();
   });
+
+  test('update input', async () => {
+    const wrapper = mount(InputName, {
+      props: {
+        disabled: false,
+        modelValue: '',
+        'onUpdate:modelValue': async (e) => wrapper.setProps({ modelValue: e }),
+      },
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    expect(wrapper.props('modelValue')).toBe('');
+
+    const input = wrapper.find('input');
+    await input.setValue('Hello');
+    expect(wrapper.props('modelValue')).toBe('Hello');
+  });
 });
