@@ -13,5 +13,6 @@ describe('input-radio.vue', () => {
 
     expect(wrapper.find('label.form-control').exists()).toBe(true);
     expect(wrapper.find('input[type="radio"]').exists()).toBe(true);
+    expect(wrapper.find('input[type="radio"]').attributes()['value']).toBe('2');
   });
 });
