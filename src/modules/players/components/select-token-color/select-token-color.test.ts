@@ -41,6 +41,21 @@ describe('select-token-color.vue', () => {
     expect(wrapper.findComponent(SelectTokenColorTooltip).exists()).toBe(true);
   });
 
+  test('dont open token selector when button is disabled', async () => {
+    const wrapper = mount(SelectTokenColor, {
+      props: {
+        disabled: true,
+        modelValue: EColors.BLUE,
+      },
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    await wrapper.find('button').trigger('click');
+    expect(wrapper.findComponent(SelectTokenColorTooltip).exists()).toBe(false);
+  });
+
   test.skip('close when click outside', async () => {
     const container = document.createElement('div');
     const clickableElement = document.createElement('span');
