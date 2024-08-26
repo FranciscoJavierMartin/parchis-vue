@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { mount } from '@vue/test-utils';
-import SelectTokenColorTooltip from './select-token-color-tooltip.vue';
 import { EColors } from '@board/interfaces/board.enum';
+import SelectTokenColorTooltip from './select-token-color-tooltip.vue';
 
 describe('select-token-color-tooltip.vue', () => {
   test('renders properly', () => {
@@ -17,5 +17,21 @@ describe('select-token-color-tooltip.vue', () => {
       expect(wrapper.find(`button.${color.toLowerCase()}`).exists()).toBe(true);
     });
     expect(wrapper.findAll('button.selected')).toHaveLength(1);
+  });
+
+  test('change color when click on one', async () => {
+    const wrapper = mount(SelectTokenColorTooltip, {
+      props: {
+        modelValue: EColors.BLUE,
+        'onUpdate:modelValue': async (e) => wrapper.setProps({ modelValue: e }),
+      },
+    });
+
+    expect(wrapper.find('.select-token-color-tooltip').exists()).toBe(true);
+
+    await wrapper.find('button.green').trigger('click');
+
+    expect(wrapper.find('button.green.selected').exists()).toBe(true);
+    expect(wrapper.find('button.blue.selected').exists()).toBe(false);
   });
 });
