@@ -18,4 +18,17 @@ describe('name-and-dice.vue', () => {
     expect(wrapper.find('.game-profile-name').classes()).not.toContain('has-turn');
     expect(wrapper.find('.game-profile-name').text()).toBe('Alice');
   });
+
+  test('has turn', () => {
+    const wrapper = mount(NameAndDice, {
+      props: {
+        name: 'Alice',
+        diceAvailable: [],
+        hasTurn: true,
+      },
+    });
+
+    expect(wrapper.find('.game-profile-name').classes()).toContain('has-turn');
+    expect(wrapper.find('.game-profile-name').text()).toBe('Alice');
+  });
 });
