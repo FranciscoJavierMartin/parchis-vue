@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { getPlayersColors } from './player.helper';
+import { getInitialDataPlayers, getPlayersColors } from './player.helper';
 import type { TTotalPlayers } from '@/modules/game/interfaces/game.interface';
 
 describe('getPlayersColors', () => {
@@ -9,5 +9,11 @@ describe('getPlayersColors', () => {
     [4, 'BLUE', 'RED', 'GREEN', 'YELLOW'],
   ])('for %i players', ([totalPlayers, ...expected]) => {
     expect(getPlayersColors('BRGY', totalPlayers as TTotalPlayers)).toStrictEqual(expected);
+  });
+});
+
+describe.skip('getInitialDataPlayers', () => {
+  test('', () => {
+    getInitialDataPlayers([], 'BRGY', 2);
   });
 });
