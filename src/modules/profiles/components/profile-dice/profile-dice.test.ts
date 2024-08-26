@@ -20,4 +20,17 @@ describe('profile-dice.vue', () => {
     expect(wrapper.find('button.game-profile-dice-button').exists()).toBe(true);
     expect(wrapper.findComponent(Dice3d).exists()).toBe(true);
   });
+
+  test('disable dice', () => {
+    const wrapper = mount(ProfileDice, {
+      props: {
+        diceRollNumber: 0,
+        disabledDice: true,
+        showDice: true,
+        value: 1,
+      },
+    });
+
+    expect(wrapper.find('button.game-profile-dice-button').attributes()['disabled']).toBe('');
+  });
 });
