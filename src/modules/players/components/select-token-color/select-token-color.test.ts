@@ -5,6 +5,7 @@ import SelectTokenColorTooltip from '@players/components/select-token-color-tool
 import { EColors } from '@board/interfaces/board.enum';
 import TokenPiece from '@tokens/components/token/token-piece/token-piece.vue';
 import SelectTokenColor from './select-token-color.vue';
+import { nextTick } from 'vue';
 
 describe('select-token-color.vue', () => {
   test('renders properly', () => {
@@ -38,5 +39,37 @@ describe('select-token-color.vue', () => {
 
     await wrapper.find('button').trigger('click');
     expect(wrapper.findComponent(SelectTokenColorTooltip).exists()).toBe(true);
+  });
+
+  test.skip('close when click outside', async () => {
+    const container = document.createElement('div');
+    const clickableElement = document.createElement('span');
+
+    container.id = 'outside';
+    clickableElement.id = 'clickableElement';
+
+    if (document.body) {
+      document.body.appendChild(container);
+      container.appendChild(clickableElement);
+    }
+
+    const wrapper = mount(SelectTokenColor, {
+      props: {
+        disabled: false,
+        modelValue: EColors.BLUE,
+      },
+      global: {
+        plugins: [i18n],
+      },
+      attachTo: container,
+    });
+
+    await wrapper.find('button').trigger('click');
+    expect(wrapper.findComponent(SelectTokenColorTooltip).exists()).toBe(true);
+
+    clickableElement.click();
+    await nextTick();
+
+    expect(wrapper.findComponent(SelectTokenColorTooltip).exists()).toBe(false);
   });
 });
