@@ -2,9 +2,10 @@ import { describe, expect, test } from 'vitest';
 import { mount } from '@vue/test-utils';
 import i18n from '@/i18n';
 import SelectNumberPlayers from '@players/components/select-number-players/select-number-players.vue';
-import SetupPlayers from './setup-players.vue';
-import PlayerInput from '../player-input/player-input.vue';
+import PlayerInput from '@players/components/player-input/player-input.vue';
 import { nextTick } from 'vue';
+import { isNumber } from '@common/helpers/storage.helper';
+import SetupPlayers from './setup-players.vue';
 
 describe('setup-players.vue', () => {
   test('renders properly', () => {
@@ -35,5 +36,26 @@ describe('setup-players.vue', () => {
     await wrapper.find('label[for="2P"]').trigger('click');
     await nextTick();
     expect(wrapper.find('.game-offline-players').findAllComponents(PlayerInput)).toHaveLength(2);
+  });
+
+  test('emit data when submit form', async () => {
+    const wrapper = mount(SetupPlayers, {
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    await wrapper.find('form').trigger('submit');
+
+    function isValidObject(obj: any): boolean {
+      return (
+        isNumber(obj['initialTurn']) &&
+        isNumber(obj['totalPlayers']) &&
+        obj['users'].length === obj['totalPlayers'] &&
+        obj['boardColor'] === 'RGYB'
+      );
+    }
+
+    expect((wrapper.emitted()['updateData'][0] as any)[0]).toSatisfy(isValidObject);
   });
 });
