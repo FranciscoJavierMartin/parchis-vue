@@ -33,4 +33,18 @@ describe('profile-dice.vue', () => {
 
     expect(wrapper.find('button.game-profile-dice-button').attributes()['disabled']).toBe('');
   });
+
+  test('emit select dice', async () => {
+    const wrapper = mount(ProfileDice, {
+      props: {
+        diceRollNumber: 0,
+        disabledDice: false,
+        showDice: true,
+        value: 1,
+      },
+    });
+
+    await wrapper.find('button').trigger('click');
+    expect(wrapper.emitted()).toHaveProperty('handleSelectDice');
+  });
 });
