@@ -1,11 +1,20 @@
+import { nextTick } from 'vue';
 import { describe, expect, test } from 'vitest';
 import { mount } from '@vue/test-utils';
 import i18n from '@/i18n';
 import SelectNumberPlayers from '@players/components/select-number-players/select-number-players.vue';
 import PlayerInput from '@players/components/player-input/player-input.vue';
-import { nextTick } from 'vue';
 import { isNumber } from '@common/helpers/storage.helper';
 import SetupPlayers from './setup-players.vue';
+
+function isValidObject(obj: any): boolean {
+  return (
+    isNumber(obj['initialTurn']) &&
+    isNumber(obj['totalPlayers']) &&
+    obj['users'].length === obj['totalPlayers'] &&
+    obj['boardColor'] === 'RGYB'
+  );
+}
 
 describe('setup-players.vue', () => {
   test('renders properly', () => {
@@ -46,15 +55,6 @@ describe('setup-players.vue', () => {
     });
 
     await wrapper.find('form').trigger('submit');
-
-    function isValidObject(obj: any): boolean {
-      return (
-        isNumber(obj['initialTurn']) &&
-        isNumber(obj['totalPlayers']) &&
-        obj['users'].length === obj['totalPlayers'] &&
-        obj['boardColor'] === 'RGYB'
-      );
-    }
 
     expect((wrapper.emitted()['updateData'][0] as any)[0]).toSatisfy(isValidObject);
   });
