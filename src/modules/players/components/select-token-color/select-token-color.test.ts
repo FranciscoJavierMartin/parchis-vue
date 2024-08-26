@@ -24,4 +24,19 @@ describe('select-token-color.vue', () => {
     expect(wrapper.find('button').findComponent(TokenPiece).exists()).toBe(true);
     expect(wrapper.findComponent(SelectTokenColorTooltip).exists()).toBe(false);
   });
+
+  test('open token selector', async () => {
+    const wrapper = mount(SelectTokenColor, {
+      props: {
+        disabled: false,
+        modelValue: EColors.BLUE,
+      },
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    await wrapper.find('button').trigger('click');
+    expect(wrapper.findComponent(SelectTokenColorTooltip).exists()).toBe(true);
+  });
 });
