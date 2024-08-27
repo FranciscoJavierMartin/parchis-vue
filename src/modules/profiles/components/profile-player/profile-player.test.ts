@@ -46,4 +46,38 @@ describe('profile-player.vue', () => {
     expect(wrapper.findComponent(ProfileDice).exists()).toBe(false);
     expect(wrapper.findComponent(ProfileRanking).exists()).toBe(false);
   });
+
+  test('show dice', () => {
+    const wrapper = mount(ProfilePlayer, {
+      props: {
+        basePosition: 'BOTTOM',
+        hasTurn: true,
+        position: 'LEFT',
+        player: {
+          color: 'BLUE',
+          name: 'Alice',
+          counterMessage: 0,
+          finished: false,
+          id: 'asdfg',
+          index: 1,
+          isOffline: false,
+          ranking: 1,
+        },
+        actionsTurn: {
+          diceList: [],
+          diceRollNumber: 0,
+          diceValue: 0,
+          disabledDice: false,
+          isDisabledUI: false,
+          showDice: false,
+          timerActivated: false,
+        },
+      },
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    expect(wrapper.findComponent(ProfileDice).exists()).toBe(true);
+  });
 });
