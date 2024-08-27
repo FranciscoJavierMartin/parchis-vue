@@ -23,11 +23,11 @@ describe('modal-share-buttons.vue', () => {
   });
 
   test.for([
-    ['Share in Copy', 'copy'],
-    ['Share in X (Twitter)', 'twitter'],
-    ['Share in Facebook', 'facebook'],
-    ['Share in Linkedin', 'linkedin'],
-  ])('renders %s button', ([buttonTitle, icon]) => {
+    ['Share in Copy', 'Copy', 'copy'],
+    ['Share in X (Twitter)', 'X (Twitter)', 'twitter'],
+    ['Share in Facebook', 'Facebook', 'facebook'],
+    ['Share in Linkedin', 'Linkedin', 'linkedin'],
+  ])('renders %s button', ([buttonTitle, label, icon]) => {
     const wrapper = mount(ModalShareButtons, {
       props: {
         data: {
@@ -43,5 +43,8 @@ describe('modal-share-buttons.vue', () => {
 
     expect(wrapper.find(`button[title="${buttonTitle}"]`).exists()).toBe(true);
     expect(wrapper.find(`button .icon-${icon}`).exists()).toBe(true);
+    expect(wrapper.find(`.modal-share-button button[title="${buttonTitle}"] + span`).text()).toBe(
+      label,
+    );
   });
 });
