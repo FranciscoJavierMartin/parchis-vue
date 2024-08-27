@@ -1,9 +1,21 @@
-import { describe, expect, test } from 'vitest';
+import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import i18n from '@/i18n';
 import ModalShareButtons from './modal-share-buttons.vue';
 
 describe('modal-share-buttons.vue', () => {
+  beforeAll(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      value: {
+        writeText: vi.fn(),
+      },
+    });
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   test('renders properly', () => {
     const wrapper = mount(ModalShareButtons, {
       props: {
@@ -46,5 +58,24 @@ describe('modal-share-buttons.vue', () => {
     expect(wrapper.find(`.modal-share-button button[title="${buttonTitle}"] + span`).text()).toBe(
       label,
     );
+  });
+
+  test('emit close when click', async () => {
+    const wrapper = mount(ModalShareButtons, {
+      props: {
+        data: {
+          text: 'Text test',
+          title: 'Title test',
+          url: 'my-url',
+        },
+      },
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    await wrapper.find('button').trigger('click');
+    expect(wrapper.emitted()).toHaveProperty('close');
+    expect(wrapper.emitted()['close'][0]).toStrictEqual([true]);
   });
 });
