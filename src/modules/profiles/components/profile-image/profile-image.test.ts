@@ -1,11 +1,18 @@
-import { describe, expect, test } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import i18n from '@/i18n';
 import PlayerAvatar from '@common/components/player-avatar/player-avatar.vue';
 import ProfileImage from './profile-image.vue';
-import { nextTick } from 'vue';
 
 describe('profile-image.vue', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.clearAllTimers();
+  });
+
   test('renders properly', () => {
     const wrapper = mount(ProfileImage, {
       props: {
@@ -119,5 +126,35 @@ describe('profile-image.vue', () => {
     await wrapper.find('button').trigger('click');
 
     expect(wrapper.emitted()).toHaveProperty('handleMuteChat');
+  });
+
+  test.skip('emit handeInterval', async () => {
+    const wrapper = mount(ProfileImage, {
+      props: {
+        player: {
+          color: 'BLUE',
+          finished: false,
+          id: 'asdf',
+          index: 1,
+          name: 'Alice',
+          counterMessage: 0,
+          isOffline: false,
+          ranking: 1,
+          isOnline: true,
+          isMuted: false,
+        },
+        startTimer: true,
+        position: 'LEFT',
+      },
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    // console.log(wrapper.emitted());
+
+    vi.advanceTimersByTime(5150);
+    // vi.advanceTimersByTimeAsync()
+    console.log(wrapper.emitted());
   });
 });
