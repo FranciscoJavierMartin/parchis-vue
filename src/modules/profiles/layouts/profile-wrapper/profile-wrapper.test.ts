@@ -1,13 +1,14 @@
 import { describe, expect, test } from 'vitest';
 import { mount } from '@vue/test-utils';
 import i18n from '@/i18n';
-import ProfileWrapper from '@profiles/layouts/profile-wrapper/profile-wrapper.vue';
-import ProfileSection from './profile-section.vue';
+import ProfilePlayer from '@profiles/components/profile-player/profile-player.vue';
+import ProfileWrapper from './profile-wrapper.vue';
 
-describe('profile-section.vue', () => {
+describe('profile-wrapper.vue', () => {
   test('renders properly', () => {
-    const wrapper = mount(ProfileSection, {
+    const wrapper = mount(ProfileWrapper, {
       props: {
+        position: 'LEFT',
         actionsTurn: {
           diceList: [],
           diceRollNumber: 0,
@@ -48,7 +49,6 @@ describe('profile-section.vue', () => {
       },
     });
 
-    expect(wrapper.find('.game-profile-section').exists()).toBe(true);
-    expect(wrapper.findAllComponents(ProfileWrapper)).toHaveLength(2);
+    expect(wrapper.findComponent(ProfilePlayer).exists()).toBe(true);
   });
 });
