@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils';
 import i18n from '@/i18n';
 import ModalShareButtons from './modal-share-buttons.vue';
 
+// TODO: Spy copyToClipboard and shareWithSocialNetwork
 describe('modal-share-buttons.vue', () => {
   beforeAll(() => {
     Object.defineProperty(navigator, 'clipboard', {
