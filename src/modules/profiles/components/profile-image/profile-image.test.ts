@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils';
 import i18n from '@/i18n';
 import PlayerAvatar from '@common/components/player-avatar/player-avatar.vue';
 import ProfileImage from './profile-image.vue';
+import { nextTick } from 'vue';
 
 describe('profile-image.vue', () => {
   test('renders properly', () => {
@@ -90,7 +91,7 @@ describe('profile-image.vue', () => {
     expect(wrapper.find('.game-profile-image-progress').exists()).toBe(true);
   });
 
-  test('mute button', () => {
+  test('mute button', async () => {
     const wrapper = mount(ProfileImage, {
       props: {
         player: {
@@ -103,7 +104,7 @@ describe('profile-image.vue', () => {
           isOffline: false,
           ranking: 1,
           isOnline: true,
-          isMuted: true,
+          isMuted: false,
         },
         startTimer: true,
         position: 'LEFT',
@@ -113,6 +114,10 @@ describe('profile-image.vue', () => {
       },
     });
 
-    expect(wrapper.find('button.game-profile-mute-chat').classes()).toContain('mute');
+    expect(wrapper.find('button.game-profile-mute-chat').classes()).not.toContain('mute');
+
+    await wrapper.find('button').trigger('click');
+
+    expect(wrapper.emitted()).toHaveProperty('handleMuteChat');
   });
 });
