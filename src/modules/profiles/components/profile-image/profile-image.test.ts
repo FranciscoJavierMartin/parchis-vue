@@ -89,4 +89,30 @@ describe('profile-image.vue', () => {
 
     expect(wrapper.find('.game-profile-image-progress').exists()).toBe(true);
   });
+
+  test('mute button', () => {
+    const wrapper = mount(ProfileImage, {
+      props: {
+        player: {
+          color: 'BLUE',
+          finished: false,
+          id: 'asdf',
+          index: 1,
+          name: 'Alice',
+          counterMessage: 0,
+          isOffline: false,
+          ranking: 1,
+          isOnline: true,
+          isMuted: true,
+        },
+        startTimer: true,
+        position: 'LEFT',
+      },
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    expect(wrapper.find('button.game-profile-mute-chat').classes()).toContain('mute');
+  });
 });
