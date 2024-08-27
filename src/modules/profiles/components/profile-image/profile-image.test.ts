@@ -33,4 +33,33 @@ describe('profile-image.vue', () => {
     expect(wrapper.find('button.game-profile-mute-chat').exists()).toBe(true);
     expect(wrapper.find('.game-profile-image-progress').exists()).toBe(false);
   });
+
+  test('show left message', () => {
+    const wrapper = mount(ProfileImage, {
+      props: {
+        player: {
+          color: 'BLUE',
+          finished: false,
+          id: 'asdf',
+          index: 1,
+          name: 'Alice',
+          counterMessage: 0,
+          isOffline: true,
+          ranking: 1,
+          isOnline: true,
+        },
+        startTimer: false,
+        position: 'LEFT',
+      },
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    expect(wrapper.find('.game-profile-image-offline').exists()).toBe(true);
+    expect(wrapper.find('.game-profile-image').exists()).toBe(true);
+    expect(wrapper.findComponent(PlayerAvatar).exists()).toBe(true);
+    expect(wrapper.find('button.game-profile-mute-chat').exists()).toBe(false);
+    expect(wrapper.find('.game-profile-image-progress').exists()).toBe(false);
+  });
 });
