@@ -1,5 +1,5 @@
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { describe, expect, test } from 'vitest';
 import i18n from '@/i18n';
 import ProfileImage from '@profiles/components/profile-image/profile-image.vue';
 import ProfileDice from '@profiles/components/profile-dice/profile-dice.vue';
@@ -8,6 +8,14 @@ import NameAndDice from '@profiles/components/name-and-dice/name-and-dice.vue';
 import ProfilePlayer from './profile-player.vue';
 
 describe('profile-player.vue', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.clearAllTimers();
+  });
+
   test('renders properly', () => {
     const wrapper = mount(ProfilePlayer, {
       props: {
@@ -115,5 +123,41 @@ describe('profile-player.vue', () => {
     });
 
     expect(wrapper.findComponent(ProfileRanking).exists()).toBe(true);
+  });
+
+  test('emit handleTimer', async () => {
+    const wrapper = mount(ProfilePlayer, {
+      props: {
+        basePosition: 'BOTTOM',
+        hasTurn: false,
+        position: 'LEFT',
+        player: {
+          color: 'BLUE',
+          name: 'Alice',
+          counterMessage: 0,
+          finished: true,
+          id: 'asdfg',
+          index: 1,
+          isOffline: false,
+          ranking: 1,
+        },
+        actionsTurn: {
+          diceList: [],
+          diceRollNumber: 0,
+          diceValue: 0,
+          disabledDice: false,
+          isDisabledUI: false,
+          showDice: false,
+          timerActivated: true,
+        },
+      },
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    await vi.advanceTimersByTimeAsync(700);
+
+    expect(wrapper.emitted()).toHaveProperty('handleTimer');
   });
 });
