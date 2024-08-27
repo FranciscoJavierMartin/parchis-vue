@@ -157,7 +157,6 @@ describe('profile-player.vue', () => {
     });
 
     await vi.advanceTimersByTimeAsync(700);
-
     expect(wrapper.emitted()).toHaveProperty('handleTimer');
   });
 });
