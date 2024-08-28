@@ -30,4 +30,15 @@ describe('modal-share-header.vue', () => {
     expect(wrapper.find('h4').text()).toBe('Custom label');
     expect(wrapper.find('button .icon-close').exists()).toBe(true);
   });
+
+  test('emit close when click on button', async () => {
+    const wrapper = mount(ModalShareHeader, {
+      global: {
+        plugins: [i18n],
+      },
+    });
+
+    await wrapper.find('button').trigger('click');
+    expect(wrapper.emitted()).toHaveProperty('close');
+  });
 });
