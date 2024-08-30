@@ -27,4 +27,18 @@ describe('toast-feedback.vue', () => {
     expect(wrapper.find('.toast-list').exists()).toBe(true);
     expect(wrapper.findAll('.toast-message')).toHaveLength(2);
   });
+
+  test('show empty list', () => {
+    const wrapper = mount(ToastFeedback, {
+      global: {
+        provide: {
+          [ToastRemoveToastSymbol]: vi.fn(),
+          [ToastMessagesSymbol]: [],
+        },
+      },
+    });
+
+    expect(wrapper.find('.toast-container').exists()).toBe(true);
+    expect(wrapper.find('.toast-list').exists()).toBe(false);
+  });
 });
