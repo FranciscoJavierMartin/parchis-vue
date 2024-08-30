@@ -41,4 +41,29 @@ describe('toast-feedback.vue', () => {
     expect(wrapper.find('.toast-container').exists()).toBe(true);
     expect(wrapper.find('.toast-list').exists()).toBe(false);
   });
+
+  test('click on message to remove', async () => {
+    const removeFn = vi.fn();
+    const wrapper = mount(ToastFeedback, {
+      global: {
+        provide: {
+          [ToastRemoveToastSymbol]: removeFn,
+          [ToastMessagesSymbol]: [
+            {
+              message: 'message 1',
+              id: 'asdf',
+            },
+            {
+              message: 'message 2',
+              id: 'qwert',
+            },
+          ],
+        },
+      },
+    });
+
+    await wrapper.findAll('.toast-message')[0].trigger('click');
+
+    expect(removeFn).toHaveBeenCalledWith('asdf');
+  });
 });
