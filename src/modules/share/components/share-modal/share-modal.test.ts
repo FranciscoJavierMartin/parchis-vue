@@ -1,11 +1,11 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import i18n from '@/i18n';
-import ShareModal from '@share/components/share-modal/share-modal.vue';
 import { ToastAddToastSymbol } from '@toast/constants/toast.constants';
-import ShareButton from './share-button.vue';
+import BaseModal from '@layouts/components/base-modal/base-modal.vue';
+import ShareModal from './share-modal.vue';
 
-describe('share-button.vue', () => {
+describe('share-modal.vue', () => {
   beforeEach(() => {
     // create teleport target
     const el = document.createElement('div');
@@ -18,13 +18,14 @@ describe('share-button.vue', () => {
   });
 
   test('renders properly', () => {
-    const wrapper = mount(ShareButton, {
+    const wrapper = mount(ShareModal, {
       props: {
         data: {
           text: 'Shared text',
           title: 'Shared title',
           url: 'my-url',
         },
+        showModal: true,
       },
       global: {
         plugins: [i18n],
@@ -34,6 +35,7 @@ describe('share-button.vue', () => {
       },
     });
 
-    expect(wrapper.findComponent(ShareModal).exists()).toBe(true);
+    expect(wrapper.findComponent(BaseModal).exists()).toBe(true);
+    expect(wrapper.find('.modal-share-wrapper').exists()).toBe(true);
   });
 });
