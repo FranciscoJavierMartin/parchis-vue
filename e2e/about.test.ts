@@ -2,13 +2,10 @@ import { test, expect } from '@playwright/test';
 
 // See here how to get started:
 // https://playwright.dev/docs/intro
-test.skip('visits about page', async ({ page }) => {
-  await page.goto('/');
+test('visits about page', async ({ page }) => {
+  await page.goto('/parchis-vue/about');
 
-  await page.waitForSelector('a.button.blue', { state: 'visible' });
+  await page.waitForSelector('.about-page', { state: 'visible' });
 
-  await expect(page.locator('[href*="/parchis-vue/online"]')).toBeVisible();
-  await expect(page.locator('[href*="/parchis-vue/offline"]')).toBeVisible();
-  await expect(page.locator('[href*="/parchis-vue/about"]')).toBeVisible();
-  await expect(page.locator('button[title*="Share"]')).toBeVisible();
+  await expect(page.locator('.about-page').locator('p').first()).toContainText('The origins of');
 });
