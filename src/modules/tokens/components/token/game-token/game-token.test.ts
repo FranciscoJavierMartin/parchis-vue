@@ -46,4 +46,28 @@ describe('game-token.vue', () => {
     expect(wrapper.find('.game-token button.game-token-button').exists()).toBe(false);
     expect(wrapper.findComponent(TokenTooltip).exists()).toBe(false);
   });
+
+  test('show button', () => {
+    const wrapper = mount(GameToken, {
+      props: {
+        diceAvailable: [{ key: 1, value: 2 }],
+        diceList: [],
+        color: EColors.BLUE,
+        typeTile: EtypeTile.NORMAL,
+        index: 0,
+        totalTokens: 4,
+        position: 1,
+        enableTooltip: false,
+        isMoving: false,
+        animated: false,
+        canSelectToken: true,
+        isDisabledUI: false,
+        debug: false,
+        coordinate: { x: 5, y: 5 },
+        positionTile: 4,
+      },
+    });
+
+    expect(wrapper.find('button.game-token-button').exists()).toBe(true);
+  });
 });
