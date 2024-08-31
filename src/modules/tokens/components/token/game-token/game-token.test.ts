@@ -97,4 +97,37 @@ describe('game-token.vue', () => {
     expect(emitted).toHaveProperty('handleSelectedToken');
     expect(emitted['handleSelectedToken']).toStrictEqual([[{ diceIndex: 0, tokenIndex: 2 }]]);
   });
+
+  test('show tooltip', async () => {
+    const wrapper = mount(GameToken, {
+      props: {
+        diceAvailable: [
+          { key: 1, value: 2 },
+          { key: 2, value: 3 },
+        ],
+        diceList: [
+          { key: 1, value: 2 },
+          { key: 2, value: 3 },
+        ],
+        color: EColors.BLUE,
+        typeTile: EtypeTile.NORMAL,
+        index: 2,
+        totalTokens: 4,
+        position: 1,
+        enableTooltip: false,
+        isMoving: false,
+        animated: false,
+        canSelectToken: true,
+        isDisabledUI: false,
+        debug: false,
+        coordinate: { x: 5, y: 5 },
+        positionTile: 4,
+      },
+    });
+
+    await wrapper.find('button.game-token-button').trigger('click');
+    const emitted = wrapper.emitted();
+    expect(emitted).not.toHaveProperty('handleSelectedToken');
+    expect(wrapper.findComponent(TokenTooltip).exists()).toBe(true);
+  });
 });
