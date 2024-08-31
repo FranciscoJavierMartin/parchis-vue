@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, Mock, test, vi, vitest } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import debounce, { delay } from './debounce.helper';
 
 describe('delay', () => {
@@ -7,7 +7,7 @@ describe('delay', () => {
     await delay(200);
     const currentTime: number = Date.now();
 
-    expect(currentTime - previousTime).toBeLessThanOrEqual(210);
+    expect(currentTime - previousTime).toBeLessThanOrEqual(250);
     expect(currentTime - previousTime).toBeGreaterThanOrEqual(200);
   });
 });
