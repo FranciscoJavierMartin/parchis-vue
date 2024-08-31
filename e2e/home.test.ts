@@ -4,6 +4,11 @@ import { test, expect } from '@playwright/test';
 // https://playwright.dev/docs/intro
 test('visits home page', async ({ page }) => {
   await page.goto('/');
-  expect(page.locator('a').getByRole('link', { name: /Play online/i })).toBeDefined();
-  expect(page.locator('a').getByRole('link', { name: /Play offline/i })).toBeDefined();
+
+  await page.waitForSelector('a.button.blue', { state: 'visible' });
+
+  await expect(page.locator('[href*="/parchis-vue/online"]')).toBeVisible();
+  await expect(page.locator('[href*="/parchis-vue/offline"]')).toBeVisible();
+  await expect(page.locator('[href*="/parchis-vue/about"]')).toBeVisible();
+  await expect(page.locator('button[title*="Share"]')).toBeVisible();
 });
