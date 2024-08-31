@@ -38,6 +38,7 @@ describe('game-token.vue', () => {
     );
     expect(left).toBe('5px');
     expect(top).toBe('5px');
+    // JSDom don't support CSS variables
     // expect(height).toBe('26px');
     // expect(width).toBe('26px');
     expect(zIndex).toBe('1');

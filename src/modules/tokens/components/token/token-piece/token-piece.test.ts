@@ -25,4 +25,17 @@ describe('token-piece.vue', () => {
 
     expect(wrapper.find('.game-token-piece').classes()).toContain(color.toLowerCase());
   });
+
+  test('debug indicator', () => {
+    const wrapper = mount(TokenPiece, {
+      props: {
+        color: 'BLUE',
+        debug: true,
+        index: 1,
+      },
+    });
+
+    expect(wrapper.find('.game-token-piece span').exists()).toBe(true);
+    expect(wrapper.find('.game-token-piece span').text()).toBe('1');
+  });
 });
