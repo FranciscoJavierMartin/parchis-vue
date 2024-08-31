@@ -16,4 +16,10 @@ describe('show-total-tokens.vue', () => {
 
     expect(wrapper.findAllComponents(TotalTokens)).toHaveLength(2);
   });
+
+  test('do not show', () => {
+    const wrapper = mount(ShowTotalTokens);
+
+    expect(wrapper.findAllComponents(TotalTokens)).toHaveLength(0);
+  });
 });
