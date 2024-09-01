@@ -4,7 +4,7 @@
     <span class="menu-option-label">
       {{ label }}
     </span>
-    <InputSwitch :id="`menu-option-${label}`" v-model="model" />
+    <InputSwitch :id="`menu-option-${label}`" v-model="model" :label="label" />
   </div>
 </template>
 

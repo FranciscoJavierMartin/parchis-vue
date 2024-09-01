@@ -11,6 +11,7 @@ const meta: Meta<typeof InputSwitch> = {
   },
   args: {
     id: '1234abcd',
+    label: 'Option',
   },
   decorators: [
     (args: object): object => ({
