@@ -40,4 +40,24 @@ test('visits offline page', async ({ page }) => {
   await page.locator('.game-offline-input-name').first().click();
 
   await expect(page.locator('.select-token-color-tooltip')).toBeHidden();
+
+  // const inputs = await page.locator('.game-offline-input-name:not(:disabled)').all();
+
+  // await Promise.all(
+  //   inputs.map(async (input, index: number) => {
+  //     await input.clear();
+  //     await input.fill(`Player ${index}0`);
+  //   }),
+  // );
+
+  // const t = await inputs[0].textContent();
+
+  expect(await page.locator('.game-offline-input-name:not(:disabled)').count()).toBe(3);
+  expect(await page.locator('.game-offline-input-name:disabled').count()).toBe(1);
+  // const input = page.locator('.game-offline-input-name').first();
+  // await input.fill('Hello world');
+
+  // const t = await input.textContent();
+
+  // console.log(t);
 });
