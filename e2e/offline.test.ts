@@ -77,4 +77,10 @@ test('visits offline page', async ({ page }) => {
   await page.locator('button[type="submit"].game-offline-play').click();
 
   await expect(page.locator('.game-board')).toBeVisible();
+
+  expect(await page.locator('.game-profile').count()).toBe(3);
+
+  expect(
+    (await page.locator('img[alt="Player 20"]').getAttribute('src'))?.endsWith('/bot.png'),
+  ).toBe(true);
 });
