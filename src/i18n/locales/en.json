@@ -48,7 +48,7 @@
     "amount": "{amount}P",
     "play": "Play",
     "input": {
-      "selectColor": "Seleccionar el color del token",
+      "selectColor": "Select token color",
       "placeholderName": "Player name",
       "selectBot": "Player is bot"
     }

@@ -2,34 +2,42 @@ import { test, expect } from '@playwright/test';
 
 // See here how to get started:
 // https://playwright.dev/docs/intro
-test('visits about page', async ({ page }) => {
-  await page.goto('/parchis-vue/about');
+test('visits offline page', async ({ page }) => {
+  await page.goto('/parchis-vue/offline');
 
-  await page.waitForSelector('.about-page', { state: 'visible' });
+  await page.waitForSelector('.game-offline', { state: 'visible' });
 
-  await expect(page.locator('.about-page').locator('p').first()).toContainText('The origins of');
-});
+  expect(await page.locator('.game-offline-player').count()).toBe(4);
 
-test('return to home page', async ({ page }) => {
-  await page.goto('/parchis-vue/about');
+  // Change number of players
+  await expect(page.getByLabel(/2P/i)).toBeChecked();
+  expect(await page.locator('.game-offline-input-name:not(:disabled)').count()).toBe(2);
+  expect(await page.locator('.game-offline-input-name:disabled').count()).toBe(2);
 
-  await page.waitForSelector('.about-page', { state: 'visible' });
+  await page.getByLabel(/3P/i).setChecked(true);
 
-  await page.locator('button.game-back-button').click();
+  await expect(page.getByLabel(/2P/i)).not.toBeChecked();
+  await expect(page.getByLabel(/3P/i)).toBeChecked();
 
-  await expect(page.locator('.confirm-modal')).toBeVisible();
-  await expect(page.locator('.confirm-modal h2')).toHaveText('Exit');
-  await expect(page.locator('.confirm-modal span.text')).toHaveText(
-    'Are you sure you want to quit the game?',
-  );
+  expect(await page.locator('.game-offline-input-name:not(:disabled)').count()).toBe(3);
+  expect(await page.locator('.game-offline-input-name:disabled').count()).toBe(1);
 
-  await page.locator('button.button-no').click();
+  // Change token color
+  await expect(
+    page.locator('.game-offline-token-color').locator('.game-token-piece').first(),
+  ).toHaveClass('game-token-piece red');
+  await page.locator('.game-offline-token-color').first().click();
 
-  await expect(page.locator('.confirm-modal')).toBeHidden();
+  await expect(page.locator('.select-token-color-tooltip')).toBeVisible();
+  await page.locator('.select-token-color-tooltip').locator('button.green').click();
 
-  await page.locator('button.game-back-button').click();
+  await expect(
+    page.locator('.game-offline-token-color').locator('.game-token-piece').first(),
+  ).toHaveClass('game-token-piece green');
+  await expect(page.locator('.select-token-color-tooltip')).toBeVisible();
 
-  await page.locator('button.button-yes').click();
+  // Click outside
+  await page.locator('.game-offline-input-name').first().click();
 
-  expect(page.url().endsWith('/parchis-vue/')).toBe(true);
+  await expect(page.locator('.select-token-color-tooltip')).toBeHidden();
 });
