@@ -7,9 +7,9 @@
       <MenuOptions />
     </template>
     <template #default>
-      <div v-if="dataGame">
+      <template v-if="dataGame">
         <Game v-bind="dataGame" :debug="envVars.debug" />
-      </div>
+      </template>
       <template v-else>
         <GameLogo />
         <SetupPlayers @update-data="updateDataGame" />

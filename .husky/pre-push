@@ -1,3 +1,4 @@
-pnpm run lint
-pnpm run stylelint
-pnpm run format:check
+pnpm lint
+pnpm stylelint
+pnpm format:check
+pnpm test:unit

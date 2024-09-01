@@ -6,6 +6,7 @@
     "env.d.ts",
     "src/**/*",
     "src/**/*.vue",
+    "e2e/**/*.test.ts",
     ".storybook/*"
   ],
   "exclude": ["src/**/__tests__/*"],
@@ -35,8 +36,8 @@
       "@profiles/*": ["src/modules/profiles/*"],
       "@share/*": ["src/modules/share/*"],
       "@sounds/*": ["src/modules/sounds/*"],
-      "@tokens/*": ["src/modules/tokens/*"],
-      "@toast/*": ["src/modules/toast/*"]
+      "@toast/*": ["src/modules/toast/*"],
+      "@tokens/*": ["src/modules/tokens/*"]
     }
   }
 }

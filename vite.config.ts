@@ -38,8 +38,8 @@ export default defineConfig({
       '@profiles': fileURLToPath(new URL('./src/modules/profiles', import.meta.url)),
       '@share': fileURLToPath(new URL('./src/modules/share', import.meta.url)),
       '@sounds': fileURLToPath(new URL('./src/modules/sounds', import.meta.url)),
-      '@tokens': fileURLToPath(new URL('./src/modules/tokens', import.meta.url)),
       '@toast': fileURLToPath(new URL('./src/modules/toast', import.meta.url)),
+      '@tokens': fileURLToPath(new URL('./src/modules/tokens', import.meta.url)),
     },
   },
 });

@@ -17,10 +17,10 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 import ShareButton from '@share/components/share-button/share-button.vue';
 import BaseIcon from '@common/components/icons/base-icon.vue';
 import { ROUTES } from '@/router/routes';
-import { useI18n } from 'vue-i18n';
 
 interface HomeToolbarProps {
   /** Is user authenticated */

@@ -1,13 +1,18 @@
 <template>
   <button
-    :aria-label="t('backModal.open')"
     v-if="withConfirmation"
+    :aria-label="t('backModal.open')"
     class="button blue game-back-button"
     @click="handleBackButton"
   >
     <BaseIcon type="back" />
   </button>
-  <RouterLink v-else :to="{ name: to }" class="button blue game-back-button">
+  <RouterLink
+    v-else
+    :aria-label="t('backModal.open')"
+    :to="{ name: to }"
+    class="button blue game-back-button"
+  >
     <BaseIcon type="back" />
   </RouterLink>
   <BackConfirmationModal

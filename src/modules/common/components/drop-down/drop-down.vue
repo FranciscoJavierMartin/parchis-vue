@@ -3,6 +3,7 @@
 <template>
   <!-- TODO: Make component accesible -->
   <div class="drop-down" :tabindex="tabindex" @blur="isOpen = false">
+    <!-- TODO: Convert to button -->
     <div class="selected" :class="{ open: isOpen }" @click="isOpen = !isOpen">
       <slot name="selectedItem" :item="selectedItem" />
     </div>

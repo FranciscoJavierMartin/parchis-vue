@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: Remove if -->
   <template v-if="totalTokens">
     <TotalTokens
       v-for="indexPosition in Object.keys(totalTokens).map((v) => +v)"
