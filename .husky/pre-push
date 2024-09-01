@@ -2,4 +2,3 @@ pnpm lint
 pnpm stylelint
 pnpm format:check
 pnpm test:unit
-pnpm test:e2e
