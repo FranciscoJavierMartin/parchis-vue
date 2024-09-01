@@ -59,4 +59,17 @@ test('visits offline page', async ({ page }) => {
   await expect(page.locator('.game-offline-input-name:not(:disabled)').nth(2)).toHaveValue(
     `Player ${2}0`,
   );
+
+  // Is bot
+  await Promise.all(
+    (await page.locator('.game-offline-player').all()).map(async (row) => {
+      await expect(row.locator('label input')).not.toBeChecked();
+    }),
+  );
+
+  await page.locator('.game-offline-player').nth(2).locator('label.input-switch').click();
+
+  await expect(
+    page.locator('.game-offline-player').nth(2).locator('label.input-switch input'),
+  ).toBeChecked();
 });
