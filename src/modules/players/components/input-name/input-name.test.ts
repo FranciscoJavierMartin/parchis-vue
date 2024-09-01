@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'vitest';
 import { mount } from '@vue/test-utils';
-import InputName from './input-name.vue';
 import i18n from '@/i18n';
+import InputName from './input-name.vue';
 
 describe('input-name.vue', () => {
-  test('renders properly', async () => {
+  test('renders properly', () => {
     const wrapper = mount(InputName, {
       props: {
         disabled: false,
@@ -22,7 +22,7 @@ describe('input-name.vue', () => {
   });
 
   test('update input', async () => {
-    const wrapper = mount(InputName, {
+    const wrapper: any = mount(InputName, {
       props: {
         disabled: false,
         modelValue: '',
@@ -41,7 +41,7 @@ describe('input-name.vue', () => {
   });
 
   test('dont update input when is disabled', async () => {
-    const wrapper = mount(InputName, {
+    const wrapper: any = mount(InputName, {
       props: {
         disabled: true,
         modelValue: '',

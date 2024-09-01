@@ -20,7 +20,7 @@ describe('select-token-color-tooltip.vue', () => {
   });
 
   test('change color when click on one', async () => {
-    const wrapper = mount(SelectTokenColorTooltip, {
+    const wrapper: any = mount(SelectTokenColorTooltip, {
       props: {
         modelValue: EColors.BLUE,
         'onUpdate:modelValue': async (e) => wrapper.setProps({ modelValue: e }),
