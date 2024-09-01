@@ -41,26 +41,35 @@ test('visits offline page', async ({ page }) => {
 
   await expect(page.locator('.select-token-color-tooltip')).toBeHidden();
 
-  // const inputs = await page.locator('.game-offline-input-name:not(:disabled)').all();
+  const inputs = await page.locator('.game-offline-input-name:not(:disabled)').all();
 
-  // await Promise.all(
-  //   inputs.map(async (input, index: number) => {
-  //     await input.clear();
-  //     await input.fill(`Player ${index}0`);
-  //   }),
-  // );
+  await Promise.all(
+    inputs.map(async (input, index: number) => {
+      await input.clear({ force: true });
+      await input.fill(`Player ${index}0`);
+    }),
+  );
+
+  await Promise.all(
+    inputs.map(async (input, index: number) => {
+      const text = await input.inputValue();
+      console.log({ expected: `Player ${index}0`, value: text });
+      await expect(input).toHaveValue(`Player ${index}0`);
+      // await input.fill(`Pslayer ${index}0`);
+    }),
+  );
 
   // const t = await inputs[0].textContent();
 
-  expect(await page.locator('.game-offline-input-name:not(:disabled)').count()).toBe(3);
-  expect(await page.locator('.game-offline-input-name:disabled').count()).toBe(1);
-  await page.locator('.game-offline-input-name').first().fill('Hello world');
-  const t = await page.locator('.game-offline-input-name').first().inputValue();
+  // expect(await page.locator('.game-offline-input-name:not(:disabled)').count()).toBe(3);
+  // expect(await page.locator('.game-offline-input-name:disabled').count()).toBe(1);
+  // await page.locator('.game-offline-input-name').first().fill('Hello world');
+  // const t = await page.locator('.game-offline-input-name').first().inputValue();
 
   // const input = page.locator('.game-offline-input-name').first();
   // await input.fill('Hello world');
 
   // const t = await input.textContent();
 
-  console.log(t);
+  // console.log(t);
 });
