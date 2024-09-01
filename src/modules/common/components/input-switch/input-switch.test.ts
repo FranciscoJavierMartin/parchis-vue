@@ -9,6 +9,7 @@ describe('input-switch.vue', () => {
     const wrapper = mount(InputSwitch, {
       props: {
         id: 'abcd',
+        label: 'Aria label test',
       },
       global: {
         plugins: [i18n],
@@ -19,7 +20,7 @@ describe('input-switch.vue', () => {
 
     expect(label.exists()).toBe(true);
     expect(label.attributes()['for']).toBe('abcd');
-    expect(label.attributes()['aria-label']).toBe('Player is bot');
+    expect(label.attributes()['aria-label']).toBe('Aria label test');
 
     const input = wrapper.find('#abcd');
 
@@ -38,6 +39,7 @@ describe('input-switch.vue', () => {
       props: {
         id: 'abcd',
         disabled: true,
+        label: 'Aria label test',
       },
       global: {
         plugins: [i18n],
@@ -48,7 +50,7 @@ describe('input-switch.vue', () => {
 
     expect(label.exists()).toBe(true);
     expect(label.attributes()['for']).toBe('abcd');
-    expect(label.attributes()['aria-label']).toBe('Player is bot');
+    expect(label.attributes()['aria-label']).toBe('Aria label test');
 
     const input = wrapper.find('#abcd');
 
@@ -68,6 +70,7 @@ describe('input-switch.vue', () => {
         id: 'abcd',
         disabled: true,
         icon: botImage,
+        label: 'Aria label test',
       },
       global: {
         plugins: [i18n],
@@ -78,7 +81,7 @@ describe('input-switch.vue', () => {
 
     expect(label.exists()).toBe(true);
     expect(label.attributes()['for']).toBe('abcd');
-    expect(label.attributes()['aria-label']).toBe('Player is bot');
+    expect(label.attributes()['aria-label']).toBe('Aria label test');
 
     const input = wrapper.find('#abcd');
 
