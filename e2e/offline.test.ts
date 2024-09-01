@@ -72,4 +72,9 @@ test('visits offline page', async ({ page }) => {
   await expect(
     page.locator('.game-offline-player').nth(2).locator('label.input-switch input'),
   ).toBeChecked();
+
+  // Play button
+  await page.locator('button[type="submit"].game-offline-play').click();
+
+  await expect(page.locator('.game-board')).toBeVisible();
 });
