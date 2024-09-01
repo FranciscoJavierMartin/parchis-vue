@@ -18,7 +18,6 @@ const color = defineModel<TColors>();
 
 //#region FUNCTIONS
 function updateColor(buttonColor: EColors): void {
-  console.log(buttonColor);
   color.value = buttonColor;
 }
 //#endregion
