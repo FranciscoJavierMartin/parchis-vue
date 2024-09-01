@@ -54,6 +54,8 @@ test('visits offline page', async ({ page }) => {
 
   expect(await page.locator('.game-offline-input-name:not(:disabled)').count()).toBe(3);
   expect(await page.locator('.game-offline-input-name:disabled').count()).toBe(1);
+  await page.locator('.game-offline-input-name').first().fill('Hello world');
+
   // const input = page.locator('.game-offline-input-name').first();
   // await input.fill('Hello world');
 
