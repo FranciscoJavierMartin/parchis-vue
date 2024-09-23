@@ -34,6 +34,7 @@ import type { TPlaySoundFunction } from '@sounds/interfaces/sounds.interface';
 import { EPositionGame, EtypeTile, type ESufixColors } from '@board/interfaces/board.enum';
 import { ESounds } from '@sounds/interfaces/sounds.enum';
 import { MAXIMUM_VISIBLE_TOKENS_PER_CELL } from '@board/constants/board.constants';
+import { TOKENS_JAIL_AND_OUTSITE } from '@/modules/debug/constants/states.constants';
 
 /**
  * Check if player can roll dice
@@ -81,18 +82,20 @@ export function getInitialPositionTokens(
   const playersColors: ESufixColors[] = getPlayersColors(boardColor, totalPlayers);
   const tokensPosition: EPositionGame[] = getTokensPositionsOnBoard(totalPlayers);
 
-  return players.map<IListTokens>((player, index) => {
-    // Current user who is playing online, it is always at position 0.
-    const isCurrentOnlineUser: boolean = index === 0;
-    const { isBot = false, isOnline = false } = player;
-    const canSelectToken = isOnline ? isCurrentOnlineUser : !isBot;
-    const color = playersColors[index];
-    const positionGame = tokensPosition[index];
+  // return players.map<IListTokens>((player, index) => {
+  //   // Current user who is playing online, it is always at position 0.
+  //   const isCurrentOnlineUser: boolean = index === 0;
+  //   const { isBot = false, isOnline = false } = player;
+  //   const canSelectToken = isOnline ? isCurrentOnlineUser : !isBot;
+  //   const color = playersColors[index];
+  //   const positionGame = tokensPosition[index];
 
-    const tokens: IToken[] = getTokensInJail(positionGame, color, canSelectToken);
+  //   const tokens: IToken[] = getTokensInJail(positionGame, color, canSelectToken);
 
-    return { index, positionGame, tokens };
-  });
+  //   return { index, positionGame, tokens };
+  // });
+
+  return TOKENS_JAIL_AND_OUTSITE;
 }
 
 /**
